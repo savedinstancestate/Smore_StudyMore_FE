@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    background: #ffffff;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+    width:800px;
+}
+
+.card-div {
+    width: calc(33.333% - 20px); /* 한 줄에 3개씩 배치, 간격을 고려하여 너비 조정 */
+    background-color: #fff;
+    margin-bottom: 10px; /* 카드 사이의 수직 간격 */
+    border: 1px solid #cacaca;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    height: 120px; /* 헤더 높이 설정 */
+    background-size: cover; /* 이미지가 컨테이너를 꽉 채우도록 */
+    background-position: center; /* 이미지 중앙 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.study-name {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 8px;
+}
+
+.card-title {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.card-text {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.study-entry-btn {
+    background-color: #009063;
+    color: #fff;
+    font-weight: 600;
+    width: 84%;
+    border:1px solid #009063;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.study-leave-btn {
+    background-color: #fff;
+    color: #929292;
+    font-weight: 400;
+    font-size: 14px;
+    width: 84%;
+    border:1px solid #929292;
+    border-radius: 4px;
+    padding:2px;
+    margin-bottom: 20px;
+}
