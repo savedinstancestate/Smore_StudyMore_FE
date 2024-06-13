@@ -12,7 +12,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/redirection" element={<Redirection />} />
+                <Route path="/redirection/:accessToken/:refreshToken" element={<Redirection />} />
                 <Route path="/mystudy" element={<MyStudy />} />
                 <Route path="/mypage" element={<MyPage />} />
             </Routes>
