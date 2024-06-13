@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import Modal from '../../components/Modal'; // 모달 컴포넌트를 임포트합니다.
-import Login from '../LoginPage/Login'; // Login 컴포넌트를 임포트합니다.
+import Modal from '../../components/Modal'; 
+import Login from '../LoginPage/Login'; 
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태를 관리합니다.
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
   const handleOpenModal = () => {
-    setIsModalOpen(true); // 모달을 열기
+    setIsModalOpen(true); 
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // 모달을 닫기
+    setIsModalOpen(false); 
   };
 
   return (
