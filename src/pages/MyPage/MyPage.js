@@ -77,7 +77,7 @@ function MyPage() {
   // 닉네임 변경
   const updateNickname = async () => {
     try {
-      const response = await axios.patch('/users/update-nickname',
+      const response = await axios.patch('/users/nickname',
       { nickname: userInfo.nickname });
       console.log('닉네임 변경 성공:', response.data);
       alert('닉네임이 변경되었습니다.');
