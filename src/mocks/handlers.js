@@ -8,7 +8,7 @@ export const handlers = [
       ctx.json({
         "studyList": [
             
-            // 더 많은 스터디 데이터...
+            // 더 많은 스터디 데이터..
         ]
       })
     );
