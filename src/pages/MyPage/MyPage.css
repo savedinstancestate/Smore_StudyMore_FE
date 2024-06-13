@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    background: #ffffff;
+}
+
+.profile-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 500px;
+}
+
+.profile-image {
+    position: relative;
+    margin: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.edited-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.image-edit-btn {
+    position: absolute;
+    display: flex;
+    width: 6%;
+    top: 70px;
+    left: 230px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.nickname-container {
+    margin-bottom: 20px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    display: flex;
+}
+
+.nickname-field {
+    display: flex; /* 입력 필드와 버튼을 수평 정렬 */
+    width: 100%; /* 컨테이너 전체 너비 */
+}
+
+.nickname-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.nickname-info {
+    font-size: 15px;
+    color: #929292;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: calc(100% - 52px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: #009063;
+    float: left;
+    margin-right: 8px;
+    flex-grow: 1; /* 입력 필드가 가능한 많은 공간 차지 */
+}
+
+input[type="text"]:focus {
+    border-color: #009063;
+}
+
+.nickname-edit-btn {
+    padding: 10px 26px;
+    background-color: #009063;
+    color: white;
+    font-weight: bold;
+    border: 1px solid #009063;
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+    white-space: nowrap;
+}
