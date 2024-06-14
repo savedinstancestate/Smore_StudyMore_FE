@@ -12,7 +12,7 @@ body {
     justify-content: space-between;
     padding: 20px;
     gap: 20px;
-    width:800px;
+    width: 800px;
     justify-content: flex-start;
     overflow-y: auto;
     box-sizing: border-box;
@@ -27,20 +27,20 @@ body {
 }
 
 .card-div {
-    width: calc(33.333% - 20px); 
+    width: calc(33.333% - 20px);
     background-color: #fff;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     border: 1px solid #cacaca;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
 }
 
 .card-header {
-    height: 90px; 
-    background-size: cover; 
-    background-position: center; 
+    height: 90px;
+    background-size: cover;
+    background-position: center;
 }
 
 .card-body {
@@ -72,7 +72,7 @@ body {
     font-weight: 600;
     font-size: 14px;
     width: 84%;
-    border:1px solid #009063;
+    border: 1px solid #009063;
     border-radius: 6px;
     padding: 8px;
     margin-bottom: 6px;
@@ -84,9 +84,9 @@ body {
     font-weight: 400;
     font-size: 12px;
     width: 84%;
-    border:1px solid #929292;
+    border: 1px solid #929292;
     border-radius: 4px;
-    padding:2px;
+    padding: 2px;
     margin-bottom: 18px;
 }
 
@@ -96,9 +96,87 @@ body {
     font-weight: 600;
     font-size: 14px;
     width: 84%;
-    border:1px solid #009063;
+    border: 1px solid #009063;
     border-radius: 6px;
     padding: 8px;
     margin-bottom: 18px;
 }
 
+
+.list-container ul {
+    list-style-type: none;
+    padding: 0;
+    width: 460px;
+}
+
+.list-container li {
+    display: flex;
+    align-items: flex-start; /* 아이템들을 위쪽 정렬 */
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+  }
+
+  .list-container li:last-child {
+    border-bottom: none; /* 마지막 요소의 border-bottom 제거 */
+  }
+  
+
+.applicant-img {
+    width: 36px;
+    height: 36px;
+    background-size: cover;
+    background-position: top left;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.applicant-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .applicant-info p {
+    margin: 0;
+  }
+
+  .applicant-item {
+    padding: 10px 0px;
+  }
+
+.applicant-nickname {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .applicant-content {
+    font-weight: 500;
+    font-size: 12px;
+    word-wrap: break-word; 
+    word-break: break-all;
+  }
+
+  .applicant-actions {
+    display: flex;
+    gap: 6px;
+    margin-left: 10px;
+  }
+  
+  .applicant-apply-btn {
+    padding: 5px 12px;
+    border: none;
+    background-color: #6c3d00;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .applicant-refuse-btn {
+    padding: 5px 12px;
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+    font-size: 14px;
+  }
