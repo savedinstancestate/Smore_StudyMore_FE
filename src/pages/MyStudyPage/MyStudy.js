@@ -12,7 +12,7 @@ function MyStudy() {
   useEffect(() => {
     const fetchParticipatingStudies = async () => {
       try {
-        const response = await axios.get("/mystudy");
+        const response = await axios.get("/study");
         const data = response.data;
 
         if (Array.isArray(data.studyList)) {
