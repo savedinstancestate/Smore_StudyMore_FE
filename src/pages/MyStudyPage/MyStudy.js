@@ -1,5 +1,7 @@
+// MyStudy.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Modal from '../../components/Modal'; 
 import ApplicantList from "./ApplicantList";
 import "./MyStudy.css";
 
@@ -12,7 +14,7 @@ function MyStudy() {
   useEffect(() => {
     const fetchParticipatingStudies = async () => {
       try {
-        const response = await axios.get("/mystudy");
+        const response = await axios.get("/study");
         const data = response.data;
 
         if (Array.isArray(data.studyList)) {
@@ -22,10 +24,7 @@ function MyStudy() {
           setParticipatingStudies([]);
         }
       } catch (error) {
-        console.error(
-          "참여하는 스터디 목록을 불러오는 데에 실패했습니다.",
-          error
-        );
+        console.error("참여하는 스터디 목록을 불러오는 데에 실패했습니다.", error);
       }
     };
 
@@ -41,10 +40,7 @@ function MyStudy() {
           setAdministeredStudies([]);
         }
       } catch (error) {
-        console.error(
-          "운영중인 스터디 목록을 불러오는 데에 실패했습니다.",
-          error
-        );
+        console.error("운영중인 스터디 목록을 불러오는 데에 실패했습니다.", error);
       }
     };
 
@@ -52,7 +48,7 @@ function MyStudy() {
     fetchAdministeredStudies();
   }, []);
 
-  function handleOpenModal(studyPk) {
+  function handleViewApplicants(studyPk) {
     setCurrentStudyPk(studyPk);
     setIsModalOpen(true);
   }
@@ -97,7 +93,7 @@ function MyStudy() {
         {administeredStudies.length === 0 ? (
           <p>스터디 목록이 없습니다.</p>
         ) : (
-            administeredStudies.map(study => (
+          administeredStudies.map(study => (
             <div className="card-div" key={study.studyPk}>
               <div
                 className="card-header"
@@ -113,13 +109,21 @@ function MyStudy() {
                 <p className="card-title">참가 인원</p>
                 <p className="card-text">{study.studyPersonNum} / 6</p>
                 <button className="study-entry-btn">입장하기</button>
-                <button className="study-request-btn" onClick={() => handleOpenModal(study.studyPk)}>지원요청 확인</button>
+                <button
+                  className="study-request-btn"
+                  onClick={() => handleViewApplicants(study.studyPk)}
+                >
+                  지원요청 확인
+                </button>
               </div>
             </div>
           ))
         )}
       </div>
-      <ApplicantList isOpen={isModalOpen} onClose={handleCloseModal} studyPk={currentStudyPk} />
+
+      <Modal show={isModalOpen} handleClose={handleCloseModal} title="지원요청 목록">
+        {currentStudyPk && <ApplicantList studyPk={currentStudyPk} />}
+      </Modal>
     </div>
   );
 }
