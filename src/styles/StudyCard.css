@@ -13,6 +13,8 @@ body {
   padding: 50px 40px;
   margin-top: 10px;
   box-sizing: border-box;
+  z-index: 1000;
+  background-color: #fff;
 }
 
 .card-container {
@@ -176,7 +178,6 @@ input[type="text"] {
     border-bottom: none; /* 마지막 요소의 border-bottom 제거 */
   }
   
-
 .applicant-img {
     width: 36px;
     height: 36px;
@@ -241,4 +242,24 @@ input[type="text"] {
     font-weight: 700;
     padding: 4px 10px;
     flex-grow: 1;
+  }
+
+  .div-modal button {
+    background-color: #009063; /* 버튼 배경색 */
+    color: white; /* 버튼 글자색 */
+    padding: 10px; /* 패딩 */
+    border: none; /* 테두리 없애기 */
+    border-radius: 5px 5px 0 0; /* 테두리 둥글게 */
+    cursor: pointer; /* 커서 모양 변경 */
+    font-size: 16px; /* 글자 크기 */
+    font-weight: 600;
+    display: flex;
+    position: relative;
+    margin-bottom:-20px;
+    float: right;
+    z-index: 10;
+  }
+
+  .div-modal button:hover {
+    background-color: #009063; /* 버튼 배경색 */
   }
