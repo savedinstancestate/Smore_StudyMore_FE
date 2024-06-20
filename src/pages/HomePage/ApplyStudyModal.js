@@ -3,7 +3,7 @@ import UniversalModal from '../../components/Modal';
 import { Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 
-const ApplyStudyModal = ({ studyName, show, handleClose }) => {
+const ApplyStudyModal = ({ studyName, studyPk, show, handleClose }) => {
     const [introduction, setIntroduction] = useState('');
     const [modalShow, setModalShow] = useState(false);
 
@@ -14,7 +14,7 @@ const ApplyStudyModal = ({ studyName, show, handleClose }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/study/{studyPk}/enter', {
+            const response = await axios.post(`/study/${studyPk}/enter`, {
                 // memberPk: 1,
                 content: introduction,
             });
