@@ -15,7 +15,7 @@ const ApplyStudyModal = ({ studyName, show, handleClose }) => {
         event.preventDefault();
         try {
             const response = await axios.post('/study/{studyPk}/enter', {
-                memberPk: 1,
+                // memberPk: 1,
                 content: introduction,
             });
             console.log('Server Response:', response.data);
