@@ -1,7 +1,8 @@
 // Board.js
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-
+import CreateStudyModal from "./CreateStudyModal";
+import "../../styles/StudyCard.css";
 
 function Board() {
   const [recruitingStudies, setRecruitingStudies] = useState([]);
@@ -36,6 +37,8 @@ function Board() {
 
 
   return (
+    <div className="div-modal">
+    <CreateStudyModal className="create-study-button" />
     <div className="div-container">
       <div className="card-container">
         <p className="card-type">모집중인 스터디 📢</p>
@@ -56,13 +59,12 @@ function Board() {
                 <p className="card-text">{study.studyStartDate} - {study.studyEndDate}</p>
                 <p className="card-title">참가 인원</p>
                 <p className="card-text">{study.studyPersonNum} / 6</p>
-                
-                
               </div>
             </div>
           ))
         )}
       </div>
+    </div>
     </div>
   );
 }
