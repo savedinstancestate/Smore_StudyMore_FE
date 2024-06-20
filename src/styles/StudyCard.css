@@ -52,6 +52,14 @@ body {
     padding: 10px !important;
 }
 
+.card-body-home {
+  text-align: center;
+  padding: 10px !important;display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 70%; /* 카드의 전체 높이에 맞추기 위해 */
+}
+
 .study-name {
     font-size: 20px;
     font-weight: 800;
@@ -232,4 +240,5 @@ input[type="text"] {
     font-size: 14px;
     font-weight: 700;
     padding: 4px 10px;
+    flex-grow: 1;
   }
