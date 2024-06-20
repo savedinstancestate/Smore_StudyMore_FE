@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Tab, Tabs, Card, Container } from 'react-bootstrap';
 import Dashboard from './Dashboard/Dashboard';
 import Schedule from './Schedule/Schedule';
-import ProblemSolving from './ProblemSolving';
+import ProblemSolving from './ProblemSolving/ProblemSolving';
 import './Study.css';
 import PersonalGoals from './PersonalGoals/PersonalGoals';
-import Announcements from './Announcements';
+import Announcements from './Announcements/Announcements';
 import Timer from './Timer';
 import axios from 'axios';
 
@@ -68,7 +68,7 @@ const Study = ({ studyPK }) => {
                         <Tab eventKey="announcements" title="공지사항">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <Announcements />
+                                    <Announcements studyPK={studyPK} />
                                 </Card.Body>
                             </Card>
                         </Tab>
