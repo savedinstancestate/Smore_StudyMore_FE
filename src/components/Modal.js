@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 
 const UniversalModal = ({ title, show, handleClose, children, footer }) => {
     return (
-        <Modal show={show} onHide={handleClose} centered scrollable>
+        <Modal show={show} onHide={handleClose} style={{ zIndex:1000000000000 }}centered scrollable>
             <Modal.Header closeButton style={{ backgroundColor: '#F2F9F7', borderBottom: 'none', textAlign: 'center' }}>
                 <Modal.Title style={{ width: '100%' }}>{title}</Modal.Title>
             </Modal.Header>

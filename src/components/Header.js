@@ -10,8 +10,8 @@ const HeaderWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
   background-color: #fff;
+  z-index:100;
 `;
 
 const HeaderContainer = styled.header`
@@ -22,6 +22,7 @@ const HeaderContainer = styled.header`
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
+  z-index: 1000;
 `;
 
 const HeaderContent = styled.div`
