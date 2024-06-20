@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Modal from '../../components/Modal'; 
 import ApplicantList from "./ApplicantList";
-import "./MyStudy.css";
+import "../../styles/StudyCard.css";
 
 function MyStudy() {
   const [participatingStudies, setParticipatingStudies] = useState([]);
@@ -19,11 +19,10 @@ function MyStudy() {
     // 참여하는 스터디 조회
     const fetchParticipatingStudies = async () => {
       try {
-        const response = await axios.get("/study");
+        const response = await axios.get("/mystudy");
         
         if (response.status === 200) {
           const data = response.data;
-          console.log('스터디 목록 로드 성공:', data.studyList);
 
           if (Array.isArray(data.studyList)) {
             console.log('스터디 목록 로드 성공:', data.studyList);
@@ -45,7 +44,7 @@ function MyStudy() {
     // 운영중인 스터디 조회
     const fetchAdministeredStudies = async () => {
       try {
-        const response = await axios.get("/study/admin");
+        const response = await axios.get("/mystudy/admin");
 
         if (response.status === 200) {
           const data = response.data;
@@ -85,7 +84,7 @@ function MyStudy() {
 
   function confirmLeaveStudy() {
     if (userInput === studyToLeave.studyName) {
-      axios.delete(`/study/participate/${studyToLeave.studyPk}`)
+      axios.delete(`/mystudy/participate/${studyToLeave.studyPk}`)
         .then(response => {
           if (response.status === 204) {
             alert(`'${studyToLeave.studyName}'에서 성공적으로 탈퇴되었습니다.`);
@@ -123,7 +122,7 @@ function MyStudy() {
   }
 
   return (
-    <div>
+    <div className="div-container">
       <div className="card-container">
         <p className="card-type">참여하는 스터디 🔥</p>
         {participatingStudies.length === 0 ? (
