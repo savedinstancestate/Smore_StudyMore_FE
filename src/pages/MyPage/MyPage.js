@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
+import Cookies from 'js-cookie';
 import './MyPage.css';
 
 function MyPage() {
@@ -11,12 +12,20 @@ function MyPage() {
   // 유저 정보 불러오기
   useEffect(() => {
     const fetchUserInfo = async () => {
+      const token = Cookies.accessToken;
+      console.log("Bearer " + token)
       try {
-        const response = await axios.get('/users/mypage');
-        console.log(response); // 로그 출력을 위해 전체 응답 로깅
+        const response = await axios.get('/users/mypage', {
+          headers : {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*", 
+          }
+        });
+        console.log(response); 
 
         if (response.status === 200) {
-          console.log("성공적으로 사용자 정보를 불러왔습니다.");
+          console.log("성공적으로 사용자 정보를 불러왔습니다.", );
           setUserInfo({
             nickname: response.data.nickname,
             profileImage: response.data.profileImage
