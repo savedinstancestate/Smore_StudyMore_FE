@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 function KakaoLoginRedirectHandler() {
     const { accessToken, refreshToken } = useParams();
@@ -16,6 +17,8 @@ function KakaoLoginRedirectHandler() {
       console.log("refreshToken: "+ refreshToken);
       Cookies.set('accessToken', accessToken);
       Cookies.set('refreshToken', refreshToken);
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
       
       navigate('/home');
   },[accessToken, refreshToken, navigate]);

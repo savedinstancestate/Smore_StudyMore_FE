@@ -130,7 +130,7 @@ function MyPage() {
 
   return (
     <div className="profile-container">
-    <h3><b>👤 프로필 수정</b></h3>
+    <p className="card-type">프로필 수정 ✍️</p>
 
     <div className="profile-image" onClick={triggerFileInput}>
         <img src={userInfo.profileImage || "img/default-profile.png"} className="edited-image" alt="프로필 이미지" />

@@ -9,10 +9,18 @@ body {
 .profile-container {
     background: white;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 14px;
+    border: 1px solid #ddd;
     text-align: center;
-    width: 500px;
+    width: 960px;
+    margin-top: 30px;
+}
+
+.card-type {
+    font-size: 24px;
+    font-weight: 700;
+    width: 100%;
+    margin-bottom: 0px;
 }
 
 .profile-image {
@@ -32,9 +40,9 @@ body {
 .image-edit-btn {
     position: absolute;
     display: flex;
-    width: 6%;
+    width: 3%;
     top: 70px;
-    left: 230px;
+    left: 460px;
     background: none;
     border: none;
     cursor: pointer;
@@ -50,7 +58,7 @@ body {
 
 .nickname-field {
     display: flex; /* 입력 필드와 버튼을 수평 정렬 */
-    width: 90%; 
+    width: 40%; 
     align-items: center;
 }
 

@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import "../styles/StudyCard.css";
 import Modal from './Modal'; 
 import Login from '../pages/LoginPage/Login';
+import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
 
 const HeaderWrapper = styled.div`
   position: fixed;
@@ -33,6 +35,12 @@ const HeaderContent = styled.div`
   max-width: 1000px;
 `;
 
+const NavContainer = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-end",
+}
+
 const Logo = styled(NavLink)`
   display: flex;
   align-items: center;
@@ -45,6 +53,9 @@ const LogoImage = styled.img`
 `;
 
 const NavLinks = styled.nav`
+  text-align: right;
+  width: 100%;
+  margin: 6px 0px;
   a {
     margin: 0 10px;
     text-decoration: none;
@@ -71,6 +82,16 @@ const PageTitle = styled.h1`
   color: black;
   font-weight: 700;
 `;
+
+const createStudyModalStyle = {
+  backgroundColor: "#009063 !important",
+  color: "white !important",
+  padding: "10px !important",
+  borderRadius: "5px !important",
+  cursor: "pointer !important",
+  fontSize: "16px !important",
+  fontWeight: "600 !important",
+};
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,14 +128,16 @@ const Header = () => {
       <Logo to="/">
           <LogoImage src="img/smore-logo-ver1.png" alt="Logo" />
         </Logo>
+        <div style={NavContainer} >
         <NavLinks>
           <NavLink exact to="/" activeClassName="active">홈</NavLink>
           <NavLink to="/mystudy" activeClassName="active">내 스터디</NavLink>
           <NavLink to="/mypage" activeClassName="active">마이페이지</NavLink>
           <a onClick={handleOpenModal}>로그인</a>
         </NavLinks>
+        <CreateStudyModal style={createStudyModalStyle} />
+        </div>
       </HeaderContent>
-      
     </HeaderContainer>
     <TitleContainer><PageTitle>{renderPageTitle()}</PageTitle></TitleContainer>
     </HeaderWrapper>
@@ -122,6 +145,8 @@ const Header = () => {
     <Modal show={isModalOpen} handleClose={handleCloseModal} title="로그인">
     <Login />
   </Modal>
+
+  
   </>
   );
 };

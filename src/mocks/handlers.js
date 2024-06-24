@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 export const handlers = [
-  rest.get('/study', (req, res, ctx) => {
+  rest.get('/mystudy', (req, res, ctx) => {
     console.log('');
     return res(
       ctx.status(200),
@@ -9,8 +9,8 @@ export const handlers = [
         "studyList": [
           {
             "studyPk": 1,
-            "studyName": "스터디 이름",
-            "studyImg": "/img/study-img-sample.png",
+            "studyName": "자바보라능",
+            "studyImg": "/img/sample-img-1.png",
             "studyPersonNum": 4,
             "studyStartDate": "2023-01-01",
             "studyEndDate": "2023-12-31"
@@ -20,7 +20,7 @@ export const handlers = [
       })
     );
   }),
-  rest.get('/study/admin', (req, res, ctx) => {
+  rest.get('/mystudy/admin', (req, res, ctx) => {
     console.log('');
     return res(
       ctx.status(200),
@@ -28,34 +28,42 @@ export const handlers = [
         "studyList": [
             {
                 "studyPk": 1,
-                "studyName": "스터디 이름",
-                "studyImg": "/img/study-img-sample.png",
+                "studyName": "빌런저장소",
+                "studyImg": "/img/sample-img-1.png",
                 "studyPersonNum": 4,
                 "studyStartDate": "2023-01-01",
                 "studyEndDate": "2023-12-31"
             },
             {
               "studyPk": 2,
-              "studyName": "스터디 이름2",
-              "studyImg": "/img/study-img-sample.png",
+              "studyName": "아마존에 간 건 아마...존?",
+              "studyImg": "/img/sample-img-2.png",
               "studyPersonNum": 4,
               "studyStartDate": "2023-01-01",
               "studyEndDate": "2023-12-31"
           },
           {
             "studyPk": 3,
-            "studyName": "스터디 이름3",
-            "studyImg": "/img/study-img-sample.png",
+            "studyName": "자율스터디",
+            "studyImg": "/img/sample-img-3.jpg",
             "studyPersonNum": 4,
             "studyStartDate": "2023-01-01",
             "studyEndDate": "2023-12-31"
-        }
+        },
+        {
+          "studyPk": 3,
+          "studyName": "자율스터디",
+          "studyImg": "/img/study-img-sample.png",
+          "studyPersonNum": 4,
+          "studyStartDate": "2023-01-01",
+          "studyEndDate": "2023-12-31"
+      }
         ]
       })
     );
   }),
 
-  rest.get('/study/apply/:studyPk', (req, res, ctx) => {
+  rest.get('/mystudy/apply/:studyPk', (req, res, ctx) => {
     const { studyPk } = req.params;
     console.log(`studyPk: ${studyPk}에 대한 지원 목록을 가져옵니다.`);
     
@@ -112,4 +120,99 @@ export const handlers = [
       })
     );
   }),
+
+  rest.get('/board', (req, res, ctx) => { // 이름, 내용, 사진, 일정, 인원
+    console.log('');
+    return res(
+      ctx.status(200),
+      ctx.json({
+        "boardList": [
+            {
+                "studyBoardPk": 1,
+                "studyPk": 1,
+                "adTitle": "빌런저장소입니다",
+                "adContent": "알고리즘 골드 이상까지 풀어 보실분! Java로 하시는 분 모집합니다! 활발한 분위기고 출석체크 엄격하게 합니다! 스터디 운영 여러개 해봤습니다! 다들 지원해주세요!",
+                "studyImg": "/img/sample-img-1.png",
+                "studyPersonNum": 4,
+                "studyStartDate": "2023-01-01",
+                "studyEndDate": "2023-12-31"
+            },
+            {
+              "studyBoardPk": 2,
+              "studyPk": 2,
+              "adTitle": "아마존에 간 건 아마...존?",
+              "adContent": "아마존에 간 존에 대해 이야기하는 스터디입니다... 나이, 성별 제한 없습니다... 아무나 오세요... 환영합니다... 칼수락 합니다...",
+              "studyImg": "/img/sample-img-2.png",
+              "studyPersonNum": 4,
+              "studyStartDate": "2023-01-01",
+              "studyEndDate": "2023-12-31"
+          },
+          {
+            "studyBoardPk": 3,
+            "studyPk": 3,
+            "adTitle": "우아한 스터디 모집합니다.",
+            "adContent": "우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다!",
+            "studyImg": "/img/sample-img-3.jpg",
+            "studyPersonNum": 4,
+            "studyStartDate": "2023-01-01",
+            "studyEndDate": "2023-12-31"
+        },
+        
+        ]
+      })
+    );
+  }),
+  // MSW handler for specific study details based on studyBoardPk
+rest.get('/board/:studyBoardPk', (req, res, ctx) => {
+  const { studyBoardPk } = req.params; // req.params를 통해 URL에서 studyBoardPk 값을 얻음
+  const boardList = [
+      {
+          "studyBoardPk": 1,
+          "studyPk": 1,
+          "adTitle": "빌런저장소입니다",
+          "adContent": "알고리즘 골드 이상까지 풀어 보실분! Java로 하시는 분 모집합니다! 활발한 분위기고 출석체크 엄격하게 합니다! 스터디 운영 여러개 해봤습니다! 다들 지원해주세요!",
+          "studyImg": "/img/sample-img-1.png",
+          "studyPersonNum": 4,
+          "studyStartDate": "2023-01-01",
+          "studyEndDate": "2023-12-31"
+      },
+      {
+          "studyBoardPk": 2,
+          "studyPk": 2,
+          "adTitle": "아마존에 간 건 아마...존?",
+          "adContent": "아마존에 간 존에 대해 이야기하는 스터디입니다... 나이, 성별 제한 없습니다... 아무나 오세요... 환영합니다... 칼수락 합니다...",
+          "studyImg": "/img/sample-img-2.png",
+          "studyPersonNum": 4,
+          "studyStartDate": "2023-01-01",
+          "studyEndDate": "2023-12-31"
+      },
+      {
+          "studyBoardPk": 3,
+          "studyPk": 3,
+          "adTitle": "우아한 스터디 모집합니다.",
+          "adContent": "우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다!",
+          "studyImg": "/img/sample-img-3.jpg",
+          "studyPersonNum": 4,
+          "studyStartDate": "2023-01-01",
+          "studyEndDate": "2023-12-31"
+      }
+  ];
+
+  // 해당 studyBoardPk와 일치하는 객체 찾기
+  const study = boardList.find(study => study.studyBoardPk.toString() === studyBoardPk);
+
+  if (study) {
+      return res(
+          ctx.status(200),
+          ctx.json(study)
+      );
+  } else {
+      return res(
+          ctx.status(404),
+          ctx.json({ error: "해당 스터디가 없습니다." })
+      );
+  }
+})
+
+  
 ];
