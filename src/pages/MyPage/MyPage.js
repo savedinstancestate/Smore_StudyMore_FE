@@ -13,11 +13,11 @@ function MyPage() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       const token = Cookies.accessToken;
-      console.log("Bearer" + token)
+      console.log("Bearer " + token)
       try {
         const response = await axios.get('/users/mypage', {
           headers : {
-            "Authorization": "Bearer" + token,
+            "Authorization": "Bearer " + token,
             "Content-Type": "application/json;charset=UTF-8",
             "Access-Control-Allow-Origin": "*", 
           }
