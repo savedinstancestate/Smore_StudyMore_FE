@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/:path*",
+        "destination": "${env:API_URL}/:path*"
+      }
+    ]
+  }
+  
