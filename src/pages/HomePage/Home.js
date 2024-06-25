@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Modal from '../../components/Modal'; 
-import StudyDetailsModal from './StudyDetailsModal';
+import BoardDetailModal from './BoardDetailModal';
 import "../../styles/StudyCard.css";
 
 function Board() {
@@ -68,8 +68,8 @@ function Board() {
           ))
         )}
       </div>
-      <Modal show={isModalOpen} handleClose={handleCloseModal} title="지원요청 목록">
-        {currentStudyBoardPk && <StudyDetailsModal studyBoardPk={currentStudyBoardPk} />}
+      <Modal show={isModalOpen} handleClose={handleCloseModal} title="모집중인 스터디">
+        {currentStudyBoardPk && <BoardDetailModal studyBoardPk={currentStudyBoardPk} />}
       </Modal>
 
     </div>
