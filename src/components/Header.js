@@ -4,7 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import "../styles/StudyCard.css";
 import Modal from './Modal'; 
-import Login from '../pages/LoginPage/Login';
+import Login from '../pages/LoginPage/LoginModal';
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
 
 const HeaderWrapper = styled.div`

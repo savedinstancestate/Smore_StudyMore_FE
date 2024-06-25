@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Home from './pages/HomePage/Home';
-import Login from './pages/LoginPage/Login';
+import Login from './pages/LoginPage/LoginModal';
 import Redirection from "./pages/LoginPage/Redirection";
 import PrivateRoute from './pages/LoginPage/PrivateRoute';
 import MyStudy from "./pages/MyStudyPage/MyStudy";
