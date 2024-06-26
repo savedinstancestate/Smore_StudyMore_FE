@@ -6,10 +6,9 @@ import "../../styles/StudyCard.css";
 
 function Board() {
   const [recruitingStudies, setRecruitingStudies] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedStudy, setSelectedStudy] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentStudyBoardPk, setCurrentStudyBoardPk] = useState(null);
+  const [currentStudyName, setCurrentStudyName] = useState('');
 
   useEffect(() => {
     fetchRecruitingStudies();
@@ -30,10 +29,11 @@ function Board() {
     }
   };
 
-  function handleCardClick(studyBoardPk) {
+  function handleCardClick(studyBoardPk, studyName) {
     setCurrentStudyBoardPk(studyBoardPk);
+    setCurrentStudyName(studyName);
     setIsModalOpen(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -47,8 +47,8 @@ function Board() {
           <p>스터디 목록이 없습니다.</p>
         ) : (
           recruitingStudies.map(study => (
-            <div className="card-div" key={study.studyBoardPk} 
-            onClick={() => handleCardClick(study.studyBoardPk)}>
+            <div className="card-div-home" key={study.studyBoardPk} 
+            onClick={() => handleCardClick(study.studyBoardPk, study.studyName)}>
               <div
                 className="card-header"
                 alt={study.studyName}
@@ -59,16 +59,18 @@ function Board() {
                 <div className="study-content-wrapper">
                 <p className="study-content">{study.adContent}</p>
                 </div>
+                <div className="card-footer">
                 <p className="card-title">스터디 기간</p>
                 <p className="card-text">{study.studyStartDate} - {study.studyEndDate}</p>
                 <p className="card-title">참가 인원</p>
                 <p className="card-text">{study.studyPersonNum} / 6</p>
+                </div>
               </div>
             </div>
           ))
         )}
       </div>
-      <Modal show={isModalOpen} handleClose={handleCloseModal} title="모집중인 스터디">
+      <Modal show={isModalOpen} handleClose={handleCloseModal} title={currentStudyName}>
         {currentStudyBoardPk && <BoardDetailModal studyBoardPk={currentStudyBoardPk} />}
       </Modal>
 
