@@ -33,14 +33,32 @@ body {
 }
 
 .card-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  height: 100%;
     width: calc(33.333% - 20px);
     background-color: #fff;
     border: 1px solid #cacaca;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding-bottom: 10px;
     margin-bottom: 10px;
+}
+
+.card-div-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  height: 100%;
+    width: calc(33.333% - 20px);
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .card-header {
@@ -65,6 +83,7 @@ body {
     color: #009063 !important;
     font-size: 14px;
     font-weight: 800;
+    margin-top: 10px;
 }
 
 .card-text {
@@ -122,6 +141,7 @@ input[type="text"] {
 .study-leave-modal h5 {
   font-weight: 700;
   margin-top:10px;
+  color: #DC143C;
 }
 
 .buttons-container {
@@ -134,7 +154,7 @@ input[type="text"] {
 .study-leave-btn-confirm {
     padding: 10px 40px;
     border: none;
-    background-color: #6c3d00;
+    background-color: #009063;
     color: white;
     cursor: pointer;
     border-radius: 5px;
@@ -145,9 +165,9 @@ input[type="text"] {
 
 .study-leave-btn-cancel {
   padding: 10px 40px;
-  border: 1px solid #6c3d00;
+  border: 1px solid #929292;
   background-color: #fff;
-  color: #6c3d00;
+  color: #929292;
   cursor: pointer;
   border-radius: 5px;
   font-size: 14px;
@@ -258,26 +278,111 @@ input[type="text"] {
     padding: 0px 10px;
   }
 
+  .card-footer {
+    background-color: #F3F9F7 !important;
+    width: 110%;
+    height: 120px; 
+    margin-top: auto; 
+    box-sizing: border-box; 
+    margin: 6px -14px -14px -14px;
+  }
 
 
-  
 
-  .create-study-btn {
-    background-color: #009063 !important; /* 버튼 배경색 */
-    color: white; /* 버튼 글자색 */
-    padding: 10px; /* 패딩 */
-    border: none; /* 테두리 없애기 */
-    border-radius: 5px 5px 0 0; /* 테두리 둥글게 */
-    cursor: pointer; /* 커서 모양 변경 */
-    font-size: 16px; /* 글자 크기 */
-    font-weight: 600;
+
+.modal-content {
+  border-radius: 44px;
+}
+
+  .card-div-detail {
+    width:100%;
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 20px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .card-header-detail {
+    height: 140px; 
+    background-size: cover; 
+    background-position: center; 
+  }
+
+  .card-title-detail {
+    color: #009063 !important;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+  .ad-title {
+    color: #009063;
+    font-size: 22px;
+    font-weight: 800;
+    margin: 20px 0 0px 0;
+  }
+
+  .modify-date-detail {
+    color: #929292;
+    font-size: 14px;
+  }
+
+  .flex-box {
     display: flex;
-    position: relative;
-    margin-bottom:-20px;
-    float: right;
-    z-index: 10;
+    flex-direction: column; /* 항목들을 세로로 쌓음 */
+    align-items: center; /* 수평 중앙 정렬 */
+    width: 80%; /* 전체 너비 사용 */ 
+    border: 1px solid #F3F9F7;
+    border-radius: 8px;
+    padding: 14px 0px 6px 0px;
+    margin: auto;
+    background-color: #F3F9F7;
   }
 
-  .div-modal button:hover {
-    background-color: #009063; /* 버튼 배경색 */
+  .flex-row {
+    display: flex;
+  justify-content: center; /* 항목들을 수평 중앙에 배치 */
+  align-items: center; /* 항목들을 수직 중앙에 배치 */
+  width: 100%; /* 각 행의 너비 전체 사용 */
+  margin-bottom: 10px; /* 각 행 아래 여백 */
   }
+
+  .card-title-detail {
+    margin: 0 5px; /* 필요에 따라 조절 */
+    color:#000000;
+    font-weight: 700;
+  }
+
+  .study-detail {
+    margin: 0 5px; /* 필요에 따라 조절 */
+    color:#000000;
+    font-weight: 500;
+  }
+
+  .content-wrapper-detail {
+    padding: 0px 50px;
+    margin: 20px 0px; /* 상단 여백 */
+    font-weight: 600;
+  }  
+
+  .application-btn {
+    width: 60%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #009063;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 검은색 반투명 배경 */
+    z-index: 1050; /* 모달보다 조금 낮게 설정 */
+}
+  
