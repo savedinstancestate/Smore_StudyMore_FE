@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import Modal from '../../components/Modal';
-import Login from './Login';
+import Login from './LoginModal';
 
 const PrivateRoute = ({ component: Component }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);

@@ -5,12 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
+// 개발 환경에서만 MSW 시작
  if (process.env.NODE_ENV === 'development') {
     const { worker } = require('./mocks/browser');
-    worker.start();
+    worker.start().then(() => {
+      console.log('MSW has started!');  // MSW 시작 로그
+  });
   } 
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

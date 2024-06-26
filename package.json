@@ -47,5 +47,8 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "devDependencies": {
+    "vercel": "^34.2.7"
   }
 }

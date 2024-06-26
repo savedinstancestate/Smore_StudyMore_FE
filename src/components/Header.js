@@ -4,7 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import "../styles/StudyCard.css";
 import Modal from './Modal'; 
-import Login from '../pages/LoginPage/Login';
+import Login from '../pages/LoginPage/LoginModal';
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
 
 const HeaderWrapper = styled.div`
@@ -39,6 +39,7 @@ const NavContainer = {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-end",
+  marginRight: "26px"
 }
 
 const Logo = styled(NavLink)`
@@ -55,7 +56,7 @@ const LogoImage = styled.img`
 const NavLinks = styled.nav`
   text-align: right;
   width: 100%;
-  margin: 6px 0px;
+  margin-bottom: 8px;
   a {
     margin: 0 10px;
     text-decoration: none;
@@ -63,10 +64,15 @@ const NavLinks = styled.nav`
     font-weight: bold;
     font-size: 14px;
     cursor: pointer;
-  &.active {
+
+    &:last-child {
+      margin-right: 0; 
+    }
+  }
+  .active {
     color: #009063;
   }
-}
+
 `;
 
 const TitleContainer = styled.div`
