@@ -20,7 +20,7 @@ function KakaoLoginRedirectHandler() {
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
       
-      // navigate('/home');
+      navigate('/');
   },[accessToken, refreshToken, navigate]);
 
   return <div>Loading...</div>;
