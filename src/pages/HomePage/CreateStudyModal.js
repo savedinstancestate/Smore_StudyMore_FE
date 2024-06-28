@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import API from '../../api/AxiosInstance';
 import UniversalModal from '../../components/Modal';
 import { Modal, Form, Button } from 'react-bootstrap';
 import Calendar from 'react-calendar';
@@ -58,7 +58,7 @@ const CreateStudyModal = () => {
         };
 
         try {
-            const response = await axios.post('/study', payload);
+            const response = await API.post('/study', payload);
             console.log(response.data);
             closeModal(); // 모달을 닫으면서 데이터를 콘솔에 로깅
         } catch (error) {
@@ -178,7 +178,7 @@ const CreateStudyModal = () => {
             fontWeight: '400',
             display: 'flex',
             alignItems: 'center'}}>
-                <img src="img/pencil.png" alt="Button Image" style={{ width: '18px', marginRight: '4px',  }} />
+                {/* <img src="img/pencil.png" alt="Button Image" style={{ width: '18px', marginRight: '4px',  }} /> */}
                 스터디 생성하기
             </Button>
 

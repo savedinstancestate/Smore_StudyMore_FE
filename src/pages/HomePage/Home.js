@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import API from '../../api/AxiosInstance';
 import Modal from '../../components/Modal'; 
 import BoardDetailModal from './BoardDetailModal';
 import "../../styles/StudyCard.css";
@@ -16,15 +16,15 @@ function Board() {
 
   const fetchRecruitingStudies = async () => {
     try {
-      const response = await axios.get('/board');
-      if (response.status === 200 && Array.isArray(response.data.boardList)) {
-        setRecruitingStudies(response.data.boardList);
+      const response = await API.get('/board');
+      if (response.status === 200) {
+        setRecruitingStudies(response.data);
       } else {
-        console.error("응답 데이터가 배열이 아닙니다:", response.data);
+        console.error("모집중인 스터디를 불러오는 데에 실패했습니다.: ", response.data);
         setRecruitingStudies([]);
       }
     } catch (error) {
-      console.error("참여하는 스터디 목록을 불러오는 데에 실패했습니다.", error);
+      console.error("모집중인 스터디를 불러오는 데에 실패했습니다.: ", error);
       setRecruitingStudies([]);
     }
   };
