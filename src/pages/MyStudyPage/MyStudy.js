@@ -1,7 +1,7 @@
 // MyStudy.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import API from '../../api/AxiosInstance';
 import Modal from '../../components/Modal'; 
 import ApplicantList from "./ApplicantListModal";
 import "../../styles/StudyCard.css";
@@ -19,7 +19,7 @@ function MyStudy() {
     // 참여하는 스터디 조회
     const fetchParticipatingStudies = async () => {
       try {
-        const response = await axios.get("/mystudy");
+        const response = await API.get('/mystudy');
         
         if (response.status === 200) {
           const data = response.data;
@@ -44,7 +44,7 @@ function MyStudy() {
     // 운영중인 스터디 조회
     const fetchAdministeredStudies = async () => {
       try {
-        const response = await axios.get("/mystudy/admin");
+        const response = await API.get("/mystudy/admin");
 
         if (response.status === 200) {
           const data = response.data;
@@ -84,7 +84,7 @@ function MyStudy() {
 
   function confirmLeaveStudy() {
     if (userInput === studyToLeave.studyName) {
-      axios.delete(`/mystudy/participate/${studyToLeave.studyPk}`)
+      API.delete(`/mystudy/participate/${studyToLeave.studyPk}`)
         .then(response => {
           if (response.status === 204) {
             alert(`'${studyToLeave.studyName}'에서 성공적으로 탈퇴되었습니다.`);
