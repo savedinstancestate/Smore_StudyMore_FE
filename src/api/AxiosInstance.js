@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: '', // 모든 요청에 대한 기본 URL 설정
+  baseURL: process.env.REACT_APP_AUTH_URL,
   headers: {
     'Content-Type': 'application/json'
   }
