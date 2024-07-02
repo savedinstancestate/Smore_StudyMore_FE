@@ -1,4 +1,3 @@
-// Header.js
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -6,6 +5,7 @@ import "../styles/StudyCard.css";
 import Modal from './Modal'; 
 import Login from '../pages/LoginPage/LoginModal';
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
+import { useHeaderStudyName } from './StudyNameContext';
 
 const HeaderWrapper = styled.div`
   position: fixed;
@@ -102,6 +102,7 @@ const createStudyModalStyle = {
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const currentLocation = useLocation();
+  const { headerStudyName } = useHeaderStudyName();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -112,6 +113,10 @@ const Header = () => {
   };
 
   const renderPageTitle = () => {
+    console.log('Current study name:', headerStudyName);
+    if (currentLocation.pathname.startsWith('/study')) {
+      return headerStudyName || '스터디 로딩 중...'; // 동적 경로에 따라 이름을 불러옴
+    }
     switch (currentLocation.pathname) {
       case '/':
         return 'Study More';
