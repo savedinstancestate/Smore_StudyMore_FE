@@ -1,33 +1,119 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './StudyInfo.css';
 
-const StudyInfo = () => {
-    const members = [
-        { name: '김현빈', role: '회장', avatar: '/path/to/avatar1.png' },
-        { name: '서다영', role: '회원', avatar: '/path/to/avatar2.png' },
-        { name: '박진수', role: '회원', avatar: '/path/to/avatar3.png' },
-        { name: '남수연', role: '회원', avatar: '/path/to/avatar4.png' },
-    ];
+const StudyInfo = ({ studyPk }) => {
+    const [studyData, setStudyData] = useState(null);
+    const [members, setMembers] = useState([]);
+    const [error, setError] = useState(null);
 
-    const studyDescription =
-        '스터디 소개입니다. 스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.스터디 소개입니다.';
+    useEffect(() => {
+        const fetchStudyData = async () => {
+            try {
+                const response = await axios.get(
+                    `/study/${studyPk}`,
+                    { responseType: 'text' } // 응답을 문자열로 받기 위해 추가
+                );
+                console.log('Fetched Study Data:', response.data);
+
+                // 비정상적인 공백 문자 제거
+                const cleanedData = response.data.replace(/[\u2028\u2029\u00A0]/g, ' ');
+
+                let data;
+                try {
+                    data = JSON.parse(cleanedData);
+                } catch (e) {
+                    console.error('JSON 파싱 오류:', e);
+                    setError('스터디 정보를 불러오는 데 실패했습니다.');
+                    return;
+                }
+
+                setStudyData(data);
+                setError(null); // 정상적으로 데이터를 가져온 경우 error 상태 초기화
+            } catch (error) {
+                console.error('스터디 정보를 불러오는 데 실패했습니다:', error);
+                setError('스터디 정보를 불러오는 데 실패했습니다.');
+            }
+        };
+
+        const fetchMembersData = async () => {
+            try {
+                const response = await axios.get(
+                    `/study/${studyPk}/dashboard/member`,
+                    { responseType: 'text' } // 응답을 문자열로 받기 위해 추가
+                );
+                console.log('Fetched Members Data:', response.data);
+
+                // 비정상적인 공백 문자 제거
+                const cleanedData = response.data.replace(/[\u2028\u2029\u00A0]/g, ' ');
+
+                let data;
+                try {
+                    data = JSON.parse(cleanedData);
+                } catch (e) {
+                    console.error('JSON 파싱 오류:', e);
+                    setError('스터디 멤버 정보를 불러오는 데 실패했습니다.');
+                    return;
+                }
+
+                // 응답 데이터가 배열인지 확인
+                if (Array.isArray(data)) {
+                    setMembers(data);
+                    setError(null); // 정상적으로 데이터를 가져온 경우 error 상태 초기화
+                } else {
+                    console.error('멤버 데이터가 배열이 아닙니다:', data);
+                    setMembers([]);
+                }
+            } catch (error) {
+                console.error('스터디 멤버 정보를 불러오는 데 실패했습니다:', error);
+                setError('스터디 멤버 정보를 불러오는 데 실패했습니다.');
+            }
+        };
+
+        fetchStudyData();
+        fetchMembersData();
+    }, [studyPk]);
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    if (!studyData) {
+        return <div>Loading...</div>;
+    }
+
+    console.log('Rendering StudyInfo with:', studyData);
+    console.log('Rendering Members with:', members);
 
     return (
         <div className="study-info">
-            <div className="info-header">우리 스터디는요 ✏️</div>
+            <div className="info-header">
+                우리 스터디는요 ✏️{' '}
+                <div className="study-dates">
+                    {studyData.startDate} ~ {studyData.closeDate}
+                </div>
+            </div>
             <div className="members-header">멤버</div>
             <div className="members-container">
-                {members.map((member) => (
-                    <div key={member.name} className="member">
-                        <img src={member.avatar} alt={`${member.name}의 사진`} className="member-avatar" />
-                        <div className="member-info">
-                            <div className="member-name">{member.name}</div>
+                {Array.isArray(members) && members.length > 0 ? (
+                    members.map((member) => (
+                        <div key={member.memberPk} className="member">
+                            <img
+                                src={member.profileImg || '/path/to/default-avatar.png'}
+                                alt={`${member.nickName}의 사진`}
+                                className="member-avatar"
+                            />
+                            <div className="member-info">
+                                <div className="member-name">{member.nickName}</div>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    <div>멤버가 없습니다.</div>
+                )}
             </div>
             <div className="study-description-header">소개</div>
-            <p className="study-description">{studyDescription}</p>
+            <p className="study-description">{studyData.content}</p>
         </div>
     );
 };
