@@ -2,7 +2,8 @@ import React from 'react';
 
 const Login = () => {  
     const handleLogin = () => {
-      window.location.href = `http://ec2-43-203-206-205.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/kakao`;
+      window.location.href = `${process.env.REACT_APP_AUTH_URL}/oauth2/authorization/kakao`;
+      // window.location.href = `http://ec2-43-203-206-205.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/kakao`;
     };
   
     return (
