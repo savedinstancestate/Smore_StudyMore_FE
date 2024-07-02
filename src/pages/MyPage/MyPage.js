@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; 
+import API from '../../api/AxiosInstance';
 import Cookies from 'js-cookie';
 import './MyPage.css';
 
@@ -12,18 +12,12 @@ function MyPage() {
   // 유저 정보 불러오기
   useEffect(() => {
     const fetchUserInfo = async () => {
-      const token = Cookies.accessToken;
-      console.log("Bearer " + token)
+      const token = Cookies.get('accessToken');
+      console.log("Bearer " + token);
+      
       try {
-        const response = await axios.get('/users/mypage', {
-          headers : {
-            "Authorization": "Bearer " + token,
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*", 
-          }
-        });
-        console.log(response); 
-
+        const response = await API.get('/users/mypage');
+        
         if (response.status === 200) {
           console.log("성공적으로 사용자 정보를 불러왔습니다.", );
           setUserInfo({
@@ -74,7 +68,7 @@ function MyPage() {
   const formData = new FormData();
   formData.append("image", file);
   try {
-    const response = await axios.patch('/users/profileImage', formData, {
+    const response = await API.patch('/users/profileImage', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -121,7 +115,7 @@ function MyPage() {
   }
 
   try {
-    const response = await axios.patch('/users/nickname', { nickname: userInfo.nickname });
+    const response = await API.patch('/users/nickname', { nickname: userInfo.nickname });
     
     if (response.status === 200) {
       console.log('닉네임 변경 성공:', response.data.nickname); // 변경된 닉네임 로그 출력

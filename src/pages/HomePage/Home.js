@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import API from '../../api/AxiosInstance';
 import Modal from '../../components/Modal'; 
 import BoardDetailModal from './BoardDetailModal';
 import "../../styles/StudyCard.css";
@@ -9,22 +9,49 @@ function Board() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentStudyBoardPk, setCurrentStudyBoardPk] = useState(null);
   const [currentStudyName, setCurrentStudyName] = useState('');
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 9;  
 
   useEffect(() => {
     fetchRecruitingStudies();
   }, []);
+/*
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  }, [isModalOpen]);
+  */
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // 문서의 끝에 도달했는지 확인
+    if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight - 50) {
+      loadMoreData();
+    }
+  };
+    // 스크롤 이벤트에 handleScroll 함수 연결
+    window.addEventListener('scroll', handleScroll);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+  };
+}, [currentPage, recruitingStudies.length]); // 의존성 배열 업데이트
 
   const fetchRecruitingStudies = async () => {
     try {
-      const response = await axios.get('/board');
-      if (response.status === 200 && Array.isArray(response.data.boardList)) {
-        setRecruitingStudies(response.data.boardList);
+      const response = await API.get('/board');
+      if (response.status === 200) {
+        setRecruitingStudies(response.data);
       } else {
-        console.error("응답 데이터가 배열이 아닙니다:", response.data);
+        console.error("모집중인 스터디를 불러오는 데에 실패했습니다.: ", response.data);
         setRecruitingStudies([]);
       }
     } catch (error) {
-      console.error("참여하는 스터디 목록을 불러오는 데에 실패했습니다.", error);
+      console.error("모집중인 스터디를 불러오는 데에 실패했습니다.: ", error);
       setRecruitingStudies([]);
     }
   };
@@ -39,19 +66,26 @@ function Board() {
     setIsModalOpen(false);
   };
 
+  const loadMoreData = () => {
+    if ((currentPage + 1) * itemsPerPage < recruitingStudies.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const visibleStudies = recruitingStudies.slice(0, (currentPage + 1) * itemsPerPage);
+
   return (
     <div className="div-container">
       <div className="card-container">
         <p className="card-type">모집중인 스터디 📢</p>
-        {recruitingStudies.length === 0 ? (
+        {visibleStudies.length === 0 ? (
           <p>스터디 목록이 없습니다.</p>
         ) : (
-          recruitingStudies.map(study => (
+          visibleStudies.map(study => (
             <div className="card-div-home" key={study.studyBoardPk} 
             onClick={() => handleCardClick(study.studyBoardPk, study.studyName)}>
               <div
                 className="card-header"
-                alt={study.studyName}
                 style={{ backgroundImage: `url(${study.studyImg})` }}
               ></div>
               <div className="card-body-home">
@@ -70,7 +104,7 @@ function Board() {
           ))
         )}
       </div>
-      <Modal show={isModalOpen} handleClose={handleCloseModal} title={currentStudyName}>
+      <Modal show={isModalOpen} handleClose={handleCloseModal} title={currentStudyName} >
         {currentStudyBoardPk && <BoardDetailModal studyBoardPk={currentStudyBoardPk} />}
       </Modal>
 

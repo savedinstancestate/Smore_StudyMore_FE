@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { StudyNameProvider } from './components/StudyNameContext';
 import './App.css';
 import Header from './components/Header';
 import Home from './pages/HomePage/Home';
@@ -13,6 +14,7 @@ import MyPage from './pages/MyPage/MyPage';
 
 const App = () => {
     return (
+        <StudyNameProvider>
         <Router>
             <div>
         <Header />
@@ -32,6 +34,7 @@ const App = () => {
             </Routes>
             </div>
         </Router>
+        </StudyNameProvider>
     );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from '../../api/AxiosInstance';
 import "../../styles/StudyCard.css";
 import ApplyStudyModal from "./ApplyStudyModal";
 
@@ -11,7 +11,7 @@ function BoardDetailModal({ studyBoardPk, onClose }) {
     if (studyBoardPk) {
       const fetchBoardDetails = async () => {
         try {
-          const response = await axios.get(`/board/${studyBoardPk}`);
+          const response = await API.get(`/board/${studyBoardPk}`);
           setBoardDetails(response.data); // 직접 데이터를 설정
         } catch (error) {
           console.error("요청 처리 중 오류가 발생했습니다.", error);
