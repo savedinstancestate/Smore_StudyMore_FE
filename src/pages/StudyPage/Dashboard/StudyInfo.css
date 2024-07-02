@@ -58,3 +58,9 @@
     border-radius: 5px;
     margin: 5px auto;
 }
+
+.info-header .study-dates {
+    font-size: 15px;
+    font-weight: 400;
+    color: #646464;
+}
