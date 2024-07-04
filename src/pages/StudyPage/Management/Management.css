@@ -1,0 +1,96 @@
+/* 전체 컨테이너의 스타일링 */
+.container {
+    padding: 30px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    margin-bottom: 0px; 
+}
+/* 제목 스타일링 */
+.title {
+    margin-top: 7px;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* 각 폼 그룹 스타일링 */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    padding:4px;
+}
+
+.form-group-inline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding:4px;
+}
+
+.form-label-inline {
+    margin-right: 14px;
+    flex: 0 0 auto; /* 너비가 내용에 따라 조절되도록 설정 */
+    white-space: nowrap; /* 라벨이 줄바꿈 되지 않도록 설정 */
+    padding-top: 6px;
+    display: block;
+    color: #000000;
+    font-weight: 500;
+    text-align: left;
+}
+
+.form-row {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: space-between; /* 요소들 사이에 공간을 균등하게 배분 */
+}
+
+.form-input {
+    flex: 1; /* 입력 필드가 가능한 많은 공간을 차지하도록 설정 */
+    margin-right: 20px; /* 이미지와의 간격 설정 */
+}
+
+.form-image {
+    flex: 0 0 auto; /* 이미지 크기가 변경되지 않도록 설정 */
+}
+
+/* 라벨 스타일링 */
+.label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000000;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+}
+
+.input {
+    width: 26% !important;
+}
+
+.input-description {
+    margin: 0px !important;
+    height: 40px !important;
+    width: 100% !important;
+}
+
+.input-img {
+    margin: 0px !important;
+    height: 40px !important;
+    width: 300px !important;
+}
+
+.image-preview img {
+    width: 300px;
+    height: auto;
+    border-radius: 4px;
+    float: left;
+    margin-bottom: 10px;
+}

@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EditStudyInfo from './EditStudyInfo';
-import Promotion from './Promotion';
 
-const Management = () => {
+const Management = ({ studyPk }) => {  // props 이름을 studyPk로 수정
+    console.log('studyPk:', studyPk);
     return (
         <div>
             <div
@@ -13,11 +12,12 @@ const Management = () => {
                     justifyContent: 'space-around',
                     gap: '10px',
                     flexWrap: 'wrap',
+                    padding: '10px',
                 }}
             >
-                <EditStudyInfo />
+                <EditStudyInfo studyPk={studyPk} />  {/* studyPk를 EditStudyInfo에 전달 */}
+                
             </div>
-
         </div>
     );
 };
