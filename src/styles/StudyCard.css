@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
     background: #ffffff;
-    margin-top: 214px !important;
+    margin-top: 200px !important;
     margin: 0;
     /* overflow: visible; */
 }
@@ -12,8 +12,7 @@ body {
   width: 960px;
   border: 1px solid #ddd;
   border-radius: 14px;
-  padding: 50px 40px 40px 40px;
-  margin-top: 20px;
+  padding: 40px;
   box-sizing: border-box;
   z-index: 1000;
   background-color: #fff;
