@@ -12,9 +12,6 @@ function MyPage() {
   // 유저 정보 불러오기
   useEffect(() => {
     const fetchUserInfo = async () => {
-      const token = Cookies.get('accessToken');
-      console.log("Bearer " + token);
-      
       try {
         const response = await API.get('/users/mypage');
         
