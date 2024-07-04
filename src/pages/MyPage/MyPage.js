@@ -65,23 +65,25 @@ function MyPage() {
   const formData = new FormData();
   formData.append("image", file);
   try {
-    const response = await API.patch('/users/profileImage', formData, {
+    const response = await API.patch('/users/profileImage', formData /*, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
-    });
-    console.log('이미지 변경 성공:', response.data);
+    }*/);
 
     if (response.status === 200) {
       console.log('프로필 이미지가 성공적으로 변경되었습니다:', response.data.profileImage);
       alert('프로필 이미지가 변경되었습니다.');
+      return true;
     } else {
       console.error('예상치 못한 응답 코드:', response.status);
       alert('프로필 이미지 변경에 실패했습니다.');
+      return false;
     }
   } catch (error) {
     console.error('이미지 변경 실패:', error);
     alert('프로필 이미지 변경에 실패했습니다.');
+    return false;
   }
 };
 
