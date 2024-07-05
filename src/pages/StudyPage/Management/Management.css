@@ -81,10 +81,8 @@
     width: 100% !important;
 }
 
-.input-img {
-    margin: 0px !important;
-    height: 40px !important;
-    width: 300px !important;
+.input-content {
+    height: 90px !important;
 }
 
 .image-preview img {
@@ -94,3 +92,31 @@
     float: left;
     margin-bottom: 10px;
 }
+
+.member-item {
+    padding: 10px 0px;
+  }
+
+.member-img {
+    width: 36px;
+    height: 36px;
+    background-size: cover;
+    background-position: top left;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.member-nickname {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  .member-delete-btn {
+    padding: 5px 12px;
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+

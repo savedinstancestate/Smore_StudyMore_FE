@@ -1,7 +1,9 @@
 import React from 'react';
 import EditStudyInfo from './EditStudyInfo';
+import EditPromotion from './EditPromotion';
+import EditMember from './EditMember';
 
-const Management = ({ studyPk }) => {  // props 이름을 studyPk로 수정
+const Management = ({ studyPk }) => {  
     console.log('studyPk:', studyPk);
     return (
         <div>
@@ -15,7 +17,9 @@ const Management = ({ studyPk }) => {  // props 이름을 studyPk로 수정
                     padding: '10px',
                 }}
             >
-                <EditStudyInfo studyPk={studyPk} />  {/* studyPk를 EditStudyInfo에 전달 */}
+                <EditStudyInfo studyPk={studyPk} />
+                <EditPromotion studyPk={studyPk} />
+                <EditMember studyPk={studyPk} />
                 
             </div>
         </div>

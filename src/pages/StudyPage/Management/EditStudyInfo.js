@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../../../api/AxiosInstance';
 import { Form, Button } from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -21,7 +21,7 @@ const EditStudyInfo = ({ studyPk }) => {
     useEffect(() => {
         const fetchStudyData = async () => {
             try {
-                const response = await axios.get(`/study/${studyPk}`);
+                const response = await API.get(`/study/management/${studyPk}`);
                 const data = response.data;
                 setFormData({
                     description: data.content,
@@ -31,7 +31,7 @@ const EditStudyInfo = ({ studyPk }) => {
                 setEndDate(new Date(data.closeDate));
                 setThumbnail(data.imageUri);
             } catch (error) {
-                setError('Failed to fetch study info.');
+                setError('스터디 정보 불러오기 실패');
             }
         };
 
@@ -65,11 +65,11 @@ const EditStudyInfo = ({ studyPk }) => {
         };
 
         try {
-            await axios.put(`/study/management/${studyPk}`, payload);
+            await API.put(`/study/management/${studyPk}`, payload);
             alert('스터디 정보가 수정되었습니다.');
         } catch (error) {
             console.error('Failed to update study info:', error);
-            setError('스터디 정보에 실패했습니다.');
+            setError('스터디 정보 수정에 실패했습니다.');
         }
     };
 
@@ -95,11 +95,12 @@ const EditStudyInfo = ({ studyPk }) => {
                 <Form.Group className="form-group">
                     <Form.Label className="label">스터디 소개</Form.Label>
                     <Form.Control
-                        type="textarea"
+                        type="input"
                         className="input-description"
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
+                        placeholder="스터디 소개를 입력하세요."
                     />
                 </Form.Group>
                 <Form.Group className="form-group-inline">
