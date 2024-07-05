@@ -175,7 +175,7 @@ const CreateStudyModal = () => {
             <Button variant="primary" onClick={() => setModalShow(true)}
             style={{backgroundColor: '#009063',
             border: '1px solid #009063',
-            fontWeight: '400',
+            fontWeight: '500',
             display: 'flex',
             alignItems: 'center'}}>
                 {/* <img src="img/pencil.png" alt="Button Image" style={{ width: '18px', marginRight: '4px',  }} /> */}

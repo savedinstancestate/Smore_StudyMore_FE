@@ -18,7 +18,7 @@ const HeaderWrapper = styled.div`
 
 const HeaderContainer = styled.header`
   background-color: #fff;
-  padding: 20px 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,7 +79,7 @@ const TitleContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 30px 20px;
+  padding: 20px;
   background-color: #F3F9F7;
 `;
 

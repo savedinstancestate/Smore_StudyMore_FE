@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import API from '../../api/AxiosInstance';
 import Cookies from 'js-cookie';
+import API from '../../api/AxiosInstance'; // API 인스턴스 가져오기
 import './MyPage.css';
 
 function MyPage() {
@@ -12,9 +12,6 @@ function MyPage() {
   // 유저 정보 불러오기
   useEffect(() => {
     const fetchUserInfo = async () => {
-      const token = Cookies.get('accessToken');
-      console.log("Bearer " + token);
-      
       try {
         const response = await API.get('/users/mypage');
         
@@ -50,15 +47,14 @@ function MyPage() {
         return; // 허용되지 않는 파일이면 함수 종료
       }
 
-      const imageUrl = URL.createObjectURL(file);
       const uploadSuccess = await uploadImage(file); // 파일 업로드 함수를 호출하고 성공 여부를 받음
       if (uploadSuccess) {
         setUserInfo({ 
           ...userInfo,
-          profileImage: imageUrl
+          profileImage: uploadSuccess
         });
       } else {
-        URL.revokeObjectURL(imageUrl); // 업로드 실패 시 생성된 URL 해제
+        console.error('이미지 업로드에 실패했습니다.');
       }
     }
   };
@@ -66,25 +62,28 @@ function MyPage() {
   // 프로필 사진 변경
   const uploadImage = async (file) => {
   const formData = new FormData();
-  formData.append("image", file);
+  formData.append("profileImage", file);
+
   try {
-    const response = await API.patch('/users/profileImage', formData, {
+    const response = await API.patch('/users/profileImage', formData,
+    {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data'  
       }
     });
-    console.log('이미지 변경 성공:', response.data);
-
     if (response.status === 200) {
       console.log('프로필 이미지가 성공적으로 변경되었습니다:', response.data.profileImage);
       alert('프로필 이미지가 변경되었습니다.');
+      return response.data.profileImage; 
     } else {
       console.error('예상치 못한 응답 코드:', response.status);
       alert('프로필 이미지 변경에 실패했습니다.');
+      return false;
     }
   } catch (error) {
     console.error('이미지 변경 실패:', error);
     alert('프로필 이미지 변경에 실패했습니다.');
+    return false;
   }
 };
 

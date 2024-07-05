@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EditStudyInfo from './EditStudyInfo';
-import Promotion from './Promotion';
+import EditPromotion from './EditPromotion';
+import EditMember from './EditMember';
 
-const Management = () => {
+const Management = ({ studyPk }) => {  
+    console.log('studyPk:', studyPk);
     return (
         <div>
             <div
@@ -13,11 +14,14 @@ const Management = () => {
                     justifyContent: 'space-around',
                     gap: '10px',
                     flexWrap: 'wrap',
+                    padding: '10px',
                 }}
             >
-                <EditStudyInfo />
+                <EditStudyInfo studyPk={studyPk} />
+                <EditPromotion studyPk={studyPk} />
+                <EditMember studyPk={studyPk} />
+                
             </div>
-
         </div>
     );
 };
