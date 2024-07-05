@@ -45,9 +45,17 @@ function Board() {
     try {
       const response = await API.get('/board');
       if (response.status === 200) {
-        setRecruitingStudies(response.data);
+        const data = response.data;
+
+        if (Array.isArray(data.studyList)) {
+          console.log('모집중인 스터디 목록 로드 성공:', data.studyList);
+          setRecruitingStudies(data.studyList);
+        } else {
+          console.error("응답 데이터가 배열이 아닙니다:", data);
+          setRecruitingStudies([]); // 데이터 형식이 맞지 않을 때 안전하게 빈 배열 설정
+        }
       } else {
-        console.error("모집중인 스터디를 불러오는 데에 실패했습니다.: ", response.data);
+        console.error("모집중인 스터디를 불러오는 데에 실패했습니다.: ", response.status);
         setRecruitingStudies([]);
       }
     } catch (error) {
