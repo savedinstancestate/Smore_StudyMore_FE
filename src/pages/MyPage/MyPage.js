@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../api/AxiosInstance';
-import Cookies from 'js-cookie';
 import './MyPage.css';
 
 function MyPage() {
@@ -63,14 +62,9 @@ function MyPage() {
   // 프로필 사진 변경
   const uploadImage = async (file) => {
   const formData = new FormData();
-  formData.append("image", file);
+  formData.append("profileImage", file);
   try {
-    const response = await API.patch('/users/profileImage', formData /*, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }*/);
-
+    const response = await API.patch('/users/profileImage', formData);
     if (response.status === 200) {
       console.log('프로필 이미지가 성공적으로 변경되었습니다:', response.data.profileImage);
       alert('프로필 이미지가 변경되었습니다.');
