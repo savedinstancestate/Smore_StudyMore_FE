@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../../api/AxiosInstance";
 import "../../styles/StudyCard.css";
 
 function ApplicantList({ studyPk }) {
@@ -9,7 +9,7 @@ function ApplicantList({ studyPk }) {
     if (studyPk) {
       const fetchApplicants = async () => {
         try {
-          const response = await axios.get(`/mystudy/apply/${studyPk}`);
+          const response = await API.get(`/mystudy/apply/${studyPk}`);
           const data = response.data;
           console.log("API response:", data);
 
@@ -37,7 +37,7 @@ function ApplicantList({ studyPk }) {
   // 지원자 수락 처리
   const handleAccept = async (userId) => {
     try {
-      const response = await axios.post(`/mystudy/apply`, { userId, studyPk });
+      const response = await API.post(`/mystudy/apply`, { userId, studyPk });
       if (response.status === 201) {
         console.log("Accept response:", response.data.message);
         // 수락된 지원자를 목록에서 제거
@@ -56,7 +56,7 @@ function ApplicantList({ studyPk }) {
   // 지원자 거절 처리
   const handleRefuse = async (userId) => {
     try {
-      const response = await axios.post(`/mystudy/refuse`, { userId, studyPk });
+      const response = await API.post(`/mystudy/refuse`, { userId, studyPk });
       if (response.status === 200) {
         console.log("Refuse response:", response.data.message);
         /// 거절된 지원자를 목록에서 제거

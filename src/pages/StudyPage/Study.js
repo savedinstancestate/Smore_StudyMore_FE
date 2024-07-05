@@ -9,7 +9,7 @@ import PersonalGoals from './PersonalGoals/PersonalGoals';
 import Announcements from './Announcements/Announcements';
 import Management from './Management/Management';
 import Timer from './Timer';
-import axios from 'axios';
+import API from '../../api/AxiosInstance';
 import { useHeaderStudyName } from '../../components/StudyNameContext';
 
 const Study = () => {
@@ -18,10 +18,10 @@ const Study = () => {
     const { setHeaderStudyName } = useHeaderStudyName(); 
 
     useEffect(() => {
-        console.log('studyPK:', studyPk);
+        console.log('studyPk:', studyPk);
         const fetchStudyInfo = async () => {
             try {
-                const response = await axios.get(`/study/${studyPk}`);
+                const response = await API.get(`/study/${studyPk}`);
                 if (response.data) {
                     setHeaderStudyName(response.data.studyName); 
                     console.log('Fetched study name:', response.data.studyName); 
@@ -78,7 +78,7 @@ const Study = () => {
                         <Tab eventKey="management" title="스터디 관리">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <Management studyPK={studyPk} />
+                                    <Management studyPk={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
