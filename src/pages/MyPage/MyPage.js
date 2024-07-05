@@ -47,15 +47,14 @@ function MyPage() {
         return; // 허용되지 않는 파일이면 함수 종료
       }
 
-      const imageUrl = URL.createObjectURL(file);
       const uploadSuccess = await uploadImage(file); // 파일 업로드 함수를 호출하고 성공 여부를 받음
       if (uploadSuccess) {
         setUserInfo({ 
           ...userInfo,
-          profileImage: imageUrl
+          profileImage: uploadSuccess
         });
       } else {
-        URL.revokeObjectURL(imageUrl); // 업로드 실패 시 생성된 URL 해제
+        console.error('이미지 업로드에 실패했습니다.');
       }
     }
   };
@@ -69,7 +68,7 @@ function MyPage() {
     if (response.status === 200) {
       console.log('프로필 이미지가 성공적으로 변경되었습니다:', response.data.profileImage);
       alert('프로필 이미지가 변경되었습니다.');
-      return true;
+      return response.data.profileImage; 
     } else {
       console.error('예상치 못한 응답 코드:', response.status);
       alert('프로필 이미지 변경에 실패했습니다.');
