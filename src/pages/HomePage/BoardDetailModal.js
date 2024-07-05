@@ -12,9 +12,7 @@ function BoardDetailModal({ studyBoardPk, onClose }) {
       const fetchBoardDetails = async () => {
         try {
           const response = await API.get(`/board/${studyBoardPk}`);
-          // 응답이 배열인지 확인하고, 배열이면 첫 번째 요소를 사용
-          const details = Array.isArray(response.data) ? response.data[0] : response.data;
-          setBoardDetails(details);
+          setBoardDetails(response.data); // 직접 데이터를 설정
         } catch (error) {
           console.error("요청 처리 중 오류가 발생했습니다.", error);
           setBoardDetails(null);
@@ -25,13 +23,11 @@ function BoardDetailModal({ studyBoardPk, onClose }) {
       console.log("studyBoardPk가 존재하지 않습니다.");
     }
   }, [studyBoardPk]);
-  
   if (!BoardDetails) return null; // 스터디 세부 정보가 없을 경우 아무것도 렌더링하지 않음
-  
+
   const toggleOverlay = (show) => {
     setShowOverlay(show);
-  };
-  
+};
 
   return (
     <div className="modal-container">
