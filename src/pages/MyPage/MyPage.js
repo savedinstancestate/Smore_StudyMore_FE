@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import API from '../../api/AxiosInstance';
+import Cookies from 'js-cookie';
+import API from '../../api/AxiosInstance'; // API 인스턴스 가져오기
 import './MyPage.css';
 
 function MyPage() {
@@ -60,27 +61,36 @@ function MyPage() {
   };
 
   // 프로필 사진 변경
-const uploadImage = async (file) => {
-  const formData = new FormData();
-  formData.append("profileImage", file); 
-  try {
-    const response = await API.patch('/users/profileImage', formData);
-    if (response.status === 200) {
-      console.log('프로필 이미지가 성공적으로 변경되었습니다:', response.data.profileImage);
-      alert('프로필 이미지가 변경되었습니다.');
-      return true;
-    } else {
-      console.error('예상치 못한 응답 코드:', response.status);
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("profileImage", file); // 서버에 맞는 필드명 사용
+  
+    // 쿠키에서 accessToken 가져오기
+    const token = Cookies.get('accessToken');
+  
+    try {
+      const response = await API.patch('/users/profileImage', formData, {
+        headers: {
+          // 토큰이 있을 경우 헤더에 추가
+          'Authorization': `Bearer ${token}`
+        }
+      });
+  
+      if (response.status === 200) {
+        console.log('프로필 이미지가 성공적으로 변경되었습니다:', response.data.profileImage);
+        alert('프로필 이미지가 변경되었습니다.');
+        return true;
+      } else {
+        console.error('예상치 못한 응답 코드:', response.status);
+        alert('프로필 이미지 변경에 실패했습니다.');
+        return false;
+      }
+    } catch (error) {
+      console.error('이미지 변경 실패:', error);
       alert('프로필 이미지 변경에 실패했습니다.');
       return false;
     }
-  } catch (error) {
-    console.error('이미지 변경 실패:', error);
-    alert('프로필 이미지 변경에 실패했습니다.');
-    return false;
-  }
-};
-
+  };
 
     const triggerFileInput = () => {
         document.getElementById('fileInput').click();
