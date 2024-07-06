@@ -37,18 +37,6 @@
     flex-direction: row;
 }
 
-.goal-avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.goal-name {
-    font-weight: bold;
-    margin-right: 20px;
-}
-
 .goal-content {
     flex: 1;
     white-space: nowrap; /* 텍스트를 한 줄로 표시 */

@@ -4,7 +4,7 @@ import InProgress from './InProgress';
 import Completed from './Completed';
 import GoalList from './GoalList';
 
-const PersonalGoals = () => {
+const PersonalGoals = ({ studyPk }) => {
     return (
         <div>
             <div
@@ -16,11 +16,11 @@ const PersonalGoals = () => {
                     flexWrap: 'wrap',
                 }}
             >
-                <NotStarted />
-                <InProgress />
-                <Completed />
+                <NotStarted studyPk={studyPk} />
+                <InProgress studyPk={studyPk} />
+                <Completed studyPk={studyPk} />
             </div>
-            <GoalList />
+            <GoalList studyPk={studyPk} />
         </div>
     );
 };
