@@ -170,7 +170,7 @@ const CreateStudyModal = () => {
                 취소
             </Button>
             <Button
-                variant="primary"
+                variant="success"
                 type="submit"
                 style={{ backgroundColor: '#FEE8D8', color: 'black', border: 'none' }}
                 onClick={handleSubmit}
@@ -182,7 +182,7 @@ const CreateStudyModal = () => {
 
     return (
         <>
-            <Button variant="primary" onClick={() => setModalShow(true)}>
+            <Button variant="success" onClick={() => setModalShow(true)}>
                 스터디 생성하기
             </Button>
 
