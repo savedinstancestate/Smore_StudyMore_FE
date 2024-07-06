@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../../../api/AxiosInstance';
 import './StudyInfo.css';
 
 const StudyInfo = ({ studyPk }) => {
@@ -10,24 +10,10 @@ const StudyInfo = ({ studyPk }) => {
     useEffect(() => {
         const fetchStudyData = async () => {
             try {
-                const response = await axios.get(
-                    `/study/${studyPk}`,
-                    { responseType: 'text' } // 응답을 문자열로 받기 위해 추가
-                );
+                const response = await API.get(`/study/${studyPk}`);
                 console.log('Fetched Study Data:', response.data);
 
-                // 비정상적인 공백 문자 제거
-                const cleanedData = response.data.replace(/[\u2028\u2029\u00A0]/g, ' ');
-
-                let data;
-                try {
-                    data = JSON.parse(cleanedData);
-                } catch (e) {
-                    console.error('JSON 파싱 오류:', e);
-                    setError('스터디 정보를 불러오는 데 실패했습니다.');
-                    return;
-                }
-
+                const data = response.data;
                 setStudyData(data);
                 setError(null); // 정상적으로 데이터를 가져온 경우 error 상태 초기화
             } catch (error) {
@@ -38,25 +24,10 @@ const StudyInfo = ({ studyPk }) => {
 
         const fetchMembersData = async () => {
             try {
-                const response = await axios.get(
-                    `/study/${studyPk}/dashboard/member`,
-                    { responseType: 'text' } // 응답을 문자열로 받기 위해 추가
-                );
+                const response = await API.get(`/study/${studyPk}/dashboard/members`);
                 console.log('Fetched Members Data:', response.data);
 
-                // 비정상적인 공백 문자 제거
-                const cleanedData = response.data.replace(/[\u2028\u2029\u00A0]/g, ' ');
-
-                let data;
-                try {
-                    data = JSON.parse(cleanedData);
-                } catch (e) {
-                    console.error('JSON 파싱 오류:', e);
-                    setError('스터디 멤버 정보를 불러오는 데 실패했습니다.');
-                    return;
-                }
-
-                // 응답 데이터가 배열인지 확인
+                const data = response.data;
                 if (Array.isArray(data)) {
                     setMembers(data);
                     setError(null); // 정상적으로 데이터를 가져온 경우 error 상태 초기화
@@ -88,7 +59,7 @@ const StudyInfo = ({ studyPk }) => {
     return (
         <div className="study-info">
             <div className="info-header">
-                우리 스터디는요 ✏️{' '}
+                우리 스터디는요 ✏️
                 <div className="study-dates">
                     {studyData.startDate} ~ {studyData.closeDate}
                 </div>
