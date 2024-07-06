@@ -3,9 +3,9 @@ import UniversalModal from '../../components/Modal';
 import { Form, Button, Modal } from 'react-bootstrap';
 import API from '../../api/AxiosInstance';
 
-const ApplyStudyModal = ({ studyName, studyPk, show, handleClose, toggleOverlay }) => {
+const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
     const [introduction, setIntroduction] = useState('');
-    const [modalShow, setModalShow] = useState(false); // 첫 번째 모달 어둡기 설정
+    const [modalShow, setModalShow] = useState(false);
 
     const handleIntroductionChange = (event) => {
         setIntroduction(event.target.value);
@@ -14,8 +14,7 @@ const ApplyStudyModal = ({ studyName, studyPk, show, handleClose, toggleOverlay 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await API.post(`/study/${studyPk}/enter`, {
-                // memberPk: 1,
+            const response = await API.post(`/board/${studyPk}/enter`, {
                 content: introduction,
             });
             console.log('Server Response:', response.data);
@@ -29,13 +28,11 @@ const ApplyStudyModal = ({ studyName, studyPk, show, handleClose, toggleOverlay 
 
     const openModal = () => {
         setModalShow(true);
-        toggleOverlay(true);  // 첫 번째 모달을 어둡게 만듭니다.
     };
 
     const closeModal = () => {
         setModalShow(false);
         resetForm();
-        toggleOverlay(false);  // 첫 번째 모달 어둠 해제
     };
 
     const resetForm = () => {
@@ -43,14 +40,12 @@ const ApplyStudyModal = ({ studyName, studyPk, show, handleClose, toggleOverlay 
     };
 
     const modalContent = (
-        <div style={{marginLeft: '22px', width: '90%'}}>
         <Form onSubmit={handleSubmit}>
             <Form.Group>
-                <Form.Label style={{fontWeight: '700', color: '#009063'}}>스터디명
-                <span style={{color: 'black', marginLeft: '6px'}}>{studyName}</span></Form.Label>
+                <Form.Label>신청 스터디: {studyName}</Form.Label>
             </Form.Group>
             <Form.Group>
-                <Form.Label style={{fontWeight: '700', color: '#009063'}}>나를 소개하기</Form.Label>
+                <Form.Label>나를 소개하기</Form.Label>
                 <Form.Control
                     as="textarea"
                     rows="3"
@@ -62,42 +57,29 @@ const ApplyStudyModal = ({ studyName, studyPk, show, handleClose, toggleOverlay 
             <Modal.Footer
                 style={{
                     display: 'flex',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'space-between',
                     borderTop: 'none',
                     width: '100%',
                     padding: 0,
                 }}
             >
-                <Button
-                    variant="secondary"
-                    onClick={closeModal}
-                    style={{ backgroundColor: '#fff', color: '#009063', border: '1px solid #009063' }}
-                >
+                <Button variant="secondary" onClick={closeModal}>
                     취소
                 </Button>
-                <Button
-                    variant="primary"
-                    type="submit"
-                    style={{ backgroundColor: '#009063', color: '#fff', border: 'none' }}
-                >
+                <Button variant="success" type="submit">
                     신청하기
                 </Button>
             </Modal.Footer>
         </Form>
-        </div>
     );
 
     return (
         <>
-            <Button
-                variant="primary"
-                onClick={openModal}
-                style={{ backgroundColor: '#009063', color: 'black', border: 'none', width: '60%', padding: '14px', border: 'none', borderRadius: '8px', backgroundColor: '#009063', color: '#fff', fontWeight: '600', marginBottom: '30px' }}
-            >
-                스터디 지원하기
+            <Button variant="success" onClick={openModal}>
+                신청하기
             </Button>
 
-            <UniversalModal title="스터디 지원하기" show={modalShow} handleClose={closeModal} children={modalContent} />
+            <UniversalModal title="참여 신청서" show={modalShow} handleClose={closeModal} children={modalContent} />
         </>
     );
 };

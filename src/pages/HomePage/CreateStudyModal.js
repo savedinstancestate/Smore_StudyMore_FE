@@ -162,19 +162,10 @@ const CreateStudyModal = () => {
         <Modal.Footer
             style={{ display: 'flex', justifyContent: 'space-between', borderTop: 'none', width: '100%', padding: 0 }}
         >
-            <Button
-                variant="secondary"
-                onClick={closeModal}
-                style={{ backgroundColor: '#F5EBE9', color: 'black', border: 'none' }}
-            >
+            <Button variant="secondary" onClick={closeModal}>
                 취소
             </Button>
-            <Button
-                variant="success"
-                type="submit"
-                style={{ backgroundColor: '#FEE8D8', color: 'black', border: 'none' }}
-                onClick={handleSubmit}
-            >
+            <Button variant="success" type="submit" onClick={handleSubmit}>
                 생성하기
             </Button>
         </Modal.Footer>
