@@ -83,7 +83,7 @@ function MyStudy() {
 
   function confirmLeaveStudy() {
     if (userInput === studyToLeave.studyName) {
-      API.delete(`/mystudy/${studyPk}`)
+      API.delete(`/mystudy/${studyToLeave.studyPk}`)
         .then(response => {
           if (response.status === 204) {
             alert(`'${studyToLeave.studyName}'에서 성공적으로 탈퇴되었습니다.`);
