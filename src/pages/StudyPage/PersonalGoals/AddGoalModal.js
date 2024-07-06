@@ -2,21 +2,33 @@ import React, { useState } from 'react';
 import UniversalModal from '../../../components/Modal';
 import { Button, Form } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
+import API from '../../../api/AxiosInstance';
 
-const AddGoalModal = () => {
+const AddGoalModal = ({ studyPk, addGoal }) => {
     const [show, setShow] = useState(false);
-    const [goalStatus, setGoalStatus] = useState('NotStarted');
+    const [goalStatus, setGoalStatus] = useState('진행 전');
     const [goalContent, setGoalContent] = useState('');
 
-    const handleSave = () => {
-        console.log({ status: goalStatus, content: goalContent }); // 데이터 처리 예: 서버에 저장
-        handleClose(); // 모달 닫기
-        resetForm(); // 폼 초기화
+    const handleSave = async () => {
+        if (goalContent && goalStatus) {
+            const newGoal = {
+                scheduleStatus: goalStatus,
+                scheduleContent: goalContent,
+            };
+
+            try {
+                const response = await API.post(`/study/${studyPk}/todo`, newGoal);
+                addGoal(response.data);
+                handleClose();
+            } catch (error) {
+                console.error('목표를 추가하는 데 실패했습니다:', error);
+            }
+        }
     };
 
     const resetForm = () => {
         setGoalContent('');
-        setGoalStatus('NotStarted');
+        setGoalStatus('진행 전');
     };
 
     const handleClose = () => {
@@ -34,22 +46,13 @@ const AddGoalModal = () => {
                 <Form.Group>
                     <Form.Label>진행 상태:</Form.Label>
                     <div style={{ display: 'flex', justifyContent: 'spaceAround', gap: '20px' }}>
-                        <Button
-                            variant={getStatusButtonVariant('NotStarted')}
-                            onClick={() => setGoalStatus('NotStarted')}
-                        >
+                        <Button variant={getStatusButtonVariant('진행 전')} onClick={() => setGoalStatus('진행 전')}>
                             진행 전
                         </Button>
-                        <Button
-                            variant={getStatusButtonVariant('InProgress')}
-                            onClick={() => setGoalStatus('InProgress')}
-                        >
+                        <Button variant={getStatusButtonVariant('진행 중')} onClick={() => setGoalStatus('진행 중')}>
                             진행 중
                         </Button>
-                        <Button
-                            variant={getStatusButtonVariant('Completed')}
-                            onClick={() => setGoalStatus('Completed')}
-                        >
+                        <Button variant={getStatusButtonVariant('완료')} onClick={() => setGoalStatus('완료')}>
                             완료
                         </Button>
                     </div>
@@ -73,7 +76,7 @@ const AddGoalModal = () => {
             <Button variant="secondary" onClick={handleClose}>
                 취소
             </Button>
-            <Button variant="success" onClick={handleSave}>
+            <Button variant="success" onClick={handleSave} disabled={!goalContent || !goalStatus}>
                 확인
             </Button>
         </div>

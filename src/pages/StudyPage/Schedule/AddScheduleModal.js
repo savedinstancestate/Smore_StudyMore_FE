@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import UniversalModal from '../../../components/Modal';
+import API from '../../../api/AxiosInstance';
 
 const AddScheduleModal = ({ show, handleClose, addEvent }) => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
     useEffect(() => {
         if (!show) {
             setStartDate('');
             setEndDate('');
-            setTitle('');
+            setContent('');
         }
     }, [show]);
 
     const handleSave = () => {
-        addEvent({ startDate, endDate, title });
+        addEvent({ startDate, endDate, content });
         handleClose();
     };
 
@@ -59,8 +60,8 @@ const AddScheduleModal = ({ show, handleClose, addEvent }) => {
                     <Form.Label>내용</Form.Label>
                     <Form.Control
                         type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
                         placeholder="일정 내용을 입력하세요"
                     />
                 </Form.Group>

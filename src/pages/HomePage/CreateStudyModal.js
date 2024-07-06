@@ -23,12 +23,12 @@ const CreateStudyModal = () => {
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
-        setShowStartDatePicker(false); // 선택 후 캘린더 숨기기
+        setShowStartDatePicker(false);
     };
 
     const handleEndDateChange = (date) => {
         setEndDate(date);
-        setShowEndDatePicker(false); // 선택 후 캘린더 숨기기
+        setShowEndDatePicker(false);
     };
 
     const handleFileChange = (e) => {
@@ -37,30 +37,40 @@ const CreateStudyModal = () => {
         if (file && file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                setThumbnail(e.target.result); // 이미지의 Base64 URL을 썸네일 상태에 저장
+                setThumbnail(e.target.result);
             };
             reader.readAsDataURL(file);
         } else {
-            setThumbnail(null); // 이미지 파일이 아닐 경우 썸네일 제거
+            setThumbnail(null);
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const payload = {
+
+        const studyCreateDTO = {
             studyName: formData.name,
-            // memberPk: 1, // 실제 멤버 ID
             imageUri: selectedFile ? thumbnail : null,
             maxPeople: parseInt(formData.attendees),
             content: formData.description,
-            openDate: moment(startDate).format('YYYY-MM-DD'),
+            startDate: moment(startDate).format('YYYY-MM-DD'),
             closeDate: moment(endDate).format('YYYY-MM-DD'),
         };
 
+        const formDataToSend = new FormData();
+        formDataToSend.append('studyCreateDTO', JSON.stringify(studyCreateDTO));
+        if (selectedFile) {
+            formDataToSend.append('image', selectedFile);
+        }
+
         try {
-            const response = await API.post('/study', payload);
+            const response = await API.post('/study', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             console.log(response.data);
-            closeModal(); // 모달을 닫으면서 데이터를 콘솔에 로깅
+            closeModal();
         } catch (error) {
             console.error(error);
         }
@@ -160,7 +170,7 @@ const CreateStudyModal = () => {
                 취소
             </Button>
             <Button
-                variant="primary"
+                variant="success"
                 type="submit"
                 style={{ backgroundColor: '#FEE8D8', color: 'black', border: 'none' }}
                 onClick={handleSubmit}
@@ -172,13 +182,7 @@ const CreateStudyModal = () => {
 
     return (
         <>
-            <Button variant="primary" onClick={() => setModalShow(true)}
-            style={{backgroundColor: '#009063',
-            border: '1px solid #009063',
-            fontWeight: '500',
-            display: 'flex',
-            alignItems: 'center'}}>
-                {/* <img src="img/pencil.png" alt="Button Image" style={{ width: '18px', marginRight: '4px',  }} /> */}
+            <Button variant="success" onClick={() => setModalShow(true)}>
                 스터디 생성하기
             </Button>
 

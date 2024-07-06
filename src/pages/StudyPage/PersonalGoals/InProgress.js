@@ -1,25 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import API from '../../../api/AxiosInstance';
 import './Goals.css';
 
-const InProgress = () => {
-    const goals = [
-        { id: 1, avatar: '/path/to/avatar1.png', name: '이수지', content: '이번주까지 끝낼 수 있을까? 진짜?' },
-        { id: 2, avatar: '/path/to/avatar1.png', name: '이수지', content: '이번주까지 끝낼 수 있을까? 진짜?' },
-        { id: 3, avatar: '/path/to/avatar1.png', name: '이수지', content: '이번주까지 끝낼 수 있을까? 진짜?' },
-        { id: 4, avatar: '/path/to/avatar1.png', name: '이수지', content: '이번주까지 끝낼 수 있을까? 진짜?' },
-        { id: 5, avatar: '/path/to/avatar1.png', name: '이수지', content: '이번주까지 끝낼 수 있을까? 진짜?' },
-        { id: 6, avatar: '/path/to/avatar1.png', name: '이수지', content: '이번주까지 끝낼 수 있을까? 진짜?' },
-    ];
+const InProgress = ({ studyPk }) => {
+    const [goals, setGoals] = useState([]);
+
+    useEffect(() => {
+        const fetchGoals = async () => {
+            try {
+                const response = await API.get(`/study/${studyPk}/todo/status`, {
+                    params: { status: '진행 중' },
+                });
+                setGoals(response.data);
+            } catch (error) {
+                console.error('목표 리스트를 불러오는 데 실패했습니다:', error);
+            }
+        };
+
+        fetchGoals();
+    }, [studyPk]);
 
     return (
         <div className="personal-goals">
             <div className="goal-header">진행 중 ✈️</div>
             <div className="goal-container">
                 {goals.map((goal) => (
-                    <div key={goal.id} className="goal">
-                        <img src={goal.avatar} alt={`${goal.name}의 사진`} className="goal-avatar" />
-                        <div className="goal-name">{goal.name}</div>
-                        <div className="goal-content">{goal.content}</div>
+                    <div key={goal.personalTodoPk} className="goal">
+                        <img
+                            src={goal.profileImg || '/path/to/default_avatar.png'}
+                            alt={`${goal.nickName}의 사진`}
+                            className="goal-avatar"
+                        />
+                        <div className="goal-name">{goal.nickName}</div>
+                        <div className="goal-content">{goal.scheduleContent}</div>
                     </div>
                 ))}
             </div>
