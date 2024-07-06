@@ -21,7 +21,7 @@ const Study = () => {
         console.log('studyPk:', studyPk);
         const fetchStudyInfo = async () => {
             try {
-                const response = await API.get(`/study/${studyPk}/management`);
+                const response = await API.get(`/study/${studyPk}`);
                 if (response.data) {
                     setHeaderStudyName(response.data.studyName); 
                     console.log('Fetched study name:', response.data.studyName); 
