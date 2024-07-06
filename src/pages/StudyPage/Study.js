@@ -24,6 +24,7 @@ const Study = () => {
                 const response = await API.get(`/study/${studyPk}`);
                 if (response.data) {
                     setHeaderStudyName(response.data.studyName); 
+                    console.log(response.data); 
                     console.log('Fetched study name:', response.data.studyName); 
                 }
             } catch (error) {
