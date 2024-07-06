@@ -56,7 +56,7 @@ function BoardDetailModal({ studyBoardPk, onClose }) {
           <p>{BoardDetails.adContent}</p>
         </div>
         <div className="modal-container"></div>
-        <ApplyStudyModal toggleOverlay={toggleOverlay} studyName={BoardDetails.studyName} studyPk={studyBoardPk} />
+        <ApplyStudyModal toggleOverlay={toggleOverlay} studyName={BoardDetails.studyName} studyPk={studyPk} />
     </div>
     </div>
   );
