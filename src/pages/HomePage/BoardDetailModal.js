@@ -12,8 +12,7 @@ function BoardDetailModal({ studyBoardPk, onClose }) {
       const fetchBoardDetails = async () => {
         try {
           const response = await API.get(`/board/${studyBoardPk}`);
-          setBoardDetails(response.data); // 직접 데이터를 설정
-          console.log(response.data.studyPk);
+          setBoardDetails(response.data); 
         } catch (error) {
           console.error("요청 처리 중 오류가 발생했습니다.", error);
           setBoardDetails(null);
