@@ -3,6 +3,7 @@
     padding: 30px !important;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    width: 100%;
 }
 
 .header-container {
@@ -93,7 +94,14 @@
     margin-bottom: 10px;
 }
 
+.list-container ul {
+    width: 100%;
+}
+
 .member-item {
+    display: flex; /* flexbox 레이아웃 사용 */
+    align-items: stretch; /* 모든 아이템을 세로 방향 중앙 정렬 */
+    margin-bottom: 4px; /* 항목 간 간격 */
     padding: 10px 0px;
   }
 
@@ -101,22 +109,29 @@
     width: 36px;
     height: 36px;
     background-size: cover;
-    background-position: top left;
+    background-position: center;
     border-radius: 50%;
     margin-right: 10px;
 }
 
+.member-info {
+    display: flex; /* flexbox 레이아웃 사용 */
+    align-items: center; /* 내부 텍스트 세로 중앙 정렬 */
+    flex-grow: 1; /* 남은 공간을 모두 차지 */
+    height: 34px;
+  }
+
 .member-nickname {
     font-weight: 600;
     font-size: 16px;
+    margin: 0;
   }
   
   .member-delete-btn {
-    padding: 5px 12px;
+    padding: 6px 14px;
     background-color: #dc3545;
     color: #fff;
     border: 1px solid #dc3545;
     border-radius: 5px;
     font-size: 14px;
   }
-
