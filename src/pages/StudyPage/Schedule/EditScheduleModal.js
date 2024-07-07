@@ -1,35 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import UniversalModal from '../../../components/Modal';
+import API from '../../../api/AxiosInstance';
+import moment from 'moment';
 
-const EditScheduleModal = ({ show, handleClose, event, updateEvent, deleteEvent }) => {
+const EditScheduleModal = ({ show, handleClose, event, updateEvent, deleteEvent, studyPk }) => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (event) {
-            setStartDate(event.startDate);
-            setEndDate(event.endDate);
-            setTitle(event.title);
+        const fetchEventDetails = async () => {
+            if (event && event.calendarPk) {
+                try {
+                    const response = await API.get(`/study/${studyPk}/calendar/${event.calendarPk}`);
+                    const eventData = response.data;
+                    console.log('Fetched event data:', eventData);
+                    setStartDate(moment(eventData.startDate).format('YYYY-MM-DD'));
+                    setEndDate(moment(eventData.endDate).format('YYYY-MM-DD'));
+                    setContent(eventData.content);
+                } catch (error) {
+                    console.error('일정 정보를 불러오는 데 실패했습니다:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        };
+
+        if (show && event) {
+            console.log('Event passed to modal:', event);
+            setLoading(true);
+            fetchEventDetails();
         }
-    }, [event]);
+    }, [show, event, studyPk]);
 
     useEffect(() => {
         if (!show) {
             setStartDate('');
             setEndDate('');
-            setTitle('');
+            setContent('');
+            setLoading(true);
         }
     }, [show]);
 
-    const handleUpdate = () => {
-        updateEvent({ ...event, startDate, endDate, title });
+    const handleUpdate = async () => {
+        const updatedEvent = {
+            calendarPk: event.calendarPk,
+            content: content,
+            startDate: startDate,
+            endDate: endDate,
+        };
+        try {
+            await API.put(`/study/${studyPk}/calendar/${event.calendarPk}`, updatedEvent);
+            updateEvent(updatedEvent);
+        } catch (error) {
+            console.error('일정 수정에 실패했습니다:', error);
+        }
         handleClose();
     };
 
-    const handleDelete = () => {
-        deleteEvent(event);
+    const handleDelete = async () => {
+        try {
+            await API.delete(`/study/${studyPk}/calendar/${event.calendarPk}`);
+            deleteEvent(event);
+        } catch (error) {
+            console.error('일정 삭제에 실패했습니다:', error);
+        }
         handleClose();
     };
 
@@ -46,41 +83,30 @@ const EditScheduleModal = ({ show, handleClose, event, updateEvent, deleteEvent 
                     <Button variant="secondary" onClick={handleClose} style={{ marginRight: '10px' }}>
                         취소
                     </Button>
-                    <Button variant="success" onClick={handleUpdate}>
+                    <Button variant="success" onClick={handleUpdate} disabled={loading}>
                         수정
                     </Button>
                 </div>
             }
         >
-            <Form>
-                <Form.Group style={{ marginBottom: '10px' }}>
-                    <Form.Label>시작</Form.Label>
-                    <Form.Control
-                        type="date"
-                        value={startDate}
-                        onChange={(e) => setStartDate(e.target.value)}
-                        placeholder="시작일을 선택하세요"
-                    />
-                </Form.Group>
-                <Form.Group style={{ marginBottom: '10px' }}>
-                    <Form.Label>종료</Form.Label>
-                    <Form.Control
-                        type="date"
-                        value={endDate}
-                        onChange={(e) => setEndDate(e.target.value)}
-                        placeholder="종료일을 선택하세요"
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>내용</Form.Label>
-                    <Form.Control
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        placeholder="일정 내용을 입력하세요"
-                    />
-                </Form.Group>
-            </Form>
+            {loading ? (
+                <div>로딩 중...</div>
+            ) : (
+                <Form>
+                    <Form.Group style={{ marginBottom: '10px' }}>
+                        <Form.Label>시작</Form.Label>
+                        <Form.Control type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                    </Form.Group>
+                    <Form.Group style={{ marginBottom: '10px' }}>
+                        <Form.Label>종료</Form.Label>
+                        <Form.Control type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>내용</Form.Label>
+                        <Form.Control type="text" value={content} onChange={(e) => setContent(e.target.value)} />
+                    </Form.Group>
+                </Form>
+            )}
         </UniversalModal>
     );
 };

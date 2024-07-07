@@ -13,9 +13,9 @@ import API from '../../api/AxiosInstance';
 import { useHeaderStudyName } from '../../components/StudyNameContext';
 
 const Study = () => {
-    const { studyPk } = useParams(); 
+    const { studyPk } = useParams();
     const [activeTab, setActiveTab] = useState('dashboard');
-    const { setHeaderStudyName } = useHeaderStudyName(); 
+    const { setHeaderStudyName } = useHeaderStudyName();
 
     useEffect(() => {
         console.log('studyPk:', studyPk);
@@ -23,11 +23,11 @@ const Study = () => {
             try {
                 const response = await API.get(`/study/${studyPk}`);
                 if (response.data) {
-                    setHeaderStudyName(response.data); 
+                    setHeaderStudyName(response.data.studyName);
                 }
             } catch (error) {
                 console.error('Failed to fetch study info:', error);
-                setHeaderStudyName('스터디 정보를 불러오지 못했습니다.'); 
+                setHeaderStudyName('스터디 정보를 불러오지 못했습니다.');
             }
         };
 
@@ -42,28 +42,28 @@ const Study = () => {
                         <Tab eventKey="dashboard" title="대시보드">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <Dashboard />
+                                    <Dashboard studyPK={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
                         <Tab eventKey="schedule" title="스터디 일정">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <Schedule />
+                                    <Schedule studyPK={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
                         <Tab eventKey="problems" title="문제 풀이">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <ProblemSolving />
+                                    <ProblemSolving studyPK={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
                         <Tab eventKey="personalGoals" title="개인 목표">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <PersonalGoals />
+                                    <PersonalGoals studyPK={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
