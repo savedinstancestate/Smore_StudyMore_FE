@@ -31,7 +31,7 @@ const EditStudyInfo = ({ studyPk }) => {
                 setEndDate(new Date(data.closeDate));
                 setThumbnail(data.imageUri);
             } catch (error) {
-                setError('스터디 정보 불러오기 실패');
+                setError('스터디 정보를 불러오는 데 실패했습니다.');
             }
         };
 
@@ -66,10 +66,10 @@ const EditStudyInfo = ({ studyPk }) => {
 
         try {
             await API.put(`/study/management/${studyPk}`, payload);
-            alert('스터디 정보가 수정되었습니다.');
+            alert('정보가 수정되었습니다.');
         } catch (error) {
             console.error('Failed to update study info:', error);
-            setError('스터디 정보 수정에 실패했습니다.');
+            setError('정보 수정에 실패했습니다.');
         }
     };
 
