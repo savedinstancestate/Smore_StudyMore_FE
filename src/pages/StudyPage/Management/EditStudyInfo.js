@@ -21,7 +21,7 @@ const EditStudyInfo = ({ studyPk }) => {
     useEffect(() => {
         const fetchStudyData = async () => {
             try {
-                const response = await API.get(`/study/management/${studyPk}`);
+                const response = await API.get(`/study/${studyPk}/management`);
                 const data = response.data;
                 setFormData({
                     description: data.content,
@@ -65,7 +65,7 @@ const EditStudyInfo = ({ studyPk }) => {
         };
 
         try {
-            await API.put(`/study/management/${studyPk}`, payload);
+            await API.put(`/study/${studyPk}/management`, payload);
             alert('정보가 수정되었습니다.');
         } catch (error) {
             console.error('Failed to update study info:', error);

@@ -13,7 +13,7 @@ const EditMember = ({ studyPk }) => {
     useEffect(() => {
         const fetchMembers = async () => {
           try {
-            const response = await API.get(`/study/${studyPk}/dashboard/member`);
+            const response = await API.get(`/study/${studyPk}/management/members`);
             setMembers(response.data);
           } catch (error) {
             console.error('멤버 정보를 불러오는데 실패했습니다.', error);
