@@ -11,7 +11,6 @@ const PrivateRoute = ({ component: Component }) => {
     setIsModalOpen(false);
   };
 
-  // accessToken이 존재할 경우 전달된 Component 렌더링
   return accessToken ? (
     <Component />
   ) : (
