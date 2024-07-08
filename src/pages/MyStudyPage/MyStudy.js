@@ -83,7 +83,7 @@ function MyStudy() {
 
   function confirmLeaveStudy() {
     if (userInput === studyToLeave.studyName) {
-      API.delete(`/mystudy/participate/${studyToLeave.studyPk}`)
+      API.delete(`/mystudy/${studyToLeave.studyPk}`)
         .then(response => {
           if (response.status === 204) {
             alert(`'${studyToLeave.studyName}'에서 성공적으로 탈퇴되었습니다.`);
@@ -141,7 +141,7 @@ function MyStudy() {
                   {study.studyStartDate} - {study.studyEndDate}
                 </p>
                 <p className="card-title">참가 인원</p>
-                <p className="card-text">{study.studyPersonNum} / 6</p>
+                <p className="card-text">{study.studyPersonNum} / {study.maxPeople}</p>
                 <button className="study-entry-btn" 
                 onClick={() => handleEnterStudy(study.studyPk)}>입장하기</button>
                 <button className="study-leave-btn" 
