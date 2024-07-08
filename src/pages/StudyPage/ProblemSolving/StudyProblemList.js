@@ -44,24 +44,24 @@ const StudyProblemList = ({ studyPk, studyName }) => {
     return (
         <div className="study-problems">
             <div className="study-problems-header">
-                <div className="study-problems-title">{studyName}의 문제 📘</div>
+                <div className="study-problems-title">스터디의 문제 📘</div>
             </div>
             <ul className="study-problems-list">
                 {problemBanks.map((bank) => (
                     <li key={bank.pk} className="study-problem-item">
                         <Form.Check
                             type="checkbox"
-                            id={bank.pk}
+                            id={`bank-check-${bank.pk}`}
                             className="checkbox"
-                            label=""
+                            label={bank.problemBankName}
                             checked={selectedBanks.includes(bank.pk)}
                             onChange={() => handleBankSelect(bank.pk)}
                         />
-                        <div className="problem-info">
+                        <label htmlFor={`bank-check-${bank.pk}`} className="problem-info">
                             <span className="problem-name">{bank.problemBankName}</span>
                             <span className="problem-writer">출제자: {bank.writer}</span>
                             <span className="problem-count">문제 수: {bank.count}</span>
-                        </div>
+                        </label>
                     </li>
                 ))}
             </ul>

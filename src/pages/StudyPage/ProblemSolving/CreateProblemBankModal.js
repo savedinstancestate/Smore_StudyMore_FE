@@ -173,7 +173,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                 style={{ width: '100%' }}
                 disabled={!bankName || !isCurrentQuestionValid()}
             >
-                Add Question
+                문제 추가하기
             </Button>
         </>
     );
@@ -194,7 +194,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
             <Form>
                 {!bankCreated && (
                     <Form.Group>
-                        <Form.Label>Bank Name:</Form.Label>
+                        <Form.Label>문제은행 이름:</Form.Label>
                         <Form.Control
                             type="text"
                             value={bankName}
@@ -204,22 +204,29 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                     </Form.Group>
                 )}
                 {renderQuestionForm()}
-                <Button
-                    variant="secondary"
-                    onClick={() => {
-                        handleClose();
-                        setQuestions([]);
-                        setBankName('');
-                        setBankPk(null);
-                        setBankCreated(false);
-                    }}
-                    className="mt-2"
-                >
-                    취소
-                </Button>
-                <Button variant="success" onClick={handleSaveProblems} className="mt-2 ml-2" disabled={!isFormValid()}>
-                    완료
-                </Button>
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                    <Button
+                        variant="secondary"
+                        onClick={() => {
+                            handleClose();
+                            setQuestions([]);
+                            setBankName('');
+                            setBankPk(null);
+                            setBankCreated(false);
+                        }}
+                        className="mt-2"
+                    >
+                        취소
+                    </Button>
+                    <Button
+                        variant="success"
+                        onClick={handleSaveProblems}
+                        className="mt-2 ml-2"
+                        disabled={!isFormValid()}
+                    >
+                        완료
+                    </Button>
+                </div>
             </Form>
         </UniversalModal>
     );

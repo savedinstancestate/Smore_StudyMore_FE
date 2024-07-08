@@ -34,19 +34,19 @@ const EditGoalModal = ({ show, handleClose, goal, studyPk, updateGoal }) => {
                     <Form.Label>진행 상태:</Form.Label>
                     <div style={{ display: 'flex', justifyContent: 'spaceAround', gap: '20px' }}>
                         <Button
-                            variant={goalStatus === 'NotStarted' ? 'success' : 'light'}
+                            variant={goalStatus === '진행 전' ? 'success' : 'light'}
                             onClick={() => setGoalStatus('진행 전')}
                         >
                             진행 전
                         </Button>
                         <Button
-                            variant={goalStatus === 'InProgress' ? 'success' : 'light'}
+                            variant={goalStatus === '진행 중' ? 'success' : 'light'}
                             onClick={() => setGoalStatus('진행 중')}
                         >
                             진행 중
                         </Button>
                         <Button
-                            variant={goalStatus === 'Completed' ? 'success' : 'light'}
+                            variant={goalStatus === '완료' ? 'success' : 'light'}
                             onClick={() => setGoalStatus('완료')}
                         >
                             완료
