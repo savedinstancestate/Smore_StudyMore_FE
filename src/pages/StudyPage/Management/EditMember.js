@@ -35,7 +35,7 @@ const EditMember = ({ studyPk }) => {
             data: { memberPk: selectedMemberPk }
         });
 
-        if (response.status === 200) {
+        if (response.status === 204) {
           setMembers(members.filter(member => member.memberPk !== selectedMemberPk));
           setSuccessMessage('멤버 퇴출이 성공적으로 처리되었습니다.');
           setIsModalOpen(false);
