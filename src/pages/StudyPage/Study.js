@@ -84,7 +84,7 @@ const Study = () => {
                     </Tabs>
                 </Container>
                 <div className="timer-container">
-                    <Timer />
+                    <Timer studyPk={studyPk} />
                 </div>
             </div>
         </div>
