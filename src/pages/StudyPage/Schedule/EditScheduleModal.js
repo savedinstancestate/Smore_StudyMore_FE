@@ -52,7 +52,7 @@ const EditScheduleModal = ({ show, handleClose, event, updateEvent, deleteEvent,
             endDate: endDate,
         };
         try {
-            await API.put(`/study/${studyPk}/calendar/`, updatedEvent);
+            await API.put(`/study/${studyPk}/calendar`, updatedEvent);
             updateEvent(updatedEvent);
         } catch (error) {
             console.error('일정 수정에 실패했습니다:', error);
