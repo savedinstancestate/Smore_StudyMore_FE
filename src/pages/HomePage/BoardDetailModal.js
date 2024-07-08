@@ -3,9 +3,9 @@ import API from '../../api/AxiosInstance';
 import "../../styles/StudyCard.css";
 import ApplyStudyModal from "./ApplyStudyModal";
 
-function BoardDetailModal({ studyBoardPk, onClose }) {
+function BoardDetailModal({ studyBoardPk }) {
   const [BoardDetails, setBoardDetails] = useState(null);
-  const [showOverlay, setShowOverlay] = useState(false); // 오버레이 표시 상태
+  const [showOverlay, setShowOverlay] = useState(false); 
 
   useEffect(() => {
     if (studyBoardPk) {
@@ -45,11 +45,11 @@ function BoardDetailModal({ studyBoardPk, onClose }) {
         <div className="flex-box">
         <div className="flex-row">
         <p className="card-title-detail">스터디 기간</p>
-        <p className="study-detail">{BoardDetails.studyStartDate} - {BoardDetails.studyEndDate}</p>
+        <p className="study-detail">{BoardDetails.startDate} - {BoardDetails.closeDate}</p>
         </div>
         <div className="flex-row">
         <p className="card-title-detail">참가 인원</p>
-        <p className="study-detail">{BoardDetails.studyPersonNum} / 6</p>
+        <p className="study-detail">{BoardDetails.studyPersonNum} / {BoardDetails.maxPeople}</p>
         </div>
         </div>
         <div className="content-wrapper-detail">
