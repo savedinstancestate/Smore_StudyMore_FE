@@ -181,7 +181,7 @@ const CreateStudyModal = () => {
                 취소
             </Button>
             <Button variant="success" type="submit" onClick={handleSubmit}>
-                생성하기
+                완료
             </Button>
         </Modal.Footer>
     );
