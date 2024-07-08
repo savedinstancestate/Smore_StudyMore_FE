@@ -84,11 +84,10 @@ const EditMember = ({ studyPk }) => {
               
               <Modal show={isModalOpen} handleClose={closeModal} title="멤버 퇴출">
                 <div>
-                  <h2>멤버 퇴출</h2>
-                  <p>정말로 멤버를 퇴출하시겠습니까?</p>
+                  <p className="edit-member-modal">정말로 멤버를 퇴출하시겠습니까?</p>
                   <div className="modal-buttons">
-                    <button onClick={expelMember}>확인</button>
-                    <button onClick={closeModal}>취소</button>
+                    <button onClick={expelMember} className="member-expel-btn-confirm">확인</button>
+                    <button onClick={closeModal} className="member-expel-btn-cancel">취소</button>
                   </div>
                 </div>
               </Modal>
