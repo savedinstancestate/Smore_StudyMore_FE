@@ -149,7 +149,7 @@ export const handlers = [
           studyName: "아마zone",
           adTitle: "아마존에 간 건 아마...존?",
           adContent:
-            "아마존에 간 존에 대해 이야기하는 스터디입니다... 나이, 성별 제한 없습니다... 아무나 오세요... 환영합니다... 칼수락 합니다...",
+            "아마존에 간 존에 대해 이야기하는 스터디입니다...",
           studyImg: "/img/sample-img-2.png",
           studyPersonNum: 4,
           studyStartDate: "2023-01-01",
@@ -162,7 +162,7 @@ export const handlers = [
           studyName: "우아한 스터디",
           adTitle: "우아한 스터디 모집합니다.",
           adContent:
-            "우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다!",
+            "우아한 스터디 모집중",
           studyImg: "/img/sample-img-3.jpg",
           studyPersonNum: 4,
           studyStartDate: "2023-01-01",

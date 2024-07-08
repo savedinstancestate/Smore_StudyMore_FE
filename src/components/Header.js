@@ -6,6 +6,7 @@ import Modal from './Modal';
 import Login from '../pages/LoginPage/LoginModal';
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
 import { useHeaderStudyName } from './StudyNameContext';
+import logoImage from './smore-logo-ver1.png';
 
 const HeaderWrapper = styled.div`
   position: fixed;
@@ -137,7 +138,7 @@ const Header = () => {
     <HeaderContainer>
       <HeaderContent>
       <Logo to="/">
-          <LogoImage src="img/smore-logo-ver1.png" alt="Logo" />
+          <LogoImage src={logoImage} alt="Logo" />
         </Logo>
         <div style={NavContainer} >
         <NavLinks>
