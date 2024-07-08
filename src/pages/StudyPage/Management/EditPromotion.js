@@ -5,15 +5,14 @@ import "./Management.css";
 
 const EditPromotion = ({ studyPk }) => {
   const [formData, setFormData] = useState({
-    adTitle: "",
-    adContent: "",
-    studyBoardPk: null,
-    imageUri: null
+    adTitle: '',
+    adContent: '',
+    studyBoardPk: '',
+    imageUri: ''
   });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
-  // 썸네일 상태를 여기에 정의합니다.
   const [thumbnail, setThumbnail] = useState(null);
 
   useEffect(() => {
