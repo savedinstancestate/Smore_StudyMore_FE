@@ -11,6 +11,7 @@ const EditPromotion = ({ studyPk }) => {
     imageUri: ''
   });
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
@@ -57,23 +58,27 @@ const EditPromotion = ({ studyPk }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
+    const payload = {
+      studyBoardPk: formData.studyBoardPk,
+      adTitle: formData.adTitle,
+      adContent: formData.adContent,
+      imageUri: formData.imageUri
+    };
+  
     if (selectedFile) {
-      formDataToSend.append('imageUri', selectedFile);
-    } else {
-      formDataToSend.append('imageUri', formData.imageUri);
+      const fileData = new FormData();
+      fileData.append('imageUri', selectedFile);
+      // 파일 업로드에 관한 추가적인 API 요청이 필요할 수 있습니다.
+      // 예: await API.post('/upload', fileData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
 
     try {
-      await API.put(`/study/${studyPk}/management/board`, formDataToSend, {
+      await API.put(`/study/${studyPk}/management/board`, payload, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'application/json'
         }
       });
-      alert("홍보글 수정이 완료되었습니다.");
+      setSuccessMessage("홍보글 수정이 완료되었습니다.");
     } catch (error) {
       console.error("홍보글 수정 실패:", error);
       setError("홍보글 수정에 실패했습니다.");
@@ -88,6 +93,8 @@ const EditPromotion = ({ studyPk }) => {
     <div className="container">
       <div className="header-container">
         <div className="title">홍보글 수정 📰</div>
+        {error && <div className="alert alert-danger">{error}</div>}
+        {successMessage && <div className="alert alert-primary">{successMessage}</div>}
         <Button
           type="submit"
           className="button"
