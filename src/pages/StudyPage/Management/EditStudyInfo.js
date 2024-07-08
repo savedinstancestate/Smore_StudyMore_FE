@@ -61,8 +61,6 @@ const EditStudyInfo = ({ studyPk }) => {
         <div className="container">
             <div className="header-container">
             <div className="title">스터디 정보 수정 ℹ️</div> 
-            {error && <div className="alert alert-danger">{error}</div>}
-              {successMessage && <div className="alert alert-primary">{successMessage}</div>}
             <Button
             type="submit" className="button"
             style={{backgroundColor: '#fff',
@@ -77,6 +75,7 @@ const EditStudyInfo = ({ studyPk }) => {
             >저장</Button>
             </div>
             {error && <div className="alert alert-danger">{error}</div>}
+            {successMessage && <div className="alert alert-primary">{successMessage}</div>}
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="form-group">
                     <Form.Label className="label">스터디 소개</Form.Label>
