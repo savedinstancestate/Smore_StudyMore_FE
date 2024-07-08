@@ -12,6 +12,7 @@ export const handlers = [
             studyName: "자바보라능",
             studyImg: "/img/sample-img-1.png",
             studyPersonNum: 4,
+            maxPeople: 5,
             studyStartDate: "2023-01-01",
             studyEndDate: "2023-12-31",
           },
