@@ -18,7 +18,7 @@ const EditPromotion = ({ studyPk }) => {
   useEffect(() => {
     const fetchAdData = async () => {
       try {
-        const response = await API.get(`/study/${studyPk}/management/board`);
+        const response = await API.get(`/study/${studyPk}/management`);
         const data = response.data;
         setFormData({
           studyBoardPk: data.studyBoardPk,
