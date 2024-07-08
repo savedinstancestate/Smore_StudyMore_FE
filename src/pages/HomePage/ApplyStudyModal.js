@@ -41,8 +41,9 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
 
     const modalContent = (
         <Form onSubmit={handleSubmit}>
-            <Form.Group>
-                <Form.Label>신청 스터디: {studyName}</Form.Label>
+            <Form.Group >
+                <Form.Label>
+                    <span style={{color: '#009063', fontWeight:'600', marginRight: '3px'}}>스터디명</span> {studyName}</Form.Label>
             </Form.Group>
             <Form.Group>
                 <Form.Label>나를 소개하기</Form.Label>
@@ -67,7 +68,7 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
                     취소
                 </Button>
                 <Button variant="success" type="submit">
-                    신청하기
+                    지원하기
                 </Button>
             </Modal.Footer>
         </Form>
@@ -75,11 +76,15 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
 
     return (
         <>
-            <Button variant="success" onClick={openModal}>
-                신청하기
+            <Button
+            variant="success"
+            onClick={openModal}
+            style={{padding: '12px 12px', fontWeight: '600', width: '80%', marginBottom: '30px'}}
+            >
+                스터디 지원하기
             </Button>
 
-            <UniversalModal title="참여 신청서" show={modalShow} handleClose={closeModal} children={modalContent} />
+            <UniversalModal title="스터디 지원하기" show={modalShow} handleClose={closeModal} children={modalContent} />
         </>
     );
 };
