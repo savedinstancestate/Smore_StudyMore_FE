@@ -58,7 +58,10 @@ const CreateStudyModal = () => {
         };
 
         const formDataToSend = new FormData();
-        formDataToSend.append('studyCreateDTO', JSON.stringify(studyCreateDTO));
+        formDataToSend.append(
+            'studyCreateDTO',
+            new Blob([JSON.stringify(studyCreateDTO)], { type: 'application/json' })
+        );
         if (selectedFile) {
             formDataToSend.append('image', selectedFile);
         }
@@ -162,7 +165,11 @@ const CreateStudyModal = () => {
         <Modal.Footer
             style={{ display: 'flex', justifyContent: 'space-between', borderTop: 'none', width: '100%', padding: 0 }}
         >
-            <Button variant="secondary" onClick={closeModal}>
+            <Button
+                variant="secondary"
+                onClick={closeModal}
+                style={{ backgroundColor: '#F5EBE9', color: 'black', border: 'none' }}
+            >
                 취소
             </Button>
             <Button variant="success" type="submit" onClick={handleSubmit}>
