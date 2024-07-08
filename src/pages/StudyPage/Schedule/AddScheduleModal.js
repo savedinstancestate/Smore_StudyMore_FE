@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import UniversalModal from '../../../components/Modal';
-import API from '../../../api/AxiosInstance';
 
-const AddScheduleModal = ({ show, handleClose, addEvent }) => {
+const AddScheduleModal = ({ show, handleClose, addEvent, fetchEvents }) => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [content, setContent] = useState('');
@@ -16,9 +15,10 @@ const AddScheduleModal = ({ show, handleClose, addEvent }) => {
         }
     }, [show]);
 
-    const handleSave = () => {
-        addEvent({ startDate, endDate, content });
+    const handleSave = async () => {
+        await addEvent({ startDate, endDate, content });
         handleClose();
+        await fetchEvents(); // 일정 추가 후 일정 목록 갱신
     };
 
     return (

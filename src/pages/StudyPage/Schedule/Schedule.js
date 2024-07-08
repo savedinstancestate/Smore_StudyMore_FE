@@ -3,13 +3,12 @@ import Calendar from 'react-calendar';
 import styled from 'styled-components';
 import 'react-calendar/dist/Calendar.css';
 import AddScheduleModal from './AddScheduleModal';
-import { Button } from 'react-bootstrap';
 import EditScheduleModal from './EditScheduleModal';
+import { Button } from 'react-bootstrap';
 import moment from 'moment';
 import API from '../../../api/AxiosInstance';
 import { FaPlus } from 'react-icons/fa';
 
-// 스타일 정의
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -46,46 +45,37 @@ const Schedule = ({ studyPk }) => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
 
-    // 일정 리스트 불러오기
-    useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                console.log(`Fetching events for studyPk: ${studyPk}`);
+    const fetchEvents = async () => {
+        try {
+            console.log(`Fetching events for studyPk: ${studyPk}`);
+            const response = await API.get(`/study/${studyPk}/calendar/list`);
+            console.log('Type of response data:', typeof response.data);
+            console.log('API response:', response.data);
 
-                const response = await API.get(`/study/${studyPk}/calendar/list`);
-                console.log('Type of response data:', typeof response.data);
-                console.log('API response:', response.data);
+            const eventData = response.data;
 
-                const eventData = response.data;
-
-                // 배열인지 확인 후 이벤트 데이터 매핑
-                if (Array.isArray(eventData)) {
-                    const mappedData = eventData.map((event) => ({
-                        ...event,
-                        startDate: new Date(event.startDate),
-                        endDate: new Date(event.endDate),
-                    }));
-                    setEvents(mappedData);
-                    console.log('Mapped events:', mappedData);
-                } else {
-                    console.error('Data is not an array', eventData);
-                    setEvents([]);
-                }
-            } catch (error) {
-                console.error('Failed to fetch events:', error);
-                setEvents([]); // 오류 발생 시 빈 배열로 설정
+            if (Array.isArray(eventData)) {
+                const mappedData = eventData.map((event) => ({
+                    ...event,
+                    startDate: new Date(event.startDate),
+                    endDate: new Date(event.endDate),
+                }));
+                setEvents(mappedData);
+                console.log('Mapped events:', mappedData);
+            } else {
+                console.error('Data is not an array', eventData);
+                setEvents([]);
             }
-        };
+        } catch (error) {
+            console.error('Failed to fetch events:', error);
+            setEvents([]); // 오류 발생 시 빈 배열로 설정
+        }
+    };
 
+    useEffect(() => {
         fetchEvents();
     }, [studyPk]);
 
-    // 날짜 변경 핸들러
-    const handleDateChange = (date) => {
-        setDate(date);
-    };
-
-    // 일정 추가 함수
     const addEvent = async (eventDetails) => {
         try {
             const postData = {
@@ -93,46 +83,48 @@ const Schedule = ({ studyPk }) => {
                 startDate: moment(eventDetails.startDate).format('YYYY-MM-DD'),
                 endDate: moment(eventDetails.endDate).format('YYYY-MM-DD'),
             };
-            console.log('Sending POST data:', postData); // 디버깅 로그 추가
+            console.log('Sending POST data:', postData);
             const response = await API.post(`/study/${studyPk}/calendar`, postData);
-            const newEvent = {
-                ...response.data,
-                startDate: new Date(postData.startDate),
-                endDate: new Date(postData.endDate),
-            };
-            setEvents([...events, newEvent]);
+            if (response.status === 200) {
+                fetchEvents(); // 일정 추가 후 바로 목록 갱신
+            }
         } catch (error) {
             console.error('일정 추가에 실패했습니다:', error);
         }
     };
 
-    // 일정 업데이트 함수
-    const updateEvent = (updatedEvent) => {
-        setEvents(events.map((event) => (event.calendarPk === updatedEvent.calendarPk ? updatedEvent : event)));
+    const updateEvent = async (updatedEvent) => {
+        try {
+            const response = await API.put(`/study/${studyPk}/calendar/${updatedEvent.calendarPk}`, updatedEvent);
+            if (response.status === 200) {
+                fetchEvents(); // 일정 업데이트 후 목록 갱신
+            }
+        } catch (error) {
+            console.error('일정 업데이트에 실패했습니다:', error);
+        }
     };
 
-    // 일정 삭제 함수
     const deleteEvent = async (eventToDelete) => {
         try {
-            await API.delete(`/study/${studyPk}/calendar/${eventToDelete.calendarPk}`);
-            setEvents(events.filter((event) => event.calendarPk !== eventToDelete.calendarPk));
+            const response = await API.delete(`/study/${studyPk}/calendar/${eventToDelete.calendarPk}`);
+            if (response.status === 200) {
+                fetchEvents(); // 일정 삭제 후 목록 갱신
+            }
         } catch (error) {
             console.error('일정 삭제에 실패했습니다:', error);
         }
     };
 
-    // 일정 클릭 핸들러
+    const handleDateChange = (date) => setDate(date);
+
     const handleEventClick = (event) => {
-        console.log('Event clicked:', event); // 클릭된 이벤트 로그 출력
         setSelectedEvent(event);
         setIsEditModalOpen(true);
     };
 
-    // 같은 날인지 확인하는 함수
     const isSameDay = (date1, date2) => {
         const d1 = new Date(date1);
         const d2 = new Date(date2);
-
         return (
             d1.getDate() === d2.getDate() && d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear()
         );
@@ -156,7 +148,20 @@ const Schedule = ({ studyPk }) => {
                 >
                     <FaPlus style={{ color: 'white' }} />
                 </Button>
-                <AddScheduleModal show={isModalOpen} handleClose={() => setIsModalOpen(false)} addEvent={addEvent} />
+                <AddScheduleModal
+                    show={isModalOpen}
+                    handleClose={() => setIsModalOpen(false)}
+                    addEvent={addEvent}
+                    fetchEvents={fetchEvents}
+                />
+                <EditScheduleModal
+                    show={isEditModalOpen}
+                    handleClose={() => setIsEditModalOpen(false)}
+                    event={selectedEvent}
+                    updateEvent={updateEvent}
+                    deleteEvent={deleteEvent}
+                    studyPk={studyPk}
+                />
             </div>
             <CalendarWrapper>
                 <Calendar
@@ -191,14 +196,6 @@ const Schedule = ({ studyPk }) => {
                     }}
                 />
             </CalendarWrapper>
-            <EditScheduleModal
-                show={isEditModalOpen}
-                handleClose={() => setIsEditModalOpen(false)}
-                event={selectedEvent}
-                updateEvent={updateEvent}
-                deleteEvent={deleteEvent}
-                studyPk={studyPk} // studyPk를 전달
-            />
         </Container>
     );
 };
