@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format, addDays, startOfMonth, endOfMonth } from 'date-fns';
+import { Button, Form } from 'react-bootstrap';
 import './AttendanceChart.css';
 import API from '../../../api/AxiosInstance';
 
@@ -30,11 +31,6 @@ const AttendanceChart = ({ studyPk }) => {
         fetchMembers();
     }, [studyPk]);
 
-    const getMemberName = (memberPk) => {
-        const member = members.find((m) => m.memberPk === memberPk);
-        return member ? member.nickName : 'Unknown';
-    };
-
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth(); // 현재 월 (0-11)
@@ -62,8 +58,9 @@ const AttendanceChart = ({ studyPk }) => {
                     {daysInMonth.map((date) => {
                         const day = new Date(date).getDate();
                         const status =
-                            (attendanceData[day] || []).find((att) => att.memberPk === member.memberPk)
-                                ?.attendanceStatus || '결석';
+                            (attendanceData[day] || [])
+                                .find((att) => att.memberPk === member.memberPk)
+                                ?.attendanceStatus.replace(/\s+/g, '') || '결석';
                         return <div key={date} className={`cell status-cell ${status}`} title={status} />;
                     })}
                 </div>
