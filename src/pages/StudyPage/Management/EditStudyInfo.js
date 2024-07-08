@@ -12,11 +12,10 @@ const EditStudyInfo = ({ studyPk }) => {
         attendees: '',
         imageUri: '',
     });
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [thumbnail, setThumbnail] = useState(null);
     const [endDate, setEndDate] = useState(new Date());
     const [showEndDatePicker, setShowEndDatePicker] = useState(false);
     const [error, setError] = useState(null);
+    const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() => {
         const fetchStudyData = async () => {
@@ -26,10 +25,8 @@ const EditStudyInfo = ({ studyPk }) => {
                 setFormData({
                     description: data.content,
                     attendees: data.maxPeople.toString(),
-                    imageUri: data.imageUri
                 });
                 setEndDate(new Date(data.closeDate));
-                setThumbnail(data.imageUri);
             } catch (error) {
                 setError('스터디 정보를 불러오는 데 실패했습니다.');
             }
@@ -39,34 +36,21 @@ const EditStudyInfo = ({ studyPk }) => {
     }, [studyPk]);
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        if (name === 'imageUri' && files) {
-            const file = files[0];
-            setSelectedFile(file);
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    setThumbnail(e.target.result);
-                };
-                reader.readAsDataURL(file);
-            }
-        } else {
+        const { name, value } = e.target;
             setFormData(prev => ({ ...prev, [name]: value }));
-        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             content: formData.description,
-            imageUri: selectedFile ? thumbnail : null,
             maxPeople: parseInt(formData.attendees),
             closeDate: moment(endDate).format('YYYY-MM-DD'),
         };
 
         try {
             await API.put(`/study/${studyPk}/management`, payload);
-            alert('정보가 수정되었습니다.');
+            setSuccessMessage('정보가 수정되었습니다.');
         } catch (error) {
             console.error('Failed to update study info:', error);
             setError('정보 수정에 실패했습니다.');
@@ -91,6 +75,7 @@ const EditStudyInfo = ({ studyPk }) => {
             >저장</Button>
             </div>
             {error && <div className="alert alert-danger">{error}</div>}
+            {successMessage && <div className="alert alert-primary">{successMessage}</div>}
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="form-group">
                     <Form.Label className="label">스터디 소개</Form.Label>
@@ -126,16 +111,6 @@ const EditStudyInfo = ({ studyPk }) => {
                     )}
                 </Form.Group>
                 <Form.Group className="form-group">
-                    <Form.Label className="label">대표사진</Form.Label>
-                    {thumbnail && <div className="image-preview"><img src={thumbnail} alt="Thumbnail" /></div>}
-                    <Form.Control
-                        className="input-img"
-                        type="file"
-                        name="imageUri"
-                        onChange={handleChange}
-                        custom
-                    />
-                    
                 </Form.Group>
                 
             </Form>

@@ -24,6 +24,7 @@ body {
 }
 
 .profile-image {
+    display: inline-block;
     position: relative;
     margin: 20px;
     text-align: center;
@@ -35,14 +36,14 @@ body {
     height: 100px;
     border-radius: 50%;
     overflow: hidden;
+    object-fit: cover;
 }
 
 .image-edit-btn {
     position: absolute;
-    display: flex;
-    width: 3%;
+    width: 27px;
     top: 70px;
-    left: 460px;
+    left: 70px;
     background: none;
     border: none;
     cursor: pointer;

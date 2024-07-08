@@ -8,8 +8,9 @@ function MyPage() {
     nickname: '',
     profileImage: ''
   });
+  const [error, setError] = useState(null); 
+  const [successMessage, setSuccessMessage] = useState("");
 
-  // 유저 정보 불러오기
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -73,16 +74,16 @@ function MyPage() {
     });
     if (response.status === 200) {
       console.log('프로필 이미지가 성공적으로 변경되었습니다:', response.data.profileImage);
-      alert('프로필 이미지가 변경되었습니다.');
+      setSuccessMessage('프로필 이미지가 변경되었습니다.');
       return response.data.profileImage; 
     } else {
       console.error('예상치 못한 응답 코드:', response.status);
-      alert('프로필 이미지 변경에 실패했습니다.');
+      setError('프로필 이미지 변경에 실패했습니다.');
       return false;
     }
   } catch (error) {
     console.error('이미지 변경 실패:', error);
-    alert('프로필 이미지 변경에 실패했습니다.');
+    setError('프로필 이미지 변경에 실패했습니다.');
     return false;
   }
 };
@@ -118,25 +119,26 @@ function MyPage() {
     
     if (response.status === 200) {
       console.log('닉네임 변경 성공:', response.data.nickname); // 변경된 닉네임 로그 출력
-      alert(`닉네임이 '${response.data.nickname}'(으)로 변경되었습니다.`);
+      setSuccessMessage(`닉네임이 '${response.data.nickname}'(으)로 변경되었습니다.`);
       setUserInfo({...userInfo, nickname: trimmedNickname});
     } else {
       console.error('예상치 못한 응답 코드:', response.status);
-      alert('닉네임 변경에 실패했습니다.');
+      setError('닉네임 변경에 실패했습니다.');
     }
   } catch (error) {
     console.error('닉네임 변경 실패:', error);
-    alert('닉네임 변경에 실패했습니다.');
+    setError('닉네임 변경에 실패했습니다.');
   }
 };
 
   return (
     <div className="profile-container">
+    {error && <div className="alert alert-danger">{error}</div>}
+    {successMessage && <div className="alert alert-primary">{successMessage}</div>}
     <p className="card-type">프로필 수정 ✍️</p>
-
     <div className="profile-image" onClick={triggerFileInput}>
         <img src={userInfo.profileImage || "img/default-profile.png"} className="edited-image" alt="프로필 이미지" />
-        <img src="img/image-edit.png" className="image-edit-btn" alt="이미지 변경"  />
+        <img src="img/img-edit.png" className="image-edit-btn" alt="이미지 변경"  />
         <input type="file" id="fileInput" style={{ display: 'none' }} accept=".png, .jpeg, .jpg, .svg" onChange={handleImageChange} />
     </div>
 

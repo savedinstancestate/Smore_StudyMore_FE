@@ -239,7 +239,7 @@ input[type="text"] {
   .applicant-apply-btn {
     padding: 5px 12px;
     border: none;
-    background-color: #6c3d00;
+    background-color: #009063;
     color: white;
     cursor: pointer;
     border-radius: 5px;
@@ -248,9 +248,9 @@ input[type="text"] {
   
   .applicant-refuse-btn {
     padding: 5px 12px;
-    background-color: #dc3545;
-    color: #fff;
-    border: 1px solid #dc3545;
+    background-color: #fff;
+    color: #929292;
+    border: 1px solid #929292;
     border-radius: 5px;
     font-size: 14px;
   }

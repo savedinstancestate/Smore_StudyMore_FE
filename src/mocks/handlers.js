@@ -416,7 +416,7 @@ export const handlers = [
     }
   }),
 
-  rest.get("/study/management/:studyPk", (req, res, ctx) => {
+  rest.get("/study/:studyPk/management", (req, res, ctx) => {
     const { studyPk } = req.params;
     const study = {
       1: {
@@ -487,7 +487,27 @@ export const handlers = [
     }
   }),
 
-  rest.post('/study/management/:studyPk', (req, res, ctx) => {
+  rest.get("/study/:studyPk/management/board", (req, res, ctx) => {
+    const { studyPk } = req.params;
+    const study = {
+      1:  {             
+        "studyBoardPk": 3004,
+        "adTitle": "홍보 제목", 
+         "adContent": "홍보 내용",
+         "imageUri": "/img/sample-img-1.png"  
+ }
+
+    };
+
+    const studyDetails = study[studyPk];
+    if (studyDetails) {
+      return res(ctx.status(200), ctx.json(studyDetails));
+    } else {
+      return res(ctx.status(404), ctx.json({ error: "Study not found" }));
+    }
+  }),
+
+  rest.post('/study/:studyPk/management', (req, res, ctx) => {
     const { studyPk } = req.params;
     const { content, imageUri, maxPeople, closeDate } = req.body;
 
@@ -504,26 +524,26 @@ export const handlers = [
 }),
 
   // 스터디 멤버 정보 가져오기
-  rest.get("/study/:studyPk/dashboard/member", (req, res, ctx) => {
+  rest.get("/study/:studyPk/management/members", (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
         {
           memberPk: 1,
-          nickName: "서다영",
-          profileImg: "/img/member-img-sample.png",
+          nickname: "서다영",
+          imgURL: "/img/member-img-sample.png",
         },
         {
           memberPk: 2,
-          nickName: "이수지",
-          profileImg: "/img/member-img-sample.png",
+          nickname: "이수지",
+          imgURL: "/img/member-img-sample.png",
         },
       ])
     );
   }),
 
   // 스터디 정보 수정
-  rest.post("/study/management/:studyPk", (req, res, ctx) => {
+  rest.post("/study/:studyPk/management", (req, res, ctx) => {
     const { studyPk } = req.params;
     const { content, imageUri, maxPeople, closeDate } = req.body;
 
@@ -532,7 +552,6 @@ export const handlers = [
       ctx.json({
         studyPk,
         content,
-        imageUri,
         maxPeople,
         closeDate,
       })
