@@ -15,6 +15,7 @@ const EditStudyInfo = ({ studyPk }) => {
     const [endDate, setEndDate] = useState(new Date());
     const [showEndDatePicker, setShowEndDatePicker] = useState(false);
     const [error, setError] = useState(null);
+    const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() => {
         const fetchStudyData = async () => {
@@ -49,7 +50,7 @@ const EditStudyInfo = ({ studyPk }) => {
 
         try {
             await API.put(`/study/${studyPk}/management`, payload);
-            alert('정보가 수정되었습니다.');
+            setSuccessMessage('정보가 수정되었습니다.');
         } catch (error) {
             console.error('Failed to update study info:', error);
             setError('정보 수정에 실패했습니다.');
@@ -60,6 +61,8 @@ const EditStudyInfo = ({ studyPk }) => {
         <div className="container">
             <div className="header-container">
             <div className="title">스터디 정보 수정 ℹ️</div> 
+            {error && <div className="alert alert-danger">{error}</div>}
+              {successMessage && <div className="alert alert-primary">{successMessage}</div>}
             <Button
             type="submit" className="button"
             style={{backgroundColor: '#fff',
