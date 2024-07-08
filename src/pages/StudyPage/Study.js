@@ -42,14 +42,14 @@ const Study = () => {
                         <Tab eventKey="dashboard" title="대시보드">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <Dashboard studyPK={studyPk} />
+                                    <Dashboard studyPk={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
                         <Tab eventKey="schedule" title="스터디 일정">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <Schedule studyPK={studyPk} />
+                                    <Schedule studyPk={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
