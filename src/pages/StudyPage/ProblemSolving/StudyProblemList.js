@@ -51,17 +51,17 @@ const StudyProblemList = ({ studyPk, studyName }) => {
                     <li key={bank.pk} className="study-problem-item">
                         <Form.Check
                             type="checkbox"
-                            id={bank.pk}
+                            id={`bank-check-${bank.pk}`}
                             className="checkbox"
-                            label=""
+                            label={bank.problemBankName}
                             checked={selectedBanks.includes(bank.pk)}
                             onChange={() => handleBankSelect(bank.pk)}
                         />
-                        <div className="problem-info">
+                        <label htmlFor={`bank-check-${bank.pk}`} className="problem-info">
                             <span className="problem-name">{bank.problemBankName}</span>
                             <span className="problem-writer">출제자: {bank.writer}</span>
                             <span className="problem-count">문제 수: {bank.count}</span>
-                        </div>
+                        </label>
                     </li>
                 ))}
             </ul>
