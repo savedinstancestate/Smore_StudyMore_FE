@@ -93,8 +93,6 @@ const EditPromotion = ({ studyPk }) => {
     <div className="container">
       <div className="header-container">
         <div className="title">홍보글 수정 📰</div>
-        {error && <div className="alert alert-danger">{error}</div>}
-        {successMessage && <div className="alert alert-primary">{successMessage}</div>}
         <Button
           type="submit"
           className="button"
@@ -113,6 +111,7 @@ const EditPromotion = ({ studyPk }) => {
         </Button>
       </div>
       {error && <div className="alert alert-danger">{error}</div>}
+      {successMessage && <div className="alert alert-primary">{successMessage}</div>}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="form-group-inline" controlId="adTitle">
           <Form.Label className="form-label-inline">글 제목</Form.Label>
