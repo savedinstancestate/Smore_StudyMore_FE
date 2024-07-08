@@ -77,7 +77,7 @@ function Board() {
             onClick={() => handleCardClick(study.studyBoardPk, study.studyName)}>
               <div
                 className="card-header"
-                style={{ backgroundImage: `url(${study.studyImg})` }}
+                style={{ backgroundImage: `url(${study.imageUri})` }}
               ></div>
               <div className="card-body-home">
                 <p className="study-name">{study.adTitle}</p>

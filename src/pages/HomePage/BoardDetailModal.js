@@ -36,7 +36,7 @@ function BoardDetailModal({ studyBoardPk }) {
         <div
           className="card-header-detail"
           alt={BoardDetails.studyName}
-          style={{ backgroundImage: `url(${BoardDetails.studyImg})` }}
+          style={{ backgroundImage: `url(${BoardDetails.imageUri})` }}
         ></div>
 
         <p className="ad-title">{BoardDetails.adTitle}</p>
