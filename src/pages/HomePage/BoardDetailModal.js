@@ -49,7 +49,7 @@ function BoardDetailModal({ studyBoardPk }) {
         </div>
         <div className="flex-row">
         <p className="card-title-detail">참가 인원</p>
-        <p className="study-detail">{BoardDetails.studyPersonNum} / {BoardDetails.maxPeople}</p>
+        <p className="study-detail">{BoardDetails.curPeople} / {BoardDetails.maxPeople}</p>
         </div>
         </div>
         <div className="content-wrapper-detail">
