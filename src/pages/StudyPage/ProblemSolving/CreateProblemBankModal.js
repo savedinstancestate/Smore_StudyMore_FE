@@ -131,7 +131,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                             type="text"
                             value={question.question}
                             onChange={(e) => handleQuestionChange(index, e)}
-                            placeholder="Enter question"
+                            placeholder="문제 입력"
                         />
                         {question.options.map((option, oIndex) => (
                             <InputGroup className="mb-3" key={oIndex}>
@@ -140,7 +140,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                                     type="text"
                                     value={option}
                                     onChange={(e) => handleOptionChange(index, oIndex, e)}
-                                    placeholder="Enter option"
+                                    placeholder="보기 입력"
                                 />
                             </InputGroup>
                         ))}
@@ -160,14 +160,14 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                                 type="text"
                                 value={question.explanation}
                                 onChange={(e) => handleExplanationChange(index, e)}
-                                placeholder="Enter explanation"
+                                placeholder="해설 입력"
                             />
                         </Form.Group>
                     </Form.Group>
                 </div>
             ))}
             <Button
-                variant="outline-primary"
+                variant="success"
                 onClick={addQuestion}
                 className="mt-2"
                 style={{ width: '100%' }}
@@ -180,7 +180,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
 
     return (
         <UniversalModal
-            title={bankName ? `${bankName}` : 'Create Problem Bank'}
+            title={bankName ? `${bankName}` : '문제은행 만들기'}
             show={show}
             handleClose={() => {
                 handleClose();
@@ -199,7 +199,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                             type="text"
                             value={bankName}
                             onChange={handleBankNameChange}
-                            placeholder="Enter bank name"
+                            placeholder="문제은행 이름 입력"
                         />
                     </Form.Group>
                 )}
