@@ -67,7 +67,7 @@ const EditMember = ({ studyPk }) => {
                   <li key={member.memberPk} className="member-item">
                     <div
                       className="member-img"
-                      style={{ backgroundImage: `url(${member.imgURL})` }}
+                      style={{ backgroundImage: `url(${member.imageURL})` }}
                     ></div>
                     <div className="member-info">
                       <p className="member-nickname">{member.nickname}</p>
