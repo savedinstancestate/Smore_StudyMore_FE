@@ -15,15 +15,6 @@ function Board() {
   useEffect(() => {
     fetchRecruitingStudies();
   }, []);
-/*
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
-  }, [isModalOpen]);
-  */
 
   useEffect(() => {
     const handleScroll = () => {
