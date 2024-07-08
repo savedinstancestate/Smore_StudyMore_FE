@@ -86,9 +86,9 @@ function Board() {
                 </div>
                 <div className="card-footer">
                 <p className="card-title">스터디 기간</p>
-                <p className="card-text">{BoardDetails.startDate} - {BoardDetails.closeDate}</p>
+                <p className="card-text">{study.startDate} - {study.closeDate}</p>
                 <p className="card-title">참가 인원</p>
-                <p className="card-text">{BoardDetails.studyPersonNum} / {BoardDetails.maxPeople}</p>
+                <p className="card-text">{study.studyPersonNum} / 6</p>
                 </div>
               </div>
             </div>
