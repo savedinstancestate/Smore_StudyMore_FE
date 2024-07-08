@@ -58,9 +58,9 @@ const EditPromotion = ({ studyPk }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataToSend = new FormData();
-    formDataToSend.append('studyBoardPk', formData.studyBoardPk);
-    formDataToSend.append('adTitle', formData.adTitle);
-    formDataToSend.append('adContent', formData.adContent);
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataToSend.append(key, value);
+    });
     if (selectedFile) {
       formDataToSend.append('imageUri', selectedFile);
     } else {
