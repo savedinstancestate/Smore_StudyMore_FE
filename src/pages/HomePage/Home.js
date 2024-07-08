@@ -82,7 +82,7 @@ function Board() {
               <div className="card-body-home">
                 <p className="study-name">{study.adTitle}</p>
                 <div className="study-content-wrapper">
-                <p className="study-content">{study.adContent}</p>
+                <p className="study-content">{study.adSummary}</p>
                 </div>
                 <div className="card-footer">
                 <p className="card-title">스터디 기간</p>
