@@ -126,12 +126,12 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
             {questions.map((question, index) => (
                 <div key={index}>
                     <Form.Group>
-                        <Form.Label>Question {index + 1}</Form.Label>
+                        <Form.Label>문제 {index + 1}</Form.Label>
                         <Form.Control
                             type="text"
                             value={question.question}
                             onChange={(e) => handleQuestionChange(index, e)}
-                            placeholder="Enter question"
+                            placeholder="문제 입력"
                         />
                         {question.options.map((option, oIndex) => (
                             <InputGroup className="mb-3" key={oIndex}>
@@ -140,12 +140,12 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                                     type="text"
                                     value={option}
                                     onChange={(e) => handleOptionChange(index, oIndex, e)}
-                                    placeholder="Enter option"
+                                    placeholder="보기 입력"
                                 />
                             </InputGroup>
                         ))}
                         <InputGroup className="mb-3">
-                            <InputGroup.Text>Answer Number</InputGroup.Text>
+                            <InputGroup.Text>정답 번호</InputGroup.Text>
                             <Form.Select value={question.answer} onChange={(e) => handleAnswerChange(index, e)}>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -155,19 +155,19 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                             </Form.Select>
                         </InputGroup>
                         <Form.Group>
-                            <Form.Label>Explanation</Form.Label>
+                            <Form.Label>정답 해설</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={question.explanation}
                                 onChange={(e) => handleExplanationChange(index, e)}
-                                placeholder="Enter explanation"
+                                placeholder="해설 입력"
                             />
                         </Form.Group>
                     </Form.Group>
                 </div>
             ))}
             <Button
-                variant="outline-primary"
+                variant="success"
                 onClick={addQuestion}
                 className="mt-2"
                 style={{ width: '100%' }}
@@ -180,7 +180,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
 
     return (
         <UniversalModal
-            title={bankName ? `${bankName}` : 'Create Problem Bank'}
+            title={bankName ? `${bankName}` : '문제은행 만들기'}
             show={show}
             handleClose={() => {
                 handleClose();
@@ -199,12 +199,13 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                             type="text"
                             value={bankName}
                             onChange={handleBankNameChange}
-                            placeholder="Enter bank name"
+                            placeholder="문제은행 이름 입력"
                         />
                     </Form.Group>
                 )}
                 {renderQuestionForm()}
                 <Button
+                    variant="secondary"
                     onClick={() => {
                         handleClose();
                         setQuestions([]);
@@ -214,10 +215,10 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
                     }}
                     className="mt-2"
                 >
-                    Cancel
+                    취소
                 </Button>
-                <Button onClick={handleSaveProblems} className="mt-2 ml-2" disabled={!isFormValid()}>
-                    Complete
+                <Button variant="success" onClick={handleSaveProblems} className="mt-2 ml-2" disabled={!isFormValid()}>
+                    완료
                 </Button>
             </Form>
         </UniversalModal>
