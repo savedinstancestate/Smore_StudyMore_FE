@@ -23,7 +23,7 @@ const Study = () => {
             try {
                 const response = await API.get(`/study/${studyPk}`);
                 if (response.data) {
-                    setHeaderStudyName(response.data.studyName); 
+                    setHeaderStudyName(response.data.studyName);
                 }
             } catch (error) {
                 console.error('Failed to fetch study info:', error);
@@ -56,21 +56,21 @@ const Study = () => {
                         <Tab eventKey="problems" title="문제 풀이">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <ProblemSolving studyPK={studyPk} />
+                                    <ProblemSolving studyPk={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
                         <Tab eventKey="personalGoals" title="개인 목표">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <PersonalGoals studyPK={studyPk} />
+                                    <PersonalGoals studyPk={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
                         <Tab eventKey="announcements" title="공지사항">
                             <Card className="tab-card">
                                 <Card.Body>
-                                    <Announcements studyPK={studyPk} />
+                                    <Announcements studyPk={studyPk} />
                                 </Card.Body>
                             </Card>
                         </Tab>
