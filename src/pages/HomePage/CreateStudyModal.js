@@ -93,18 +93,18 @@ const CreateStudyModal = () => {
     };
 
     const modalContent = (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group>
-                <Form.Label>스터디 이름</Form.Label>
+        <Form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+            <Form.Group style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                <Form.Label style={{ marginRight: '10px', minWidth: '90px' }}>스터디 이름</Form.Label>
                 <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} />
             </Form.Group>
-            <Form.Group>
-                <Form.Label>내용</Form.Label>
+            <Form.Group style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                <Form.Label style={{ marginRight: '10px', minWidth: '90px' }}>내용</Form.Label>
                 <Form.Control type="text" name="description" value={formData.description} onChange={handleChange} />
             </Form.Group>
-            <Form.Group>
-                <Form.Label>인원</Form.Label>
-                <Form.Select name="attendees" value={formData.attendees} onChange={handleChange}>
+            <Form.Group style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                <Form.Label style={{ marginRight: '10px', minWidth: '90px' }}>인원</Form.Label>
+                <Form.Select name="attendees" value={formData.attendees} onChange={handleChange} style={{ flex: '1' }}>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -112,15 +112,22 @@ const CreateStudyModal = () => {
                     <option value="6">6</option>
                 </Form.Select>
             </Form.Group>
-            <Form.Group>
-                <Form.Label>기간</Form.Label>
-                <div>
-                    <Button variant="outline-secondary" onClick={() => setShowStartDatePicker(!showStartDatePicker)}>
+            <Form.Group style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                <Form.Label style={{ marginRight: '10px', minWidth: '90px' }}>기간</Form.Label>
+                <div style={{ display: 'flex', alignItems: 'center', flex: '1' }}>
+                    <Button
+                        variant="outline-secondary"
+                        onClick={() => setShowStartDatePicker(!showStartDatePicker)}
+                        style={{ flex: '1' }}
+                    >
                         {startDate.toISOString().substring(0, 10)}
                     </Button>
-
-                    <span className="date-separator">~</span>
-                    <Button variant="outline-secondary" onClick={() => setShowEndDatePicker(!showEndDatePicker)}>
+                    <span style={{ margin: '0 10px' }}>~</span>
+                    <Button
+                        variant="outline-secondary"
+                        onClick={() => setShowEndDatePicker(!showEndDatePicker)}
+                        style={{ flex: '1' }}
+                    >
                         {endDate.toISOString().substring(0, 10)}
                     </Button>
                     {showStartDatePicker && (
@@ -141,14 +148,15 @@ const CreateStudyModal = () => {
                     )}
                 </div>
             </Form.Group>
-            <Form.Group>
-                <Form.Label>대표사진</Form.Label>
+            <Form.Group style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                <Form.Label style={{ marginRight: '10px', minWidth: '90px' }}>대표사진</Form.Label>
                 <Form.Control
                     type="file"
                     id="custom-file"
                     label={selectedFile ? selectedFile.name : '파일을 선택해주세요'}
                     onChange={handleFileChange}
-                    custom
+                    custom="true"
+                    style={{ flex: '1' }}
                 />
                 {thumbnail && (
                     <img
