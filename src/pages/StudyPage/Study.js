@@ -23,8 +23,7 @@ const Study = () => {
             try {
                 const response = await API.get(`/study/${studyPk}`);
                 if (response.data) {
-                    setHeaderStudyName(response.data.studyName);
-                    console.log('Fetched study name:', response.data.studyName);
+                    setHeaderStudyName(response.data.studyName); 
                 }
             } catch (error) {
                 console.error('Failed to fetch study info:', error);

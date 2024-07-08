@@ -14,7 +14,7 @@ const EditPromotion = ({ studyPk }) => {
   useEffect(() => {
     const fetchAdData = async () => {
       try {
-        const response = await API.get(`/study/management/${studyPk}`);
+        const response = await API.get(`/study/${studyPk}/management`);
         const data = response.data;
         setFormData({
           adTitle: data.adTitle,
@@ -39,7 +39,7 @@ const EditPromotion = ({ studyPk }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await API.put(`/study/${studyPk}`, formData);
+      await API.put(`/study/${studyPk}/management/board`, formData);
       alert("홍보글 수정이 완료되었습니다.");
     } catch (error) {
       console.error("홍보글 수정 실패:", error);

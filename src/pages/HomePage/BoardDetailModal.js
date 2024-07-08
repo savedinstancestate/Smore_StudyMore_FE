@@ -3,16 +3,16 @@ import API from '../../api/AxiosInstance';
 import "../../styles/StudyCard.css";
 import ApplyStudyModal from "./ApplyStudyModal";
 
-function BoardDetailModal({ studyBoardPk, onClose }) {
+function BoardDetailModal({ studyBoardPk }) {
   const [BoardDetails, setBoardDetails] = useState(null);
-  const [showOverlay, setShowOverlay] = useState(false); // 오버레이 표시 상태
+  const [showOverlay, setShowOverlay] = useState(false); 
 
   useEffect(() => {
     if (studyBoardPk) {
       const fetchBoardDetails = async () => {
         try {
           const response = await API.get(`/board/${studyBoardPk}`);
-          setBoardDetails(response.data); // 직접 데이터를 설정
+          setBoardDetails(response.data); 
         } catch (error) {
           console.error("요청 처리 중 오류가 발생했습니다.", error);
           setBoardDetails(null);
@@ -36,7 +36,7 @@ function BoardDetailModal({ studyBoardPk, onClose }) {
         <div
           className="card-header-detail"
           alt={BoardDetails.studyName}
-          style={{ backgroundImage: `url(${BoardDetails.studyImg})` }}
+          style={{ backgroundImage: `url(${BoardDetails.imageUri})` }}
         ></div>
 
         <p className="ad-title">{BoardDetails.adTitle}</p>
@@ -45,18 +45,18 @@ function BoardDetailModal({ studyBoardPk, onClose }) {
         <div className="flex-box">
         <div className="flex-row">
         <p className="card-title-detail">스터디 기간</p>
-        <p className="study-detail">{BoardDetails.studyStartDate} - {BoardDetails.studyEndDate}</p>
+        <p className="study-detail">{BoardDetails.startDate} - {BoardDetails.closeDate}</p>
         </div>
         <div className="flex-row">
         <p className="card-title-detail">참가 인원</p>
-        <p className="study-detail">{BoardDetails.studyPersonNum} / 6</p>
+        <p className="study-detail">{BoardDetails.curPeople} / {BoardDetails.maxPeople}</p>
         </div>
         </div>
         <div className="content-wrapper-detail">
           <p>{BoardDetails.adContent}</p>
         </div>
         <div className="modal-container"></div>
-        <ApplyStudyModal toggleOverlay={toggleOverlay} studyName={BoardDetails.studyName} studyPk={studyBoardPk} />
+        <ApplyStudyModal toggleOverlay={toggleOverlay} studyName={BoardDetails.studyName} studyPk={BoardDetails.studyPk} />
     </div>
     </div>
   );

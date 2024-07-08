@@ -21,7 +21,7 @@ const EditStudyInfo = ({ studyPk }) => {
     useEffect(() => {
         const fetchStudyData = async () => {
             try {
-                const response = await API.get(`/study/management/${studyPk}`);
+                const response = await API.get(`/study/${studyPk}/management`);
                 const data = response.data;
                 setFormData({
                     description: data.content,
@@ -31,7 +31,7 @@ const EditStudyInfo = ({ studyPk }) => {
                 setEndDate(new Date(data.closeDate));
                 setThumbnail(data.imageUri);
             } catch (error) {
-                setError('스터디 정보 불러오기 실패');
+                setError('스터디 정보를 불러오는 데 실패했습니다.');
             }
         };
 
@@ -65,11 +65,11 @@ const EditStudyInfo = ({ studyPk }) => {
         };
 
         try {
-            await API.put(`/study/management/${studyPk}`, payload);
-            alert('스터디 정보가 수정되었습니다.');
+            await API.put(`/study/${studyPk}/management`, payload);
+            alert('정보가 수정되었습니다.');
         } catch (error) {
             console.error('Failed to update study info:', error);
-            setError('스터디 정보 수정에 실패했습니다.');
+            setError('정보 수정에 실패했습니다.');
         }
     };
 
