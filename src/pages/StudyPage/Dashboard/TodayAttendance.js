@@ -43,14 +43,13 @@ const TodayAttendance = ({ studyPk }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-around' }}>
             {attendanceData.map((att) => (
-                <Card
-                    key={att.memberPk}
-                    style={{ margin: '10px', color: att.attendanceStatus === '출석' ? 'green' : 'red', width: '100px' }}
-                >
+                <Card key={att.memberPk} style={{ margin: '10px', width: '100px' }}>
                     <Card.Body>
-                        <Card.Title>{att.nickname}</Card.Title>
+                        <Card.Title style={{ fontSize: '20px' }}>{att.nickname}</Card.Title>
                         <Image src={findMemberImage(att.memberPk)} roundedCircle style={{ width: '50px' }} />
-                        <Card.Text>{att.timeAgo}</Card.Text>
+                        <Card.Text style={{ color: att.attendanceStatus === '출석' ? 'green' : 'red' }}>
+                            {att.timeAgo}
+                        </Card.Text>
                     </Card.Body>
                 </Card>
             ))}

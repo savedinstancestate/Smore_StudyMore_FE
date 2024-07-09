@@ -51,7 +51,7 @@ const AttendanceChart = ({ studyPk }) => {
     return (
         <div>
             <div className="attendance-chart">
-                <div className="attendance-chart-header">월별 출석 현황 🗓️</div>
+                <div className="attendance-chart-header">출석 현황 🗓️</div>
                 <div className="header-row">
                     <div className="cell month-cell">{format(start, 'M월')}</div>
                     {daysInMonth.map((date) => (
@@ -73,8 +73,9 @@ const AttendanceChart = ({ studyPk }) => {
                         })}
                     </div>
                 ))}
+
+                <TodayAttendance studyPk={studyPk} />
             </div>
-            <TodayAttendance studyPk={studyPk} />
         </div>
     );
 };
