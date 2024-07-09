@@ -20,7 +20,7 @@ body {
     font-size: 24px;
     font-weight: 700;
     width: 100%;
-    margin-bottom: 0px;
+    margin-top: 10px;
 }
 
 .profile-image {
@@ -50,7 +50,7 @@ body {
 }
 
 .nickname-container {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     flex-direction: column;
     text-align: center;
     align-items: center;

@@ -22,15 +22,15 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/redirection/:accessToken/:refreshToken" element={<Redirection />} />
+                {/* 
                 <Route path="/mystudy" element={<MyStudy />} />
                 <Route path="/study/:studyPk" element={<Study />} />
                 <Route path="/mypage" element={<MyPage />} />
-                
-                {/* 인증(로그인) 필요한 페이지 접근 설정
+                */}
                 <Route path="/mystudy" element={<PrivateRoute component={MyStudy} />} />
                 <Route path="/study/:studyPk" element={<PrivateRoute component={Study} />} />
                 <Route path="/mypage" element={<PrivateRoute component={MyPage} />} /> 
-                */}
+                
             </Routes>
             </div>
         </Router>
