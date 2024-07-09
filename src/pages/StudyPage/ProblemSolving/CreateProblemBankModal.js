@@ -25,7 +25,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
             try {
                 const response = await API.post(`/study/${studyPk}/problem/bank`, { problemName: bankName });
                 console.log('Problem Bank Created:', response.data);
-                setBankPk(response.data); // String형의 18자리 숫자 설정
+                setBankPk(response.data.problemBankPk);
                 setBankCreated(true);
                 setQuestions([
                     ...questions,
@@ -232,36 +232,4 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
     );
 };
 
-const CreateProblemBankButton = ({ studyPk }) => {
-    const [showModal, setShowModal] = useState(false);
-
-    const handleOpenModal = () => {
-        setShowModal(true);
-    };
-
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
-
-    return (
-        <>
-            <Button
-                onClick={handleOpenModal}
-                variant="success"
-                style={{
-                    borderRadius: '20%',
-                    width: '40px',
-                    height: '40px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                <FaPlus style={{ color: 'white' }} />
-            </Button>
-            <CreateProblemBankModal show={showModal} handleClose={handleCloseModal} studyPk={studyPk} />
-        </>
-    );
-};
-
-export default CreateProblemBankButton;
+export default CreateProblemBankModal;

@@ -44,7 +44,7 @@ const StudyProblemList = ({ studyPk, studyName }) => {
     return (
         <div className="study-problems">
             <div className="study-problems-header">
-                <div className="study-problems-title">스터디의 문제 📘</div>
+                <div className="study-problems-title">{studyName}의 문제 📘</div>
             </div>
             <ul className="study-problems-list">
                 {problemBanks.map((bank) => (

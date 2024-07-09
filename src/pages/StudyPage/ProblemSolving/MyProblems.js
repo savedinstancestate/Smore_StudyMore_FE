@@ -35,7 +35,7 @@ const MyProblems = ({ studyPk }) => {
 
     const handleDelete = async () => {
         try {
-            await API.delete(`/study/${studyPk}/problem/${selectedProblemBankPk}`);
+            await API.delete(`/study/${studyPk}/problem/bank/${selectedProblemBankPk}`);
             setProblemBanks(problemBanks.filter((bank) => bank.problemBankPk !== selectedProblemBankPk));
             setShowDeleteModal(false);
             setSelectedProblemBankPk(null);
