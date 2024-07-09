@@ -28,8 +28,13 @@ const NotificationComponent = ({ show, handleClose }) => {
       }
     );
 
+    eventSource.onopen = () => {
+        console.log("SSE 연결이 성공적으로 열렸습니다.");
+      };
+
     eventSource.onmessage = (event) => {
       const newNotification = JSON.parse(event.data);
+      console.log("새 알림을 받았습니다:", newNotification);
       setNotifications((prev) => [...prev, newNotification]);
     };
 
