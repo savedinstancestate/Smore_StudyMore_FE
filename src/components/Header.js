@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import "../styles/StudyCard.css";
@@ -120,6 +121,11 @@ const Header = () => {
   const currentLocation = useLocation();
   const { headerStudyName } = useHeaderStudyName();
 
+  useEffect(() => {
+    const token = Cookies.get('accessToken');
+    setIsLoggedIn(!!token); 
+  }, []); 
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -169,11 +175,11 @@ const Header = () => {
                   <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
                 )}
               </NavLinks>
-              
             </div>
       </HeaderContent>
     </HeaderContainer>
-    <TitleContainer><PageTitle>{renderPageTitle()}</PageTitle></TitleContainer>
+    <TitleContainer>
+      <PageTitle>{renderPageTitle()}</PageTitle></TitleContainer>
     </HeaderWrapper>
 
     <Modal show={isModalOpen} handleClose={handleCloseModal} title="로그인">
