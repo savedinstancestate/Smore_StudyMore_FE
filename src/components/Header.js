@@ -58,7 +58,7 @@ const LogoImage = styled.img`
 const NavLinks = styled.nav`
   text-align: right;
   width: 100%;
-  margin-bottom: 4px;
+  margin-bottom: 0px;
 
   a {
     margin: 0 10px;
