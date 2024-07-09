@@ -25,9 +25,9 @@ const EditScheduleModal = ({ show, handleClose, event, updateEvent, deleteEvent,
                 startDate: startDate,
                 endDate: endDate,
             };
-            await API.put(`/study/${studyPk}/calendar/${event.calendarPk}`, updatedEvent);
+            await API.put(`/study/${studyPk}/calendar`, updatedEvent);
             handleClose();
-            updateEvent(); // Refresh events
+            updateEvent();
         } catch (error) {
             console.error('Failed to update event:', error);
         }
@@ -37,7 +37,7 @@ const EditScheduleModal = ({ show, handleClose, event, updateEvent, deleteEvent,
         try {
             await API.delete(`/study/${studyPk}/calendar/${event.calendarPk}`);
             handleClose();
-            deleteEvent(); // Refresh events
+            deleteEvent();
         } catch (error) {
             console.error('Failed to delete event:', error);
         }
