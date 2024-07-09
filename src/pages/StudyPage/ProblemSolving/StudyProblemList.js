@@ -23,9 +23,9 @@ const StudyProblemList = ({ studyPk, studyName }) => {
         fetchProblemBanks();
     }, [studyPk]);
 
-    const handleBankSelect = (pk) => {
+    const handleBankSelect = (pk, isChecked) => {
         setSelectedBanks((prevSelected) =>
-            prevSelected.includes(pk) ? prevSelected.filter((id) => id !== pk) : [...prevSelected, pk]
+            isChecked ? [...prevSelected, pk] : prevSelected.filter((id) => id !== pk)
         );
     };
 
@@ -44,7 +44,7 @@ const StudyProblemList = ({ studyPk, studyName }) => {
     return (
         <div className="study-problems">
             <div className="study-problems-header">
-                <div className="study-problems-title">{studyName}의 문제 📘</div>
+                <div className="study-problems-title">스터디의 문제 📘</div>
             </div>
             <ul className="study-problems-list">
                 {problemBanks.map((bank) => (
@@ -55,7 +55,7 @@ const StudyProblemList = ({ studyPk, studyName }) => {
                             className="checkbox"
                             label={bank.problemBankName}
                             checked={selectedBanks.includes(bank.pk)}
-                            onChange={() => handleBankSelect(bank.pk)}
+                            onChange={(e) => handleBankSelect(bank.pk, e.target.checked)}
                         />
                         <label htmlFor={`bank-check-${bank.pk}`} className="problem-info">
                             <span className="problem-name">{bank.problemBankName}</span>
