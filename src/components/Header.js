@@ -8,6 +8,7 @@ import Login from "../pages/LoginPage/LoginModal";
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
 import { useHeaderStudyName } from "./StudyNameContext";
 import { useAuth } from "./AuthContext";
+import NotificationModal from './NotificationModal';
 import logoImage from "./smore-logo-ver1.png";
 
 const HeaderWrapper = styled.div`
@@ -110,6 +111,12 @@ const Header = () => {
   const location = useLocation();
   const currentLocation = useLocation();
   const { headerStudyName } = useHeaderStudyName();
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+    const [notifications, setNotifications] = useState([]);
+
+    const toggleNotificationModal = () => {
+      setIsNotificationOpen(!isNotificationOpen);
+  };
 
   useEffect(() => {
     const checkLoginStatus = () => {
@@ -128,8 +135,15 @@ const Header = () => {
     setIsModalOpen(false);
   };
 
+  const toggleNotification = () => {
+    setIsNotificationOpen(!isNotificationOpen);
+  };
+
+  const handleCloseNotificationModal = () => {
+    setIsNotificationOpen(false);
+  }
+
   const renderPageTitle = () => {
-    console.log("Current study name:", headerStudyName);
     if (currentLocation.pathname.startsWith("/study")) {
       return headerStudyName || "스터디 로딩 중..."; // 동적 경로에 따라 이름을 불러옴
     }
@@ -159,20 +173,24 @@ const Header = () => {
               <NavLinks>
                 <NavLink exact to="/" activeClassName="active">
                   홈
-                </NavLink>
+                </NavLink>{/*
                 {isLoggedIn ? (
-                  <>
+                <>*/}
                     <NavLink to="/mystudy" activeClassName="active">
                       내 스터디
                     </NavLink>
                     <NavLink to="/mypage" activeClassName="active">
                       마이페이지
                     </NavLink>
+                    <NavLink to="#" onClick={(e) => {
+  e.preventDefault();
+  toggleNotification();
+}}>알림</NavLink>
                     <CreateStudyModal />
-                  </>
-                ) : (
+                 {/* </>
+                ) : (*/}
                   <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
-                )}
+                {/* )}*/}
               </NavLinks>
             </div>
           </HeaderContent>
@@ -185,6 +203,13 @@ const Header = () => {
       <Modal show={isModalOpen} handleClose={handleCloseModal} title="로그인">
         <Login />
       </Modal>
+
+      <NotificationModal
+                show={isNotificationOpen}
+                handleClose={() => setIsNotificationOpen(false)}
+                title="알림"
+                notifications={notifications}
+            />
     </>
   );
 };
