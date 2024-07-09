@@ -3,10 +3,6 @@ import Cookies from "js-cookie";
 import { useAuth } from "./AuthContext";
 import EventSourcePolyfill from 'eventsource-polyfill';
 
-const EventSource = EventSourcePolyfill || NativeEventSource;
-console.log(EventSourcePolyfill);
-
-
 const NotificationComponent = ({ show, handleClose }) => {
   const [notifications, setNotifications] = useState([]);
   const { isLoggedIn } = useAuth(); // AuthContext를 통해 로그인 상태 확인
@@ -25,8 +21,8 @@ const NotificationComponent = ({ show, handleClose }) => {
       return;
     }
 
-    const eventSource = new EventSource(
-      "${process.env.REACT_APP_AUTH_URL}/subscribe/notification",
+    const eventSource = new EventSourcePolyfill(
+        `${process.env.REACT_APP_AUTH_URL}/subscribe/notification`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
