@@ -10,7 +10,7 @@ const StudyInfo = ({ studyPk }) => {
     useEffect(() => {
         const fetchStudyData = async () => {
             try {
-                const response = await API.get(`/study/${studyPk}`);
+                const response = await API.get(`/study/${studyPk}/dashboard`);
                 console.log('Fetched Study Data:', response.data);
 
                 const data = response.data;
