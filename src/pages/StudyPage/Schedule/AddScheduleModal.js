@@ -26,7 +26,7 @@ const AddScheduleModal = ({ show, handleClose, addEvent, studyPk }) => {
             };
             await API.post(`/study/${studyPk}/calendar`, postData);
             handleClose();
-            addEvent(); // Trigger to refresh events
+            addEvent();
         } catch (error) {
             console.error('Error adding event:', error);
         }
