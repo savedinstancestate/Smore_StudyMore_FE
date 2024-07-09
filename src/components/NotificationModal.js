@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { useAuth } from "./AuthContext";
+// import { useAuth } from "./AuthContext";
 import EventSourcePolyfill from 'eventsource-polyfill';
 
 const NotificationComponent = ({ show, handleClose }) => {
   const [notifications, setNotifications] = useState([]);
-  const { isLoggedIn } = useAuth(); // AuthContext를 통해 로그인 상태 확인
+  // const { isLoggedIn } = useAuth(); // AuthContext를 통해 로그인 상태 확인
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken"); // 쿠키에서 액세스 토큰 가져오기
@@ -15,6 +15,8 @@ const NotificationComponent = ({ show, handleClose }) => {
       );
       return;
     }
+
+    console.log("AccessToken:", accessToken);
 
     const eventSource = new EventSourcePolyfill(
         `${process.env.REACT_APP_AUTH_URL}/subscribe/notification`,
@@ -33,13 +35,14 @@ const NotificationComponent = ({ show, handleClose }) => {
 
     eventSource.onerror = (err) => {
       console.error("EventSource failed:", err);
+      console.error("Error details:", err);
       eventSource.close();
     };
 
     return () => {
       eventSource.close();
     };
-  }, [isLoggedIn]); // isLoggedIn 변경 시 useEffect 재실행
+  }, []); // isLoggedIn 변경 시 useEffect 재실행
 
   if (!show) {
     return null;
