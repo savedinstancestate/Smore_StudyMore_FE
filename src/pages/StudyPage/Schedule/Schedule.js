@@ -45,73 +45,26 @@ const Schedule = ({ studyPk }) => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
 
+    useEffect(() => {
+        fetchEvents();
+    }, [studyPk]);
+
     const fetchEvents = async () => {
         try {
-            console.log(`Fetching events for studyPk: ${studyPk}`);
             const response = await API.get(`/study/${studyPk}/calendar/list`);
-            console.log('Type of response data:', typeof response.data);
-            console.log('API response:', response.data);
-
-            const eventData = response.data;
-
-            if (Array.isArray(eventData)) {
-                const mappedData = eventData.map((event) => ({
+            if (Array.isArray(response.data)) {
+                const mappedData = response.data.map((event) => ({
                     ...event,
                     startDate: new Date(event.startDate),
                     endDate: new Date(event.endDate),
                 }));
                 setEvents(mappedData);
-                console.log('Mapped events:', mappedData);
             } else {
-                console.error('Data is not an array', eventData);
                 setEvents([]);
             }
         } catch (error) {
             console.error('Failed to fetch events:', error);
-            setEvents([]); // 오류 발생 시 빈 배열로 설정
-        }
-    };
-
-    useEffect(() => {
-        fetchEvents();
-    }, [studyPk]);
-
-    const addEvent = async (eventDetails) => {
-        try {
-            const postData = {
-                content: eventDetails.content,
-                startDate: moment(eventDetails.startDate).format('YYYY-MM-DD'),
-                endDate: moment(eventDetails.endDate).format('YYYY-MM-DD'),
-            };
-            console.log('Sending POST data:', postData);
-            const response = await API.post(`/study/${studyPk}/calendar`, postData);
-            if (response.status === 200) {
-                fetchEvents(); // 일정 추가 후 바로 목록 갱신
-            }
-        } catch (error) {
-            console.error('일정 추가에 실패했습니다:', error);
-        }
-    };
-
-    const updateEvent = async (updatedEvent) => {
-        try {
-            const response = await API.put(`/study/${studyPk}/calendar/${updatedEvent.calendarPk}`, updatedEvent);
-            if (response.status === 200) {
-                fetchEvents(); // 일정 업데이트 후 목록 갱신
-            }
-        } catch (error) {
-            console.error('일정 업데이트에 실패했습니다:', error);
-        }
-    };
-
-    const deleteEvent = async (eventToDelete) => {
-        try {
-            const response = await API.delete(`/study/${studyPk}/calendar/${eventToDelete.calendarPk}`);
-            if (response.status === 200) {
-                fetchEvents(); // 일정 삭제 후 목록 갱신
-            }
-        } catch (error) {
-            console.error('일정 삭제에 실패했습니다:', error);
+            setEvents([]);
         }
     };
 
@@ -120,14 +73,6 @@ const Schedule = ({ studyPk }) => {
     const handleEventClick = (event) => {
         setSelectedEvent(event);
         setIsEditModalOpen(true);
-    };
-
-    const isSameDay = (date1, date2) => {
-        const d1 = new Date(date1);
-        const d2 = new Date(date2);
-        return (
-            d1.getDate() === d2.getDate() && d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear()
-        );
     };
 
     return (
@@ -151,17 +96,19 @@ const Schedule = ({ studyPk }) => {
                 <AddScheduleModal
                     show={isModalOpen}
                     handleClose={() => setIsModalOpen(false)}
-                    addEvent={addEvent}
-                    fetchEvents={fetchEvents}
-                />
-                <EditScheduleModal
-                    show={isEditModalOpen}
-                    handleClose={() => setIsEditModalOpen(false)}
-                    event={selectedEvent}
-                    updateEvent={updateEvent}
-                    deleteEvent={deleteEvent}
+                    addEvent={fetchEvents}
                     studyPk={studyPk}
                 />
+                {selectedEvent && (
+                    <EditScheduleModal
+                        show={isEditModalOpen}
+                        handleClose={() => setIsEditModalOpen(false)}
+                        event={selectedEvent}
+                        updateEvent={fetchEvents}
+                        deleteEvent={fetchEvents}
+                        studyPk={studyPk}
+                    />
+                )}
             </div>
             <CalendarWrapper>
                 <Calendar
@@ -170,9 +117,10 @@ const Schedule = ({ studyPk }) => {
                     onChange={handleDateChange}
                     tileContent={({ date, view }) => {
                         const dayEvents = events.filter((event) => {
-                            const eventStartDate = new Date(event.startDate);
-                            const eventEndDate = new Date(event.endDate);
-                            return isSameDay(date, eventStartDate) || (date >= eventStartDate && date <= eventEndDate);
+                            return (
+                                moment(date).isSame(event.startDate, 'day') ||
+                                (date >= event.startDate && date <= event.endDate)
+                            );
                         });
                         return dayEvents.length ? (
                             <div>
