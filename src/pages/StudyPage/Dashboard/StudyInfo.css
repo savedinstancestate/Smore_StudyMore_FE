@@ -22,6 +22,8 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .member {
