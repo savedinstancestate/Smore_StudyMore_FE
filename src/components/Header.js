@@ -10,6 +10,7 @@ import { useHeaderStudyName } from "./StudyNameContext";
 import { useAuth } from "./AuthContext";
 import NotificationModal from "./NotificationModal";
 import logoImage from "./smore-logo-ver1.png";
+import notification from "./notification.png";
 
 const HeaderWrapper = styled.div`
   position: fixed;
@@ -174,8 +175,8 @@ const Header = () => {
                 <NavLink exact to="/" activeClassName="active">
                   홈
                 </NavLink>
-                {isLoggedIn ? (
-                  <>
+                 {isLoggedIn ? (
+                  <> 
                     <NavLink to="/mystudy" activeClassName="active">
                       내 스터디
                     </NavLink>
@@ -183,19 +184,20 @@ const Header = () => {
                       마이페이지
                     </NavLink>
                     <NavLink
+                    src={notification}
                       to="#"
                       onClick={(e) => {
                         e.preventDefault();
                         toggleNotification();
                       }}
                     >
-                      알림
+                    <img src={notification} style={{width: '36px', padding: '6px', }}></img>
                     </NavLink>
                     <CreateStudyModal />
                   </>
-                ) : (
+                ) : ( 
                   <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
-                )}
+               )} 
               </NavLinks>
             </div>
           </HeaderContent>
