@@ -143,7 +143,15 @@ input[type="text"] {
 .study-leave-modal h5 {
   font-weight: 700;
   margin-top:10px;
-  color: #DC143C;
+  color: #000000;
+}
+
+.study-leave-contents {
+  margin-bottom: 6px;
+}
+
+.study-leave-content {
+  margin-bottom: 4px;
 }
 
 .buttons-container {
@@ -405,5 +413,14 @@ input[type="text"] {
   width: 100%; 
   padding-top: 30px; 
   padding-bottom: 70px; 
+}
 
+.no-data-mystudy {
+  font-size: 24px; 
+  font-weight: 600;
+  color: #929292;
+  text-align: center; 
+  width: 100%; 
+  padding-top: 30px; 
+  padding-bottom: 30px; 
 }

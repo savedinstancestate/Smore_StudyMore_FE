@@ -195,8 +195,10 @@ function MyStudy() {
         {studyToLeave && (
           <div className="study-leave-modal">
             <h5>정말 탈퇴하시겠어요?</h5>
-            <p>스터디 탈퇴 시 모든 데이터는 삭제되며, 복구되지 않습니다.</p>
-            <p>확인을 위해 <b>'{studyToLeave.studyName}'</b>을(를) 정확히 입력하세요.</p>
+            <div className="study-leave-contents">
+            <p className="study-leave-content">스터디 탈퇴 시 모든 데이터는 삭제되며, 복구되지 않습니다.</p>
+            <p className="study-leave-content">확인을 위해 <b>'{studyToLeave.studyName}'</b>을(를) 정확히 입력하세요.</p>
+            </div>
             <input type="text" className="study-leave-filed" placeholder="스터디명 입력" value={userInput} onChange={handleInputChange} />
             <div className="buttons-container">
             <button className="study-leave-btn-confirm"
