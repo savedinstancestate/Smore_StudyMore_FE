@@ -232,4 +232,36 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
     );
 };
 
-export default CreateProblemBankModal;
+const CreateProblemBankButton = ({ studyPk }) => {
+    const [showModal, setShowModal] = useState(false);
+
+    const handleOpenModal = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+    return (
+        <>
+            <Button
+                onClick={handleOpenModal}
+                variant="success"
+                style={{
+                    borderRadius: '20%',
+                    width: '40px',
+                    height: '40px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <FaPlus style={{ color: 'white' }} />
+            </Button>
+            <CreateProblemBankModal show={showModal} handleClose={handleCloseModal} studyPk={studyPk} />
+        </>
+    );
+};
+
+export default CreateProblemBankButton;
