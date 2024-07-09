@@ -95,12 +95,12 @@ const PageTitle = styled.h1`
 const createStudyModalStyle = {
   backgroundColor: "#009063 !important",
   color: "white !important",
-  padding: "10px !important",
+  padding: "8px 10px !important",
   borderRadius: "5px !important",
   cursor: "pointer !important",
   fontSize: "15px !important",
   fontWeight: "600 !important",
-  marginLeft: "10px",
+  marginLeft: "10px !important",
 };
 
 const LoginButton = styled.button`
@@ -112,7 +112,7 @@ const LoginButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 0px 10px;
+  margin-left: 10px;
 `;
 
 const Header = () => {
