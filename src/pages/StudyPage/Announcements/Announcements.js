@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import './Announcements.css';
 import { FaPlus } from 'react-icons/fa';
-import { format, parseISO } from 'date-fns';
 
 const Announcements = ({ studyPk }) => {
     const [announcements, setAnnouncements] = useState([]);
@@ -16,7 +15,7 @@ const Announcements = ({ studyPk }) => {
     const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [showAddModal, setShowAddModal] = useState(false);
+    const [showAddModal, setShowAddModal] = useState(false); // Add this line
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -93,7 +92,7 @@ const Announcements = ({ studyPk }) => {
     const modalContent = (
         <>
             <p>{selectedAnnouncement?.noticeContent}</p>
-            <p className="text-muted">{format(parseISO(selectedAnnouncement?.time), 'yyyy-MM-dd HH:mm:ss')}</p>
+            <p className="text-muted">{selectedAnnouncement?.time}</p>
         </>
     );
 
@@ -138,7 +137,8 @@ const Announcements = ({ studyPk }) => {
                     }}
                 >
                     <FaPlus style={{ color: 'white' }} />
-                </Button>
+                </Button>{' '}
+                {/* Modify this line */}
             </div>
             <div className="announcement-container">
                 {announcements.map((announcement) => (
@@ -157,9 +157,7 @@ const Announcements = ({ studyPk }) => {
                                     >
                                         {announcement.noticeContent}
                                     </Card.Text>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                        {format(parseISO(announcement.time), 'yyyy-MM-dd HH:mm:ss')}
-                                    </Card.Subtitle>
+                                    <Card.Subtitle className="mb-2 text-muted">{announcement.time}</Card.Subtitle>
                                 </div>
                                 <div className="d-flex align-items-start">
                                     <Button
@@ -213,7 +211,7 @@ const Announcements = ({ studyPk }) => {
                         footer={deleteModalFooter}
                     />
                 )}
-                <AddAnnouncementModal
+                <AddAnnouncementModal // Add this block
                     show={showAddModal}
                     handleClose={closeAddModal}
                     studyPk={studyPk}
