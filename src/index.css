@@ -1,6 +1,24 @@
 html {
-    overflow-y: scroll; /* 스크롤바 공간을 항상 확보합니다. */
-  }
+    overflow-y: auto;
+}
+
+header {
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    display: block;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #dadada;
+}
+
 body {
     margin: 0;
     padding: 0;
