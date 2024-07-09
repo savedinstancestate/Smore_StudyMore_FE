@@ -3,14 +3,15 @@ import Cookies from "js-cookie";
 import API from '../../api/AxiosInstance';
 import "../../styles/StudyCard.css";
 import ApplyStudyModal from "./ApplyStudyModal";
+import { useAuth } from '../../components/AuthContext';
 import Modal from '../../components/Modal';
 import Login from '../../pages/LoginPage/LoginModal';
 
 function BoardDetailModal({ studyBoardPk }) {
+  const { isLoggedIn } = useAuth();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [BoardDetails, setBoardDetails] = useState(null);
   const [showOverlay, setShowOverlay] = useState(false); 
-  const [showApplyModal, setShowApplyModal] = useState(false); // 새로운 상태 추가
 
   useEffect(() => {
     if (studyBoardPk) {
@@ -36,18 +37,11 @@ function BoardDetailModal({ studyBoardPk }) {
   };
 
   const handleApplyClick = () => {
-    const accessToken = Cookies.get("accessToken");
-    if (!accessToken) {
+    if (!isLoggedIn) {
       setIsLoginModalOpen(true);
     } else {
-      setShowApplyModal(true); // 로그인되어 있으면 지원하기 모달 열기
       toggleOverlay(true);
     }
-  };
-
-  const handleCloseApplyModal = () => {
-    setShowApplyModal(false);
-    toggleOverlay(false);
   };
 
   return (
@@ -76,23 +70,15 @@ function BoardDetailModal({ studyBoardPk }) {
         <div className="content-wrapper-detail">
           <p>{BoardDetails.adContent}</p>
         </div>
-        <div className="modal-container">
-          <div onClick={handleApplyClick} className="apply-study-modal">
-            <button
-              variant="success"
-              style={{padding: '12px 12px', fontWeight: '600', width: '80%', marginBottom: '30px'}}
-            >
-              스터디 지원하기
-            </button>
+        {isLoggedIn ? (
+          <div className="modal-container">
+            <ApplyStudyModal toggleOverlay={toggleOverlay} studyName={BoardDetails.studyName} studyPk={BoardDetails.studyPk} />
           </div>
-          <ApplyStudyModal 
-            toggleOverlay={toggleOverlay} 
-            studyName={BoardDetails.studyName} 
-            studyPk={BoardDetails.studyPk} 
-            show={showApplyModal} 
-            handleClose={handleCloseApplyModal}
-          />
-        </div>
+        ) : (
+          <div onClick={handleApplyClick} className="modal-container">
+            <button className="apply-study-button">스터디 지원하기</button>
+          </div>
+        )}
       </div>
       <Modal show={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} title="로그인">
         <Login />
@@ -102,4 +88,3 @@ function BoardDetailModal({ studyBoardPk }) {
 }
 
 export default BoardDetailModal;
- 
