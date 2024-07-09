@@ -23,8 +23,13 @@ const NotificationComponent = ({ show, handleClose }) => {
     };
 
     eventSource.onmessage = (event) => {
-      const newNotification = JSON.parse(event.data);
-      setNotifications((prev) => [...prev, newNotification]);
+        try {
+            console.log("Received event:", event.data); // 서버에서 받은 데이터 출력
+            const newNotification = JSON.parse(event.data);
+            setNotifications((prev) => [...prev, newNotification]);
+          } catch (error) {
+            console.error("Failed to parse event data:", error);
+          }
     };
 
     eventSource.onerror = (err) => {
