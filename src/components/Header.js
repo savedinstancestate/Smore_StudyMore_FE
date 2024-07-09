@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import Login from "../pages/LoginPage/LoginModal";
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
 import { useHeaderStudyName } from "./StudyNameContext";
+import { useAuth } from './AuthContext'; 
 import logoImage from "./smore-logo-ver1.png";
 
 const HeaderWrapper = styled.div`
