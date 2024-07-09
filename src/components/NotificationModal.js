@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-// import { useAuth } from "./AuthContext";
-import EventSourcePolyfill from 'eventsource-polyfill';
+import { useAuth } from "./AuthContext";
+import { EventSourcePolyfill } from 'eventsource-polyfill';
 
 const NotificationComponent = ({ show, handleClose }) => {
   const [notifications, setNotifications] = useState([]);
-  // const { isLoggedIn } = useAuth(); // AuthContext를 통해 로그인 상태 확인
+  const { isLoggedIn } = useAuth(); // AuthContext를 통해 로그인 상태 확인
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      console.log("사용자가 로그인하지 않았습니다.");
+      return;
+    }
+
     const accessToken = Cookies.get("accessToken"); // 쿠키에서 액세스 토큰 가져오기
     if (!accessToken) {
       console.log(
@@ -16,10 +21,10 @@ const NotificationComponent = ({ show, handleClose }) => {
       return;
     }
 
-    console.log("AccessToken:", accessToken);
+    console.log("AccessToken from Cookies:", accessToken); // 액세스 토큰 로그
 
     const eventSource = new EventSourcePolyfill(
-        `${process.env.REACT_APP_AUTH_URL}/subscribe/notification`,
+      `${process.env.REACT_APP_AUTH_URL}/subscribe/notification`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -28,21 +33,26 @@ const NotificationComponent = ({ show, handleClose }) => {
       }
     );
 
+    eventSource.onopen = () => {
+      console.log("SSE 연결이 성공적으로 열렸습니다.");
+    };
+
     eventSource.onmessage = (event) => {
       const newNotification = JSON.parse(event.data);
+      console.log("새 알림을 받았습니다:", newNotification);
       setNotifications((prev) => [...prev, newNotification]);
     };
 
     eventSource.onerror = (err) => {
       console.error("EventSource failed:", err);
-      console.error("Error details:", err);
+      console.error("Error details:", err); // 추가 오류 정보 출력
       eventSource.close();
     };
 
     return () => {
       eventSource.close();
     };
-  }, []); // isLoggedIn 변경 시 useEffect 재실행
+  }, [isLoggedIn]); // isLoggedIn 변경 시 useEffect 재실행
 
   if (!show) {
     return null;
