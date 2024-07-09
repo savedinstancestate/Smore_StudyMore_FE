@@ -5,6 +5,7 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
+import createImage from "./create.png";
 
 const CreateStudyModal = () => {
     const [modalShow, setModalShow] = useState(false);
@@ -200,7 +201,7 @@ const CreateStudyModal = () => {
             border: 'none',
             borderRadius:'6px'}}
             >
-                <img src='img/create.png' style={{width: '22px', marginRight: '6px', marginTop: '-2px'}}></img>
+                <createImage src={createImage} style={{width: '22px', marginRight: '6px', marginTop: '-2px'}} />
                 스터디 생성하기
             </Button>
 

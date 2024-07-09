@@ -18,19 +18,16 @@ function Board() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // 문서의 끝에 도달했는지 확인
     if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight - 50) {
-      loadMoreData();
+loadMoreData();
     }
   };
-    // 스크롤 이벤트에 handleScroll 함수 연결
     window.addEventListener('scroll', handleScroll);
 
-    // 컴포넌트 언마운트 시 이벤트 리스너 제거
     return () => {
       window.removeEventListener('scroll', handleScroll);
   };
-}, [currentPage, recruitingStudies.length]); // 의존성 배열 업데이트
+}, [currentPage, recruitingStudies.length]); 
 
   const fetchRecruitingStudies = async () => {
     try {
@@ -70,7 +67,7 @@ function Board() {
       <div className="card-container">
         <p className="card-type">모집중인 스터디 📢</p>
         {visibleStudies.length === 0 ? (
-          <p>스터디 목록이 없습니다.</p>
+          <p className="no-data">스터디 목록이 없습니다.</p>
         ) : (
           visibleStudies.map(study => (
             <div className="card-div-home" key={study.studyBoardPk} 
