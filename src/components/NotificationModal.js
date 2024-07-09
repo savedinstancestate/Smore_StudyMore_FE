@@ -14,38 +14,28 @@ const NotificationComponent = ({ show, handleClose }) => {
       return;
     }
 
-    console.log("AccessToken:", accessToken);
-
     const eventSource = new EventSourcePolyfill(
-        `${process.env.REACT_APP_AUTH_URL}/subscribe/notification`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        withCredentials: true,
-      }
+      `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`, 
     );
 
     eventSource.onopen = () => {
-        console.log("SSE 연결이 성공적으로 열렸습니다.");
-      };
+      console.log("SSE 연결이 열렸습니다.");
+    };
 
     eventSource.onmessage = (event) => {
       const newNotification = JSON.parse(event.data);
-      console.log("새 알림을 받았습니다:", newNotification);
       setNotifications((prev) => [...prev, newNotification]);
     };
 
     eventSource.onerror = (err) => {
       console.error("EventSource failed:", err);
-      console.error("Error details:", err);
       eventSource.close();
     };
 
     return () => {
       eventSource.close();
     };
-  }, []); // isLoggedIn 변경 시 useEffect 재실행
+  }, []);
 
   if (!show) {
     return null;
