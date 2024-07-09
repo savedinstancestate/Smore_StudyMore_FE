@@ -37,6 +37,7 @@ const AddScheduleModal = ({ show, handleClose, addEvent, studyPk }) => {
             title="일정 추가"
             show={show}
             handleClose={handleClose}
+            backdrop="static"
             footer={
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                     <Button variant="secondary" onClick={handleClose}>
