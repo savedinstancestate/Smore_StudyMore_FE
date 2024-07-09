@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
     background: #ffffff;
-    height: 700px;
+
 }
 
 .profile-container {
@@ -14,6 +14,7 @@ body {
     text-align: center;
     width: 960px;
     margin-top: 0px;
+    margin-bottom: 320px;
 }
 
 .card-type {

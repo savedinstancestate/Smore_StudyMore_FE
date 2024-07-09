@@ -313,6 +313,22 @@ input[type="text"] {
   border-radius: 44px;
 }
 
+.apply-study-button {
+  padding: 12px;
+  width: 80%;
+  background-color: #009063;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.apply-study-button:hover {
+  background-color: #007a53;
+}
+
   .card-div-detail {
     width:100%;
     background-color: #fff;
