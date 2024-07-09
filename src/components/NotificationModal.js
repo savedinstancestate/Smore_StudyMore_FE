@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useAuth } from "./AuthContext";
-import { EventSourcePolyfill } from "eventsource-polyfill";
-
+import * as EventSource from 'eventsource-polyfill';
+const EventSourcePolyfill = EventSource.EventSourcePolyfill;
+console.log(EventSourcePolyfill);
 
 const NotificationComponent = ({ show, handleClose }) => {
   const [notifications, setNotifications] = useState([]);
