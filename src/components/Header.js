@@ -40,7 +40,7 @@ const NavContainer = {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-end",
-  marginRight: "26px"
+  marginRight: "25px"
 }
 
 const Logo = styled(NavLink)`
@@ -57,13 +57,14 @@ const LogoImage = styled.img`
 const NavLinks = styled.nav`
   text-align: right;
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+ 
   a {
     margin: 0 10px;
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
     cursor: pointer;
 
     &:last-child {
@@ -96,12 +97,26 @@ const createStudyModalStyle = {
   padding: "10px !important",
   borderRadius: "5px !important",
   cursor: "pointer !important",
-  fontSize: "16px !important",
+  fontSize: "15px !important",
   fontWeight: "600 !important",
 };
 
+
+const LoginButton = styled.button`
+  padding: 8px 20px;
+  background-color: #009063;
+  color: white;
+  font-size: 15px;
+  font-weight: 600 !important;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 14px 10px;
+`;
+
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const currentLocation = useLocation();
   const { headerStudyName } = useHeaderStudyName();
 
@@ -140,15 +155,22 @@ const Header = () => {
       <Logo to="/">
           <LogoImage src={logoImage} alt="Logo" />
         </Logo>
-        <div style={NavContainer} >
-        <NavLinks>
-          <NavLink exact to="/" activeClassName="active">홈</NavLink>
-          <NavLink to="/mystudy" activeClassName="active">내 스터디</NavLink>
-          <NavLink to="/mypage" activeClassName="active">마이페이지</NavLink>
-          <a onClick={handleOpenModal}>로그인</a>
-        </NavLinks>
-        <CreateStudyModal style={createStudyModalStyle} />
-        </div>
+        <div style={NavContainer}>
+              <NavLinks>
+                <NavLink exact to="/" activeClassName="active">홈</NavLink>
+                {isLoggedIn ? (
+                  <>
+                    <NavLink to="/mystudy" activeClassName="active">내 스터디</NavLink>
+                    <NavLink to="/mypage" activeClassName="active">마이페이지</NavLink>
+                    <NavLink to="/logout" activeClassName="active">로그아웃</NavLink>
+                    <CreateStudyModal style={createStudyModalStyle} />
+                  </>
+                ) : (
+                  <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
+                )}
+              </NavLinks>
+              
+            </div>
       </HeaderContent>
     </HeaderContainer>
     <TitleContainer><PageTitle>{renderPageTitle()}</PageTitle></TitleContainer>
