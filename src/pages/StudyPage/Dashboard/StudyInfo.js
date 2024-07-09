@@ -58,12 +58,7 @@ const StudyInfo = ({ studyPk }) => {
 
     return (
         <div className="study-info">
-            <div className="info-header">
-                우리 스터디는요 ✏️
-                <div className="study-dates">
-                    {studyData.startDate} ~ {studyData.closeDate}
-                </div>
-            </div>
+            <div className="info-header">우리 스터디는요 ✏️</div>
             <div className="members-header">멤버</div>
             <div className="members-container">
                 {Array.isArray(members) && members.length > 0 ? (
@@ -85,6 +80,10 @@ const StudyInfo = ({ studyPk }) => {
             </div>
             <div className="study-description-header">소개</div>
             <p className="study-description">{studyData.content}</p>
+            <div className="study-dates-header">일정</div>
+            <div className="study-dates">
+                {studyData.startDate} ~ {studyData.closeDate}
+            </div>
         </div>
     );
 };
