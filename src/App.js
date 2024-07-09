@@ -11,10 +11,13 @@ import PrivateRoute from './pages/LoginPage/PrivateRoute';
 import MyStudy from "./pages/MyStudyPage/MyStudy";
 import Study from "./pages/StudyPage/Study";
 import MyPage from './pages/MyPage/MyPage';
+import { AuthProvider } from './components/AuthContext';
 
 const App = () => {
     return (
+        <AuthProvider>
         <StudyNameProvider>
+            
         <Router>
             <div>
         <Header />
@@ -34,7 +37,9 @@ const App = () => {
             </Routes>
             </div>
         </Router>
+        
         </StudyNameProvider>
+        </AuthProvider>
     );
 };
 
