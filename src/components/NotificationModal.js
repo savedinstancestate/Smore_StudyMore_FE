@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { EventSourcePolyfill } from 'eventsource-polyfill';
+import EventSourcePolyfill from 'eventsource-polyfill';
 
 const NotificationComponent = ({ show, handleClose }) => {
   const [notifications, setNotifications] = useState([]);
-  const { isLoggedIn } = useAuth(); // AuthContext를 통해 로그인 상태 확인
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken"); // 쿠키에서 액세스 토큰 가져오기
@@ -15,10 +14,10 @@ const NotificationComponent = ({ show, handleClose }) => {
       return;
     }
 
-    console.log("AccessToken from Cookies:", accessToken); // 액세스 토큰 로그
+    console.log("AccessToken:", accessToken);
 
     const eventSource = new EventSourcePolyfill(
-      `${process.env.REACT_APP_AUTH_URL}/subscribe/notification`,
+        `${process.env.REACT_APP_AUTH_URL}/subscribe/notification`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -28,8 +27,8 @@ const NotificationComponent = ({ show, handleClose }) => {
     );
 
     eventSource.onopen = () => {
-      console.log("SSE 연결이 성공적으로 열렸습니다.");
-    };
+        console.log("SSE 연결이 성공적으로 열렸습니다.");
+      };
 
     eventSource.onmessage = (event) => {
       const newNotification = JSON.parse(event.data);
@@ -39,14 +38,14 @@ const NotificationComponent = ({ show, handleClose }) => {
 
     eventSource.onerror = (err) => {
       console.error("EventSource failed:", err);
-      console.error("Error details:", err); // 추가 오류 정보 출력
+      console.error("Error details:", err);
       eventSource.close();
     };
 
     return () => {
       eventSource.close();
     };
-  }, []); 
+  }, []); // isLoggedIn 변경 시 useEffect 재실행
 
   if (!show) {
     return null;
