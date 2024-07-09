@@ -3,6 +3,7 @@ import { format, addDays, startOfMonth, endOfMonth } from 'date-fns';
 import { Button, Form } from 'react-bootstrap';
 import './AttendanceChart.css';
 import API from '../../../api/AxiosInstance';
+import TodayAttendance from './TodayAttendance';
 
 const AttendanceChart = ({ studyPk }) => {
     const [attendanceData, setAttendanceData] = useState({});
@@ -42,29 +43,32 @@ const AttendanceChart = ({ studyPk }) => {
     }
 
     return (
-        <div className="attendance-chart">
-            <div className="attendance-chart-header">출석 현황🕰️</div>
-            <div className="header-row">
-                <div className="cell month-cell">{format(start, 'M월')}</div>
-                {daysInMonth.map((date) => (
-                    <div key={date} className="cell">
-                        {format(new Date(date), 'd')}
+        <div>
+            <div className="attendance-chart">
+                <div className="attendance-chart-header">월별 출석 현황 🗓️</div>
+                <div className="header-row">
+                    <div className="cell month-cell">{format(start, 'M월')}</div>
+                    {daysInMonth.map((date) => (
+                        <div key={date} className="cell">
+                            {format(new Date(date), 'd')}
+                        </div>
+                    ))}
+                </div>
+                {members.map((member) => (
+                    <div key={member.memberPk} className="data-row">
+                        <div className="cell name-cell">{member.nickName}</div>
+                        {daysInMonth.map((date) => {
+                            const day = new Date(date).getDate().toString();
+                            const status =
+                                (attendanceData[day] || [])
+                                    .find((att) => att.memberPk === member.memberPk)
+                                    ?.attendanceStatus.replace(/\s+/g, '') || '결석';
+                            return <div key={date} className={`cell status-cell ${status}`} title={status} />;
+                        })}
                     </div>
                 ))}
             </div>
-            {members.map((member) => (
-                <div key={member.memberPk} className="data-row">
-                    <div className="cell name-cell">{member.nickName}</div>
-                    {daysInMonth.map((date) => {
-                        const day = new Date(date).getDate().toString();
-                        const status =
-                            (attendanceData[day] || [])
-                                .find((att) => att.memberPk === member.memberPk)
-                                ?.attendanceStatus.replace(/\s+/g, '') || '결석';
-                        return <div key={date} className={`cell status-cell ${status}`} title={status} />;
-                    })}
-                </div>
-            ))}
+            <TodayAttendance studyPk={studyPk} />
         </div>
     );
 };
