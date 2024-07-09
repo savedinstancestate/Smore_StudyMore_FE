@@ -8,7 +8,7 @@ import Login from "../pages/LoginPage/LoginModal";
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
 import { useHeaderStudyName } from "./StudyNameContext";
 import { useAuth } from "./AuthContext";
-import NotificationModal from './NotificationModal';
+import NotificationModal from "./NotificationModal";
 import logoImage from "./smore-logo-ver1.png";
 
 const HeaderWrapper = styled.div`
@@ -112,10 +112,10 @@ const Header = () => {
   const currentLocation = useLocation();
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-    const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
-    const toggleNotificationModal = () => {
-      setIsNotificationOpen(!isNotificationOpen);
+  const toggleNotificationModal = () => {
+    setIsNotificationOpen(!isNotificationOpen);
   };
 
   useEffect(() => {
@@ -141,7 +141,7 @@ const Header = () => {
 
   const handleCloseNotificationModal = () => {
     setIsNotificationOpen(false);
-  }
+  };
 
   const renderPageTitle = () => {
     if (currentLocation.pathname.startsWith("/study")) {
@@ -173,24 +173,29 @@ const Header = () => {
               <NavLinks>
                 <NavLink exact to="/" activeClassName="active">
                   홈
-                </NavLink>{/*
+                </NavLink>
                 {isLoggedIn ? (
-                <>*/}
+                  <>
                     <NavLink to="/mystudy" activeClassName="active">
                       내 스터디
                     </NavLink>
                     <NavLink to="/mypage" activeClassName="active">
                       마이페이지
                     </NavLink>
-                    <NavLink to="#" onClick={(e) => {
-  e.preventDefault();
-  toggleNotification();
-}}>알림</NavLink>
+                    <NavLink
+                      to="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggleNotification();
+                      }}
+                    >
+                      알림
+                    </NavLink>
                     <CreateStudyModal />
-                 {/* </>
-                ) : (*/}
+                  </>
+                ) : (
                   <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
-                {/* )}*/}
+                )}
               </NavLinks>
             </div>
           </HeaderContent>
@@ -205,11 +210,11 @@ const Header = () => {
       </Modal>
 
       <NotificationModal
-                show={isNotificationOpen}
-                handleClose={() => setIsNotificationOpen(false)}
-                title="알림"
-                notifications={notifications}
-            />
+        show={isNotificationOpen}
+        handleClose={() => setIsNotificationOpen(false)}
+        title="알림"
+        notifications={notifications}
+      />
     </>
   );
 };
