@@ -20,7 +20,7 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
         content: introduction,
       });
       console.log("Server Response:", response.data);
-      setSuccessMessage("스터디 지원이 완료되었습니다!");
+      setSuccessMessage("스터디 지원이 완료되었습니다.");
       resetForm();
       setTimeout(() => {
         closeModal();
@@ -50,7 +50,7 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
 
   const modalContent = (
     <Form onSubmit={handleSubmit}>
-        {successMessage && <div className="alert alert-danger">{successMessage}</div>}
+        {successMessage && <div className="alert alert-primary">{successMessage}</div>}
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
       <Form.Group>
         <Form.Label>
