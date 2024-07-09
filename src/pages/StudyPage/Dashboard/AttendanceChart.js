@@ -11,8 +11,14 @@ const AttendanceChart = ({ studyPk }) => {
 
     useEffect(() => {
         const fetchAttendanceData = async () => {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1; // 현재 월 (1-12)
+
             try {
-                const response = await API.get(`/study/${studyPk}/dashboard/attendance/monthly`);
+                const response = await API.get(`/study/${studyPk}/dashboard/attendance/monthly`, {
+                    params: { year: year, month: month },
+                });
                 setAttendanceData(response.data);
             } catch (error) {
                 console.error('출석 데이터를 불러오는 데 실패했습니다:', error);
