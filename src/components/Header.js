@@ -94,7 +94,7 @@ const PageTitle = styled.h1`
 `;
 
 const LoginButton = styled.button`
-  padding: 8px 20px;
+  padding: 8px 18px;
   background-color: #009063;
   color: white;
   font-size: 15px;

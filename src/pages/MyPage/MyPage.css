@@ -3,6 +3,7 @@ body {
     display: flex;
     justify-content: center;
     background: #ffffff;
+    height: 700px;
 }
 
 .profile-container {
@@ -12,7 +13,7 @@ body {
     border: 1px solid #ddd;
     text-align: center;
     width: 960px;
-    margin-top: 30px;
+    margin-top: 0px;
 }
 
 .card-type {
