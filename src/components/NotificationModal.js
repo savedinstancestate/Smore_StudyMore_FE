@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useAuth } from "./AuthContext";
-import * as EventSource from 'eventsource-polyfill';
-const EventSourcePolyfill = EventSource.EventSourcePolyfill;
+import EventSourcePolyfill from 'eventsource-polyfill';
+
+const EventSource = EventSourcePolyfill || NativeEventSource;
 console.log(EventSourcePolyfill);
+
 
 const NotificationComponent = ({ show, handleClose }) => {
   const [notifications, setNotifications] = useState([]);
@@ -23,11 +25,11 @@ const NotificationComponent = ({ show, handleClose }) => {
       return;
     }
 
-    const eventSource = new EventSourcePolyfill(
-      "https://smore.today/subscribe/notification",
+    const eventSource = new EventSource(
+      "${process.env.REACT_APP_AUTH_URL}/subscribe/notification",
       {
         headers: {
-          'Authorization': `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         withCredentials: true,
       }
