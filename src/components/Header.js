@@ -20,7 +20,7 @@ const HeaderWrapper = styled.div`
 
 const HeaderContainer = styled.header`
   background-color: #fff;
-  padding: 10px 20px;
+  padding: 20px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,8 +100,8 @@ const createStudyModalStyle = {
   cursor: "pointer !important",
   fontSize: "15px !important",
   fontWeight: "600 !important",
+  marginLeft: "10px",
 };
-
 
 const LoginButton = styled.button`
   padding: 8px 20px;
@@ -112,7 +112,7 @@ const LoginButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 14px 10px;
+  margin: 0px 10px;
 `;
 
 const Header = () => {
@@ -168,7 +168,6 @@ const Header = () => {
                   <>
                     <NavLink to="/mystudy" activeClassName="active">내 스터디</NavLink>
                     <NavLink to="/mypage" activeClassName="active">마이페이지</NavLink>
-                    <NavLink to="/logout" activeClassName="active">로그아웃</NavLink>
                     <CreateStudyModal style={createStudyModalStyle} />
                   </>
                 ) : (
