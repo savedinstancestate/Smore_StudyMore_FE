@@ -581,5 +581,19 @@ export const handlers = [
         error: "Member PK is missing in the request."
       })
     );
-  })
+  }),
+
+  rest.get('https://smore.today/subscribe/notification', (req, res, ctx) => {
+    // EventSource는 기본적으로 msw에서 직접 지원하지 않으므로, 여기서는 REST API를 예시로 사용합니다.
+    // 실제 EventSource 테스트는 다른 방식으로 구현해야 할 수 있습니다.
+    return res(
+      ctx.status(200),
+      ctx.json({
+        notificationPk: "0fe8b947-b22e-47d9-ad1c-7f1c8b15172",
+        studyPk: "12312421321312",
+        receiverPk: 123214124215,
+        content: "스터디 가입 신청 요청이 있습니다."
+      })
+    );
+  }),
 ];

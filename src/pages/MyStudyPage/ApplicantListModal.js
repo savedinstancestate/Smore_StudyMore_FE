@@ -76,7 +76,7 @@ function ApplicantList({ studyPk }) {
     <div>
       <div className="list-container">
         {applicants.length === 0 ? (
-          <p>지원 요청이 없습니다.</p>
+          <p className="no-data-mystudy">지원 요청이 없습니다.</p>
         ) : (
           <ul>
             {applicants.map((applicant) => (

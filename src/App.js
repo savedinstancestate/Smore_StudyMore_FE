@@ -25,7 +25,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/redirection/:accessToken/:refreshToken" element={<Redirection />} />
-                {/* 
+               {/* 
                 <Route path="/mystudy" element={<MyStudy />} />
                 <Route path="/study/:studyPk" element={<Study />} />
                 <Route path="/mypage" element={<MyPage />} />
