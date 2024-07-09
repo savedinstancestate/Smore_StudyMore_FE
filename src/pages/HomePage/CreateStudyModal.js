@@ -197,11 +197,11 @@ const CreateStudyModal = () => {
             fontSize: '15px',
             fontWeight: '600',
             marginLeft: '10px',
-            padding: '8px 14px',
+            padding: '8px 10px',
             border: 'none',
             borderRadius:'6px'}}
             >
-                <img src={createImage} style={{width: '22px', marginRight: '6px', marginTop: '-2px'}} />
+                <img src={createImage} style={{width: '18px', marginRight: '4px', marginTop: '-3px'}} />
                 스터디 생성하기
             </Button>
 
