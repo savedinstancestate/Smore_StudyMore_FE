@@ -48,6 +48,7 @@ const EditScheduleModal = ({ show, handleClose, event, updateEvent, deleteEvent,
             title="일정 수정"
             show={show}
             handleClose={handleClose}
+            backdrop="static"
             footer={
                 <div>
                     <Button variant="danger" onClick={handleDelete} style={{ marginRight: '10px' }}>
