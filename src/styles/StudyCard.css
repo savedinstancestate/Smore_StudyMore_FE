@@ -398,3 +398,13 @@ input[type="text"] {
     z-index: 1050; /* 모달보다 조금 낮게 설정 */
 }
   
+.no-data {
+  font-size: 24px;
+  font-weight: 600;
+  color: #929292;
+  text-align: center; 
+  width: 100%; 
+  padding-top: 30px; 
+  padding-bottom: 70px; 
+
+}

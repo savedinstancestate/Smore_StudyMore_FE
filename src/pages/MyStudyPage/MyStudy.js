@@ -125,7 +125,7 @@ function MyStudy() {
       <div className="card-container">
         <p className="card-type">참여하는 스터디 🔥</p>
         {participatingStudies.length === 0 ? (
-          <p>스터디 목록이 없습니다.</p>
+          <p className="no-data">스터디 목록이 없습니다.</p>
         ) : (
           participatingStudies.map(study => (
             <div className="card-div" key={study.studyPk}>
@@ -156,7 +156,7 @@ function MyStudy() {
       <div className="card-container">
         <p className="card-type">운영중인 스터디 ✏️</p>
         {administeredStudies.length === 0 ? (
-          <p>스터디 목록이 없습니다.</p>
+          <p className="no-data">스터디 목록이 없습니다.</p>
         ) : (
           administeredStudies.map(study => (
             <div className="card-div" key={study.studyPk}>
