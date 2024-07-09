@@ -196,7 +196,7 @@ const CreateStudyModal = () => {
             fontSize: '15px',
             fontWeight: '600',
             marginLeft: '10px',
-            padding: '8px 16px',
+            padding: '8px 14px',
             border: 'none',
             borderRadius:'6px'}}
             >
