@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { useAuth } from "./AuthContext";
 import { EventSourcePolyfill } from 'eventsource-polyfill';
 
 const NotificationComponent = ({ show, handleClose }) => {
@@ -8,11 +7,6 @@ const NotificationComponent = ({ show, handleClose }) => {
   const { isLoggedIn } = useAuth(); // AuthContext를 통해 로그인 상태 확인
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      console.log("사용자가 로그인하지 않았습니다.");
-      return;
-    }
-
     const accessToken = Cookies.get("accessToken"); // 쿠키에서 액세스 토큰 가져오기
     if (!accessToken) {
       console.log(
@@ -52,7 +46,7 @@ const NotificationComponent = ({ show, handleClose }) => {
     return () => {
       eventSource.close();
     };
-  }, [isLoggedIn]); // isLoggedIn 변경 시 useEffect 재실행
+  }, []); 
 
   if (!show) {
     return null;
