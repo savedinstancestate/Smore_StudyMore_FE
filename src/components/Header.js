@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
-import { NavLink, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { NavLink, useLocation } from "react-router-dom";
+import styled from "styled-components";
 import "../styles/StudyCard.css";
-import Modal from './Modal'; 
-import Login from '../pages/LoginPage/LoginModal';
+import Modal from "./Modal";
+import Login from "../pages/LoginPage/LoginModal";
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
-import { useHeaderStudyName } from './StudyNameContext';
-import logoImage from './smore-logo-ver1.png';
+import { useHeaderStudyName } from "./StudyNameContext";
+import logoImage from "./smore-logo-ver1.png";
 
 const HeaderWrapper = styled.div`
   position: fixed;
@@ -15,7 +15,7 @@ const HeaderWrapper = styled.div`
   left: 0;
   width: 100%;
   background-color: #fff;
-  z-index:100;
+  z-index: 100;
 `;
 
 const HeaderContainer = styled.header`
@@ -41,8 +41,8 @@ const NavContainer = {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-end",
-  marginRight: "25px"
-}
+  marginRight: "25px",
+};
 
 const Logo = styled(NavLink)`
   display: flex;
@@ -58,8 +58,8 @@ const LogoImage = styled.img`
 const NavLinks = styled.nav`
   text-align: right;
   width: 100%;
-  margin-bottom: 4px;
- 
+  margin-bottom: 0px;
+
   a {
     margin: 0 10px;
     text-decoration: none;
@@ -69,13 +69,12 @@ const NavLinks = styled.nav`
     cursor: pointer;
 
     &:last-child {
-      margin-right: 0; 
+      margin-right: 0;
     }
   }
   .active {
     color: #009063;
   }
-
 `;
 
 const TitleContainer = styled.div`
@@ -83,7 +82,7 @@ const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 20px;
-  background-color: #F3F9F7;
+  background-color: #f3f9f7;
 `;
 
 const PageTitle = styled.h1`
@@ -92,17 +91,6 @@ const PageTitle = styled.h1`
   font-weight: 700;
 `;
 
-const createStudyModalStyle = {
-  backgroundColor: "#009063 !important",
-  color: "white !important",
-  padding: "8px 10px !important",
-  borderRadius: "5px !important",
-  cursor: "pointer !important",
-  fontSize: "15px !important",
-  fontWeight: "600 !important",
-  marginLeft: "10px !important",
-};
-
 const LoginButton = styled.button`
   padding: 8px 20px;
   background-color: #009063;
@@ -110,7 +98,7 @@ const LoginButton = styled.button`
   font-size: 15px;
   font-weight: 600 !important;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   margin-left: 10px;
 `;
@@ -122,9 +110,9 @@ const Header = () => {
   const { headerStudyName } = useHeaderStudyName();
 
   useEffect(() => {
-    const token = Cookies.get('accessToken');
-    setIsLoggedIn(!!token); 
-  }, []); 
+    const token = Cookies.get("accessToken");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -135,58 +123,63 @@ const Header = () => {
   };
 
   const renderPageTitle = () => {
-    console.log('Current study name:', headerStudyName);
-    if (currentLocation.pathname.startsWith('/study')) {
-      return headerStudyName || '스터디 로딩 중...'; // 동적 경로에 따라 이름을 불러옴
+    console.log("Current study name:", headerStudyName);
+    if (currentLocation.pathname.startsWith("/study")) {
+      return headerStudyName || "스터디 로딩 중..."; // 동적 경로에 따라 이름을 불러옴
     }
     switch (currentLocation.pathname) {
-      case '/':
-        return 'Study More';
-      case '/mystudy':
-        return '내 스터디';
-      case '/mypage':
-        return '마이페이지';
-      case '/login':
-        return '로그인';
+      case "/":
+        return "Study More";
+      case "/mystudy":
+        return "내 스터디";
+      case "/mypage":
+        return "마이페이지";
+      case "/login":
+        return "로그인";
       default:
-        return '';
+        return "";
     }
   };
 
   return (
     <>
-    <HeaderWrapper>
-    <HeaderContainer>
-      <HeaderContent>
-      <Logo to="/">
-          <LogoImage src={logoImage} alt="Logo" />
-        </Logo>
-        <div style={NavContainer}>
+      <HeaderWrapper>
+        <HeaderContainer>
+          <HeaderContent>
+            <Logo to="/">
+              <LogoImage src={logoImage} alt="Logo" />
+            </Logo>
+            <div style={NavContainer}>
               <NavLinks>
-                <NavLink exact to="/" activeClassName="active">홈</NavLink>
+                <NavLink exact to="/" activeClassName="active">
+                  홈
+                </NavLink>
                 {isLoggedIn ? (
                   <>
-                    <NavLink to="/mystudy" activeClassName="active">내 스터디</NavLink>
-                    <NavLink to="/mypage" activeClassName="active">마이페이지</NavLink>
-                    <CreateStudyModal style={createStudyModalStyle} />
+                    <NavLink to="/mystudy" activeClassName="active">
+                      내 스터디
+                    </NavLink>
+                    <NavLink to="/mypage" activeClassName="active">
+                      마이페이지
+                    </NavLink>
+                    <CreateStudyModal />
                   </>
                 ) : (
                   <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
                 )}
               </NavLinks>
             </div>
-      </HeaderContent>
-    </HeaderContainer>
-    <TitleContainer>
-      <PageTitle>{renderPageTitle()}</PageTitle></TitleContainer>
-    </HeaderWrapper>
+          </HeaderContent>
+        </HeaderContainer>
+        <TitleContainer>
+          <PageTitle>{renderPageTitle()}</PageTitle>
+        </TitleContainer>
+      </HeaderWrapper>
 
-    <Modal show={isModalOpen} handleClose={handleCloseModal} title="로그인">
-    <Login />
-  </Modal>
-
-  
-  </>
+      <Modal show={isModalOpen} handleClose={handleCloseModal} title="로그인">
+        <Login />
+      </Modal>
+    </>
   );
 };
 

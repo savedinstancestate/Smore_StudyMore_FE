@@ -190,7 +190,17 @@ const CreateStudyModal = () => {
 
     return (
         <>
-            <Button variant="success" onClick={() => setModalShow(true)}>
+            <Button variant="success"
+            onClick={() => setModalShow(true)}
+            style={{backgroundColor: '#009063',
+            fontSize: '15px',
+            fontWeight: '600',
+            marginLeft: '10px',
+            padding: '8px 14px',
+            border: 'none',
+            borderRadius:'6px'}}
+            >
+                <img src='img/create.png' style={{width: '22px', marginRight: '6px', marginTop: '-2px'}}></img>
                 스터디 생성하기
             </Button>
 
