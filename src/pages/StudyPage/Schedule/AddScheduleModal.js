@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import UniversalModal from '../../../components/Modal';
+import API from '../../../api/AxiosInstance';
+import moment from 'moment';
 
-const AddScheduleModal = ({ show, handleClose, addEvent, fetchEvents }) => {
+const AddScheduleModal = ({ show, handleClose, addEvent, studyPk }) => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [content, setContent] = useState('');
@@ -16,9 +18,18 @@ const AddScheduleModal = ({ show, handleClose, addEvent, fetchEvents }) => {
     }, [show]);
 
     const handleSave = async () => {
-        await addEvent({ startDate, endDate, content });
-        handleClose();
-        await fetchEvents(); // 일정 추가 후 일정 목록 갱신
+        try {
+            const postData = {
+                content: content,
+                startDate: moment(startDate).format('YYYY-MM-DD'),
+                endDate: moment(endDate).format('YYYY-MM-DD'),
+            };
+            await API.post(`/study/${studyPk}/calendar`, postData);
+            handleClose();
+            addEvent();
+        } catch (error) {
+            console.error('Error adding event:', error);
+        }
     };
 
     return (
