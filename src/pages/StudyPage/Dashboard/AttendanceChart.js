@@ -56,7 +56,7 @@ const AttendanceChart = ({ studyPk }) => {
                 <div key={member.memberPk} className="data-row">
                     <div className="cell name-cell">{member.nickName}</div>
                     {daysInMonth.map((date) => {
-                        const day = new Date(date).getDate();
+                        const day = new Date(date).getDate().toString();
                         const status =
                             (attendanceData[day] || [])
                                 .find((att) => att.memberPk === member.memberPk)
