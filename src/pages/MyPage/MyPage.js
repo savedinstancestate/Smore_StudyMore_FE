@@ -135,7 +135,7 @@ function MyPage() {
     <div className="profile-container">
     {error && <div className="alert alert-danger">{error}</div>}
     {successMessage && <div className="alert alert-primary">{successMessage}</div>}
-    <p className="card-type">프로필 수정 ✍️</p>
+    <p className="card-type-mypage">프로필 수정 ✍️</p>
     <div className="profile-image" onClick={triggerFileInput}>
         <img src={userInfo.profileImage || "img/default-profile.png"} className="edited-image" alt="프로필 이미지" />
         <img src="img/img-edit.png" className="image-edit-btn" alt="이미지 변경"  />
