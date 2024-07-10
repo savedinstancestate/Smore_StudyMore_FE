@@ -14,27 +14,39 @@ const NotificationComponent = ({ show, handleClose }) => {
       return;
     }
 
-    const eventSource = new EventSourcePolyfill(
-      `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
-    );
+    let eventSource;
 
-    eventSource.onopen = () => {
-      console.log("SSE 연결이 열렸습니다.");
+    const connectEventSource = () => {
+      eventSource = new EventSourcePolyfill(
+        `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
+      );
+
+      eventSource.onopen = () => {
+        console.log("SSE 연결이 열렸습니다.");
+      };
+
+      eventSource.onmessage = (event) => {
+        console.log("Received event:", event.data);
+        setNotifications(prev => [...prev, event.data]); // 새로운 알림을 추가
+      };
+
+      eventSource.onerror = (err) => {
+        console.error("EventSource failed:", err);
+        // SSE 연결 실패 시 일정 시간 후 재연결 시도
+        setTimeout(() => {
+          console.log("재연결 시도 중...");
+          connectEventSource();
+        }, 5000);
+      };
     };
 
-    eventSource.onmessage = (event) => {
-      console.log("Received event:", event.data);
-      setNotifications(prev => [...prev, event.data]); // 새로운 알림을 추가
-    };
+    connectEventSource();
 
-    eventSource.onerror = (err) => {
-      console.error("EventSource failed:", err);
-    };
-
-    /*
     return () => {
-      eventSource.close();
-    }; */
+      if (eventSource) {
+        eventSource.close();
+      }
+    };
   }, []);
 
   if (!show) {
