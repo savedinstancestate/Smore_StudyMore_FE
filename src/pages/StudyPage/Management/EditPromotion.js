@@ -58,21 +58,26 @@ const EditPromotion = ({ studyPk }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('studyBoardPk', formData.studyBoardPk);
-    formData.append('adTitle', formData.adTitle);
-    formData.append('adContent', formData.adContent);
 
-    // 파일이 선택되었으면 FormData에 파일도 추가
-    if (selectedFile) {
-      formData.append('imageUri', selectedFile);
-    } else {
-      // 파일이 없다면 기존 이미지 URI를 유지하기 위해 추가
-      formData.append('imageUri', formData.imageUri);
-    }
+  const studyBoardUpdateDTO = {
+    studyBoardPk: formData.studyBoardPk,
+    adTitle: formData.adTitle,
+    adContent: formData.adContent
+  };
+
+  const formDataToSend = new FormData();
+  formDataToSend.append(
+    'studyBoardUpdateDTO',
+    new Blob([JSON.stringify(studyBoardUpdateDTO)],
+     { type: 'application/json' })
+  );
+
+  if (selectedFile) {
+    formDataToSend.append('image', selectedFile);
+  }
 
     try {
-      const response = await API.put(`/study/${studyPk}/management/board`, formData, {
+      const response = await API.put(`/study/${studyPk}/management/board`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
