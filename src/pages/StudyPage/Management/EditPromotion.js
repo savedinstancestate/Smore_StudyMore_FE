@@ -58,24 +58,23 @@ const EditPromotion = ({ studyPk }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = {
-      studyBoardPk: formData.studyBoardPk,
-      adTitle: formData.adTitle,
-      adContent: formData.adContent,
-      imageUri: formData.imageUri
-    };
-  
+    const formData = new FormData();
+    formData.append('studyBoardPk', formData.studyBoardPk);
+    formData.append('adTitle', formData.adTitle);
+    formData.append('adContent', formData.adContent);
+
+    // 파일이 선택되었으면 FormData에 파일도 추가
     if (selectedFile) {
-      const fileData = new FormData();
-      fileData.append('imageUri', selectedFile);
-      // 파일 업로드에 관한 추가적인 API 요청이 필요할 수 있습니다.
-      // 예: await API.post('/upload', fileData, { headers: { 'Content-Type': 'multipart/form-data' } });
+      formData.append('imageUri', selectedFile);
+    } else {
+      // 파일이 없다면 기존 이미지 URI를 유지하기 위해 추가
+      formData.append('imageUri', formData.imageUri);
     }
 
     try {
-      await API.put(`/study/${studyPk}/management/board`, payload, {
+      const response = await API.put(`/study/${studyPk}/management/board`, formData, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'multipart/form-data'
         }
       });
       setSuccessMessage("홍보글 수정이 완료되었습니다.");
