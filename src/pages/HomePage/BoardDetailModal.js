@@ -70,15 +70,15 @@ function BoardDetailModal({ studyBoardPk }) {
         <div className="content-wrapper-detail">
           <p>{BoardDetails.adContent}</p>
         </div>
-        {isLoggedIn ? (
+        {/* {isLoggedIn ? ( */}
           <div className="modal-container">
             <ApplyStudyModal toggleOverlay={toggleOverlay} studyName={BoardDetails.studyName} studyPk={BoardDetails.studyPk} />
           </div>
-        ) : (
+        {/*) : (*/}
           <div onClick={handleApplyClick} className="modal-container">
             <button className="apply-study-button">스터디 지원하기</button>
           </div>
-        )}
+        {/*)}*/}
       </div>
       <Modal show={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} title="로그인">
         <Login />
