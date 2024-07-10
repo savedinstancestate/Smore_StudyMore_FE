@@ -15,8 +15,9 @@ const NotificationComponent = ({ show, handleClose }) => {
     }
 
     const eventSource = new EventSourcePolyfill(
-      `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
-    );
+        `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`,
+        { heartbeatTimeout: 1800000 } // 30분
+      );
 
     eventSource.onopen = () => {
       console.log("SSE 연결이 열렸습니다.");
@@ -29,15 +30,15 @@ const NotificationComponent = ({ show, handleClose }) => {
 
     eventSource.onerror = (err) => {
       console.error("EventSource failed:", err);
-      eventSource.close();
     };
 
-    return () => {
+    /* return () => {
       eventSource.close();
-    };
+    };*/
   }, []);
 
   const displayNotification = (content) => {
+    console.log("Notification content:", content);
     const notificationDiv = document.createElement('div');
     notificationDiv.textContent = content;
     notificationDiv.style.padding = '10px';
@@ -46,7 +47,6 @@ const NotificationComponent = ({ show, handleClose }) => {
       notificationRef.current.appendChild(notificationDiv);
     }
   };
-
   if (!show) {
     return null;
   }
@@ -67,7 +67,7 @@ const NotificationComponent = ({ show, handleClose }) => {
         overflowY: "auto"
       }}
     >
-      <h3>알림</h3>
+      <h3>알림...외않떠</h3>
       <div ref={notificationRef}></div> {/* 알림 출력 부분 */}
       <button onClick={handleClose}>닫기</button>
     </div>
