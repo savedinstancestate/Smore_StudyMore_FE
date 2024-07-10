@@ -47,7 +47,13 @@ const TodayAttendance = ({ studyPk }) => {
                     <Card.Body>
                         <Card.Title style={{ fontSize: '20px' }}>{att.nickname}</Card.Title>
                         <Image src={findMemberImage(att.memberPk)} roundedCircle style={{ width: '50px' }} />
-                        <Card.Text style={{ color: att.attendanceStatus === '출석' ? 'green' : 'red' }}>
+                        <Card.Text
+                            style={{
+                                color: att.attendanceStatus === '출석' ? 'green' : 'red',
+                                fontSize: '15px',
+                                marginTop: '10px',
+                            }}
+                        >
                             {att.timeAgo}
                         </Card.Text>
                     </Card.Body>
