@@ -60,7 +60,11 @@ const MyProblems = ({ studyPk }) => {
                                 {bank.problemBankName} - 문제 수: {bank.count}
                             </div>
                             <div>
-                                <EditProblemBankButton problemBank={bank} onUpdate={fetchProblemBanks} />
+                                <EditProblemBankButton
+                                    sutdyPk={studyPk}
+                                    problemBank={bank}
+                                    onUpdate={fetchProblemBanks}
+                                />
                                 <Button
                                     variant="link"
                                     onClick={() => handleDeleteConfirmation(bank.problemBankPk)}
