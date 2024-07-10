@@ -24,14 +24,14 @@ body {
     justify-content: flex-start;
     gap: 30px;
     overflow: visible;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .card-type {
     font-size: 24px;
     font-weight: 700;
     width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: -10px;
 }
 
 .card-div {
@@ -59,7 +59,7 @@ body {
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     cursor: pointer;
 }
 
@@ -439,4 +439,77 @@ input[type="text"] {
   width: 100%; 
   padding-top: 30px; 
   padding-bottom: 30px; 
+}
+
+
+
+
+.apply-item {
+  display: flex;
+  align-items: center;
+  padding: 0px;
+}
+
+.apply-img img {
+  width: 220px;
+  margin-right: 20px;
+  border-radius: 6px;
+}
+
+.apply-info {
+  flex: 1;
+}
+
+.apply-study-name {
+  font-weight: 700;
+  font-size: 20px;
+  color: #009063;
+  margin-left: 10px;
+}
+
+.apply-state {
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 60px;
+  word-wrap: break-word; 
+  word-break: break-all;
+  color: rgb(214, 28, 28); 
+}
+
+.apply-state-2 {
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 110px;
+  word-wrap: break-word; 
+  word-break: break-all;
+  color: rgb(214, 28, 28); 
+}
+
+.apply-edit {
+  display: flex;
+  gap: 6px;
+  margin-left: 180px;
+  float: right;
+}
+
+.apply-edit-btn {
+  padding: 10px 20px;
+  border: 1px solid #009063;
+  background-color: #fff;
+  color: #009063;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.apply-delete-btn {
+  padding: 10px 20px;
+  border: 1px solid #929292;
+  background-color: #fff;
+  color: #929292;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
 }

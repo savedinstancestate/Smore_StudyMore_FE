@@ -4,6 +4,8 @@ import API from '../../api/AxiosInstance';
 import Modal from '../../components/Modal'; 
 import ApplicantList from "./ApplicantListModal";
 import "../../styles/StudyCard.css";
+import sample1 from './sample1.png';
+import sample2 from './sample2.jpg';
 
 function MyStudy() {
   const [participatingStudies, setParticipatingStudies] = useState([]);
@@ -184,8 +186,64 @@ function MyStudy() {
               </div>
             </div>
           ))
-        )}
+        )}   
       </div>
+
+      <div className="card-container">
+      <p className="card-type">지원한 스터디 🧑‍💻</p>
+      <div className="list-container">
+              <div className="apply-item">
+                <div
+                  className="apply-img"
+                >
+                  <img src={sample1}></img>
+                </div>
+                <div className="apply-info">
+                  <span className="apply-study-name">3D 게임개발 스터디</span>
+                  <span className="apply-state">수락 대기 중</span>
+                </div>
+                <div className="apply-edit">
+                  <button
+                    className="apply-edit-btn"
+                  >
+                    수정
+                  </button>
+                  <button
+                    className="apply-delete-btn"
+                  >
+                    취소
+                  </button>
+                </div>
+              </div>
+      </div>
+      <div className="list-container">
+              <div className="apply-item">
+                <div
+                  className="apply-img"
+                >
+                  <img src={sample2}></img>
+                </div>
+                <div className="apply-info">
+                  <span className="apply-study-name">우아한 스터디</span>
+                  <span className="apply-state-2">수락 대기 중</span>
+                </div>
+                <div className="apply-edit">
+                  <button
+                    className="apply-edit-btn"
+                  >
+                    수정
+                  </button>
+                  <button
+                    className="apply-delete-btn"
+                  >
+                    취소
+                  </button>
+                </div>
+              </div>
+      </div>
+</div>
+
+
 
       <Modal show={isModalOpen} handleClose={handleCloseModal} title="지원요청 목록">
         {currentStudyPk && <ApplicantList studyPk={currentStudyPk} />}

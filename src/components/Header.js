@@ -191,7 +191,7 @@ const Header = () => {
                         toggleNotification();
                       }}
                     >
-                    <img src={notification} style={{width: '36px', padding: '6px', }}></img>
+                    <img src={notification} style={{width: '24px', padding: '0px', }}></img>
                     </NavLink>
                     <CreateStudyModal />
                   </>
