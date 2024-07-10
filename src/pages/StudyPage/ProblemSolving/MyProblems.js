@@ -13,18 +13,18 @@ const MyProblems = ({ studyPk }) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedProblemBankPk, setSelectedProblemBankPk] = useState(null);
 
-    useEffect(() => {
-        const fetchProblemBanks = async () => {
-            try {
-                console.log(`Fetching problem banks for studyPk: ${studyPk}`); // 디버깅 로그 추가
-                const response = await API.get(`/study/${studyPk}/problem/bank/personal`);
-                console.log('Fetched problem banks:', response.data); // 응답 데이터 확인
-                setProblemBanks(response.data);
-            } catch (error) {
-                console.error('문제은행 리스트를 불러오는 데 실패했습니다:', error);
-            }
-        };
+    const fetchProblemBanks = async () => {
+        try {
+            console.log(`Fetching problem banks for studyPk: ${studyPk}`); // 디버깅 로그 추가
+            const response = await API.get(`/study/${studyPk}/problem/bank/personal`);
+            console.log('Fetched problem banks:', response.data); // 응답 데이터 확인
+            setProblemBanks(response.data);
+        } catch (error) {
+            console.error('문제은행 리스트를 불러오는 데 실패했습니다:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchProblemBanks();
     }, [studyPk]);
 
@@ -48,7 +48,7 @@ const MyProblems = ({ studyPk }) => {
         <div className="problem-list">
             <div className="problem-list-header">
                 <div className="problem-list-title">내가 낸 문제</div>
-                <CreateProblemBankButton studyPk={studyPk} />
+                <CreateProblemBankButton studyPk={studyPk} onUpdate={fetchProblemBanks} />
             </div>
             <div className="problem-list-container">
                 {Array.isArray(problemBanks) &&
@@ -58,7 +58,7 @@ const MyProblems = ({ studyPk }) => {
                                 {bank.problemBankName} - 문제 수: {bank.count}
                             </div>
                             <div>
-                                <EditProblemBankButton problemBank={bank} />
+                                <EditProblemBankButton problemBank={bank} onUpdate={fetchProblemBanks} />
                                 <Button
                                     variant="link"
                                     onClick={() => handleDeleteConfirmation(bank.problemBankPk)}
