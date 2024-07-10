@@ -4,7 +4,7 @@ import QuizModal from './QuizModal';
 import API from '../../../api/AxiosInstance';
 import './StudyProblemList.css';
 
-const StudyProblemList = ({ studyPk, studyName }) => {
+const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
     const [problemBanks, setProblemBanks] = useState([]);
     const [selectedBanks, setSelectedBanks] = useState([]);
     const [maxQuestions, setMaxQuestions] = useState(10);
@@ -21,7 +21,7 @@ const StudyProblemList = ({ studyPk, studyName }) => {
 
     useEffect(() => {
         fetchProblemBanks();
-    }, [studyPk]);
+    }, [studyPk, onUpdate]);
 
     const handleBankSelect = (pk, isChecked) => {
         setSelectedBanks((prevSelected) =>
