@@ -30,6 +30,7 @@ const App = () => {
                 <Route path="/study/:studyPk" element={<Study />} />
                 <Route path="/mypage" element={<MyPage />} />
                 */}
+                 
                 <Route path="/mystudy" element={<PrivateRoute component={MyStudy} />} />
                 <Route path="/study/:studyPk" element={<PrivateRoute component={Study} />} />
                 <Route path="/mypage" element={<PrivateRoute component={MyPage} />} /> 
