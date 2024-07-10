@@ -183,16 +183,6 @@ const Header = () => {
                     <NavLink to="/mypage" activeClassName="active">
                       마이페이지
                     </NavLink>
-                    <NavLink
-                    src={notification}
-                      to="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        toggleNotification();
-                      }}
-                    >
-                    <img src={notification} style={{width: '24px', padding: '0px', }}></img>
-                    </NavLink>
                     <CreateStudyModal />
                   </>
                 ) : ( 

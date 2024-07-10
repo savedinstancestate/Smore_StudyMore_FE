@@ -82,7 +82,7 @@ body {
 }
 
 .card-title {
-    color: #009063 !important;
+    color: #656565 !important;
     font-size: 14px;
     font-weight: 800;
     margin-top: 10px;
@@ -470,7 +470,7 @@ input[type="text"] {
 .apply-state {
   font-weight: 500;
   font-size: 18px;
-  margin-left: 60px;
+  margin-left: 50px;
   word-wrap: break-word; 
   word-break: break-all;
   color: rgb(214, 28, 28); 
@@ -479,7 +479,7 @@ input[type="text"] {
 .apply-state-2 {
   font-weight: 500;
   font-size: 18px;
-  margin-left: 110px;
+  margin-left: 105px;
   word-wrap: break-word; 
   word-break: break-all;
   color: rgb(214, 28, 28); 
@@ -488,7 +488,7 @@ input[type="text"] {
 .apply-edit {
   display: flex;
   gap: 6px;
-  margin-left: 180px;
+  margin-left: 140px;
   float: right;
 }
 
