@@ -55,7 +55,6 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
                             type="checkbox"
                             id={`bank-check-${bank.problemBankPk}`}
                             className="checkbox"
-                            label={bank.problemBankName}
                             checked={selectedBanks[bank.problemBankPk] || false}
                             onChange={() => handleBankSelect(bank.problemBankPk)}
                         />
