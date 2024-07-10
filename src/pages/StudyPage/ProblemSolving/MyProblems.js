@@ -6,6 +6,7 @@ import CreateProblemBankButton from './CreateProblemBankModal';
 import EditProblemBankButton from './EditProblemBankModal';
 import DeleteProblemBankModal from './DeleteProblemBankModal';
 import API from '../../../api/AxiosInstance';
+import StudyProblemList from './StudyProblemList';
 import './MyProblems.css';
 
 const MyProblems = ({ studyPk }) => {
@@ -45,36 +46,39 @@ const MyProblems = ({ studyPk }) => {
     };
 
     return (
-        <div className="problem-list">
-            <div className="problem-list-header">
-                <div className="problem-list-title">내가 낸 문제</div>
-                <CreateProblemBankButton studyPk={studyPk} onUpdate={fetchProblemBanks} />
-            </div>
-            <div className="problem-list-container">
-                {Array.isArray(problemBanks) &&
-                    problemBanks.map((bank) => (
-                        <div key={bank.problemBankPk} className="problem">
-                            <div className="problem-info">
-                                {bank.problemBankName} - 문제 수: {bank.count}
+        <div className="problem-solving">
+            <div className="problem-list">
+                <div className="problem-list-header">
+                    <div className="problem-list-title">내가 낸 문제</div>
+                    <CreateProblemBankButton studyPk={studyPk} onUpdate={fetchProblemBanks} />
+                </div>
+                <div className="problem-list-container">
+                    {Array.isArray(problemBanks) &&
+                        problemBanks.map((bank) => (
+                            <div key={bank.problemBankPk} className="problem">
+                                <div className="problem-info">
+                                    {bank.problemBankName} - 문제 수: {bank.count}
+                                </div>
+                                <div>
+                                    <EditProblemBankButton problemBank={bank} onUpdate={fetchProblemBanks} />
+                                    <Button
+                                        variant="link"
+                                        onClick={() => handleDeleteConfirmation(bank.problemBankPk)}
+                                        style={{ textDecoration: 'none', padding: '0 5px', color: '#919191' }}
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </Button>
+                                </div>
                             </div>
-                            <div>
-                                <EditProblemBankButton problemBank={bank} onUpdate={fetchProblemBanks} />
-                                <Button
-                                    variant="link"
-                                    onClick={() => handleDeleteConfirmation(bank.problemBankPk)}
-                                    style={{ textDecoration: 'none', padding: '0 5px', color: '#919191' }}
-                                >
-                                    <FontAwesomeIcon icon={faTrash} />
-                                </Button>
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                </div>
+                <DeleteProblemBankModal
+                    show={showDeleteModal}
+                    handleClose={() => setShowDeleteModal(false)}
+                    handleDelete={handleDelete}
+                />
             </div>
-            <DeleteProblemBankModal
-                show={showDeleteModal}
-                handleClose={() => setShowDeleteModal(false)}
-                handleDelete={handleDelete}
-            />
+            <StudyProblemList studyPk={studyPk} studyName="스터디 이름" onUpdate={fetchProblemBanks} />
         </div>
     );
 };
