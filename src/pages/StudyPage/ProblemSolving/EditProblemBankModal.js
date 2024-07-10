@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import UniversalModal from '../../../components/Modal';
-import API from '../../../api/AxiosInstance';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faSave } from '@fortawesome/free-solid-svg-icons';
+import API from '../../../api/AxiosInstance';
 
-const EditProblemBankModal = ({ show, handleClose, problemBank, studyPk }) => {
+const EditProblemBankModal = ({ show, handleClose, problemBank, onUpdate }) => {
     const [bankName, setBankName] = useState(problemBank.problemBankName);
     const [problems, setProblems] = useState([]);
 
@@ -18,7 +18,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, studyPk }) => {
 
     const fetchProblemBankData = async () => {
         try {
-            const response = await API.get(`/study/${studyPk}/problem/bank/${problemBank.problemBankPk}`);
+            const response = await API.get(`/study/${problemBank.studyPk}/problem/bank/${problemBank.problemBankPk}`);
             setProblems(response.data.problemList);
         } catch (error) {
             console.error('문제를 불러오는 데 실패했습니다:', error);
@@ -35,6 +35,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, studyPk }) => {
                 problemBankName: bankName,
             });
             alert('문제은행 이름이 성공적으로 저장되었습니다.');
+            onUpdate(); // 문제은행이 업데이트되었음을 알림
         } catch (error) {
             console.error('문제은행 이름을 저장하는 데 실패했습니다:', error);
         }
@@ -57,7 +58,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, studyPk }) => {
         const requestData = {
             problemPk: problem.problemPk,
             problemContent: problem.problemContent,
-            answer: problem.answerPk,
+            answerPk: problem.answerPk,
             problemExplanation: problem.problemExplanation,
             problemOptionRequestDTOList: problem.options.map((opt) => ({
                 content: opt.content,
@@ -68,6 +69,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, studyPk }) => {
         try {
             await API.put(`/study/${problemBank.studyPk}/problem`, requestData);
             alert('문제가 성공적으로 저장되었습니다.');
+            onUpdate(); // 문제은행이 업데이트되었음을 알림
         } catch (error) {
             console.error('문제를 저장하는 데 실패했습니다:', error);
         }
@@ -77,7 +79,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, studyPk }) => {
         <UniversalModal show={show} handleClose={handleClose} title={bankName} backdrop="static">
             <Form>
                 <Form.Group>
-                    <Form.Label>문제은행 제목</Form.Label>
+                    <Form.Label>문제은행 제목 : {bankName}</Form.Label>
                     <Form.Control type="text" value={bankName} onChange={handleBankNameChange} />
                     <Button
                         variant="outline-success"
@@ -150,7 +152,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, studyPk }) => {
     );
 };
 
-const EditProblemBankButton = ({ problemBank }) => {
+const EditProblemBankButton = ({ problemBank, onUpdate }) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleOpenModal = () => {
@@ -172,7 +174,12 @@ const EditProblemBankButton = ({ problemBank }) => {
                 <FontAwesomeIcon icon={faEdit} />
             </Button>
             {showModal && (
-                <EditProblemBankModal show={showModal} handleClose={handleCloseModal} problemBank={problemBank} />
+                <EditProblemBankModal
+                    show={showModal}
+                    handleClose={handleCloseModal}
+                    problemBank={problemBank}
+                    onUpdate={onUpdate}
+                />
             )}
         </>
     );
