@@ -4,7 +4,7 @@ import UniversalModal from '../../../components/Modal';
 import API from '../../../api/AxiosInstance';
 import { FaPlus } from 'react-icons/fa';
 
-const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
+const CreateProblemBankModal = ({ show, handleClose, studyPk, onUpdate }) => {
     const [bankName, setBankName] = useState('');
     const [questions, setQuestions] = useState([]);
     const [bankPk, setBankPk] = useState(null);
@@ -91,6 +91,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
         }
         alert('모든 문제가 성공적으로 저장되었습니다.');
         handleClose();
+        onUpdate(); // 갱신
         setQuestions([]);
         setBankName('');
         setBankPk(null);
@@ -99,7 +100,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
 
     const isCurrentQuestionValid = () => {
         const currentQuestion = questions[questions.length - 1];
-        if (!currentQuestion) return true; // No question yet
+        if (!currentQuestion) return true;
         return (
             currentQuestion.question.trim() &&
             currentQuestion.options.every((option) => option.trim()) &&
@@ -232,7 +233,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk }) => {
     );
 };
 
-const CreateProblemBankButton = ({ studyPk }) => {
+const CreateProblemBankButton = ({ studyPk, onUpdate }) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleOpenModal = () => {
@@ -259,7 +260,12 @@ const CreateProblemBankButton = ({ studyPk }) => {
             >
                 <FaPlus style={{ color: 'white' }} />
             </Button>
-            <CreateProblemBankModal show={showModal} handleClose={handleCloseModal} studyPk={studyPk} />
+            <CreateProblemBankModal
+                show={showModal}
+                handleClose={handleCloseModal}
+                studyPk={studyPk}
+                onUpdate={onUpdate}
+            />
         </>
     );
 };
