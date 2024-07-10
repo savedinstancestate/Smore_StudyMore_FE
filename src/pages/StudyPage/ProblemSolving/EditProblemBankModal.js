@@ -35,7 +35,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, onUpdate }) => {
                 problemBankName: bankName,
             });
             alert('문제은행 이름이 성공적으로 저장되었습니다.');
-            onUpdate(); // 문제은행이 업데이트되었음을 알림
+            onUpdate();
         } catch (error) {
             console.error('문제은행 이름을 저장하는 데 실패했습니다:', error);
         }
@@ -69,17 +69,17 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, onUpdate }) => {
         try {
             await API.put(`/study/${problemBank.studyPk}/problem`, requestData);
             alert('문제가 성공적으로 저장되었습니다.');
-            onUpdate(); // 문제은행이 업데이트되었음을 알림
+            onUpdate();
         } catch (error) {
             console.error('문제를 저장하는 데 실패했습니다:', error);
         }
     };
 
     return (
-        <UniversalModal show={show} handleClose={handleClose} title={bankName} backdrop="static">
+        <UniversalModal show={show} handleClose={handleClose} title="문제은행 수정" backdrop="static">
             <Form>
                 <Form.Group>
-                    <Form.Label>문제은행 제목 : {bankName}</Form.Label>
+                    <Form.Label>문제은행 제목:</Form.Label>
                     <Form.Control type="text" value={bankName} onChange={handleBankNameChange} />
                     <Button
                         variant="outline-success"

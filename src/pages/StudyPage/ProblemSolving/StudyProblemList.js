@@ -55,11 +55,12 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
                             type="checkbox"
                             id={`bank-check-${bank.problemBankPk}`}
                             className="checkbox"
+                            label={bank.problemBankName}
                             checked={selectedBanks[bank.problemBankPk] || false}
                             onChange={() => handleBankSelect(bank.problemBankPk)}
                         />
                         <label htmlFor={`bank-check-${bank.problemBankPk}`} className="problem-info">
-                            <span className="problem-name">{bank.problemBankName}</span>
+                            <span className="problem-writer">출제자: {bank.writer}</span>
                             <span className="problem-count">문제 수: {bank.count}</span>
                         </label>
                     </li>
