@@ -6,7 +6,7 @@ import './StudyProblemList.css';
 
 const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
     const [problemBanks, setProblemBanks] = useState([]);
-    const [selectedBanks, setSelectedBanks] = useState([]);
+    const [selectedBanks, setSelectedBanks] = useState({});
     const [maxQuestions, setMaxQuestions] = useState(10);
     const [showQuizModal, setShowQuizModal] = useState(false);
 
@@ -24,9 +24,10 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
     }, [studyPk, onUpdate]);
 
     const handleBankSelect = (pk, isChecked) => {
-        setSelectedBanks((prevSelected) =>
-            isChecked ? [...prevSelected, pk] : prevSelected.filter((id) => id !== pk)
-        );
+        setSelectedBanks((prevSelected) => ({
+            ...prevSelected,
+            [pk]: isChecked,
+        }));
     };
 
     const handleMaxQuestionsChange = (e) => {
@@ -34,7 +35,8 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
     };
 
     const handleStartQuiz = () => {
-        if (selectedBanks.length > 0) {
+        const selectedBankIds = Object.keys(selectedBanks).filter((pk) => selectedBanks[pk]);
+        if (selectedBankIds.length > 0) {
             setShowQuizModal(true);
         } else {
             alert('문제은행을 선택해주세요.');
@@ -54,7 +56,7 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
                             id={`bank-check-${bank.pk}`}
                             className="checkbox"
                             label={bank.problemBankName}
-                            checked={selectedBanks.includes(bank.pk)}
+                            checked={selectedBanks[bank.pk] || false}
                             onChange={(e) => handleBankSelect(bank.pk, e.target.checked)}
                         />
                         <label htmlFor={`bank-check-${bank.pk}`} className="problem-info">
@@ -87,7 +89,7 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
                 show={showQuizModal}
                 handleClose={() => setShowQuizModal(false)}
                 studyPk={studyPk}
-                selectedBanks={selectedBanks}
+                selectedBanks={Object.keys(selectedBanks).filter((pk) => selectedBanks[pk])}
                 maxQuestions={maxQuestions}
             />
         </div>
