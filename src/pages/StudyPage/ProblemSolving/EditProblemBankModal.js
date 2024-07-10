@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faSave } from '@fortawesome/free-solid-svg-icons';
 import API from '../../../api/AxiosInstance';
 
-const EditProblemBankModal = ({ show, handleClose, problemBank }) => {
+const EditProblemBankModal = ({ show, handleClose, problemBank, onUpdate }) => {
     const [bankName, setBankName] = useState(problemBank.problemBankName);
     const [problems, setProblems] = useState([]);
 
@@ -35,6 +35,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank }) => {
                 problemBankName: bankName,
             });
             alert('문제은행 이름이 성공적으로 저장되었습니다.');
+            onUpdate(); // 갱신
         } catch (error) {
             console.error('문제은행 이름을 저장하는 데 실패했습니다:', error);
         }
@@ -68,6 +69,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank }) => {
         try {
             await API.put(`/study/${problemBank.studyPk}/problem`, requestData);
             alert('문제가 성공적으로 저장되었습니다.');
+            onUpdate(); // 갱신
         } catch (error) {
             console.error('문제를 저장하는 데 실패했습니다:', error);
         }
@@ -150,7 +152,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank }) => {
     );
 };
 
-const EditProblemBankButton = ({ problemBank }) => {
+const EditProblemBankButton = ({ problemBank, onUpdate }) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleOpenModal = () => {
@@ -172,7 +174,12 @@ const EditProblemBankButton = ({ problemBank }) => {
                 <FontAwesomeIcon icon={faEdit} />
             </Button>
             {showModal && (
-                <EditProblemBankModal show={showModal} handleClose={handleCloseModal} problemBank={problemBank} />
+                <EditProblemBankModal
+                    show={showModal}
+                    handleClose={handleCloseModal}
+                    problemBank={problemBank}
+                    onUpdate={onUpdate}
+                />
             )}
         </>
     );

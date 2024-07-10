@@ -10,16 +10,16 @@ const StudyProblemList = ({ studyPk, studyName }) => {
     const [maxQuestions, setMaxQuestions] = useState(10);
     const [showQuizModal, setShowQuizModal] = useState(false);
 
-    useEffect(() => {
-        const fetchProblemBanks = async () => {
-            try {
-                const response = await API.get(`/study/${studyPk}/problem/bank`);
-                setProblemBanks(response.data);
-            } catch (error) {
-                console.error('문제은행 리스트를 불러오는 데 실패했습니다:', error);
-            }
-        };
+    const fetchProblemBanks = async () => {
+        try {
+            const response = await API.get(`/study/${studyPk}/problem/bank`);
+            setProblemBanks(response.data);
+        } catch (error) {
+            console.error('문제은행 리스트를 불러오는 데 실패했습니다:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchProblemBanks();
     }, [studyPk]);
 
