@@ -46,7 +46,7 @@
 
 .status-cell {
     height: 30px;
-    border: none;
+    border: #dedede solid 0.5px;
 }
 
 .출석 {

@@ -45,9 +45,15 @@ const TodayAttendance = ({ studyPk }) => {
             {attendanceData.map((att) => (
                 <Card key={att.memberPk} style={{ margin: '10px', width: '100px' }}>
                     <Card.Body>
-                        <Card.Title style={{ fontSize: '20px' }}>{att.nickname}</Card.Title>
+                        <Card.Title style={{ fontSize: '15px' }}>{att.nickname}</Card.Title>
                         <Image src={findMemberImage(att.memberPk)} roundedCircle style={{ width: '50px' }} />
-                        <Card.Text style={{ color: att.attendanceStatus === '출석' ? 'green' : 'red' }}>
+                        <Card.Text
+                            style={{
+                                color: att.attendanceStatus === '출석' ? 'green' : 'red',
+                                fontSize: '10px',
+                                marginTop: '10px',
+                            }}
+                        >
                             {att.timeAgo}
                         </Card.Text>
                     </Card.Body>
