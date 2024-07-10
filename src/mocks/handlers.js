@@ -58,14 +58,6 @@ export const handlers = [
             studyStartDate: "2023-01-01",
             studyEndDate: "2023-12-31",
           },
-          {
-            studyPk: 4,
-            studyName: "자율스터디",
-            studyImg: "/img/study-img-sample.png",
-            studyPersonNum: 4,
-            studyStartDate: "2023-01-01",
-            studyEndDate: "2023-12-31",
-          },
         ],
       })
     );
