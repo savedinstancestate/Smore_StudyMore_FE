@@ -23,26 +23,14 @@ const NotificationComponent = ({ show, handleClose }) => {
     };
 
     eventSource.onmessage = (event) => {
+      console.log("Received event:", event.data); // 서버에서 받은 데이터를 로그에 출력
       try {
-        console.log("Received event:", event.data); // 서버에서 받은 데이터를 로그에 출력
         const newNotification = JSON.parse(event.data);
-
-        // 알림 출력을 위한 div 생성
-        const notificationDiv = document.createElement('div');
-        notificationDiv.textContent = newNotification.content;
-        if (notificationRef.current) {
-          notificationRef.current.appendChild(notificationDiv);
-        }
+        displayNotification(newNotification.content);
       } catch (error) {
         console.error("Failed to parse event data:", error);
         console.error("Event data:", event.data); // 원시 데이터를 출력하여 확인
-
-        // 원시 데이터를 알림으로 출력
-        const notificationDiv = document.createElement('div');
-        notificationDiv.textContent = event.data;
-        if (notificationRef.current) {
-          notificationRef.current.appendChild(notificationDiv);
-        }
+        displayNotification(event.data); // 원시 데이터를 알림으로 출력
       }
     };
 
@@ -55,6 +43,14 @@ const NotificationComponent = ({ show, handleClose }) => {
       eventSource.close();
     };
   }, []);
+
+  const displayNotification = (content) => {
+    const notificationDiv = document.createElement('div');
+    notificationDiv.textContent = content;
+    if (notificationRef.current) {
+      notificationRef.current.appendChild(notificationDiv);
+    }
+  };
 
   if (!show) {
     return null;
