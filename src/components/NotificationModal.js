@@ -27,11 +27,14 @@ const NotificationComponent = ({ show, handleClose }) => {
 
       eventSource.onmessage = (event) => {
         console.log("Received event:", event.data);
-        setNotifications(prev => [...prev, event.data]); // 새로운 알림을 추가
+        if (event.data !== 'ping') {
+            setNotifications(prev => [...prev, event.data]); // 새로운 알림을 추가
+          }
       };
 
       eventSource.onerror = (err) => {
         console.error("EventSource failed:", err);
+        eventSource.close();
         // SSE 연결 실패 시 일정 시간 후 재연결 시도
         setTimeout(() => {
           console.log("재연결 시도 중...");
