@@ -69,7 +69,7 @@ const EditMember = ({ studyPk }) => {
                       className="member-img"
                       style={{ backgroundImage: `url(${member.imageURL})` }}
                     ></div>
-                    <div className="member-info">
+                    <div className="member-info-manage">
                       <p className="member-nickname">{member.nickname}</p>
                     </div>
                     <button
