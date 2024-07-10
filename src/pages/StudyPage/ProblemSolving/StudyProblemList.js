@@ -23,10 +23,10 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
         fetchProblemBanks();
     }, [studyPk, onUpdate]);
 
-    const handleBankSelect = (pk, isChecked) => {
+    const handleBankSelect = (pk) => {
         setSelectedBanks((prevSelected) => ({
             ...prevSelected,
-            [pk]: isChecked,
+            [pk]: !prevSelected[pk],
         }));
     };
 
@@ -50,18 +50,17 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
             </div>
             <ul className="study-problems-list">
                 {problemBanks.map((bank) => (
-                    <li key={bank.pk} className="study-problem-item">
+                    <li key={bank.problemBankPk} className="study-problem-item">
                         <Form.Check
                             type="checkbox"
-                            id={`bank-check-${bank.pk}`}
+                            id={`bank-check-${bank.problemBankPk}`}
                             className="checkbox"
                             label={bank.problemBankName}
-                            checked={selectedBanks[bank.pk] || false}
-                            onChange={(e) => handleBankSelect(bank.pk, e.target.checked)}
+                            checked={selectedBanks[bank.problemBankPk] || false}
+                            onChange={() => handleBankSelect(bank.problemBankPk)}
                         />
-                        <label htmlFor={`bank-check-${bank.pk}`} className="problem-info">
+                        <label htmlFor={`bank-check-${bank.problemBankPk}`} className="problem-info">
                             <span className="problem-name">{bank.problemBankName}</span>
-                            <span className="problem-writer">출제자: {bank.writer}</span>
                             <span className="problem-count">문제 수: {bank.count}</span>
                         </label>
                     </li>
