@@ -40,6 +40,7 @@ const MyProblems = ({ studyPk }) => {
             setProblemBanks(problemBanks.filter((bank) => bank.problemBankPk !== selectedProblemBankPk));
             setShowDeleteModal(false);
             setSelectedProblemBankPk(null);
+            fetchProblemBanks(); // 삭제 후 문제은행 목록 갱신
         } catch (error) {
             console.error('문제은행을 삭제하는 데 실패했습니다:', error);
         }
@@ -76,7 +77,7 @@ const MyProblems = ({ studyPk }) => {
                 handleClose={() => setShowDeleteModal(false)}
                 handleDelete={handleDelete}
             />
-            <StudyProblemList studyPk={studyPk} studyName="스터디 이름" onUpdate={fetchProblemBanks} />
+            <StudyProblemList studyPk={studyPk} onUpdate={fetchProblemBanks} />
         </div>
     );
 };

@@ -91,16 +91,16 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk, onUpdate }) => {
         }
         alert('모든 문제가 성공적으로 저장되었습니다.');
         handleClose();
-        onUpdate(); // 갱신
         setQuestions([]);
         setBankName('');
         setBankPk(null);
         setBankCreated(false);
+        onUpdate(); // 문제은행이 업데이트
     };
 
     const isCurrentQuestionValid = () => {
         const currentQuestion = questions[questions.length - 1];
-        if (!currentQuestion) return true;
+        if (!currentQuestion) return true; // No question yet
         return (
             currentQuestion.question.trim() &&
             currentQuestion.options.every((option) => option.trim()) &&

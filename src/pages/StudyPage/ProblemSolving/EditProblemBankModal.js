@@ -35,7 +35,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, onUpdate }) => {
                 problemBankName: bankName,
             });
             alert('문제은행 이름이 성공적으로 저장되었습니다.');
-            onUpdate(); // 갱신
+            onUpdate(); // 문제은행이 업데이트되었음을 알림
         } catch (error) {
             console.error('문제은행 이름을 저장하는 데 실패했습니다:', error);
         }
@@ -69,7 +69,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, onUpdate }) => {
         try {
             await API.put(`/study/${problemBank.studyPk}/problem`, requestData);
             alert('문제가 성공적으로 저장되었습니다.');
-            onUpdate(); // 갱신
+            onUpdate(); // 문제은행이 업데이트
         } catch (error) {
             console.error('문제를 저장하는 데 실패했습니다:', error);
         }
