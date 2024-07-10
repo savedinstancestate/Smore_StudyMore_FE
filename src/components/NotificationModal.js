@@ -24,14 +24,7 @@ const NotificationComponent = ({ show, handleClose }) => {
 
     eventSource.onmessage = (event) => {
       console.log("Received event:", event.data); // 서버에서 받은 데이터를 로그에 출력
-      try {
-        const newNotification = JSON.parse(event.data);
-        displayNotification(newNotification.content);
-      } catch (error) {
-        console.error("Failed to parse event data:", error);
-        console.error("Event data:", event.data); // 원시 데이터를 출력하여 확인
-        displayNotification(event.data); // 원시 데이터를 알림으로 출력
-      }
+      displayNotification(event.data); // 원시 데이터를 알림으로 출력
     };
 
     eventSource.onerror = (err) => {
@@ -47,6 +40,8 @@ const NotificationComponent = ({ show, handleClose }) => {
   const displayNotification = (content) => {
     const notificationDiv = document.createElement('div');
     notificationDiv.textContent = content;
+    notificationDiv.style.padding = '10px';
+    notificationDiv.style.borderBottom = '1px solid #ddd';
     if (notificationRef.current) {
       notificationRef.current.appendChild(notificationDiv);
     }
@@ -68,6 +63,8 @@ const NotificationComponent = ({ show, handleClose }) => {
         padding: "20px",
         borderRadius: "8px",
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+        maxHeight: "300px",
+        overflowY: "auto"
       }}
     >
       <h3>알림</h3>
