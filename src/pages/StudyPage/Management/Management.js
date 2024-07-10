@@ -15,7 +15,7 @@ const Management = ({ studyPk }) => {
                     gap: '10px',
                     flexWrap: 'wrap',
                     padding: '10px',
-                    width: '700px',
+                    width: '1100px',
                 }}
             >
                 <EditStudyInfo studyPk={studyPk} />
