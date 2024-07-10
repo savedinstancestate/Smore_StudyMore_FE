@@ -6,7 +6,7 @@ import './StudyProblemList.css';
 
 const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
     const [problemBanks, setProblemBanks] = useState([]);
-    const [selectedBanks, setSelectedBanks] = useState([]);
+    const [selectedBanks, setSelectedBanks] = useState({});
     const [maxQuestions, setMaxQuestions] = useState(10);
     const [showQuizModal, setShowQuizModal] = useState(false);
 
@@ -23,10 +23,11 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
         fetchProblemBanks();
     }, [studyPk, onUpdate]);
 
-    const handleBankSelect = (pk, isChecked) => {
-        setSelectedBanks((prevSelected) =>
-            isChecked ? [...prevSelected, pk] : prevSelected.filter((id) => id !== pk)
-        );
+    const handleBankSelect = (pk) => {
+        setSelectedBanks((prevSelected) => ({
+            ...prevSelected,
+            [pk]: !prevSelected[pk],
+        }));
     };
 
     const handleMaxQuestionsChange = (e) => {
@@ -34,7 +35,8 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
     };
 
     const handleStartQuiz = () => {
-        if (selectedBanks.length > 0) {
+        const selectedBankIds = Object.keys(selectedBanks).filter((pk) => selectedBanks[pk]);
+        if (selectedBankIds.length > 0) {
             setShowQuizModal(true);
         } else {
             alert('문제은행을 선택해주세요.');
@@ -48,18 +50,17 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
             </div>
             <ul className="study-problems-list">
                 {problemBanks.map((bank) => (
-                    <li key={bank.pk} className="study-problem-item">
+                    <li key={bank.problemBankPk} className="study-problem-item">
                         <Form.Check
                             type="checkbox"
-                            id={`bank-check-${bank.pk}`}
+                            id={`bank-check-${bank.problemBankPk}`}
                             className="checkbox"
                             label={bank.problemBankName}
-                            checked={selectedBanks.includes(bank.pk)}
-                            onChange={(e) => handleBankSelect(bank.pk, e.target.checked)}
+                            checked={selectedBanks[bank.problemBankPk] || false}
+                            onChange={() => handleBankSelect(bank.problemBankPk)}
                         />
-                        <label htmlFor={`bank-check-${bank.pk}`} className="problem-info">
+                        <label htmlFor={`bank-check-${bank.problemBankPk}`} className="problem-info">
                             <span className="problem-name">{bank.problemBankName}</span>
-                            <span className="problem-writer">출제자: {bank.writer}</span>
                             <span className="problem-count">문제 수: {bank.count}</span>
                         </label>
                     </li>
@@ -87,7 +88,7 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
                 show={showQuizModal}
                 handleClose={() => setShowQuizModal(false)}
                 studyPk={studyPk}
-                selectedBanks={selectedBanks}
+                selectedBanks={Object.keys(selectedBanks).filter((pk) => selectedBanks[pk])}
                 maxQuestions={maxQuestions}
             />
         </div>
