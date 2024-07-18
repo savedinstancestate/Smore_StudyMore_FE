@@ -9,9 +9,12 @@ const API = axios.create({
   }
 });
 
+// 각 요청에 Authorization 헤더 추가
 API.interceptors.request.use(function(config) {
   const token = Cookies.get('accessToken');
-  config.headers.Authorization = token ? `Bearer ${token}` : '';
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   return config;
 }, function(error) {
   return Promise.reject(error);
