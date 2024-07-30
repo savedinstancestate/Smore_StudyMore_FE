@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -8,9 +8,9 @@ import Login from "../pages/LoginPage/LoginModal";
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
 import { useHeaderStudyName } from "./StudyNameContext";
 import { useAuth } from "./AuthContext";
-import NotificationModal from "./NotificationModal";
+import NotificationComponent from "./NotificationModal"; 
 import logoImage from "./smore-logo-ver1.png";
-import notification from "./notification.png";
+import notificationIcon from "./notification.png"; 
 
 const HeaderWrapper = styled.div`
   position: fixed;
@@ -106,6 +106,29 @@ const LoginButton = styled.button`
   margin-left: 10px;
 `;
 
+const NotificationButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+`;
+
+const NotificationIcon = styled.img`
+  width: 22px;
+
+`;
+
+const NotificationBadge = styled.span`
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+`;
+
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useAuth();
@@ -114,10 +137,27 @@ const Header = () => {
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [notificationPosition, setNotificationPosition] = useState({ top: 0, left: 0 });
+  const notificationButtonRef = useRef(null);
+
+  const updateNotificationPosition = () => {
+    if (notificationButtonRef.current) {
+      const rect = notificationButtonRef.current.getBoundingClientRect();
+      setNotificationPosition({ top: rect.bottom, left: rect.left - 270 });
+    }
+  };
 
   const toggleNotificationModal = () => {
+    updateNotificationPosition();
     setIsNotificationOpen(!isNotificationOpen);
   };
+
+  useEffect(() => {
+    window.addEventListener('resize', updateNotificationPosition);
+    return () => {
+      window.removeEventListener('resize', updateNotificationPosition);
+    };
+  }, []);
 
   useEffect(() => {
     const checkLoginStatus = () => {
@@ -136,17 +176,13 @@ const Header = () => {
     setIsModalOpen(false);
   };
 
-  const toggleNotification = () => {
-    setIsNotificationOpen(!isNotificationOpen);
-  };
-
   const handleCloseNotificationModal = () => {
     setIsNotificationOpen(false);
   };
 
   const renderPageTitle = () => {
     if (currentLocation.pathname.startsWith("/study")) {
-      return headerStudyName || "스터디 로딩 중..."; // 동적 경로에 따라 이름을 불러옴
+      return headerStudyName || "스터디 로딩 중...";
     }
     switch (currentLocation.pathname) {
       case "/":
@@ -175,8 +211,14 @@ const Header = () => {
                 <NavLink exact to="/" activeClassName="active">
                   홈
                 </NavLink>
-                 {isLoggedIn ? (
-                  <> 
+                <NotificationButton ref={notificationButtonRef} onClick={toggleNotificationModal}>
+                <NotificationIcon src={notificationIcon} alt="Notifications" />
+                      {notifications.length > 0 && (
+                        <NotificationBadge>{notifications.length}</NotificationBadge>
+                      )}
+                </NotificationButton>
+                {isLoggedIn ? (
+                  <>
                     <NavLink to="/mystudy" activeClassName="active">
                       내 스터디
                     </NavLink>
@@ -184,10 +226,11 @@ const Header = () => {
                       마이페이지
                     </NavLink>
                     <CreateStudyModal />
+                    
                   </>
-                ) : ( 
+                ) : (
                   <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
-               )} 
+                )}
               </NavLinks>
             </div>
           </HeaderContent>
@@ -201,11 +244,10 @@ const Header = () => {
         <Login />
       </Modal>
 
-      <NotificationModal
+      <NotificationComponent
         show={isNotificationOpen}
-        handleClose={() => setIsNotificationOpen(false)}
-        title="알림"
-        notifications={notifications}
+        handleClose={handleCloseNotificationModal}
+        position={notificationPosition}
       />
     </>
   );
