@@ -1,162 +1,132 @@
 import React, { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
-import API from '../../api/AxiosInstance'; // API 인스턴스 가져오기
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import API from '../../api/AxiosInstance'; 
 import './MyPage.css';
 
 function MyPage() {
-  const [userInfo, setUserInfo] = useState({
-    nickname: '',
-    profileImage: ''
-  });
-  const [error, setError] = useState(null); 
+  const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '' });
   const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState(null);
+  const queryClient = useQueryClient();
+
+  const { data, isError, error: queryError } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: async () => {
+      const response = await API.get('/users/mypage');
+      return response.data;
+    }
+  });
 
   useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const response = await API.get('/users/mypage');
-        
-        if (response.status === 200) {
-          console.log("성공적으로 사용자 정보를 불러왔습니다.", );
-          setUserInfo({
-            nickname: response.data.nickname,
-            profileImage: response.data.profileImage
-          });
-        } else {
-          console.error('예상치 못한 응답 코드:', response.status);
+    if (data) {
+      setUserInfo({
+        nickname: data.nickname,
+        profileImage: data.profileImage
+      });
+    }
+
+    if (isError) {
+      console.error('Error fetching user info:', queryError);
+      setError(queryError?.response?.data?.message || '유저 정보 조회 실패');
+    }
+  }, [data, isError, queryError]);
+
+  const triggerFileInput = () => {
+    document.getElementById('fileInput').click();
+  };
+
+  const profileImageMutation = useMutation(
+    async (file) => {
+      const formData = new FormData();
+      formData.append("profileImage", file);
+      return await API.patch('/users/profileImage', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+    }
+  );
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    const validExtensions = ['png', 'jpeg', 'jpg', 'svg'];
+    if (validExtensions.includes(fileExtension)) {
+      profileImageMutation.mutate(file, {
+        onSuccess: (data) => {
+          setUserInfo(current => ({ ...current, profileImage: data.profileImage }));
+          setSuccessMessage('프로필 이미지가 변경되었습니다.');
+          queryClient.invalidateQueries(['userInfo']);
+        },
+        onError: (error) => {
+          console.error('이미지 업로드에 실패했습니다.', error);
+          setError('프로필 이미지 변경에 실패했습니다.');
         }
-      } catch (error) {
-        if (error.response && error.response.status === 401) {
-          console.error('401 오류: 유효하지 않은 토큰입니다.', error.response.data.message);
-        } else {
-          console.error('사용자 정보를 불러오는 데 실패했습니다.', error);
-        }
-      }
-    };
-    fetchUserInfo();
-  }, []);
-
-  // 프로필 사진 파일 확장자 검증
-  const handleImageChange = async (e) => {
-    if (e.target.files[0]) {
-      const file = e.target.files[0];
-
-      const fileExtension = file.name.split('.').pop().toLowerCase();
-      const validExtensions = ['png', 'jpeg', 'jpg', 'svg'];
-    if (!validExtensions.includes(fileExtension)) {
-        alert(`허용되는 파일 확장자는 ${validExtensions.join(", ")} 입니다.`);
-        return; // 허용되지 않는 파일이면 함수 종료
-      }
-
-      const uploadSuccess = await uploadImage(file); // 파일 업로드 함수를 호출하고 성공 여부를 받음
-      if (uploadSuccess) {
-        setUserInfo({ 
-          ...userInfo,
-          profileImage: uploadSuccess
-        });
-      } else {
-        console.error('이미지 업로드에 실패했습니다.');
-      }
+      });
+    } else {
+      alert(`허용되는 파일 확장자는 ${validExtensions.join(", ")} 입니다.`);
     }
   };
 
-  // 프로필 사진 변경
-  const uploadImage = async (file) => {
-  const formData = new FormData();
-  formData.append("profileImage", file);
+  const nicknameMutation = useMutation(
+    async (newNickname) => {
+      return await API.patch('/users/nickname', { nickname: newNickname });
+    }
+  );
 
-  try {
-    const response = await API.patch('/users/profileImage', formData,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data'  
+  const updateNickname = () => {
+    const trimmedNickname = userInfo.nickname.trim();
+    if (!trimmedNickname) { // 공백만 입력된 경우
+      setError('닉네임을 입력해주세요.');
+      return;
+    }
+    if (/\s/.test(trimmedNickname)) { // 공백을 포함하고 있는 경우
+      setError('닉네임에 공백을 포함할 수 없습니다.');
+      return;
+    }
+    if (/[ㄱ-ㅎㅏ-ㅣ]+/.test(trimmedNickname)) { // 한글 자음 또는 모음만 있는 경우
+      setError('닉네임에 한글 자음 또는 모음만 사용할 수 없습니다.');
+      return;
+    }
+
+    nicknameMutation.mutate(trimmedNickname, {
+      onSuccess: (data) => {
+        setUserInfo(current => ({ ...current, nickname: data.nickname }));
+        setSuccessMessage(`닉네임이 '${data.nickname}'(으)로 변경되었습니다.`);
+        queryClient.invalidateQueries(['userInfo']);
+      },
+      onError: (error) => {
+        console.error('닉네임 변경 실패:', error);
+        setError('닉네임 변경에 실패했습니다.');
       }
     });
-    if (response.status === 200) {
-      console.log('프로필 이미지가 성공적으로 변경되었습니다:', response.data.profileImage);
-      setSuccessMessage('프로필 이미지가 변경되었습니다.');
-      return response.data.profileImage; 
-    } else {
-      console.error('예상치 못한 응답 코드:', response.status);
-      setError('프로필 이미지 변경에 실패했습니다.');
-      return false;
-    }
-  } catch (error) {
-    console.error('이미지 변경 실패:', error);
-    setError('프로필 이미지 변경에 실패했습니다.');
-    return false;
-  }
-};
-
-    const triggerFileInput = () => {
-        document.getElementById('fileInput').click();
-      };
-      
-  // 닉네임 변경
-  const updateNickname = async () => {
-  const trimmedNickname = userInfo.nickname.trim(); // 양쪽 공백을 제거하고 검사
-
-   // 공백만 있는 경우
-   if (!trimmedNickname) {
-    alert('닉네임을 입력해주세요.');
-    return;
-  }
-
-  // 공백을 포함하고 있는 경우
-  if (/\s/.test(trimmedNickname)) {
-    alert('닉네임을 입력해 주세요.');
-    return;
-  }
-
-  // 한글 자음 또는 모음이 포함된 경우
-  if (/[ㄱ-ㅎㅏ-ㅣ]/.test(trimmedNickname)) {
-    alert('자음 혹은 모음을 단독으로 사용할 수 없습니다.');
-    return;
-  }
-
-  try {
-    const response = await API.patch('/users/nickname', { nickname: userInfo.nickname });
-    
-    if (response.status === 200) {
-      console.log('닉네임 변경 성공:', response.data.nickname); // 변경된 닉네임 로그 출력
-      setSuccessMessage(`닉네임이 '${response.data.nickname}'(으)로 변경되었습니다.`);
-      setUserInfo({...userInfo, nickname: trimmedNickname});
-    } else {
-      console.error('예상치 못한 응답 코드:', response.status);
-      setError('닉네임 변경에 실패했습니다.');
-    }
-  } catch (error) {
-    console.error('닉네임 변경 실패:', error);
-    setError('닉네임 변경에 실패했습니다.');
-  }
-};
+  };
 
   return (
     <div className="profile-container">
-    {error && <div className="alert alert-danger">{error}</div>}
-    {successMessage && <div className="alert alert-primary">{successMessage}</div>}
-    <p className="card-type-mypage">프로필 수정 ✍️</p>
-    <div className="profile-image" onClick={triggerFileInput}>
+      {error && <div className="alert alert-danger">{error}</div>}
+      {successMessage && <div className="alert alert-primary">{successMessage}</div>}
+      <p className="card-type-mypage">프로필 수정 ✍️</p>
+      <div className="profile-image" onClick={triggerFileInput}>
         <img src={userInfo.profileImage || "img/default-profile.png"} className="edited-image" alt="프로필 이미지" />
         <img src="img/img-edit.png" className="image-edit-btn" alt="이미지 변경"  />
         <input type="file" id="fileInput" style={{ display: 'none' }} accept=".png, .jpeg, .jpg, .svg" onChange={handleImageChange} />
-    </div>
+      </div>
 
-    <div className="nickname-container">
+      <div className="nickname-container">
         <span className="nickname-title">닉네임</span>
         <span className="nickname-info">한글, 영문, 숫자 2-10자 입력</span>
         <div className="nickname-field">
-        <input
-        type="text"
-        id="nickname"
-        placeholder="수정할 닉네임을 입력하세요."
-        maxLength="10"
-        value={userInfo.nickname} 
-        onChange={e => setUserInfo({...userInfo, nickname: e.target.value})}/>
-        <button className="nickname-edit-btn" onClick={updateNickname}>확인</button>
+          <input
+            type="text"
+            id="nickname"
+            placeholder="수정할 닉네임을 입력하세요."
+            maxLength="10"
+            value={userInfo.nickname} 
+            onChange={e => setUserInfo({...userInfo, nickname: e.target.value})}
+          />
+          <button className="nickname-edit-btn" onClick={updateNickname}>확인</button>
         </div>
+      </div>
     </div>
-</div>
   );
 }
 
