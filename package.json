@@ -55,6 +55,8 @@
         "workerDirectory": "public"
     },
     "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "react-scripts": "^5.0.1",
         "vercel": "^34.2.7"
     }
 }
