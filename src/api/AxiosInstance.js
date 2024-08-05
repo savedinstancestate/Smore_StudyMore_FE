@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const API = axios.create({
-  baseURL: 'http://ec2-43-202-82-233.ap-northeast-2.compute.amazonaws.com:8080',
+  baseURL: process.env.REACT_APP_AUTH_URL,
   headers: {
     'Content-Type': 'application/json'
   }
