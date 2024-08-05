@@ -59,7 +59,7 @@ const NotificationComponent = ({ show, handleClose, position }) => {
   return (
     <div
       style={{
-        position: "absolute",
+        position: "fixed",
         top: `${position.top}px`,
         left: `${position.left}px`,
         zIndex: 1002,
