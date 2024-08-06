@@ -25,15 +25,14 @@ const NotificationComponent = ({ show, position }) => {
         console.log("SSE 연결 성공");
       };
 
-      eventSource.onmessage = (event) => {
-        console.log("Received event:", event.data);
-            setNotifications(prev => [...prev, event.data]); // 새로운 알림 추가
-      };
-
-      eventSource.addEventListener("sse", (event) => { // 0806 새로 추가
+       eventSource.addEventListener("sse", (event) => { // 'sse' 이벤트 처리
         console.log("Received sse event:", event.data);
-        const parsedData = JSON.parse(event.data);
-        setNotifications(prev => [...prev, parsedData.Content]); // 새로운 알림 추가
+        try {
+          const parsedData = JSON.parse(event.data);
+          setNotifications(prev => [...prev, parsedData.Content]); // 새로운 알림 추가
+        } catch (error) {
+          console.error("Failed to parse event data:", error);
+        }
       });
 
       eventSource.onerror = (err) => {
