@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import EventSourcePolyfill from 'eventsource-polyfill';
 
-const NotificationComponent = ({ show, handleClose, position }) => {
+const NotificationComponent = ({ show, position }) => {
   const [notifications, setNotifications] = useState([]); // 알림을 저장할 상태
 
   useEffect(() => {
@@ -22,15 +22,19 @@ const NotificationComponent = ({ show, handleClose, position }) => {
       );
 
       eventSource.onopen = () => {
-        console.log("SSE 연결이 열렸습니다.");
+        console.log("SSE 연결 성공");
       };
 
       eventSource.onmessage = (event) => {
         console.log("Received event:", event.data);
-        if (event.data !== 'ping') {
-            setNotifications(prev => [...prev, event.data]); // 새로운 알림을 추가
-          }
+            setNotifications(prev => [...prev, event.data]); // 새로운 알림 추가
       };
+
+      eventSource.addEventListener("sse", (event) => { // 0806 새로 추가
+        console.log("Received sse event:", event.data);
+        const parsedData = JSON.parse(event.data);
+        setNotifications(prev => [...prev, parsedData.Content]); // 새로운 알림 추가
+      });
 
       eventSource.onerror = (err) => {
         console.error("EventSource failed:", err);
