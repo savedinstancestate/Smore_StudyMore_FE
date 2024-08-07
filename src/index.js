@@ -8,15 +8,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
-/*
 // 개발 환경에서만 MSW 시작
 if (process.env.NODE_ENV === "development") {
   const { worker } = require("./mocks/browser");
-  worker.start().then(() => {
-    console.log("MSW has started!");
-  });
 }
-*/
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
