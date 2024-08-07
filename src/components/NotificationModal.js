@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import EventSourcePolyfill from 'eventsource-polyfill';
 
-const NotificationComponent = ({ show, position }) => {
-  const [notifications, setNotifications] = useState([]); // 알림을 저장할 상태
+const NotificationComponent = ({ show, position, notifications, setNotifications }) => {
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
@@ -53,7 +52,7 @@ const NotificationComponent = ({ show, position }) => {
         eventSource.close();
       }
     };
-  }, []);
+  }, [setNotifications]);
 
   if (!show) {
     return null;
@@ -89,7 +88,6 @@ const NotificationComponent = ({ show, position }) => {
           ))
         )}
       </div>
-      {/* <button onClick={handleClose} style={{color: "#009063", background: "white", border: "1px solid #009063", borderRadius: "4px"}}>닫기</button> */}
     </div>
   );
 };
