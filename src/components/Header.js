@@ -119,12 +119,12 @@ const NotificationIcon = styled.img`
 
 const NotificationBadge = styled.span`
   position: absolute;
-  top: -5px;
-  right: -5px;
+  top: 1px;
+  right: 6px;
   background-color: #009063;
   border-radius: 50%;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 `;
 
 const Header = () => {
@@ -151,6 +151,9 @@ const Header = () => {
   const toggleNotificationModal = () => {
     updateNotificationPosition();
     setIsNotificationOpen(!isNotificationOpen);
+    if (!isNotificationOpen) {
+      setHasUnreadNotifications(false); // 알림 모달을 열 때 읽음 상태로 설정
+    }
   };
 
   useEffect(() => {
@@ -176,11 +179,6 @@ const Header = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-  };
-
-  const handleCloseNotificationModal = () => {
-    setIsNotificationOpen(false);
-    setHasUnreadNotifications(false); // 알림 모달을 닫을 때 읽음 상태로 설정
   };
 
   const handleNotificationUpdate = (hasNewNotification) => {
