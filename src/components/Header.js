@@ -257,6 +257,8 @@ const Header = () => {
         show={isNotificationOpen}
         handleClose={handleCloseNotificationModal}
         position={notificationPosition}
+        notifications={notifications}
+        setNotifications={setNotifications}
       />
     </>
   );

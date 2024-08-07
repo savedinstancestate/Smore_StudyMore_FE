@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import EventSourcePolyfill from 'eventsource-polyfill';
 
-const NotificationComponent = ({ show, position }) => {
-  const [notifications, setNotifications] = useState([]); // 알림을 저장할 상태
+const NotificationComponent = ({ show, position, notifications, setNotifications }) => {
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
@@ -25,15 +24,14 @@ const NotificationComponent = ({ show, position }) => {
         console.log("SSE 연결 성공");
       };
 
-      eventSource.onmessage = (event) => {
-        console.log("Received event:", event.data);
-            setNotifications(prev => [...prev, event.data]); // 새로운 알림 추가
-      };
-
-      eventSource.addEventListener("sse", (event) => { // 0806 새로 추가
+       eventSource.addEventListener("sse", (event) => { // 'sse' 이벤트 처리
         console.log("Received sse event:", event.data);
-        const parsedData = JSON.parse(event.data);
-        setNotifications(prev => [...prev, parsedData.Content]); // 새로운 알림 추가
+        try {
+          const parsedData = JSON.parse(event.data);
+          setNotifications(prev => [...prev, parsedData.Content]); // 새로운 알림 추가
+        } catch (error) {
+          console.error("Failed to parse event data:", error);
+        }
       });
 
       eventSource.onerror = (err) => {
@@ -54,7 +52,7 @@ const NotificationComponent = ({ show, position }) => {
         eventSource.close();
       }
     };
-  }, []);
+  }, [setNotifications]);
 
   if (!show) {
     return null;
@@ -90,7 +88,6 @@ const NotificationComponent = ({ show, position }) => {
           ))
         )}
       </div>
-      {/* <button onClick={handleClose} style={{color: "#009063", background: "white", border: "1px solid #009063", borderRadius: "4px"}}>닫기</button> */}
     </div>
   );
 };
