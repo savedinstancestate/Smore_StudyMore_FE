@@ -2,64 +2,57 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import EventSourcePolyfill from 'eventsource-polyfill';
 
-const NotificationComponent = ({ show, position, onNewNotification }) => {
+const NotificationComponent = ({ show, position, onNotificationReceived }) => {
   const [notifications, setNotifications] = useState([]); // 알림을 저장할 상태
-  const [eventSource, setEventSource] = useState(null);
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
     if (!accessToken) {
-      console.log(
-        "액세스 토큰을 사용할 수 없습니다. SSE 연결을 설정할 수 없습니다."
-      );
+      console.log("액세스 토큰을 사용할 수 없습니다. SSE 연결을 설정할 수 없습니다.");
       return;
     }
 
-    // 기존 EventSource가 있으면 닫기
-    if (eventSource) {
-      eventSource.close();
-    }
+    let eventSource;
 
-    // 새로운 EventSource 설정
-    const newEventSource = new EventSourcePolyfill(
+    const connectEventSource = () => {
+      eventSource = new EventSourcePolyfill(
         `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
       );
 
-      newEventSource.onopen = () => {
+      eventSource.onopen = () => {
         console.log("SSE 연결 성공");
       };
 
-      newEventSource.addEventListener("sse", (event) => { // 'sse' 이벤트 처리
+       eventSource.addEventListener("sse", (event) => { // 'sse' 이벤트 처리
         console.log("Received sse event:", event.data);
         try {
           const parsedData = JSON.parse(event.data);
-          setNotifications(prev => [...prev, parsedData.Content]); // 새로운 알림 추가
-          onNewNotification();
+          setNotifications(prev => [...prev, parsedData]); // 새로운 알림 추가
+          onNotificationReceived(true);
         } catch (error) {
-          console.error("Failed to parse event data:", error);
+          console.error("알림 데이터 파싱 오류:", error);
         }
       });
 
-      newEventSource.onerror = (err) => {
-        console.error("EventSource failed:", err);
-        newEventSource.close();
+      eventSource.onerror = (error) => {
+        console.error("SSE 연결 오류:", error);
+        eventSource.close();
+        // SSE 연결 실패 시 일정 시간 후 재연결 시도
         setTimeout(() => {
           console.log("재연결 시도 중...");
-          const retryEventSource = new EventSourcePolyfill(
-            `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
-          );
-          setEventSource(retryEventSource);
+          connectEventSource();
         }, 5000);
       };
+    };
 
-    setEventSource(newEventSource);
+    connectEventSource();
 
     return () => {
-      if (newEventSource) {
-        newEventSource.close();
+      if (eventSource) {
+        eventSource.close();
       }
     };
-  }, [show, onNewNotification]);
+  }, [onNotificationReceived]);
 
   if (!show) {
     return null;
@@ -89,9 +82,9 @@ const NotificationComponent = ({ show, position, onNewNotification }) => {
           </div>
         ) : (
           notifications.map((notification, index) => (
-            <div key={index} style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>
-              {notification}
-            </div>
+            <li key={index} style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>
+              {notification.content}
+            </li>
           ))
         )}
       </div>
