@@ -77,10 +77,10 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
         maxHeight: "300px",
         overflowY: "auto",
-        width: "300px",
+        width: "260px",
       }}
     >
-      <h5>알림</h5>
+      <h5 style={{fontWeight: '600'}}>알림</h5>
       <div>
         {notifications.length === 0 ? (
           <div style={{ padding: "10px", textAlign: "center", color: "#888" }}>
@@ -91,7 +91,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
             <li
               key={index}
               style={{
-                padding: "20px 10px",
+                padding: "20px 0px",
                 borderTop: "1px solid #ddd",
                 fontSize: "14px",
                 listStyle: "none",
