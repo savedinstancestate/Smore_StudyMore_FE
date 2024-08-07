@@ -4,6 +4,7 @@ import EventSourcePolyfill from 'eventsource-polyfill';
 
 const NotificationComponent = ({ show, position, onNotificationReceived }) => {
   const [notifications, setNotifications] = useState([]); // 알림을 저장할 상태
+  const [eventSource, setEventSource] = useState(null); // EventSource 인스턴스를 상태로 저장
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
@@ -12,37 +13,39 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
       return;
     }
 
-    let eventSource;
-
     const connectEventSource = () => {
-      eventSource = new EventSourcePolyfill(
+      const es = new EventSourcePolyfill(
         `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
       );
 
-      eventSource.onopen = () => {
+      es.onopen = () => {
         console.log("SSE 연결 성공");
       };
 
-       eventSource.addEventListener("sse", (event) => { // 'sse' 이벤트 처리
+      es.addEventListener("sse", (event) => { // 'sse' 이벤트 처리
         console.log("Received sse event:", event.data);
         try {
           const parsedData = JSON.parse(event.data);
           setNotifications(prev => [...prev, parsedData]); // 새로운 알림 추가
-          onNotificationReceived(true);
+          if (onNotificationReceived) {
+            onNotificationReceived(true);
+          }
         } catch (error) {
           console.error("알림 데이터 파싱 오류:", error);
         }
       });
 
-      eventSource.onerror = (error) => {
+      es.onerror = (error) => {
         console.error("SSE 연결 오류:", error);
-        eventSource.close();
+        es.close();
         // SSE 연결 실패 시 일정 시간 후 재연결 시도
         setTimeout(() => {
           console.log("재연결 시도 중...");
           connectEventSource();
         }, 5000);
       };
+
+      setEventSource(es); // EventSource 인스턴스를 상태로 저장
     };
 
     connectEventSource();
@@ -52,7 +55,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         eventSource.close();
       }
     };
-  }, [onNotificationReceived]);
+  }, []); // 의존성 배열을 빈 배열로 설정하여 컴포넌트 마운트 및 언마운트 시만 연결
 
   if (!show) {
     return null;
