@@ -11,7 +11,6 @@ import { useAuth } from "./AuthContext";
 import NotificationComponent from "./NotificationModal";
 import logoImage from "./smore-logo-ver1.png";
 import notificationIcon from "./notification.png";
-import EventSourcePolyfill from 'eventsource-polyfill';
 
 const HeaderWrapper = styled.div`
   position: fixed;
@@ -122,9 +121,9 @@ const NotificationBadge = styled.span`
   position: absolute;
   top: -5px;
   right: -5px;
-  background-color: #009063;
+  background-color: red;
   border-radius: 50%;
-  padding: 2px 2px;
+  padding: 2px;
 `;
 
 const Header = () => {
@@ -134,7 +133,7 @@ const Header = () => {
   const currentLocation = useLocation();
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const [notifications, setNotifications] = useState([]);
+  const [hasNewNotification, setHasNewNotification] = useState(false);
   const [notificationPosition, setNotificationPosition] = useState({
     top: 0,
     left: 0,
@@ -142,51 +141,13 @@ const Header = () => {
   const notificationButtonRef = useRef(null);
 
   useEffect(() => {
-    const accessToken = Cookies.get("accessToken");
-    if (!accessToken) {
-      console.log("액세스 토큰을 사용할 수 없습니다. SSE 연결을 설정할 수 없습니다.");
-      return;
-    }
-
-    let eventSource;
-
-    const connectEventSource = () => {
-      eventSource = new EventSourcePolyfill(
-        `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
-      );
-
-      eventSource.onopen = () => {
-        console.log("SSE 연결 성공");
-      };
-
-      eventSource.addEventListener("sse", (event) => { // 'sse' 이벤트 처리
-        console.log("Received sse event:", event.data);
-        try {
-          const parsedData = JSON.parse(event.data);
-          setNotifications(prev => [...prev, parsedData.Content]); // 새로운 알림 추가
-        } catch (error) {
-          console.error("Failed to parse event data:", error);
-        }
-      });
-
-      eventSource.onerror = (err) => {
-        console.error("EventSource failed:", err);
-        eventSource.close();
-        setTimeout(() => {
-          console.log("재연결 시도 중...");
-          connectEventSource();
-        }, 5000);
-      };
+    const checkLoginStatus = () => {
+      const token = Cookies.get("accessToken");
+      setIsLoggedIn(!!token);
     };
 
-    connectEventSource();
-
-    return () => {
-      if (eventSource) {
-        eventSource.close();
-      }
-    };
-  }, []);
+    checkLoginStatus();
+  }, [location]);
 
   const updateNotificationPosition = () => {
     if (notificationButtonRef.current) {
@@ -198,6 +159,13 @@ const Header = () => {
   const toggleNotificationModal = () => {
     updateNotificationPosition();
     setIsNotificationOpen(!isNotificationOpen);
+    if (!isNotificationOpen) {
+      setHasNewNotification(false);
+    }
+  };
+
+  const handleNewNotification = () => {
+    setHasNewNotification(true);
   };
 
   useEffect(() => {
@@ -275,10 +243,8 @@ const Header = () => {
                         src={notificationIcon}
                         alt="Notifications"
                       />
-                      {notifications.length > 0 && (
-                        <NotificationBadge>
-                          {notifications.length}
-                        </NotificationBadge>
+                      {hasNewNotification && !isNotificationOpen && (
+                        <NotificationBadge />
                       )}
                     </NotificationButton>
                     <CreateStudyModal />
@@ -302,8 +268,8 @@ const Header = () => {
       <NotificationComponent
         show={isNotificationOpen}
         handleClose={handleCloseNotificationModal}
+        onNewNotification={handleNewNotification}
         position={notificationPosition}
-        notifications={notifications}
       />
     </>
   );
