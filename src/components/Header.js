@@ -154,6 +154,7 @@ const Header = () => {
   };
 
   useEffect(() => {
+    updateNotificationPosition();
     window.addEventListener("resize", updateNotificationPosition);
     return () => {
       window.removeEventListener("resize", updateNotificationPosition);
