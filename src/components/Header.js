@@ -131,6 +131,7 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const location = useLocation();
+  const currentLocation = useLocation();
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
