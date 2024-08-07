@@ -121,9 +121,10 @@ const NotificationBadge = styled.span`
   position: absolute;
   top: -5px;
   right: -5px;
-  background-color: red;
+  background-color: #009063;
   border-radius: 50%;
-  padding: 2px;
+  width: 12px;
+  height: 12px;
 `;
 
 const Header = () => {
@@ -133,21 +134,12 @@ const Header = () => {
   const currentLocation = useLocation();
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const [hasNewNotification, setHasNewNotification] = useState(false);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const [notificationPosition, setNotificationPosition] = useState({
     top: 0,
     left: 0,
   });
   const notificationButtonRef = useRef(null);
-
-  useEffect(() => {
-    const checkLoginStatus = () => {
-      const token = Cookies.get("accessToken");
-      setIsLoggedIn(!!token);
-    };
-
-    checkLoginStatus();
-  }, [location]);
 
   const updateNotificationPosition = () => {
     if (notificationButtonRef.current) {
@@ -159,13 +151,6 @@ const Header = () => {
   const toggleNotificationModal = () => {
     updateNotificationPosition();
     setIsNotificationOpen(!isNotificationOpen);
-    if (!isNotificationOpen) {
-      setHasNewNotification(false);
-    }
-  };
-
-  const handleNewNotification = () => {
-    setHasNewNotification(true);
   };
 
   useEffect(() => {
@@ -194,6 +179,11 @@ const Header = () => {
 
   const handleCloseNotificationModal = () => {
     setIsNotificationOpen(false);
+    setHasUnreadNotifications(false); // 알림 모달을 닫을 때 읽음 상태로 설정
+  };
+
+  const handleNotificationUpdate = (hasNewNotification) => {
+    setHasUnreadNotifications(hasNewNotification); // 알림 업데이트 상태 설정
   };
 
   const renderPageTitle = () => {
@@ -243,7 +233,7 @@ const Header = () => {
                         src={notificationIcon}
                         alt="Notifications"
                       />
-                      {hasNewNotification && !isNotificationOpen && (
+                      {hasUnreadNotifications && (
                         <NotificationBadge />
                       )}
                     </NotificationButton>
@@ -267,9 +257,8 @@ const Header = () => {
 
       <NotificationComponent
         show={isNotificationOpen}
-        handleClose={handleCloseNotificationModal}
-        onNewNotification={handleNewNotification}
         position={notificationPosition}
+        onNotificationReceived={handleNotificationUpdate}
       />
     </>
   );
