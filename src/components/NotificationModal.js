@@ -4,6 +4,7 @@ import EventSourcePolyfill from 'eventsource-polyfill';
 
 const NotificationComponent = ({ show, position, onNewNotification }) => {
   const [notifications, setNotifications] = useState([]); // 알림을 저장할 상태
+  const [eventSource, setEventSource] = useState(null);
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
@@ -14,18 +15,21 @@ const NotificationComponent = ({ show, position, onNewNotification }) => {
       return;
     }
 
-    let eventSource;
+    // 기존 EventSource가 있으면 닫기
+    if (eventSource) {
+      eventSource.close();
+    }
 
-    const connectEventSource = () => {
-      eventSource = new EventSourcePolyfill(
+    // 새로운 EventSource 설정
+    const newEventSource = new EventSourcePolyfill(
         `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
       );
 
-      eventSource.onopen = () => {
+      newEventSource.onopen = () => {
         console.log("SSE 연결 성공");
       };
 
-       eventSource.addEventListener("sse", (event) => { // 'sse' 이벤트 처리
+      newEventSource.addEventListener("sse", (event) => { // 'sse' 이벤트 처리
         console.log("Received sse event:", event.data);
         try {
           const parsedData = JSON.parse(event.data);
@@ -36,22 +40,23 @@ const NotificationComponent = ({ show, position, onNewNotification }) => {
         }
       });
 
-      eventSource.onerror = (err) => {
+      newEventSource.onerror = (err) => {
         console.error("EventSource failed:", err);
-        eventSource.close();
-        // SSE 연결 실패 시 일정 시간 후 재연결 시도
+        newEventSource.close();
         setTimeout(() => {
           console.log("재연결 시도 중...");
-          connectEventSource();
+          const retryEventSource = new EventSourcePolyfill(
+            `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
+          );
+          setEventSource(retryEventSource);
         }, 5000);
       };
-    };
 
-    connectEventSource();
+    setEventSource(newEventSource);
 
     return () => {
-      if (eventSource) {
-        eventSource.close();
+      if (newEventSource) {
+        newEventSource.close();
       }
     };
   }, [show, onNewNotification]);
@@ -90,7 +95,6 @@ const NotificationComponent = ({ show, position, onNewNotification }) => {
           ))
         )}
       </div>
-      {/* <button onClick={handleClose} style={{color: "#009063", background: "white", border: "1px solid #009063", borderRadius: "4px"}}>닫기</button> */}
     </div>
   );
 };
