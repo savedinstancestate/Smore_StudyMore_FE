@@ -144,7 +144,7 @@ const Header = () => {
   const updateNotificationPosition = () => {
     if (notificationButtonRef.current) {
       const rect = notificationButtonRef.current.getBoundingClientRect();
-      setNotificationPosition({ top: rect.bottom, left: rect.left - 270 });
+      setNotificationPosition({ top: rect.bottom, left: rect.left - 235 });
     }
   };
 
