@@ -4,7 +4,7 @@ import EventSourcePolyfill from "eventsource-polyfill";
 
 const NotificationComponent = ({ show, position, onNotificationReceived }) => {
   const [notifications, setNotifications] = useState([]); // 알림을 저장할 상태
-  const [eventSource, setEventSource] = useState(null); // EventSource 인스턴스를 상태로 저장
+  const esRef = useRef(null); // EventSource 인스턴스를 useRef로 관리
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
@@ -61,14 +61,14 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         }, 5000);
       };
 
-      setEventSource(es); // EventSource 인스턴스를 상태로 저장
+      esRef.current = es; // useRef로 EventSource 인스턴스를 저장
     };
 
     connectEventSource();
 
     return () => {
-      if (eventSource) {
-        eventSource.close();
+      if (esRef.current) {
+        esRef.current.close();
       }
     };
   }, []); // 의존성 배열을 빈 배열로 설정하여 컴포넌트 마운트 및 언마운트 시만 연결
