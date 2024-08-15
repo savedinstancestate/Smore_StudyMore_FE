@@ -28,15 +28,16 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         console.log("Received sse event:", event.data);
         try {
           const parsedData = JSON.parse(event.data);
-          const notificationTime = new Date(parsedData.time).getTime();
           const timestampThreshold = Date.now() - 5 * 60 * 1000;
           
           setNotifications((prev) => {
             const isDuplicate = prev.some(
               (notification) =>
-                notification.content === parsedData.content &&
-                new Date(notification.time).getTime() > timestampThreshold
+                notification.id === parsedData.id ||
+                (notification.content === parsedData.content &&
+                 new Date(notification.time).getTime() > timestampThreshold)
             );
+
             if (!isDuplicate) {
               return [parsedData, ...prev];
             }
@@ -70,7 +71,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         eventSource.close();
       }
     };
-  }, []); // 의존성 배열을 빈 배열로 설정하여 컴포넌트 마운트 및 언마운트 시만 연결
+  }, [eventSource]); // 의존성 배열을 빈 배열로 설정하여 컴포넌트 마운트 및 언마운트 시만 연결
 
   if (!show) {
     return null;
@@ -92,7 +93,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         width: "260px",
       }}
     >
-      <h5 style={{fontWeight: '600'}}>알림</h5>
+      <h5 style={{fontWeight: '500'}}>알림</h5>
       <div>
         {notifications.length === 0 ? (
           <div style={{ padding: "10px", textAlign: "center", color: "#888" }}>
@@ -101,10 +102,11 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         ) : (
           notifications.map((notification, index) => (
             <li
-              key={index}
+              key={notification.id || index}
               style={{
-                padding: "20px 0px",
-                borderTop: "1px solid #ddd",
+                padding: "14px 0px",
+                borderBottom:
+                  index === notifications.length - 1 ? "none" : "1px solid #ddd",
                 fontSize: "14px",
                 listStyle: "none",
               }}
