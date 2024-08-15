@@ -33,7 +33,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
           setNotifications((prev) => {
             const isDuplicate = prev.some(
               (notification) =>
-                notification.id === parsedData.id ||
+              notification.notificationPk === parsedData.notificationPk ||
                 (notification.content === parsedData.content &&
                  new Date(notification.time).getTime() > timestampThreshold)
             );
