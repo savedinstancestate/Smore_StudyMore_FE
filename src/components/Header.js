@@ -159,6 +159,12 @@ const Header = () => {
   };
 
   useEffect(() => {
+    // 로컬 스토리지에서 알림 상태를 불러오기
+    const storedNotifications = JSON.parse(localStorage.getItem("hasUnreadNotifications"));
+    if (storedNotifications !== null) {
+      setHasUnreadNotifications(storedNotifications);
+    }
+
     updateNotificationPosition();
     window.addEventListener("resize", updateNotificationPosition);
     return () => {
