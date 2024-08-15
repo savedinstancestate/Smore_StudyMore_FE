@@ -71,7 +71,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         eventSource.close();
       }
     };
-  }, [eventSource]); // 의존성 배열을 빈 배열로 설정하여 컴포넌트 마운트 및 언마운트 시만 연결
+  }, []); // 의존성 배열을 빈 배열로 설정하여 컴포넌트 마운트 및 언마운트 시만 연결
 
   if (!show) {
     return null;
