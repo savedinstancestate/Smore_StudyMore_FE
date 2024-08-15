@@ -25,11 +25,24 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
       };
 
       es.addEventListener("sse", (event) => {
-        // 'sse' 이벤트 처리
         console.log("Received sse event:", event.data);
         try {
           const parsedData = JSON.parse(event.data);
-          setNotifications((prev) => [parsedData, ...prev,]); // 새로운 알림 추가
+          const notificationTime = new Date(parsedData.time).getTime();
+          const timestampThreshold = Date.now() - 5 * 60 * 1000;
+          
+          setNotifications((prev) => {
+            const isDuplicate = prev.some(
+              (notification) =>
+                notification.content === parsedData.content &&
+                new Date(notification.time).getTime() > timestampThreshold
+            );
+            if (!isDuplicate) {
+              return [parsedData, ...prev];
+            }
+            return prev;
+          });
+
           if (onNotificationReceived) {
             onNotificationReceived(true);
           }
@@ -41,7 +54,6 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
       es.onerror = (error) => {
         console.error("SSE 연결 오류:", error);
         es.close();
-        // SSE 연결 실패 시 일정 시간 후 재연결 시도
         setTimeout(() => {
           console.log("재연결 시도 중...");
           connectEventSource();
@@ -97,7 +109,10 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
                 listStyle: "none",
               }}
             >
-              {notification.content}
+              <div>{notification.content}</div>
+              <div style={{ color: "#888", fontSize: "12px" }}>
+                {new Date(notification.time).toLocaleString()}
+              </div>
             </li>
           ))
         )}
