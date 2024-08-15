@@ -102,7 +102,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         ) : (
           notifications.map((notification, index) => (
             <li
-              key={notification.id || index}
+              key={notification.notificationPk || index}
               style={{
                 padding: "14px 0px",
                 borderBottom:
