@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import Cookies from "js-cookie";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -40,12 +40,12 @@ const HeaderContent = styled.div`
   max-width: 1000px;
 `;
 
-const NavContainer = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-end",
-  marginRight: "25px",
-};
+const NavContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 25px;
+`;
 
 const Logo = styled(NavLink)`
   display: flex;
@@ -131,10 +131,11 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const location = useLocation();
-  const currentLocation = useLocation();
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(
+    JSON.parse(localStorage.getItem("hasUnreadNotifications")) || false
+  );
   const [notificationPosition, setNotificationPosition] = useState({
     top: 0,
     left: 0,
@@ -150,9 +151,10 @@ const Header = () => {
 
   const toggleNotificationModal = () => {
     updateNotificationPosition();
-    setIsNotificationOpen(!isNotificationOpen);
+    setIsNotificationOpen((prev) => !prev);
     if (!isNotificationOpen) {
-      setHasUnreadNotifications(false); // 알림 모달을 열 때 읽음 상태로 설정
+      setHasUnreadNotifications(false);
+      localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
     }
   };
 
@@ -171,7 +173,7 @@ const Header = () => {
     };
 
     checkLoginStatus();
-  }, [location]);
+  }, [location, setIsLoggedIn]);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -183,13 +185,14 @@ const Header = () => {
 
   const handleNotificationUpdate = (hasNewNotification) => {
     setHasUnreadNotifications(hasNewNotification); // 알림 업데이트 상태 설정
+    localStorage.setItem("hasUnreadNotifications", JSON.stringify(hasNewNotification));
   };
 
-  const renderPageTitle = () => {
-    if (currentLocation.pathname.startsWith("/study")) {
+  const renderPageTitle = useMemo(() => {
+    if (location.pathname.startsWith("/study")) {
       return headerStudyName || "스터디 로딩 중...";
     }
-    switch (currentLocation.pathname) {
+    switch (location.pathname) {
       case "/":
         return "Study More";
       case "/mystudy":
@@ -201,7 +204,7 @@ const Header = () => {
       default:
         return "";
     }
-  };
+  }, [location.pathname, headerStudyName]);
 
   return (
     <>
@@ -211,17 +214,17 @@ const Header = () => {
             <Logo to="/">
               <LogoImage src={logoImage} alt="Logo" />
             </Logo>
-            <div style={NavContainer}>
+            <NavContainer>
               <NavLinks>
-                <NavLink exact to="/" activeClassName="active">
+              <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')}>
                   홈
                 </NavLink>
                 {isLoggedIn ? (
                   <>
-                    <NavLink to="/mystudy" activeClassName="active">
+                    <NavLink to="/mystudy" className={({ isActive }) => (isActive ? 'active' : '')}>
                       내 스터디
                     </NavLink>
-                    <NavLink to="/mypage" activeClassName="active">
+                    <NavLink to="/mypage" className={({ isActive }) => (isActive ? 'active' : '')}>
                       마이페이지
                     </NavLink>
                     <NotificationButton
@@ -242,11 +245,11 @@ const Header = () => {
                   <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
                 )}
               </NavLinks>
-            </div>
+              </NavContainer>
           </HeaderContent>
         </HeaderContainer>
         <TitleContainer>
-          <PageTitle>{renderPageTitle()}</PageTitle>
+          <PageTitle>{renderPageTitle}</PageTitle>
         </TitleContainer>
       </HeaderWrapper>
 
