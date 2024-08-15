@@ -133,9 +133,7 @@ const Header = () => {
   const location = useLocation();
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(
-    JSON.parse(localStorage.getItem("hasUnreadNotifications")) || false
-  );
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const [notificationPosition, setNotificationPosition] = useState({
     top: 0,
     left: 0,
@@ -152,6 +150,7 @@ const Header = () => {
   const toggleNotificationModal = () => {
     updateNotificationPosition();
     setIsNotificationOpen((prev) => !prev);
+
     if (!isNotificationOpen) {
       setHasUnreadNotifications(false);
       localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
@@ -159,10 +158,13 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // 로컬 스토리지에서 알림 상태를 불러오기
+    // 페이지가 처음 로드되거나 새로고침 될 때 로컬 스토리지에서 상태를 가져옴
     const storedNotifications = JSON.parse(localStorage.getItem("hasUnreadNotifications"));
     if (storedNotifications !== null) {
       setHasUnreadNotifications(storedNotifications);
+    } else {
+      // 만약 로컬 스토리지에 값이 없으면 초기화
+      localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
     }
 
     updateNotificationPosition();
