@@ -158,14 +158,17 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // 페이지가 처음 로드되거나 새로고침 될 때 로컬 스토리지에서 상태를 가져옴
-    const storedNotifications = JSON.parse(localStorage.getItem("hasUnreadNotifications"));
-    if (storedNotifications !== null) {
-      setHasUnreadNotifications(storedNotifications);
-    } else {
-      // 만약 로컬 스토리지에 값이 없으면 초기화
-      localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
-    }
+    // 페이지 로드 시 로컬 스토리지에서 상태를 불러옴
+  const storedNotifications = JSON.parse(localStorage.getItem("hasUnreadNotifications"));
+
+  // 로컬 스토리지에 저장된 값이 있으면 그 값을 상태로 설정
+  if (storedNotifications !== null && typeof storedNotifications === "boolean") {
+    setHasUnreadNotifications(storedNotifications);
+  } else {
+    // 저장된 값이 없거나 잘못된 형식이면 초기화 (false로 설정)
+    localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
+    setHasUnreadNotifications(false);
+  }
 
     updateNotificationPosition();
     window.addEventListener("resize", updateNotificationPosition);
