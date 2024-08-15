@@ -101,7 +101,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         width: "260px",
       }}
     >
-      <h5 style={{fontWeight: '500'}}>알림</h5>
+      <h6 style={{fontWeight: '500'}}>알림</h6>
       <div>
         {notifications.length === 0 ? (
           <div style={{ padding: "10px", textAlign: "center", color: "#888" }}>
@@ -112,15 +112,15 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
             <li
               key={notification.notificationPk || index}
               style={{
-                padding: "14px 0px",
+                padding: "12px 4px",
                 borderBottom:
                   index === notifications.length - 1 ? "none" : "1px solid #ddd",
-                fontSize: "14px",
+                fontSize: "13px",
                 listStyle: "none",
               }}
             >
               <div>{notification.content}</div>
-              <div style={{ color: "#888", fontSize: "12px" }}>
+              <div style={{ color: "#888", fontSize: "11px" }}>
                 {new Date(notification.time).toLocaleString()}
               </div>
             </li>
