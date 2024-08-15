@@ -16,6 +16,11 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
     }
 
     const connectEventSource = () => {
+      // 기존 EventSource 연결이 있으면 닫기
+      if (esRef.current) {
+        esRef.current.close();
+      }
+      
       const es = new EventSourcePolyfill(
         `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
       );
@@ -38,10 +43,13 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
                  new Date(notification.time).getTime() > timestampThreshold)
             );
 
-            if (!isDuplicate) {
-              return [parsedData, ...prev];
-            }
-            return prev;
+            // 중복되지 않은 알림만 추가
+            const newNotifications = isDuplicate
+              ? prev
+              : [parsedData, ...prev];
+
+            // 시간 순서대로 정렬
+            return newNotifications.sort((a, b) => new Date(b.time) - new Date(a.time));
           });
 
           if (onNotificationReceived) {
