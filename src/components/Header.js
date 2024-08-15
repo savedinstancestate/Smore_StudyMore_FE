@@ -147,27 +147,16 @@ const Header = () => {
     }
   };
 
-  const toggleNotificationModal = () => {
-    updateNotificationPosition();
-    setIsNotificationOpen((prev) => !prev);
-
-    if (!isNotificationOpen) {
-      setHasUnreadNotifications(false);
-      localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
-    }
-  };
-
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 상태를 불러옴
   const storedNotifications = JSON.parse(localStorage.getItem("hasUnreadNotifications"));
 
-  // 로컬 스토리지에 저장된 값이 있으면 그 값을 상태로 설정
-  if (storedNotifications !== null && typeof storedNotifications === "boolean") {
-    setHasUnreadNotifications(storedNotifications);
+  if (storedNotifications !== null) {
+    // storedNotifications이 'true' 문자열이면 true, 'false' 문자열이면 false로 변환
+    setHasUnreadNotifications(storedNotifications === 'true');
   } else {
-    // 저장된 값이 없거나 잘못된 형식이면 초기화 (false로 설정)
+    // 로컬 스토리지에 값이 없으면 초기화 (false로 설정)
     localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
-    setHasUnreadNotifications(false);
   }
 
     updateNotificationPosition();
@@ -176,6 +165,21 @@ const Header = () => {
       window.removeEventListener("resize", updateNotificationPosition);
     };
   }, []);
+
+  useEffect(() => {
+    // 상태 변경 시 로컬 스토리지 업데이트
+    localStorage.setItem("hasUnreadNotifications", JSON.stringify(hasUnreadNotifications));
+  }, [hasUnreadNotifications]); 
+
+  const toggleNotificationModal = () => {
+    updateNotificationPosition();
+    setIsNotificationOpen((prev) => !prev);
+
+    if (!isNotificationOpen) {
+      setHasUnreadNotifications(false);
+      localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
+    }
+  }; 
 
   useEffect(() => {
     const checkLoginStatus = () => {
