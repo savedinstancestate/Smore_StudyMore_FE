@@ -147,15 +147,10 @@ const Header = () => {
     }
   };
 
-  // 초기 로컬 스토리지에서 값 가져오기
   useEffect(() => {
     const storedNotifications = localStorage.getItem("hasUnreadNotifications");
-    if (storedNotifications) {
-      setHasUnreadNotifications(JSON.parse(storedNotifications));
-    } else {
-      setHasUnreadNotifications(false); // 기본값을 false로 설정
-    }
-
+    // 기본값을 false로 설정하고, 로컬 스토리지에 값이 있는 경우 업데이트
+    setHasUnreadNotifications(storedNotifications ? JSON.parse(storedNotifications) : false);
     updateNotificationPosition();
     window.addEventListener("resize", updateNotificationPosition);
     return () => {
