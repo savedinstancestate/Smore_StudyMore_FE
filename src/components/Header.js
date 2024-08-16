@@ -171,10 +171,10 @@ const Header = () => {
   const toggleNotificationModal = () => {
     updateNotificationPosition();
     setIsNotificationOpen(prev => !prev);
-/*
+
     if (!isNotificationOpen) {
       setHasUnreadNotifications(false);
-    } */
+    }
   };
 
   useEffect(() => {
