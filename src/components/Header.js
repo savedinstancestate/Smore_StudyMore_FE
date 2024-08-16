@@ -150,12 +150,10 @@ const Header = () => {
   // 초기 로컬 스토리지에서 값 가져오기
   useEffect(() => {
     const storedNotifications = localStorage.getItem("hasUnreadNotifications");
-    if (storedNotifications === null) {
-      // 로컬 스토리지에 값이 없으면 기본값을 false로 설정
-      setHasUnreadNotifications(false);
-    } else {
-      // 로컬 스토리지에 값이 있으면 그 값을 사용
+    if (storedNotifications) {
       setHasUnreadNotifications(JSON.parse(storedNotifications));
+    } else {
+      setHasUnreadNotifications(false); // 기본값을 false로 설정
     }
 
     updateNotificationPosition();
@@ -173,10 +171,10 @@ const Header = () => {
   const toggleNotificationModal = () => {
     updateNotificationPosition();
     setIsNotificationOpen(prev => !prev);
-
+/*
     if (!isNotificationOpen) {
       setHasUnreadNotifications(false);
-    }
+    } */
   };
 
   useEffect(() => {
