@@ -165,11 +165,12 @@ const Header = () => {
 
   const toggleNotificationModal = () => {
     updateNotificationPosition();
-    setIsNotificationOpen(prev => !prev);
-
-    if (!isNotificationOpen) {
-      setHasUnreadNotifications(false);
-    }
+    setIsNotificationOpen(prev => {
+      if (!prev) {
+        setHasUnreadNotifications(false); // 알림 모달을 열 때 unread 상태를 false로 설정
+      }
+      return !prev;
+    });
   };
 
   useEffect(() => {
@@ -189,8 +190,16 @@ const Header = () => {
     setIsModalOpen(false);
   };
 
+  const resetNotificationState = () => {
+    setHasUnreadNotifications(false);
+    localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
+  };
+
   const handleNotificationUpdate = (hasNewNotification) => {
     setHasUnreadNotifications(hasNewNotification);
+    if (!hasNewNotification) {
+      resetNotificationState(); // 알림이 없어진 경우 상태와 로컬 스토리지 초기화
+    }
   };
 
   const renderPageTitle = useMemo(() => {
