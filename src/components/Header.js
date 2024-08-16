@@ -148,16 +148,12 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // 페이지 로드 시 로컬 스토리지에서 상태를 불러옴
-  const storedNotifications = JSON.parse(localStorage.getItem("hasUnreadNotifications"));
+    const storedNotifications = JSON.parse(localStorage.getItem("hasUnreadNotifications"));
 
-  if (storedNotifications !== null) {
-    // storedNotifications이 'true' 문자열이면 true, 'false' 문자열이면 false로 변환
-    setHasUnreadNotifications(storedNotifications === 'true');
-  } else {
-    // 로컬 스토리지에 값이 없으면 초기화 (false로 설정)
-    localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
-  }
+    // 로컬 스토리지의 값이 유효한 경우 상태를 업데이트합니다.
+    if (storedNotifications !== null) {
+      setHasUnreadNotifications(storedNotifications);
+    }
 
     updateNotificationPosition();
     window.addEventListener("resize", updateNotificationPosition);
@@ -167,19 +163,19 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    // 상태 변경 시 로컬 스토리지 업데이트
+    // 상태가 변경될 때마다 로컬 스토리지에 저장합니다.
     localStorage.setItem("hasUnreadNotifications", JSON.stringify(hasUnreadNotifications));
-  }, [hasUnreadNotifications]); 
+  }, [hasUnreadNotifications]);
 
   const toggleNotificationModal = () => {
     updateNotificationPosition();
     setIsNotificationOpen((prev) => !prev);
 
+    // 모달이 열릴 때에만 알림 읽음으로 표시합니다.
     if (!isNotificationOpen) {
       setHasUnreadNotifications(false);
-      localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
     }
-  }; 
+  };
 
   useEffect(() => {
     const checkLoginStatus = () => {
@@ -199,8 +195,7 @@ const Header = () => {
   };
 
   const handleNotificationUpdate = (hasNewNotification) => {
-    setHasUnreadNotifications(hasNewNotification); // 알림 업데이트 상태 설정
-    localStorage.setItem("hasUnreadNotifications", JSON.stringify(hasNewNotification));
+    setHasUnreadNotifications(hasNewNotification);
   };
 
   const renderPageTitle = useMemo(() => {
@@ -231,7 +226,7 @@ const Header = () => {
             </Logo>
             <NavContainer>
               <NavLinks>
-              <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')}>
+                <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')}>
                   홈
                 </NavLink>
                 {isLoggedIn ? (
@@ -260,7 +255,7 @@ const Header = () => {
                   <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
                 )}
               </NavLinks>
-              </NavContainer>
+            </NavContainer>
           </HeaderContent>
         </HeaderContainer>
         <TitleContainer>
