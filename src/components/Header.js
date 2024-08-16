@@ -147,22 +147,21 @@ const Header = () => {
     }
   };
 
- // 초기 로컬 스토리지에서 값 가져오기
- useEffect(() => {
-  const storedNotifications = localStorage.getItem("hasUnreadNotifications");
+  // 초기 로컬 스토리지에서 값 가져오기
+  useEffect(() => {
+    const storedNotifications = localStorage.getItem("hasUnreadNotifications");
+    if (storedNotifications) {
+      setHasUnreadNotifications(JSON.parse(storedNotifications));
+    } else {
+      setHasUnreadNotifications(false); // 기본값을 false로 설정
+    }
 
-  if (storedNotifications !== null) {
-    setHasUnreadNotifications(JSON.parse(storedNotifications));
-  } else {
-    setHasUnreadNotifications(false); // 초기값을 false로 설정
-  }
-
-  updateNotificationPosition();
-  window.addEventListener("resize", updateNotificationPosition);
-  return () => {
-    window.removeEventListener("resize", updateNotificationPosition);
-  };
-}, []);
+    updateNotificationPosition();
+    window.addEventListener("resize", updateNotificationPosition);
+    return () => {
+      window.removeEventListener("resize", updateNotificationPosition);
+    };
+  }, []);
 
   // 알림 상태가 변경될 때마다 로컬 스토리지에 저장
   useEffect(() => {
@@ -171,7 +170,7 @@ const Header = () => {
 
   const toggleNotificationModal = () => {
     updateNotificationPosition();
-    setIsNotificationOpen((prev) => !prev);
+    setIsNotificationOpen(prev => !prev);
 
     if (!isNotificationOpen) {
       setHasUnreadNotifications(false);
