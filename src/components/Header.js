@@ -133,7 +133,7 @@ const Header = () => {
   const location = useLocation();
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState([]);
   const [notificationPosition, setNotificationPosition] = useState({
     top: 0,
     left: 0,
@@ -147,28 +147,32 @@ const Header = () => {
     }
   };
 
-  useEffect(() => {
-    // 페이지가 처음 로드될 때 로컬 스토리지에서 알림 읽음 상태를 가져옵니다.
-    const storedNotifications = JSON.parse(localStorage.getItem("hasUnreadNotifications"));
-    if (storedNotifications !== null) {
-      setHasUnreadNotifications(storedNotifications);
-    }
+ // 초기 로컬 스토리지에서 값 가져오기
+ useEffect(() => {
+  const storedNotifications = localStorage.getItem("hasUnreadNotifications");
 
-    updateNotificationPosition();
-    window.addEventListener("resize", updateNotificationPosition);
-    return () => {
-      window.removeEventListener("resize", updateNotificationPosition);
-    };
-  }, []);
+  if (storedNotifications) {
+    setHasUnreadNotifications(JSON.parse(storedNotifications));
+  }
+
+  updateNotificationPosition();
+  window.addEventListener("resize", updateNotificationPosition);
+  return () => {
+    window.removeEventListener("resize", updateNotificationPosition);
+  };
+}, []);
+
+  // 알림 상태가 변경될 때마다 로컬 스토리지에 저장
+  useEffect(() => {
+    localStorage.setItem("hasUnreadNotifications", JSON.stringify(hasUnreadNotifications));
+  }, [hasUnreadNotifications]);
 
   const toggleNotificationModal = () => {
     updateNotificationPosition();
     setIsNotificationOpen((prev) => !prev);
 
-    // 모달이 열릴 때에만 알림 읽음으로 표시합니다.
     if (!isNotificationOpen) {
-      setHasUnreadNotifications(false);
-      localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
+      setHasUnreadNotifications([]);
     }
   };
 
@@ -191,7 +195,6 @@ const Header = () => {
 
   const handleNotificationUpdate = (hasNewNotification) => {
     setHasUnreadNotifications(hasNewNotification);
-    localStorage.setItem("hasUnreadNotifications", JSON.stringify(hasNewNotification));
   };
 
   const renderPageTitle = useMemo(() => {
