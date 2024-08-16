@@ -150,10 +150,12 @@ const Header = () => {
   // 초기 로컬 스토리지에서 값 가져오기
   useEffect(() => {
     const storedNotifications = localStorage.getItem("hasUnreadNotifications");
-    if (storedNotifications) {
-      setHasUnreadNotifications(JSON.parse(storedNotifications));
+    if (storedNotifications === null) {
+      // 로컬 스토리지에 값이 없으면 기본값을 false로 설정
+      setHasUnreadNotifications(false);
     } else {
-      setHasUnreadNotifications(false); // 기본값을 false로 설정
+      // 로컬 스토리지에 값이 있으면 그 값을 사용
+      setHasUnreadNotifications(JSON.parse(storedNotifications));
     }
 
     updateNotificationPosition();
