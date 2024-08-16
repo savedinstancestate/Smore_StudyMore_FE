@@ -133,7 +133,7 @@ const Header = () => {
   const location = useLocation();
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const [hasUnreadNotifications, setHasUnreadNotifications] = useState([]);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const [notificationPosition, setNotificationPosition] = useState({
     top: 0,
     left: 0,
@@ -151,8 +151,10 @@ const Header = () => {
  useEffect(() => {
   const storedNotifications = localStorage.getItem("hasUnreadNotifications");
 
-  if (storedNotifications) {
+  if (storedNotifications !== null) {
     setHasUnreadNotifications(JSON.parse(storedNotifications));
+  } else {
+    setHasUnreadNotifications(false); // 초기값을 false로 설정
   }
 
   updateNotificationPosition();
@@ -172,7 +174,7 @@ const Header = () => {
     setIsNotificationOpen((prev) => !prev);
 
     if (!isNotificationOpen) {
-      setHasUnreadNotifications([]);
+      setHasUnreadNotifications(false);
     }
   };
 
