@@ -252,14 +252,14 @@ const Header = () => {
             <NavLink
               to="/mystudy"
               className={({ isActive }) => (isActive ? "active" : "")}
-              // onClick={handleProtectedLinkClick}
+              onClick={handleProtectedLinkClick}
             >
               내 스터디
             </NavLink>
             <NavLink
               to="/mypage"
               className={({ isActive }) => (isActive ? "active" : "")}
-              // onClick={handleProtectedLinkClick}
+              onClick={handleProtectedLinkClick}
             >
               마이페이지
             </NavLink>
