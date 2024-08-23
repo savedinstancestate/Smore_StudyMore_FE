@@ -119,8 +119,8 @@ const NotificationIcon = styled.img`
 
 const NotificationBadge = styled.span`
   position: absolute;
-  top: 5;
-  right: 9;
+  top: 5px;
+  right: 9px;
   background-color: #ea8400;
   border-radius: 50%;
   width: 9px;
