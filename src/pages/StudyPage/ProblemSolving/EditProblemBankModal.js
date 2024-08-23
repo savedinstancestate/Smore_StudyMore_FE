@@ -78,37 +78,71 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, onUpdate }) => {
     return (
         <UniversalModal show={show} handleClose={handleClose} title="문제은행 수정" backdrop="static">
             <Form>
-                <Form.Group>
-                    <Form.Label>문제은행 제목:</Form.Label>
-                    <Form.Control type="text" value={bankName} onChange={handleBankNameChange} />
-                    <Button
-                        variant="outline-success"
-                        onClick={handleSaveBankName}
-                        className="mb-3"
-                        style={{ marginTop: '5px' }}
-                    >
-                        저장
-                    </Button>
+                <Form.Group
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginBottom: '10px',
+                        width: '100%',
+                    }}
+                >
+                    <Form.Label style={{ width: '40px' }}>제목</Form.Label>
+                    <Form.Control size="sm" type="text" value={bankName} onChange={handleBankNameChange} />
+                    <div className="button-right" width="20px">
+                        <Button
+                            variant="outline-success"
+                            onClick={handleSaveBankName}
+                            className="mb-3"
+                            style={{ padding: '5px', width: '50px', marginTop: '10px' }}
+                        >
+                            저장
+                        </Button>
+                    </div>
                 </Form.Group>
+
                 {problems.length > 0 &&
                     problems.map((problem, index) => (
-                        <div key={index}>
+                        <div key={index} style={{ marginBottom: '20px' }}>
                             <Form.Group>
-                                <Form.Label>Q: {problem.problemContent}</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    value={problem.problemContent}
-                                    onChange={(e) => handleProblemChange(index, 'problemContent', e.target.value)}
-                                />
+                                <Form.Group
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        marginBottom: '10px',
+                                        width: '100%',
+                                    }}
+                                >
+                                    <Form.Label style={{ marginRight: '10px', marginBottom: '0' }}>질문</Form.Label>
+                                    <Form.Control
+                                        size="sm"
+                                        type="text"
+                                        value={problem.problemContent}
+                                        onChange={(e) => handleProblemChange(index, 'problemContent', e.target.value)}
+                                        style={{ flex: '1' }}
+                                    />
+                                </Form.Group>
+
                                 {problem.options.map((option, optIndex) => (
-                                    <InputGroup className="mb-3" key={optIndex}>
-                                        <InputGroup.Text>{optIndex + 1}</InputGroup.Text>
+                                    <Form.Group
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            marginBottom: '10px',
+                                            width: '100%',
+                                            className: 'mb-3',
+                                            key: optIndex,
+                                        }}
+                                    >
+                                        <Form.Label style={{ marginRight: '10px', marginBottom: '0' }}>
+                                            보기 {optIndex + 1}
+                                        </Form.Label>
                                         <Form.Control
+                                            size="sm"
                                             type="text"
                                             value={option.content}
                                             onChange={(e) => handleOptionChange(index, optIndex, e.target.value)}
                                         />
-                                    </InputGroup>
+                                    </Form.Group>
                                 ))}
                                 <InputGroup className="mb-3">
                                     <InputGroup.Text>정답번호</InputGroup.Text>
@@ -123,9 +157,18 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, onUpdate }) => {
                                         ))}
                                     </Form.Select>
                                 </InputGroup>
-                                <Form.Group>
-                                    <Form.Label>해설</Form.Label>
+
+                                <Form.Group
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        marginBottom: '10px',
+                                        width: '100%',
+                                    }}
+                                >
+                                    <Form.Label style={{ marginRight: '10px', marginBottom: '0' }}>해설</Form.Label>
                                     <Form.Control
+                                        size="sm"
                                         type="text"
                                         value={problem.problemExplanation}
                                         onChange={(e) =>
@@ -137,7 +180,7 @@ const EditProblemBankModal = ({ show, handleClose, problemBank, onUpdate }) => {
                                     variant="outline-success"
                                     onClick={() => handleSaveProblem(index)}
                                     className="mb-3"
-                                    style={{ marginTop: '5px' }}
+                                    style={{ marginTop: '5px', width: '100%' }}
                                 >
                                     저장
                                 </Button>

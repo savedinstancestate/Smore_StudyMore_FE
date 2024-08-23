@@ -51,15 +51,15 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
             <ul className="study-problems-list">
                 {problemBanks.map((bank) => (
                     <li key={bank.problemBankPk} className="study-problem-item">
-                        <Form.Check
-                            type="checkbox"
-                            id={`bank-check-${bank.problemBankPk}`}
-                            className="checkbox"
-                            label={bank.problemBankName}
-                            checked={selectedBanks[bank.problemBankPk] || false}
-                            onChange={() => handleBankSelect(bank.problemBankPk)}
-                        />
                         <label htmlFor={`bank-check-${bank.problemBankPk}`} className="problem-info">
+                            <Form.Check
+                                type="checkbox"
+                                id={`bank-check-${bank.problemBankPk}`}
+                                className="checkbox"
+                                label={bank.problemBankName}
+                                checked={selectedBanks[bank.problemBankPk] || false}
+                                onChange={() => handleBankSelect(bank.problemBankPk)}
+                            />
                             <span className="problem-count">문제 수: {bank.count}</span>
                         </label>
                     </li>
