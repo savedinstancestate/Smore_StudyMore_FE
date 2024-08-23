@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import Cookies from "js-cookie";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -8,9 +8,9 @@ import Login from "../pages/LoginPage/LoginModal";
 import CreateStudyModal from "../pages/HomePage/CreateStudyModal";
 import { useHeaderStudyName } from "./StudyNameContext";
 import { useAuth } from "./AuthContext";
-import NotificationComponent from "./NotificationModal"; 
+import NotificationComponent from "./NotificationModal";
 import logoImage from "./smore-logo-ver1.png";
-import notificationIcon from "./notification.png"; 
+import notificationIcon from "./notification.png";
 
 const HeaderWrapper = styled.div`
   position: fixed;
@@ -40,12 +40,12 @@ const HeaderContent = styled.div`
   max-width: 1000px;
 `;
 
-const NavContainer = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-end",
-  marginRight: "25px",
-};
+const NavContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 25px;
+`;
 
 const Logo = styled(NavLink)`
   display: flex;
@@ -115,49 +115,63 @@ const NotificationButton = styled.button`
 
 const NotificationIcon = styled.img`
   width: 22px;
-
 `;
 
 const NotificationBadge = styled.span`
   position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: red;
-  color: white;
+  top: 1px;
+  right: 6px;
+  background-color: #009063;
   border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
+  width: 10px;
+  height: 10px;
 `;
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const location = useLocation();
-  const currentLocation = useLocation();
   const { headerStudyName } = useHeaderStudyName();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const [notifications, setNotifications] = useState([]);
-  const [notificationPosition, setNotificationPosition] = useState({ top: 0, left: 0 });
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
+  const [notificationPosition, setNotificationPosition] = useState({
+    top: 0,
+    left: 0,
+  });
   const notificationButtonRef = useRef(null);
 
   const updateNotificationPosition = () => {
     if (notificationButtonRef.current) {
       const rect = notificationButtonRef.current.getBoundingClientRect();
-      setNotificationPosition({ top: rect.bottom, left: rect.left - 270 });
+      setNotificationPosition({ top: rect.bottom, left: rect.left - 235 });
     }
   };
 
-  const toggleNotificationModal = () => {
-    updateNotificationPosition();
-    setIsNotificationOpen(!isNotificationOpen);
-  };
-
   useEffect(() => {
-    window.addEventListener('resize', updateNotificationPosition);
+    const storedNotifications = localStorage.getItem("hasUnreadNotifications");
+    // 기본값을 false로 설정하고, 로컬 스토리지에 값이 있는 경우 업데이트
+    setHasUnreadNotifications(storedNotifications ? JSON.parse(storedNotifications) : false);
+    updateNotificationPosition();
+    window.addEventListener("resize", updateNotificationPosition);
     return () => {
-      window.removeEventListener('resize', updateNotificationPosition);
+      window.removeEventListener("resize", updateNotificationPosition);
     };
   }, []);
+
+  // 알림 상태가 변경될 때마다 로컬 스토리지에 저장
+  useEffect(() => {
+    localStorage.setItem("hasUnreadNotifications", JSON.stringify(hasUnreadNotifications));
+  }, [hasUnreadNotifications]);
+
+  const toggleNotificationModal = () => {
+    updateNotificationPosition();
+    setIsNotificationOpen(prev => {
+      if (!prev) {
+        setHasUnreadNotifications(false); // 알림 모달을 열 때 unread 상태를 false로 설정
+      }
+      return !prev;
+    });
+  };
 
   useEffect(() => {
     const checkLoginStatus = () => {
@@ -166,7 +180,7 @@ const Header = () => {
     };
 
     checkLoginStatus();
-  }, [location]);
+  }, [location, setIsLoggedIn]);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -176,15 +190,23 @@ const Header = () => {
     setIsModalOpen(false);
   };
 
-  const handleCloseNotificationModal = () => {
-    setIsNotificationOpen(false);
+  const resetNotificationState = () => {
+    setHasUnreadNotifications(false);
+    localStorage.setItem("hasUnreadNotifications", JSON.stringify(false));
   };
 
-  const renderPageTitle = () => {
-    if (currentLocation.pathname.startsWith("/study")) {
+  const handleNotificationUpdate = (hasNewNotification) => {
+    setHasUnreadNotifications(hasNewNotification);
+    if (!hasNewNotification) {
+      resetNotificationState(); // 알림이 없어진 경우 상태와 로컬 스토리지 초기화
+    }
+  };
+
+  const renderPageTitle = useMemo(() => {
+    if (location.pathname.startsWith("/study")) {
       return headerStudyName || "스터디 로딩 중...";
     }
-    switch (currentLocation.pathname) {
+    switch (location.pathname) {
       case "/":
         return "Study More";
       case "/mystudy":
@@ -196,7 +218,7 @@ const Header = () => {
       default:
         return "";
     }
-  };
+  }, [location.pathname, headerStudyName]);
 
   return (
     <>
@@ -206,37 +228,42 @@ const Header = () => {
             <Logo to="/">
               <LogoImage src={logoImage} alt="Logo" />
             </Logo>
-            <div style={NavContainer}>
+            <NavContainer>
               <NavLinks>
-                <NavLink exact to="/" activeClassName="active">
+                <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')}>
                   홈
                 </NavLink>
-                <NotificationButton ref={notificationButtonRef} onClick={toggleNotificationModal}>
-                <NotificationIcon src={notificationIcon} alt="Notifications" />
-                      {notifications.length > 0 && (
-                        <NotificationBadge>{notifications.length}</NotificationBadge>
-                      )}
-                </NotificationButton>
                 {isLoggedIn ? (
                   <>
-                    <NavLink to="/mystudy" activeClassName="active">
+                    <NavLink to="/mystudy" className={({ isActive }) => (isActive ? 'active' : '')}>
                       내 스터디
                     </NavLink>
-                    <NavLink to="/mypage" activeClassName="active">
+                    <NavLink to="/mypage" className={({ isActive }) => (isActive ? 'active' : '')}>
                       마이페이지
                     </NavLink>
+                    <NotificationButton
+                      ref={notificationButtonRef}
+                      onClick={toggleNotificationModal}
+                    >
+                      <NotificationIcon
+                        src={notificationIcon}
+                        alt="Notifications"
+                      />
+                      {hasUnreadNotifications && (
+                        <NotificationBadge />
+                      )}
+                    </NotificationButton>
                     <CreateStudyModal />
-                    
                   </>
                 ) : (
                   <LoginButton onClick={handleOpenModal}>로그인</LoginButton>
                 )}
               </NavLinks>
-            </div>
+            </NavContainer>
           </HeaderContent>
         </HeaderContainer>
         <TitleContainer>
-          <PageTitle>{renderPageTitle()}</PageTitle>
+          <PageTitle>{renderPageTitle}</PageTitle>
         </TitleContainer>
       </HeaderWrapper>
 
@@ -246,8 +273,8 @@ const Header = () => {
 
       <NotificationComponent
         show={isNotificationOpen}
-        handleClose={handleCloseNotificationModal}
         position={notificationPosition}
+        onNotificationReceived={handleNotificationUpdate}
       />
     </>
   );
