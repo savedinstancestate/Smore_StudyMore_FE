@@ -188,7 +188,7 @@ function MyStudy() {
           ))
         )}   
       </div>
-
+ {/*
       <div className="card-container">
       <p className="card-type">지원한 스터디 🧑‍💻</p>
       <div className="list-container">
@@ -242,7 +242,7 @@ function MyStudy() {
               </div>
       </div>
 </div>
-
+          */}
 
 
       <Modal show={isModalOpen} handleClose={handleCloseModal} title="지원요청 목록">
@@ -252,7 +252,8 @@ function MyStudy() {
       <Modal show={isWithdrawalModalOpen} handleClose={handleCloseWithdrawalModal} title="스터디 탈퇴">
         {studyToLeave && (
           <div className="study-leave-modal">
-            <h5>정말 탈퇴하시겠어요?</h5>
+            <img src="img/warning.png" style={{width: '40px', marginTop: '-12px', marginBottom: '12px'}}></img>
+            <h5>스터디를 탈퇴하시겠습니까?</h5>
             <div className="study-leave-contents">
             <p className="study-leave-content">스터디 탈퇴 시 모든 데이터는 삭제되며, 복구되지 않습니다.</p>
             <p className="study-leave-content">확인을 위해 <b>'{studyToLeave.studyName}'</b>을(를) 정확히 입력하세요.</p>

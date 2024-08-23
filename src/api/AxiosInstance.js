@@ -2,7 +2,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const API = axios.create({
-  baseURL: process.env.REACT_APP_AUTH_URL,
+  baseURL: '',
+  // baseURL: process.env.REACT_APP_AUTH_URL,
   headers: {
     'Content-Type': 'application/json'
   }

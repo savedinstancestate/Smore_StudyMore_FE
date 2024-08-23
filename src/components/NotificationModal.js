@@ -94,6 +94,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
         zIndex: 1002,
         backgroundColor: "white",
         padding: "20px 20px 10px 20px",
+        border: "1px solid #e2e2e2",
         borderRadius: "8px",
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
         maxHeight: "300px",
@@ -104,7 +105,7 @@ const NotificationComponent = ({ show, position, onNotificationReceived }) => {
       <h6 style={{fontWeight: '500'}}>알림</h6>
       <div>
         {notifications.length === 0 ? (
-          <div style={{ padding: "10px", textAlign: "center", color: "#888" }}>
+          <div style={{ padding: "10px", textAlign: "center", color: "#888", fontSize: "15px", paddingBottom: "18px" }}>
             알림이 없습니다.
           </div>
         ) : (

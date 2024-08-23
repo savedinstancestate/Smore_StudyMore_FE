@@ -77,7 +77,7 @@ loadMoreData();
                 style={{ backgroundImage: `url(${study.imageUri})` }}
               ></div>
               <div className="card-body-home">
-                <p className="study-name">{study.adTitle}</p>
+                <p className="ad-name">{study.adTitle}</p>
                 <div className="study-content-wrapper">
                 <p className="study-content">{study.adContent}</p>
                 </div>

@@ -3,6 +3,7 @@ import { setupWorker, rest } from 'msw';
 // const studyPk = 591138934038569899;
 
 export const handlers = [
+<<<<<<< HEAD
     rest.get('/mystudy', (req, res, ctx) => {
         console.log('');
         return res(
@@ -64,6 +65,77 @@ export const handlers = [
             })
         );
     }),
+=======
+  rest.get("/mystudy", (req, res, ctx) => {
+    console.log("");
+    return res(
+      ctx.status(200),
+      ctx.json({
+        studyList: [
+          {
+            studyPk: 1,
+            studyName: "자바보라능",
+            studyImg: "/img/sample-img-1.png",
+            studyPersonNum: 4,
+            maxPeople: 5,
+            studyStartDate: "2023-01-01",
+            studyEndDate: "2023-12-31",
+          },
+          {
+            studyPk: 2,
+            studyName: "네트워King",
+            studyImg: "/img/sample-img-2.png",
+            studyPersonNum: 4,
+            studyStartDate: "2023-01-01",
+            studyEndDate: "2023-12-31",
+          },
+        ],
+      })
+    );
+  }),
+  rest.get("/mystudy/admin", (req, res, ctx) => {
+    console.log("");
+    return res(
+      ctx.status(200),
+      ctx.json({
+        studyList: [
+          {
+            studyPk: 3,
+            studyName: "빌런저장소",
+            studyImg: "/img/sample-img-1.png",
+            studyPersonNum: 4,
+            studyStartDate: "2023-01-01",
+            studyEndDate: "2023-12-31",
+          },
+          {
+            studyPk: 4,
+            studyName: "아마zone",
+            studyImg: "/img/sample-img-2.png",
+            studyPersonNum: 4,
+            studyStartDate: "2023-01-01",
+            studyEndDate: "2023-12-31",
+          },
+          {
+            studyPk: 5,
+            studyName: "자율스터디",
+            studyImg: "/img/sample-img-3.jpg",
+            studyPersonNum: 4,
+            studyStartDate: "2023-01-01",
+            studyEndDate: "2023-12-31",
+          },
+          {
+            studyPk: 6,
+            studyName: "자율스터디",
+            studyImg: "/img/sample-img-3.jpg",
+            studyPersonNum: 4,
+            studyStartDate: "2023-01-01",
+            studyEndDate: "2023-12-31",
+          },
+        ],
+      })
+    );
+  }),
+>>>>>>> a973eb6 ([style] UI 디자인 변경)
 
     rest.get('/mystudy/apply/:studyPk', (req, res, ctx) => {
         const { studyPk } = req.params;
@@ -120,6 +192,7 @@ export const handlers = [
         );
     }),
 
+<<<<<<< HEAD
     rest.get('/board', (req, res, ctx) => {
         return res(
             ctx.status(200),
@@ -320,10 +393,221 @@ export const handlers = [
             ])
         );
     }),
+=======
+  rest.get("/board", (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json([
+        {
+          studyBoardPk: 1,
+          studyPk: 1,
+          studyName: "빌런저장소",
+          adTitle: "빌런저장소입니다",
+          adContent:
+            "알고리즘 골드 이상까지 풀어 보실분! Java로 하시는 분 모집합니다! 활발한 분위기고 출석체크 엄격하게 합니다! 스터디 운영 여러개 해봤습니다! 다들 지원해주세요!",
+          imageUri: "/img/sample-img-1.png",
+          curPeople: 4,
+          maxPeople: 6,
+          startDate: "2023-01-01",
+          closeDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 2,
+          studyPk: 2,
+          studyName: "아마zone",
+          adTitle: "알고리즘 공부 같이",
+          adContent:
+            "아마존에 간 존에 대해 이야기하는 스터디입니다...",
+            imageUri: "/img/sample-img-2.png",
+            curPeople: 4,
+            maxPeople: 6,
+          startDate: "2023-01-01",
+          closeDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 3,
+          studyPk: 3,
+          studyName: "우아한 스터디",
+          adTitle: "우아한 스터디 모집합니다.",
+          adContent:
+            "우아한 스터디 모집중",
+            imageUri: "/img/sample-img-3.jpg",
+            curPeople: 4,
+            maxPeople: 6,
+          startDate: "2023-01-01",
+          closeDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 4,
+          studyPk: 4,
+          studyName: "빌런저장소",
+          adTitle: "빌런저장소입니다",
+          adContent:
+            "알고리즘 골드 이상까지 풀어 보실분! Java로 하시는 분 모집합니다! 활발한 분위기고 출석체크 엄격하게 합니다! 스터디 운영 여러개 해봤습니다! 다들 지원해주세요!",
+            imageUri: "/img/sample-img-1.png",
+            curPeople: 4,
+            maxPeople: 6,
+          startDate: "2023-01-01",
+          closeDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 5,
+          studyPk: 5,
+          studyName: "아마zone",
+          adTitle: "아마존에 간 건 아마...존?",
+          adContent:
+            "아마존에 간 존에 대해 이야기하는 스터디입니다... 나이, 성별 제한 없습니다... 아무나 오세요... 환영합니다... 칼수락 합니다...",
+            imageUri: "/img/sample-img-2.png",
+            curPeople: 4,
+            maxPeople: 6,
+          startDate: "2023-01-01",
+          closeDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 6,
+          studyPk: 6,
+          studyName: "우아한 스터디",
+          adTitle: "우아한 스터디 모집합니다.",
+          adContent:
+            "우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다!",
+            imageUri: "/img/sample-img-3.jpg",
+            curPeople: 4,
+            maxPeople: 6,
+          startDate: "2023-01-01",
+          closeDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 7,
+          studyPk: 7,
+          studyName: "빌런저장소",
+          adTitle: "빌런저장소입니다",
+          adContent:
+            "알고리즘 골드 이상까지 풀어 보실분! Java로 하시는 분 모집합니다! 활발한 분위기고 출석체크 엄격하게 합니다! 스터디 운영 여러개 해봤습니다! 다들 지원해주세요!",
+          studyImg: "/img/sample-img-1.png",
+          studyPersonNum: 4,
+          studyStartDate: "2023-01-01",
+          studyEndDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 8,
+          studyPk: 8,
+          studyName: "아마zone",
+          adTitle: "아마존에 간 건 아마...존?",
+          adContent:
+            "아마존에 간 존에 대해 이야기하는 스터디입니다... 나이, 성별 제한 없습니다... 아무나 오세요... 환영합니다... 칼수락 합니다...",
+          studyImg: "/img/sample-img-2.png",
+          studyPersonNum: 4,
+          studyStartDate: "2023-01-01",
+          studyEndDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 9,
+          studyPk: 9,
+          studyName: "우아한 스터디",
+          adTitle: "우아한 스터디 모집합니다.",
+          adContent:
+            "우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다!",
+          studyImg: "/img/sample-img-3.jpg",
+          studyPersonNum: 4,
+          studyStartDate: "2023-01-01",
+          studyEndDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 10,
+          studyPk: 10,
+          studyName: "빌런저장소",
+          adTitle: "빌런저장소입니다",
+          adContent:
+            "알고리즘 골드 이상까지 풀어 보실분! Java로 하시는 분 모집합니다! 활발한 분위기고 출석체크 엄격하게 합니다! 스터디 운영 여러개 해봤습니다! 다들 지원해주세요!",
+          studyImg: "/img/sample-img-1.png",
+          studyPersonNum: 4,
+          studyStartDate: "2023-01-01",
+          studyEndDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 11,
+          studyPk: 11,
+          studyName: "아마zone",
+          adTitle: "아마존에 간 건 아마...존?",
+          adContent:
+            "아마존에 간 존에 대해 이야기하는 스터디입니다... 나이, 성별 제한 없습니다... 아무나 오세요... 환영합니다... 칼수락 합니다...",
+          studyImg: "/img/sample-img-2.png",
+          studyPersonNum: 4,
+          studyStartDate: "2023-01-01",
+          studyEndDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 12,
+          studyPk: 12,
+          studyName: "우아한 스터디",
+          adTitle: "우아한 스터디 모집합니다.",
+          adContent:
+            "우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다!",
+          studyImg: "/img/sample-img-3.jpg",
+          studyPersonNum: 4,
+          studyStartDate: "2023-01-01",
+          studyEndDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 13,
+          studyPk: 13,
+          studyName: "빌런저장소",
+          adTitle: "빌런저장소입니다",
+          adContent:
+            "알고리즘 골드 이상까지 풀어 보실분! Java로 하시는 분 모집합니다! 활발한 분위기고 출석체크 엄격하게 합니다! 스터디 운영 여러개 해봤습니다! 다들 지원해주세요!",
+          studyImg: "/img/sample-img-1.png",
+          studyPersonNum: 4,
+          studyStartDate: "2023-01-01",
+          studyEndDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 14,
+          studyPk: 14,
+          studyName: "아마zone",
+          adTitle: "아마존에 간 건 아마...존?",
+          adContent:
+            "아마존에 간 존에 대해 이야기하는 스터디입니다... 나이, 성별 제한 없습니다... 아무나 오세요... 환영합니다... 칼수락 합니다...",
+          studyImg: "/img/sample-img-2.png",
+          studyPersonNum: 4,
+          studyStartDate: "2023-01-01",
+          studyEndDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+        {
+          studyBoardPk: 15,
+          studyPk: 15,
+          studyName: "우아한 스터디",
+          adTitle: "우아한 스터디 모집합니다.",
+          adContent:
+            "우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다!",
+          studyImg: "/img/sample-img-3.jpg",
+          studyPersonNum: 4,
+          studyStartDate: "2023-01-01",
+          studyEndDate: "2023-12-31",
+          modifyDate: "2023-02-23",
+        },
+      ])
+    );
+  }),
+>>>>>>> a973eb6 ([style] UI 디자인 변경)
 
     rest.get('/board/:studyBoardPk', (req, res, ctx) => {
         const { studyBoardPk } = req.params; // req.params를 통해 URL에서 studyBoardPk 값을 얻음
 
+<<<<<<< HEAD
         // 사전에 정의된 스터디 정보 객체
         const boardData = {
             1: {
@@ -379,6 +663,53 @@ export const handlers = [
                 modifyDate: '2023-02-23',
             },
         };
+=======
+    // 사전에 정의된 스터디 정보 객체
+    const boardData = {
+      1: {
+        studyBoardPk: 1,
+        studyPk: 1,
+        studyName: "빌런저장소",
+        adTitle: "빌런저장소입니다",
+        adContent:
+          "알고리즘 골드 이상까지 풀어 보실분! Java로 하시는 분 모집합니다! 활발한 분위기고 출석체크 엄격하게 합니다! 스터디 운영 여러개 해봤습니다! 다들 지원해주세요!",
+          imageUri: "/img/sample-img-1.png",
+          curPeople: 4,
+          maxPeople: 6,
+        startDate: "2023-01-01",
+        closeDate: "2023-12-31",
+        modifyDate: "2023-02-23",
+      },
+      2: {
+        studyBoardPk: 2,
+        studyPk: 2,
+        studyName: "아마zone",
+        adTitle: "아마존에 간 건 아마...존?",
+        adContent:
+          "아마존에 간 존에 대해 이야기하는 스터디입니다... 나이, 성별 제한 없습니다... 아무나 오세요... 환영합니다... 칼수락 합니다...",
+          imageUri: "/img/sample-img-2.png",
+          curPeople: 4,
+          maxPeople: 6,
+        startDate: "2023-01-01",
+        closeDate: "2023-12-31",
+        modifyDate: "2023-02-23",
+      },
+      3: {
+        studyBoardPk: 3,
+        studyPk: 3,
+        studyName: "우아한 스터디",
+        adTitle: "우아한 스터디 모집합니다.",
+        adContent:
+          "우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다! 우아한 스터디 모집중입니다!",
+          imageUri: "/img/sample-img-3.jpg",
+          curPeople: 4,
+          maxPeople: 6,
+          startDate: "2023-01-01",
+          closeDate: "2023-12-31",
+        modifyDate: "2023-02-23",
+      },
+    };
+>>>>>>> a973eb6 ([style] UI 디자인 변경)
 
         const study = boardData[studyBoardPk];
 
@@ -585,6 +916,7 @@ export const handlers = [
         );
     }),
 
+<<<<<<< HEAD
     // 수지 API
 
     // 스터디 생성
@@ -1322,4 +1654,42 @@ export const handlers = [
 
         return res(ctx.status(200), ctx.json({ message: '삭제 완료' }));
     }),
+=======
+  rest.get('https://smore.today/subscribe/notification', (req, res, ctx) => {
+    // EventSource는 기본적으로 msw에서 직접 지원하지 않으므로, 여기서는 REST API를 예시로 사용합니다.
+    // 실제 EventSource 테스트는 다른 방식으로 구현해야 할 수 있습니다.
+    return res(
+      ctx.status(200),
+      ctx.json({
+        notificationPk: "0fe8b947-b22e-47d9-ad1c-7f1c8b15172",
+        studyPk: "12312421321312",
+        receiverPk: 123214124215,
+        content: "스터디 가입 신청 요청이 있습니다."
+      })
+    );
+  }),
+
+  rest.get(`${process.env.REACT_APP_AUTH_URL}/subscribe/notification`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json([
+        {
+          id: '598784756638638344_1722925088952',
+          data: 'EventStream Created. [memberPk = 598784756638638344]',
+        },
+        {
+          id: '598784756638638344_1722925088952',
+          event: 'sse',
+          data: JSON.stringify({
+            notificationPk: 'ee9c7508-25db-4467-a425-13aa8b774609',
+            studyPk: '608219604899519210',
+            receiverPk: 598784756638638344,
+            Content: '공지 수정 성공',
+          }),
+        },
+      ])
+    );
+  }),
+
+>>>>>>> a973eb6 ([style] UI 디자인 변경)
 ];

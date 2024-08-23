@@ -101,6 +101,7 @@ function MyPage() {
   };
 
   return (
+    <div className="div-container-mypage">
     <div className="profile-container">
       {error && <div className="alert alert-danger">{error}</div>}
       {successMessage && <div className="alert alert-primary">{successMessage}</div>}
@@ -112,13 +113,15 @@ function MyPage() {
       </div>
 
       <div className="nickname-container">
-        <span className="nickname-title">닉네임</span>
+        <span className="nickname-title">닉네임 
         <span className="nickname-info">한글, 영문, 숫자 2-10자 입력</span>
+        </span>
+        
         <div className="nickname-field">
           <input
             type="text"
             id="nickname"
-            placeholder="수정할 닉네임을 입력하세요."
+            placeholder="수정할 닉네임 입력"
             maxLength="10"
             value={userInfo.nickname} 
             onChange={e => setUserInfo({...userInfo, nickname: e.target.value})}
@@ -126,6 +129,8 @@ function MyPage() {
           <button className="nickname-edit-btn" onClick={updateNickname}>확인</button>
         </div>
       </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    </div>
     </div>
   );
 }
