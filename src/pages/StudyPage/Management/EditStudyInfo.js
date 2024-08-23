@@ -15,7 +15,7 @@ const EditStudyInfo = ({ studyPk }) => {
     const [endDate, setEndDate] = useState(new Date());
     const [showEndDatePicker, setShowEndDatePicker] = useState(false);
     const [error, setError] = useState(null);
-    const [successMessage, setSuccessMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         const fetchStudyData = async () => {
@@ -37,7 +37,7 @@ const EditStudyInfo = ({ studyPk }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-            setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
@@ -60,19 +60,23 @@ const EditStudyInfo = ({ studyPk }) => {
     return (
         <div className="container">
             <div className="header-container">
-            <div className="title">스터디 정보 수정 ℹ️</div> 
-            <Button
-            type="submit" className="button"
-            style={{backgroundColor: '#fff',
-            border: '1px solid #009063',
-            color: '#009063',
-            fontWeight: '500',
-            width: '80px',
-            float: 'right',
-            marginRight: '6px',
-            }}
-            onClick={handleSubmit}
-            >저장</Button>
+                <div className="title">스터디 정보 수정 ℹ️</div>
+                <Button
+                    type="submit"
+                    className="button"
+                    style={{
+                        backgroundColor: '#fff',
+                        border: '1px solid #009063',
+                        color: '#009063',
+                        fontWeight: '500',
+                        width: '80px',
+                        float: 'right',
+                        marginRight: '6px',
+                    }}
+                    onClick={handleSubmit}
+                >
+                    저장
+                </Button>
             </div>
             {error && <div className="alert alert-danger">{error}</div>}
             {successMessage && <div className="alert alert-primary">{successMessage}</div>}
@@ -91,32 +95,38 @@ const EditStudyInfo = ({ studyPk }) => {
                 <Form.Group className="form-group-inline">
                     <Form.Label className="form-label-inline">최대 인원</Form.Label>
                     <Form.Select className="input" name="attendees" value={formData.attendees} onChange={handleChange}>
-                        {[2, 3, 4, 5, 6].map(num => (
-                            <option key={num} value={num}>{num}</option>
+                        {[2, 3, 4, 5, 6].map((num) => (
+                            <option key={num} value={num}>
+                                {num}
+                            </option>
                         ))}
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="form-group-inline">
                     <Form.Label className="form-label-inline">종료 날짜</Form.Label>
-                    <Button className="input" variant="outline-secondary" onClick={() => setShowEndDatePicker(!showEndDatePicker)}>
+                    <Button
+                        className="input"
+                        variant="outline-secondary"
+                        onClick={() => setShowEndDatePicker(!showEndDatePicker)}
+                    >
                         {moment(endDate).format('YYYY-MM-DD')}
                     </Button>
                     {showEndDatePicker && (
                         <Calendar
                             className="calendar"
                             value={endDate}
-                            onChange={(date) => { setEndDate(date); setShowEndDatePicker(false); }}
+                            onChange={(date) => {
+                                setEndDate(date);
+                                setShowEndDatePicker(false);
+                            }}
                             formatDay={(locale, date) => moment(date).format('D')}
                         />
                     )}
                 </Form.Group>
-                <Form.Group className="form-group">
-                </Form.Group>
-                
+                <Form.Group className="form-group"></Form.Group>
             </Form>
         </div>
     );
-    
 };
 
 export default EditStudyInfo;

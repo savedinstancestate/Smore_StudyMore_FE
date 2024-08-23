@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, Alert } from 'react-bootstrap';
 import UniversalModal from '../../../components/Modal';
 import API from '../../../api/AxiosInstance';
-
 const AddAnnouncementModal = ({ show, handleClose, studyPk, onAddAnnouncement }) => {
     const [newAnnouncement, setNewAnnouncement] = useState({ title: '', content: '' });
     const [error, setError] = useState(null);

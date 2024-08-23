@@ -6,9 +6,11 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.study-problems-header .study-problems-title {
+.study-problems-header {
     color: black;
     font-size: 1.5em;
+    display: flex;
+    align-self: flex-start;
 }
 
 .study-problems-list {
@@ -21,8 +23,6 @@
 }
 
 .study-problem-item {
-    display: flex;
-    align-items: center;
     padding: 10px 0;
 }
 
@@ -37,18 +37,21 @@
     align-items: center;
     gap: 20px; /* 문제은행 이름, 출제자, 문제 수 사이의 간격 */
     width: 100%;
+    justify-content: space-between;
 }
 
 .problem-name {
     flex: 2;
-}
-
-.problem-writer {
-    flex: 1;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .problem-count {
-    flex: 1;
+    flex-shrink: 0;
+    text-align: right;
+    width: 200px;
 }
 
 /* 스크롤바 전체 스타일 */
