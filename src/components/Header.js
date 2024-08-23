@@ -119,12 +119,12 @@ const NotificationIcon = styled.img`
 
 const NotificationBadge = styled.span`
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5;
+  right: 9;
   background-color: #ea8400;
   border-radius: 50%;
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
 `;
 
 const Header = () => {
