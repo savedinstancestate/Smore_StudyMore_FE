@@ -65,7 +65,7 @@ const StudyInfo = ({ studyPk }) => {
                     members.map((member) => (
                         <div key={member.memberPk} className="member">
                             <img
-                                src={member.profileImg || '/path/to/default-avatar.png'}
+                                src={member.profileImg || 'img/default-profile.png'}
                                 alt={`${member.nickName}의 사진`}
                                 className="member-avatar"
                             />

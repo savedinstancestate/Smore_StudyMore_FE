@@ -4,8 +4,6 @@ import API from '../../api/AxiosInstance';
 import Modal from '../../components/Modal'; 
 import ApplicantList from "./ApplicantListModal";
 import "../../styles/StudyCard.css";
-import sample1 from './sample1.png';
-import sample2 from './sample2.jpg';
 
 function MyStudy() {
   const [participatingStudies, setParticipatingStudies] = useState([]);
@@ -138,11 +136,11 @@ function MyStudy() {
               ></div>
               <div className="card-body">
                 <p className="study-name">{study.studyName}</p>
-                <p className="card-title">스터디 기간</p>
+                <p className="card-title" style={{color: '#9b580b'}}>스터디 기간</p>
                 <p className="card-text">
                   {study.studyStartDate} - {study.studyEndDate}
                 </p>
-                <p className="card-title">참가 인원</p>
+                <p className="card-title" style={{color: '#9b580b'}}>참가 인원</p>
                 <p className="card-text">{study.studyPersonNum} / {study.maxPeople}</p>
                 <button className="study-entry-btn" 
                 onClick={() => handleEnterStudy(study.studyPk)}>입장하기</button>
@@ -169,11 +167,11 @@ function MyStudy() {
               ></div>
               <div className="card-body">
                 <p className="study-name">{study.studyName}</p>
-                <p className="card-title">스터디 기간</p>
+                <p className="card-title" style={{color: '#9b580b'}}>스터디 기간</p>
                 <p className="card-text">
                   {study.studyStartDate} - {study.studyEndDate}
                 </p>
-                <p className="card-title">참가 인원</p>
+                <p className="card-title" style={{color: '#9b580b'}}>참가 인원</p>
                 <p className="card-text">{study.studyPersonNum} / 6</p>
                 <button className="study-entry-btn"
                 onClick={() => handleEnterStudy(study.studyPk)}>입장하기</button>

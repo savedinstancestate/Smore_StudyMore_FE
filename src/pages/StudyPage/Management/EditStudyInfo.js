@@ -66,8 +66,8 @@ const EditStudyInfo = ({ studyPk }) => {
                     className="button"
                     style={{
                         backgroundColor: '#fff',
-                        border: '1px solid #009063',
-                        color: '#009063',
+                        border: '1px solid #ea8400',
+                        color: '#ea8400',
                         fontWeight: '500',
                         width: '80px',
                         float: 'right',

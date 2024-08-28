@@ -46,7 +46,7 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
     return (
         <div className="study-problems">
             <div className="study-problems-header">
-                <div className="study-problems-title">스터디의 문제 📘</div>
+                <div className="study-problems-title">스터디 문제은행 📘</div>
             </div>
             <ul className="study-problems-list">
                 {problemBanks.map((bank) => (
@@ -79,7 +79,7 @@ const StudyProblemList = ({ studyPk, studyName, onUpdate }) => {
                         </option>
                     ))}
                 </Form.Control>
-                <Button onClick={handleStartQuiz} className="solve-problems-button" variant="success">
+                <Button onClick={handleStartQuiz} className="solve-problems-button" variant="success" style={{ backgroundColor: '#ea8400', border: 'none' }}>
                     문제 풀기
                 </Button>
             </div>

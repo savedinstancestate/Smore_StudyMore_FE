@@ -13,9 +13,10 @@
 
 .ranking-header {
     margin-top: 7px;
-    font-size: 1.5em;
+    font-size: 20px;
     margin-bottom: 20px;
     font-weight: bold;
+    color: #333;
 }
 
 .study-ranking ul {
@@ -43,9 +44,11 @@
 
 .name {
     flex-grow: 1;
+    font-size: 16px;
 }
 
 .hours {
     font-weight: bold;
-    color: #009063;
+    font-size: 16px;
+    color: #ea8400;
 }

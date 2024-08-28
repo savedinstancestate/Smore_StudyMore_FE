@@ -97,7 +97,7 @@ const Announcements = ({ studyPk }) => {
     );
 
     const modalFooter = (
-        <Button variant="secondary" onClick={closeModal}>
+        <Button variant="secondary" onClick={closeModal} style={{ backgroundColor: '#fff', color: '#929292', border: '1px solid #929292' }}>
             닫기
         </Button>
     );
@@ -123,7 +123,7 @@ const Announcements = ({ studyPk }) => {
         <div style={{ padding: '10px' }}>
             {error && <Alert variant="danger">{error}</Alert>}
             <div className="d-flex justify-content-between align-items-center mb-3">
-                <h3>공지사항</h3>
+            <div className="study-announcements-title">공지사항 🔊</div>
                 <Button
                     variant="success"
                     onClick={openAddModal}
@@ -134,9 +134,11 @@ const Announcements = ({ studyPk }) => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        backgroundColor: '#fff',
+                        border: '2px solid #ea8400'
                     }}
                 >
-                    <FaPlus style={{ color: 'white' }} />
+                    <FaPlus style={{ color: '#ea8400' }} />
                 </Button>{' '}
                 {/* Modify this line */}
             </div>
@@ -146,18 +148,24 @@ const Announcements = ({ studyPk }) => {
                         <Card.Body>
                             <div className="d-flex justify-content-between">
                                 <div onClick={() => openModal(announcement)} style={{ cursor: 'pointer' }}>
-                                    <Card.Title>{announcement.noticeTitle}</Card.Title>
+                                    <Card.Title 
+                                    style={{ fontSize: '18px', textAlign:'left', margin: '6px 0px 6px 4px', fontWeight: '500' }}
+                                    >{announcement.noticeTitle}</Card.Title>
                                     <Card.Text
                                         style={{
                                             display: '-webkit-box',
                                             WebkitBoxOrient: 'vertical',
                                             WebkitLineClamp: 3,
                                             overflow: 'hidden',
+                                            fontSize: '14px', 
+                                            textAlign:'left', 
+                                            margin: '6px 4px'
                                         }}
                                     >
                                         {announcement.noticeContent}
                                     </Card.Text>
-                                    <Card.Subtitle className="mb-2 text-muted">{announcement.time}</Card.Subtitle>
+                                    <Card.Subtitle className="mb-2 text-muted"
+                                    style={{ fontSize: '12px', textAlign:'left', margin: '4px' }}>{announcement.time}</Card.Subtitle>
                                 </div>
                                 <div className="d-flex align-items-start">
                                     <Button

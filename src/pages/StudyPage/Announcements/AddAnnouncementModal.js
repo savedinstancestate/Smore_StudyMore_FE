@@ -59,6 +59,7 @@ const AddAnnouncementModal = ({ show, handleClose, studyPk, onAddAnnouncement })
                     value={newAnnouncement.title}
                     onChange={handleChange}
                     placeholder="공지 제목을 입력하세요"
+                    style={{ marginBottom: '10px' }}
                 />
             </Form.Group>
             <Form.Group controlId="announcementContent">
@@ -77,10 +78,12 @@ const AddAnnouncementModal = ({ show, handleClose, studyPk, onAddAnnouncement })
 
     const addModalFooter = (
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose}
+            style={{ backgroundColor: '#fff', color: '#929292', border: '1px solid #929292' }}>
                 취소
             </Button>
-            <Button variant="success" onClick={handleAddAnnouncement} disabled={!isFormValid}>
+            <Button variant="success" onClick={handleAddAnnouncement} disabled={!isFormValid}
+            style={{ backgroundColor: '#ea8400', border: 'none' }}>
                 완료
             </Button>
         </div>

@@ -61,11 +61,11 @@ const QuizModal = ({ show, handleClose, studyPk, selectedBanks, maxQuestions }) 
             backdrop="static"
             footer={
                 showExplanation && currentQuestionIndex < questions.length - 1 ? (
-                    <Button variant="success" onClick={handleNextQuestion}>
+                    <Button variant="success" onClick={handleNextQuestion} style={{backgroundColor: '#ea8400', border: 'none'}}>
                         다음
                     </Button>
                 ) : (
-                    <Button variant="success" onClick={handleClose}>
+                    <Button variant="success" onClick={handleClose} style={{backgroundColor: '#ea8400', border: 'none'}}>
                         끝내기
                     </Button>
                 )

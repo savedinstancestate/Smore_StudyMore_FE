@@ -1,3 +1,10 @@
+.study-announcements-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0px;
+    color: #333;
+}
+
 .announcement-container {
     max-height: 600px;
     overflow-y: auto;
@@ -10,7 +17,7 @@
 
 /* 스크롤바 핸들 */
 .announcement-container::-webkit-scrollbar-thumb {
-    background-color: #1f875b; /* 스크롤바 핸들 색상 */
+    background-color: #ea8400; /* 스크롤바 핸들 색상 */
     border-radius: 10px; /* 스크롤바 핸들 모서리 둥글기 */
 }
 

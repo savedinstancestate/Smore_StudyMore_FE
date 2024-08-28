@@ -114,7 +114,6 @@ body {
 }
 
 .card-title {
-    color: #9b580b !important;
     font-size: 13px;
     font-weight: 800;
     margin-top: 10px;
@@ -168,19 +167,28 @@ body {
   border: #ea8400;
 }
 
-input[type="text"] {
+.study-leave-filed {
   width: 70% !important;
   padding: 10px;
   margin: 4px 0;
+  width: calc(100% - 52px - 16px);
+  height: 42px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  flex-grow: 1; 
+  font-size: 15px;
 }
 
 .study-leave-title {
   font-weight: 500;
+  font-size: 18px;
   color: #000000;
 }
 
 .study-leave-contents {
-  margin: 6px 0px;
+  margin: 0px 0px 6px 0px;
   font-size: 14px;
 }
 

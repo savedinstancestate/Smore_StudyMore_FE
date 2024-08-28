@@ -121,6 +121,7 @@ function MyPage() {
           <input
             type="text"
             id="nickname"
+            className="nickname-input"
             placeholder="수정할 닉네임 입력"
             maxLength="10"
             value={userInfo.nickname} 

@@ -15,11 +15,11 @@
 
 /* 제목 스타일링 */
 .title {
-    margin-top: 7px;
-    font-size: 1.5em;
-    margin-bottom: 20px;
+    font-size: 20px;
     font-weight: bold;
-    text-align: left;
+    margin-bottom: 20px;
+    color: #333;
+    float: left;
 }
 
 /* 각 폼 그룹 스타일링 */
@@ -81,17 +81,21 @@
 }
 
 .input {
-    width: 26% !important;
+    width: 20% !important;
+    font-size: 15px !important;
 }
 
 .input-description {
     margin: 0px !important;
     height: 40px !important;
     width: 100% !important;
+    font-size: 15px !important;
 }
 
 .input-content {
     height: 90px !important;
+    font-size: 15px !important;
+    padding: 10px !important;
 }
 
 .image-preview img {
@@ -136,14 +140,14 @@
 }
 
 .member-nickname {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
     margin: 0;
 }
 
 .member-delete-btn {
     padding: 6px 14px;
-    background-color: #dc3545;
+    background-color: #da2537;
     color: #fff;
     border: 1px solid #dc3545;
     border-radius: 5px;
@@ -166,7 +170,7 @@
 .member-expel-btn-confirm {
     padding: 10px 10px;
     border: none;
-    background-color: #009063;
+    background-color: #ea8400;
     color: white;
     cursor: pointer;
     border-radius: 5px;

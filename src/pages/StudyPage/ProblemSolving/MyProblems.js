@@ -50,7 +50,7 @@ const MyProblems = ({ studyPk }) => {
         <div>
             <div className="problem-list">
                 <div className="problem-list-header">
-                    <div className="problem-list-title">내가 낸 문제</div>
+                    <div className="problem-list-title">내 문제은행 📗</div>
                     <CreateProblemBankButton studyPk={studyPk} onUpdate={fetchProblemBanks} />
                 </div>
                 <div className="problem-list-container">
