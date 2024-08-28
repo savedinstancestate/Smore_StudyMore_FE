@@ -67,7 +67,7 @@ const EditMember = ({ studyPk }) => {
                         <li key={member.memberPk} className="member-item">
                             <img
                                 className="member-img"
-                                src={member.imageURL || 'img/default-profile.png'}
+                                src={member.imageURL || '/img/default-profile.png'}
                                 alt={`${member.imageURL}의 사진`} />
                             <div className="member-info-manage">
                                 <p className="member-nickname">{member.nickname}</p>

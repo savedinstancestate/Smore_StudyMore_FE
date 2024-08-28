@@ -108,7 +108,7 @@ function MyPage() {
       <p className="card-type-mypage">프로필 수정 ✍️</p>
       <div className="profile-image" onClick={triggerFileInput}>
         <img src={userInfo.profileImage || "img/default-profile.png"} className="edited-image" alt="프로필 이미지" />
-        <img src="img/img-edit.png" className="image-edit-btn" alt="이미지 변경"  />
+        <img src="/img/img-edit.png" className="image-edit-btn" alt="이미지 변경"  />
         <input type="file" id="fileInput" style={{ display: 'none' }} accept=".png, .jpeg, .jpg, .svg" onChange={handleImageChange} />
       </div>
 
