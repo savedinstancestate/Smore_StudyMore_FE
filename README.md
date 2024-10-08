@@ -5,13 +5,14 @@
 - [배포 URL](http://ec2-43-202-238-3.ap-northeast-2.compute.amazonaws.com:3000) <br><br>
 <img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/f64e34f8-0997-41ec-9658-931b1346a2c6"><br>
 ___
-
 <br>
 
 ## 💡 프로젝트 개요
 - <b>스터디 모집 및 참여 플랫폼</b>
 - 구름톤 트레이닝 풀스택 과정 파이널 프로젝트
 - 프론트엔드(2명), 백엔드(4명)
+</div>
+<br>
 
 ## 🎮 주요 기능
 1. 카카오 로그인 기능
@@ -22,18 +23,35 @@ ___
 6. 목표 설정 기능
 7. 스터디원 관리 기능
 8. 웹 알림 기능
-
 </div>
+<br>
+
+## 💡 기획 의도 및 요구사항
+### 1. 프로젝트 배경
+    스터디를 모집하고 관리까지 하고 싶다!
+    카*오톡, 디*코드···  함께 사용할 게 너무 많다!
+    다른 사람들과 함께하는 기분을 내고 싶다!
+    오직 스터디만을 위한 플랫폼이 필요하다!
+### 2. 개발 요구사항
+  <p>1. <b>스터디 관리 -</b> 스터디 생성 및 모집, 관리</p>
+  <p>2. <b>출석 및 랭킹 조회 -</b> 학습 타이머를 통한 출석, 스터디 공부왕 랭킹 조회</p>
+  <p>3. <b>일정 관리 -</b> 스터디 학습일정 생성 및 관리</p>
+  <p>4. <b>문제 풀이 -</b> 학습한 내용을 문제로 출제 및 풀이</p>
+  <p>5. <b>학습목표 설정 -</b> 개인 학습목표 설정 및 달성 여부 체크</p>
+  <p>6. <b>웹 알림 -</b> 스터디 활동 관련 알림 표시</p>
+  <p>7. <b>호환성 -</b> 반응형 UI 지원</p>
+  </div>
+  <br>
 
 ## <img src="https://github.com/user-attachments/assets/a6d0c6cc-d4a0-406c-834e-d8721a313806" alt="image" width="30"/> BackEnd 레포지토리
 <a href="https://github.com/goorm-6th-Als/Smore_StudyMore_BE"> Smore_StudyMore_BE
-
 </div>
-
+<br>
 
 ## 🛠 아키텍처
-<img width="756" alt="스크린샷 2024-10-08 14 58 50" src="https://github.com/user-attachments/assets/27ba802f-8982-4f5b-a749-28407be4d75a">
-
+<img width="756" alt="스크린샷 2024-10-08 14 58 50" src="https://github.com/user-attachments/assets/27ba802f-8982-4f5b-a749-28407be4d75a"><br>
+</div>
+<br>
 
 ## 📚 기술 스택
 ### BackEnd
@@ -52,9 +70,9 @@ ___
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"/> <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white"/> <img src="https://img.shields.io/badge/ec2-FF9900?style=flat-square&logo=amazonec2&logoColor=black"/> <br>
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
 </div>
+<br>
 
 ## 👫 팀원 구성
-
 <div align="center">
 
 |   **이름**   | **포지션** | **구분** | **Github** |   **이름**   | **포지션** | **구분** | **Github** |   **이름**   | **포지션** | **구분** |       **Github** |
@@ -62,7 +80,8 @@ ___
 | <div align="center"><img src="https://avatars.githubusercontent.com/u/96505736?v=4" width="50" height="50"/><br><b>김현빈</b></div> | <div align="center"><b>BE</b></div> | <div align="center"><b>팀장</b></div> | <div align="center"><b>[링크](https://github.com/khv9786)</b></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/108870712?v=4" width="50" height="50"/><br><b>강준수</b></div> | <div align="center"><b>BE</b></div> | <div align="center"><b>팀원</b></div> | <div align="center"><b>[링크](https://github.com/Kangjunesu)</b></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/104208670?v=4" width="50" height="50"/><br><b>이수지</b></div> | <div align="center"><b>FE</b></div> | <div align="center"><b>팀원</b></div> | <div align="center"><b>[링크](https://github.com/ssssuji)</b></div> |
 | <div align="center"><img src="https://avatars.githubusercontent.com/u/75283640?v=4" width="50" height="50"/><br><b>박진수</b></div> | <div align="center"><b>BE</b></div> | <div align="center"><b>팀원</b></div> | <div align="center"><b>[링크](https://github.com/qkrwlstn1)</b></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/53739820?v=4" width="50" height="50"/><br><b>남수연</b></div> | <div align="center"><b>BE</b></div> | <div align="center"><b>팀원</b></div> | <div align="center"><b>[링크](https://github.com/namtndus)</b></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/109202222?v=4" width="50" height="50"/><br><b>서다영</b></div> | <div align="center"><b>FE</b></div> | <div align="center"><b>팀원</b></div> | <div align="center"><b>[링크](https://github.com/savedinstancestate)</b></div> |
 </div>
-
+</div>
+<br>
 
 ## 💪 역할 분담
 ### BackEnd
