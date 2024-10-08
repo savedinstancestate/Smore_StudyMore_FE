@@ -1,8 +1,10 @@
 # 🍪 스모어 (Study-more!)
-- Kakao x goorm 기업 연계 프로젝트 1조 알쓰조 <br>
-- [배포 URL](http://ec2-43-202-238-3.ap-northeast-2.compute.amazonaws.com:3000)
-
-<img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/f64e34f8-0997-41ec-9658-931b1346a2c6">
+---
+- <b>Kakao x goorm 기업 연계 프로젝트</b>
+- <b>개발 기간 :</b> 2024.05 ~ 2024.08
+- [배포 URL](http://ec2-43-202-238-3.ap-northeast-2.compute.amazonaws.com:3000) <br><br>
+<img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/f64e34f8-0997-41ec-9658-931b1346a2c6"><br>
+___
 
 <br>
 
@@ -21,7 +23,6 @@
 7. 스터디원 관리 기능
 8. 웹 알림 기능
 
-<br>
 </div>
 
 ## <img src="https://github.com/user-attachments/assets/a6d0c6cc-d4a0-406c-834e-d8721a313806" alt="image" width="30"/> BackEnd 레포지토리
@@ -29,10 +30,9 @@
 
 </div>
 
-<br>
 
-##  🛠 아키텍처
-![image](https://github.com/user-attachments/assets/f911955e-4735-441f-a52a-7327e648c85a)
+## 🛠 아키텍처
+<img width="756" alt="스크린샷 2024-10-08 14 58 50" src="https://github.com/user-attachments/assets/27ba802f-8982-4f5b-a749-28407be4d75a">
 
 
 ## 📚 기술 스택
@@ -48,140 +48,12 @@
 | TEST | <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=Postman&logoColor=white"/> |
 | etc | <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=jira&logoColor=white"/> <img src="https://img.shields.io/badge/IntelliJIDEA-000000?style=flat-square&logo=intellij-idea&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/Discord-000000?style=flat-square&logo=discord&logoColor=#5865F2"/> <img src="https://img.shields.io/badge/Figma-000000?style=flat-square&logo=figma&logoColor=#F24E1E"/>|
 
-    
-
 ### FrontEnd
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/> <img src="https://img.shields.io/badge/react-20232a?style=flat-square&logo=react&logoColor=61DAFB"/> <img src="https://img.shields.io/badge/axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"/> <img src="https://img.shields.io/badge/Bootstrapap-7952B3?style=flat-square&logo=bootstrap&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> 
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"/> <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white"/> <img src="https://img.shields.io/badge/ec2-FF9900?style=flat-square&logo=amazonec2&logoColor=black"/> <br>
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
+</div>
 
-## 3. 프로젝트 구조
-
-<details> <summary> ⛏ ERD </summary>
-
-    ![image](https://github.com/user-attachments/assets/624f2789-866c-4dc7-b970-162488845c97)
-</details>
-
-<details><summary>📂 파일 구조</summary>
-    
-```
-
-├─build
-│  ├─classes
-│  │  └─java
-│  │      └─main
-│  │          └─com
-│  │              └─als
-│  │                  └─SMore
-│  │                      ├─domain
-│  │                      │  ├─entity
-│  │                      │  └─repository
-│  │                      ├─global
-│  │                      │  └─json
-│  │                      ├─log
-│  │                      │  └─timeTrace
-│  │                      ├─notification
-│  │                      │  ├─controller
-│  │                      │  ├─dto
-│  │                      │  ├─repository
-│  │                      │  └─service
-│  │                      ├─study
-│  │                      │  ├─attendance
-│  │                      │  │  ├─controller
-│  │                      │  │  ├─DTO
-│  │                      │  │  │  ├─request
-│  │                      │  │  │  └─response
-│  │                      │  │  ├─service
-│  │                      │  │  │  └─impl
-│  │                      │  │  └─validator
-│  │                      │  ├─calendar
-│  │                      │  │  ├─controller
-│  │                      │  │  ├─dto
-│  │                      │  │  │  ├─request
-│  │                      │  │  │  └─response
-│  │                      │  │  ├─service
-│  │                      │  │  │  └─impl
-│  │                      │  │  └─validator
-│  │                      │  ├─chatting
-│  │                      │  │  ├─config
-│  │                      │  │  ├─controller
-│  │                      │  │  ├─DTO
-│  │                      │  │  └─service
-│  │                      │  ├─dashboard
-│  │                      │  │  ├─controller
-│  │                      │  │  ├─DTO
-│  │                      │  │  ├─mapper
-│  │                      │  │  └─service
-│  │                      │  ├─enter
-│  │                      │  │  ├─controller
-│  │                      │  │  ├─DTO
-│  │                      │  │  ├─mapper
-│  │                      │  │  └─service
-│  │                      │  ├─management
-│  │                      │  │  ├─controller
-│  │                      │  │  ├─DTO
-│  │                      │  │  ├─mapper
-│  │                      │  │  └─service
-│  │                      │  ├─notice
-│  │                      │  │  ├─controller
-│  │                      │  │  ├─DTO
-│  │                      │  │  ├─service
-│  │                      │  │  └─validator
-│  │                      │  ├─problem
-│  │                      │  │  ├─controller
-│  │                      │  │  ├─DTO
-│  │                      │  │  │  ├─request
-│  │                      │  │  │  │  ├─problem
-│  │                      │  │  │  │  └─problemBank
-│  │                      │  │  │  └─response
-│  │                      │  │  │      ├─problem
-│  │                      │  │  │      └─problemBank
-│  │                      │  │  ├─service
-│  │                      │  │  │  └─impl
-│  │                      │  │  │      ├─problem
-│  │                      │  │  │      └─problemBank
-│  │                      │  │  └─validator
-│  │                      │  ├─studyCRUD
-│  │                      │  │  ├─controller
-│  │                      │  │  ├─DTO
-│  │                      │  │  ├─mapper
-│  │                      │  │  ├─service
-│  │                      │  │  └─utils
-│  │                      │  └─todo
-│  │                      │      ├─controller
-│  │                      │      ├─DTO
-│  │                      │      ├─mapper
-│  │                      │      └─service
-│  │                      └─user
-│  │                          ├─login
-│  │                          │  ├─config
-│  │                          │  ├─controller
-│  │                          │  ├─dto
-│  │                          │  │  └─response
-│  │                          │  ├─service
-│  │                          │  └─util
-│  │                          │      └─aop
-│  │                          │          ├─annotation
-│  │                          │          └─dto
-│  │                          ├─mypage
-│  │                          │  ├─config
-│  │                          │  ├─controller
-│  │                          │  ├─dto
-│  │                          │  │  ├─request
-│  │                          │  │  └─response
-│  │                          │  └─service
-│  │                          └─mystudy
-│  │                              ├─controller
-│  │                              ├─dto
-│  │                              │  ├─request
-│  │                              │  └─response
-│  │                              └─service
-
- ```
-
-</details>
-
-<br>
-
-## 팀원 구성
+## 👫 팀원 구성
 
 <div align="center">
 
@@ -192,7 +64,7 @@
 </div>
 
 
-## 4. 역할 분담
+## 💪 역할 분담
 ### BackEnd
 ![image](https://github.com/user-attachments/assets/7804068f-b445-493f-91e7-2cb7abe87ed9)
 ### FrontEnd
