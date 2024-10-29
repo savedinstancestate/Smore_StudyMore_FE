@@ -8,6 +8,7 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
   const [modalShow, setModalShow] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [showOverlay, setShowOverlay] = useState(false); 
 
   const handleIntroductionChange = (event) => {
     setIntroduction(event.target.value);
@@ -35,18 +36,26 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
     }
   };
 
+  const toggleOverlay = (show) => {
+    setShowOverlay(show);
+  };
+
   const openModal = () => {
     setModalShow(true);
+    toggleOverlay(true);
   };
 
   const closeModal = () => {
     setModalShow(false);
+    toggleOverlay(false);
     resetForm();
   };
 
   const resetForm = () => {
     setIntroduction("");
   };
+
+  
 
   const modalContent = (
     <Form onSubmit={handleSubmit}>
@@ -55,7 +64,7 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
       <Form.Group>
         <Form.Label>
           <span
-            style={{ color: "#009063", fontWeight: "600", marginRight: "3px" }}
+            style={{ color: "#ea8400", fontWeight: "700", marginRight: "3px" }}
           >
             스터디명
           </span>{" "}
@@ -63,7 +72,7 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
         </Form.Label>
       </Form.Group>
       <Form.Group>
-        <Form.Label>나를 소개하기</Form.Label>
+        <Form.Label style={{ fontWeight: "700" }}>나를 소개하기</Form.Label>
         <Form.Control
           as="textarea"
           rows="3"
@@ -81,10 +90,10 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
           padding: 0,
         }}
       >
-        <Button variant="secondary" onClick={closeModal}>
+        <Button variant="secondary" onClick={closeModal} style={{backgroundColor: '#fff', color: '#929292', border: '1px solid #929292'}}>
           취소
         </Button>
-        <Button variant="success" type="submit">
+        <Button variant="success" type="submit" style={{color: "#fff", backgroundColor: "#ea8400", border: "none" }}>
           지원하기
         </Button>
       </Modal.Footer>
@@ -97,10 +106,12 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
         variant="success"
         onClick={openModal}
         style={{
-          padding: "12px 12px",
+          padding: "12px",
           fontWeight: "600",
-          width: "80%",
-          marginBottom: "30px",
+          width: "90%",
+          marginBottom: "20px",
+          backgroundColor: "#ea8400",
+          border: "none",
         }}
       >
         스터디 지원하기
@@ -111,7 +122,24 @@ const ApplyStudyModal = ({ studyName, show, handleClose, studyPk }) => {
         show={modalShow}
         handleClose={closeModal}
         children={modalContent}
+        style={{
+          zIndex: 1050, // 모달 창의 z-index를 더 높게 설정
+        }}
       />
+      {showOverlay && (
+        <div
+          className="overlay"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 1040, // 모달 창 아래에 위치하도록 설정
+          }}
+        ></div>
+      )}
     </>
   );
 };

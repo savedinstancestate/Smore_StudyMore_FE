@@ -46,13 +46,28 @@ const AddGoalModal = ({ studyPk, addGoal }) => {
                 <Form.Group>
                     <Form.Label>진행 상태:</Form.Label>
                     <div style={{ display: 'flex', justifyContent: 'spaceAround', gap: '20px' }}>
-                        <Button variant={getStatusButtonVariant('진행 전')} onClick={() => setGoalStatus('진행 전')}>
+                        <Button variant={getStatusButtonVariant('진행 전')} onClick={() => setGoalStatus('진행 전')}
+                        style={{
+                            backgroundColor: goalStatus === '진행 전' ? '#ea8400' : '#f8f9fa',
+                            color: goalStatus === '진행 전' ? '#fff' : '#000',
+                            borderColor: goalStatus === '진행 전' ? '#ea8400' : '#ced4da'
+                        }}>
                             진행 전
                         </Button>
-                        <Button variant={getStatusButtonVariant('진행 중')} onClick={() => setGoalStatus('진행 중')}>
+                        <Button variant={getStatusButtonVariant('진행 중')} onClick={() => setGoalStatus('진행 중')}
+                        style={{
+                            backgroundColor: goalStatus === '진행 중' ? '#ea8400' : '#f8f9fa',
+                            color: goalStatus === '진행 중' ? '#fff' : '#000',
+                            borderColor: goalStatus === '진행 중' ? '#ea8400' : '#ced4da'
+                        }}>
                             진행 중
                         </Button>
-                        <Button variant={getStatusButtonVariant('완료')} onClick={() => setGoalStatus('완료')}>
+                        <Button variant={getStatusButtonVariant('완료')} onClick={() => setGoalStatus('완료')}
+                        style={{
+                            backgroundColor: goalStatus === '완료' ? '#ea8400' : '#f8f9fa',
+                            color: goalStatus === '완료' ? '#fff' : '#000',
+                            borderColor: goalStatus === '완료' ? '#ea8400' : '#ced4da'
+                        }}>
                             완료
                         </Button>
                     </div>
@@ -73,10 +88,12 @@ const AddGoalModal = ({ studyPk, addGoal }) => {
 
     const modalFooter = (
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose}
+            style={{ backgroundColor: '#fff', color: '#929292', border: '1px solid #929292' }}>
                 취소
             </Button>
-            <Button variant="success" onClick={handleSave} disabled={!goalContent || !goalStatus}>
+            <Button variant="success" onClick={handleSave} disabled={!goalContent || !goalStatus}
+            style={{ backgroundColor: '#ea8400', border: 'none' }}>
                 확인
             </Button>
         </div>
@@ -94,9 +111,11 @@ const AddGoalModal = ({ studyPk, addGoal }) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    backgroundColor: '#fff',
+                    border: '2px solid #ea8400'
                 }}
             >
-                <FaPlus style={{ color: 'white' }} />
+                <FaPlus style={{ color: '#ea8400' }} />
             </Button>
             <UniversalModal
                 title="개인목표 생성하기"

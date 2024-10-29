@@ -77,14 +77,14 @@ loadMoreData();
                 style={{ backgroundImage: `url(${study.imageUri})` }}
               ></div>
               <div className="card-body-home">
-                <p className="study-name">{study.adTitle}</p>
+                <p className="ad-name">{study.adTitle}</p>
                 <div className="study-content-wrapper">
                 <p className="study-content">{study.adContent}</p>
                 </div>
                 <div className="card-footer">
-                <p className="card-title">스터디 기간</p>
+                <p className="card-title" style={{color: '#9b580b'}}>스터디 기간</p>
                 <p className="card-text">{study.startDate} - {study.closeDate}</p>
-                <p className="card-title">참가 인원</p>
+                <p className="card-title" style={{color: '#9b580b'}}>참가 인원</p>
                 <p className="card-text">{study.curPeople} / {study.maxPeople}</p>
                 </div>
               </div>

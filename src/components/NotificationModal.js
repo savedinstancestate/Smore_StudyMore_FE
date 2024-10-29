@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
-import EventSourcePolyfill from 'eventsource-polyfill';
+import EventSourcePolyfill from "eventsource-polyfill";
 
-const NotificationComponent = ({ show, handleClose }) => {
+const NotificationComponent = ({ show, position, onNotificationReceived }) => {
   const [notifications, setNotifications] = useState([]); // 알림을 저장할 상태
+  const esRef = useRef(null); // EventSource 인스턴스를 useRef로 관리
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
@@ -14,43 +15,71 @@ const NotificationComponent = ({ show, handleClose }) => {
       return;
     }
 
-    let eventSource;
-
     const connectEventSource = () => {
-      eventSource = new EventSourcePolyfill(
+      // 기존 EventSource 연결이 있으면 닫기
+      if (esRef.current) {
+        esRef.current.close();
+      }
+      
+      const es = new EventSourcePolyfill(
         `${process.env.REACT_APP_AUTH_URL}/subscribe/notification?Bearer=${accessToken}`
       );
 
-      eventSource.onopen = () => {
-        console.log("SSE 연결이 열렸습니다.");
+      es.onopen = () => {
+        console.log("SSE 연결 성공");
       };
 
-      eventSource.onmessage = (event) => {
-        console.log("Received event:", event.data);
-        if (event.data !== 'ping') {
-            setNotifications(prev => [...prev, event.data]); // 새로운 알림을 추가
+      es.addEventListener("sse", (event) => {
+        console.log("Received sse event:", event.data);
+        try {
+          const parsedData = JSON.parse(event.data);
+          const timestampThreshold = Date.now() - 5 * 60 * 1000;
+          
+          setNotifications((prev) => {
+            const isDuplicate = prev.some(
+              (notification) =>
+              notification.notificationPk === parsedData.notificationPk ||
+                (notification.content === parsedData.content &&
+                 new Date(notification.time).getTime() > timestampThreshold)
+            );
+
+            // 중복되지 않은 알림만 추가
+            const newNotifications = isDuplicate
+              ? prev
+              : [parsedData, ...prev];
+
+            // 시간 순서대로 정렬
+            return newNotifications.sort((a, b) => new Date(b.time) - new Date(a.time));
+          });
+
+          if (onNotificationReceived) {
+            onNotificationReceived(true);
           }
-      };
+        } catch (error) {
+          console.error("알림 데이터 파싱 오류:", error);
+        }
+      });
 
-      eventSource.onerror = (err) => {
-        console.error("EventSource failed:", err);
-        eventSource.close();
-        // SSE 연결 실패 시 일정 시간 후 재연결 시도
+      es.onerror = (error) => {
+        console.error("SSE 연결 오류:", error);
+        es.close();
         setTimeout(() => {
           console.log("재연결 시도 중...");
           connectEventSource();
         }, 5000);
       };
+
+      esRef.current = es; // useRef로 EventSource 인스턴스를 저장
     };
 
     connectEventSource();
 
     return () => {
-      if (eventSource) {
-        eventSource.close();
+      if (esRef.current) {
+        esRef.current.close();
       }
     };
-  }, []);
+  }, []); // 의존성 배열을 빈 배열로 설정하여 컴포넌트 마운트 및 언마운트 시만 연결
 
   if (!show) {
     return null;
@@ -60,28 +89,45 @@ const NotificationComponent = ({ show, handleClose }) => {
     <div
       style={{
         position: "fixed",
-        top: "20%",
-        left: "50%",
-        transform: "translateX(-50%)",
+        top: `${position.top}px`,
+        left: `${position.left}px`,
         zIndex: 1002,
         backgroundColor: "white",
-        padding: "20px",
+        padding: "20px 20px 10px 20px",
+        border: "1px solid #e2e2e2",
         borderRadius: "8px",
         boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
         maxHeight: "300px",
         overflowY: "auto",
-        width: "300px",
+        width: "260px",
       }}
     >
-      <h3>알림...외않떠</h3>
+      <h6 style={{fontWeight: '500'}}>알림</h6>
       <div>
-        {notifications.map((notification, index) => (
-          <div key={index} style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>
-            {notification}
+        {notifications.length === 0 ? (
+          <div style={{ padding: "10px", textAlign: "center", color: "#888", fontSize: "15px", paddingBottom: "18px" }}>
+            알림이 없습니다.
           </div>
-        ))}
+        ) : (
+          notifications.map((notification, index) => (
+            <li
+              key={notification.notificationPk || index}
+              style={{
+                padding: "12px 4px",
+                borderBottom:
+                  index === notifications.length - 1 ? "none" : "1px solid #ddd",
+                fontSize: "13px",
+                listStyle: "none",
+              }}
+            >
+              <div>{notification.content}</div>
+              <div style={{ color: "#888", fontSize: "11px" }}>
+                {new Date(notification.time).toLocaleString()}
+              </div>
+            </li>
+          ))
+        )}
       </div>
-      <button onClick={handleClose}>닫기</button>
     </div>
   );
 };

@@ -55,7 +55,7 @@ const StudyRanking = ({ studyPk }) => {
 
     return (
         <div className="study-ranking">
-            <div className="ranking-header">스터디 공부왕👑</div>
+            <div className="ranking-header">스터디 공부왕 👑</div>
             {error && <div>{error}</div>}
             <ul>
                 {studyRankings.map((rank, index) => (
