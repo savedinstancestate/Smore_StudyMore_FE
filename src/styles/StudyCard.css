@@ -1,0 +1,781 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    background-color: #fff !important;
+}
+
+.div-container {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 30px 30px 0px 30px;
+  box-sizing: border-box;
+  z-index: 1000;
+  background-color: #fff;
+  overflow: visible;
+  margin-left: 280px; 
+  margin-bottom: 40px;
+  max-width: 880px; 
+  width: calc(100% - 300px);
+  transition: width 0.3s ease;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px 30px;
+    overflow: visible;
+    margin-bottom: 40px;
+}
+
+.card-type {
+    font-size: 22px;
+    font-weight: 700;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.card-div {
+  display: 0 1 30%;
+  flex-direction: column;
+  justify-content: space-between; 
+  height: 100%;
+    width: calc(33.333% - 20px);
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.card-div-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(33.333% - 20px);
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: calc(33.333% - 320px);
+}
+
+.card-header {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  padding-bottom: 56.25%;
+  border-radius: 10px 10px 0 0; /* 카드의 모서리를 둥글게 하려면 사용 */
+  flex-shrink: 0;
+  position: relative;
+}
+
+.card-header::before {
+  content: "";
+  display: block;
+  padding-bottom: 40%; /* 16:9 비율을 유지 */
+}
+
+.card-header img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 박스의 크기에 맞게 조정 */
+  border-radius: 10px 10px 0 0; /* 둥근 모서리 유지 */
+}
+
+.card-body {
+    text-align: center;
+    padding: 10px !important;
+}
+
+.study-name {
+    color: #ea8400;
+    font-size: 18px;
+    font-weight: 800;
+    margin: 8px 0;
+}
+
+.ad-name {
+  color: #ea8400;
+  font-size: 18px;
+  font-weight: 800;
+  margin: 12px 0px 8px 0px;
+}
+
+.card-title {
+    font-size: 13px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.card-text {
+    color: #5b5b5b;
+    font-size: 13px;
+    margin-bottom: -2px;
+    font-weight: 500;
+}
+
+.study-entry-btn,
+.study-leave-btn,
+.study-request-btn {
+  display: block;
+  margin: 8px auto;
+  padding: 8px 0;
+  width: 80%;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.study-entry-btn {
+    background-color: #ea8400;
+    color: #fff;
+    border: 1px solid hsl(34, 100%, 46%);
+    margin-top: 12px;
+}
+
+.study-leave-btn {
+    background-color: #fff;
+    color: #929292;
+    border: 1px solid #929292;
+}
+
+.study-request-btn {
+  background-color: #fff;
+  color: #ea8400;
+  border: 1px solid #ea8400;
+}
+
+.study-leave-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: #ea8400;
+}
+
+.study-leave-filed {
+  width: 70% !important;
+  padding: 10px;
+  margin: 4px 0;
+  width: calc(100% - 52px - 16px);
+  height: 42px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  flex-grow: 1; 
+  font-size: 15px;
+}
+
+.study-leave-title {
+  font-weight: 500;
+  font-size: 18px;
+  color: #000000;
+}
+
+.study-leave-contents {
+  margin: 0px 0px 6px 0px;
+  font-size: 14px;
+}
+
+.study-leave-content {
+  margin-bottom: 4px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center; 
+  gap: 10px;
+  margin: 10px 0px;
+}
+
+.study-leave-btn-confirm {
+    padding: 10px 30px;
+    border: none;
+    background-color: #ea8400;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    flex-grow: 1;
+}
+
+.study-leave-btn-cancel {
+  padding: 10px 30px;
+  border: 1px solid #929292;
+  background-color: #fff;
+  color: #929292;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  flex-grow: 1;
+}
+
+.list-container ul {
+    list-style-type: none;
+    padding: 0;
+    width: 430px;
+}
+
+.list-container li {
+    display: flex;
+    align-items: flex-start; /* 아이템들을 위쪽 정렬 */
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+  }
+
+  .list-container li:last-child {
+    border-bottom: none; /* 마지막 요소의 border-bottom 제거 */
+  }
+  
+.applicant-img {
+    width: 36px;
+    height: 36px;
+    background-size: cover;
+    background-position: top left;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.applicant-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .applicant-info p {
+    margin: 0;
+  }
+
+  .applicant-item {
+    padding: 10px 0px;
+  }
+
+.applicant-nickname {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .applicant-content {
+    font-weight: 500;
+    font-size: 14px;
+    word-wrap: break-word; 
+    word-break: break-all;
+  }
+
+  .applicant-actions {
+    display: flex;
+    gap: 6px;
+    margin-left: 10px;
+  }
+  
+  .applicant-apply-btn {
+    padding: 5px 12px;
+    border: none;
+    background-color: #ea8400;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .applicant-refuse-btn {
+    padding: 5px 12px;
+    background-color: #fff;
+    color: #929292;
+    border: 1px solid #929292;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .card-body-home {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100%;
+  padding: 10px !important;
+  }
+
+  .study-content-wrapper {
+    flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+  max-height: 80px;
+  margin: 4px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  }  
+
+  .study-content {
+    display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  }
+
+  .card-footer {
+  background-color: #fff2e275 !important;
+  height: 110px;
+  margin-top: auto;
+  box-sizing: border-box;
+  margin: 0px -10px -10px -10px;
+  }
+
+
+
+
+.modal-content {
+  border-radius: 44px;
+}
+
+.apply-study-button {
+  padding: 12px;
+  width: 90%;
+  background-color: #ea8400;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+  .card-div-detail {
+    width:100%;
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 10px;
+    margin: -10px 0px 0px 0px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .card-header-detail {
+    height: 180px; 
+    background-size: cover; 
+    background-position: center; 
+  }
+
+  .card-title-detail {
+    color: #ea8400 !important;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+  .ad-title {
+    color: #ea8400;
+    font-size: 20px;
+    font-weight: 800;
+    margin: 16px 0px 0px 0px;
+  }
+
+  .modify-date-detail {
+    color: #929292;
+    font-size: 13px;
+  }
+
+  .flex-box {
+    display: flex;
+    flex-direction: column; /* 항목들을 세로로 쌓음 */
+    align-items: center; /* 수평 중앙 정렬 */
+    width: 90%; /* 전체 너비 사용 */ 
+    border: 1px solid #F3F9F7;
+    border-radius: 8px;
+    padding: 12px 0px 4px 0px;
+    margin: -4px auto;
+    background-color: #fff2e275;
+  }
+
+  .flex-row {
+    display: flex;
+  justify-content: center; /* 항목들을 수평 중앙에 배치 */
+  align-items: center; /* 항목들을 수직 중앙에 배치 */
+  width: 100%; /* 각 행의 너비 전체 사용 */
+  margin-bottom: 10px; /* 각 행 아래 여백 */
+  }
+
+  .card-title-detail {
+    margin: 0 5px; 
+    color:#ea8400 !important;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .study-detail {
+    margin: 0 5px; 
+    color:#5b5b5b;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .content-wrapper-detail {
+    padding: 0px 30px;
+    margin: 22px 0px; 
+    font-weight: 500;
+    font-size: 15px;
+  }  
+
+  .application-btn {
+    width: 60%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ea8400;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 검은색 반투명 배경 */
+    z-index: 1050; /* 모달보다 조금 낮게 설정 */
+}
+  
+.no-data {
+  font-size: 22px;
+  font-weight: 600;
+  color: #929292;
+  text-align: center; 
+  width: 100%; 
+  padding-top: 30px; 
+  padding-bottom: 70px; 
+}
+
+.no-data-mystudy {
+  font-size: 22px; 
+  font-weight: 600;
+  color: #929292;
+  text-align: center; 
+  width: 100%; 
+  padding-top: 30px; 
+  padding-bottom: 30px; 
+}
+
+
+
+
+.apply-item {
+  display: flex;
+  align-items: center;
+  padding: 0px;
+}
+
+.apply-img img {
+  width: 200px;
+  margin-right: 20px;
+  border-radius: 6px;
+}
+
+.apply-info {
+  flex: 1;
+}
+
+.apply-study-name {
+  font-weight: 700;
+  font-size: 20px;
+  color: #ea8400;
+  margin-left: 10px;
+}
+
+.apply-state {
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 50px;
+  word-wrap: break-word; 
+  word-break: break-all;
+  color: rgb(214, 28, 28); 
+}
+
+.apply-state-2 {
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 105px;
+  word-wrap: break-word; 
+  word-break: break-all;
+  color: rgb(214, 28, 28); 
+}
+
+.apply-edit {
+  display: flex;
+  gap: 6px;
+  margin-left: 160px;
+  float: right;
+}
+
+.apply-edit-btn {
+  padding: 10px 20px;
+  border: 1px solid #ea8400;
+  background-color: #fff;
+  color: #ea8400;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.apply-delete-btn {
+  padding: 10px 20px;
+  border: 1px solid #929292;
+  background-color: #fff;
+  color: #929292;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 1200px) {
+
+  .card-div-home {
+    width: calc(33.333% - 20px);
+    padding-bottom: calc(33.333% - 320px); 
+}
+
+  .ad-name, .study-name {
+    font-size: 16px;
+  }
+
+  .study-content-wrapper {
+    min-height: 70px;
+  }
+
+  .study-content {
+    font-size: 12px;
+    padding: 0px 4px;
+  }
+
+  .card-footer {
+    height: 100px;
+    padding: 10px 0px;
+  }
+
+  .card-title, .card-text {
+    font-size: 12px;
+  }
+
+  .no-data {
+    font-size: 16px;
+  }
+
+  .study-entry-btn,
+  .study-leave-btn,
+  .study-request-btn {
+  font-size: 12px;
+  }
+
+}
+
+@media screen and (max-width: 1100px) {
+
+  .card-type {
+    font-size: 20px;
+    margin-bottom: -4px;
+  }
+
+  .ad-name, .study-name {
+    font-size: 16px;
+  }
+
+  .study-content-wrapper {
+    min-height: 50px;
+  }
+
+  .study-content {
+    font-size: 11px;
+    padding: 0px 4px;
+  }
+
+  .card-footer {
+    height: 94px;
+    padding: 10px 0px;
+  }
+
+  .card-title, .card-text {
+    font-size: 11px;
+  }
+
+  .no-data {
+    font-size: 16px;
+  }
+
+  .study-entry-btn,
+  .study-leave-btn,
+  .study-request-btn {
+  padding: 8px 0;
+  }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+  .card-type {
+    font-size: 20px;
+    margin-bottom: -4px;
+  }
+
+  .ad-name, .study-name {
+    font-size: 14px;
+  }
+
+  .study-content-wrapper {
+    min-height: 50px;
+  }
+
+  .study-content {
+    font-size: 11px;
+    padding: 0px 0px;
+  }
+
+  .card-footer {
+    height: 88px;
+    padding: 10px 0px;
+  }
+
+  .card-title, .card-text {
+    font-size: 10px;
+  }
+
+  .no-data {
+    font-size: 16px;
+  }
+
+  .study-entry-btn,
+  .study-leave-btn,
+  .study-request-btn {
+  padding: 8px 0;
+  font-size: 10px;
+  }
+}
+
+
+@media screen and (max-width: 960px) {
+
+  .card-type {
+    font-size: 20px;
+    margin-bottom: -4px;
+  }
+
+  .ad-name, .study-name {
+    font-size: 12px;
+  }
+
+  .study-content-wrapper {
+    min-height: 50px;
+  }
+
+  .study-content {
+    font-size: 10px;
+    padding: 0px 0px;
+  }
+
+  .card-footer {
+    height: 76px;
+    padding: 10px 0px;
+  }
+
+  .card-title, .card-text {
+    font-size: 8px;
+  }
+
+  .no-data {
+    font-size: 16px;
+  }
+
+  .study-entry-btn,
+  .study-leave-btn,
+  .study-request-btn {
+  padding: 8px 0;
+  font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+
+  .card-type {
+    font-size: 20px;
+    margin-bottom: -4px;
+  }
+
+  .ad-name, .study-name {
+    font-size: 10px;
+  }
+
+  .study-content-wrapper {
+    min-height: 50px;
+  }
+
+  .study-content {
+    font-size: 9px;
+    padding: 0px 0px;
+  }
+
+  .card-footer {
+    height: 80px;
+    padding: 10px 0px;
+  }
+
+  .card-title, .card-text {
+    font-size: 8px;
+  }
+
+  .no-data {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card-div,
+  .card-div-home {
+    width: 100%;
+  }
+
+  .ad-name, .study-name {
+    font-size: 16px;
+  }
+
+  .study-content {
+    font-size: 12px;
+  }
+
+  .card-footer {
+    height: auto;
+    padding: 8px;
+  }
+
+  .no-data {
+    font-size: 18px;
+  }
+}
+
+

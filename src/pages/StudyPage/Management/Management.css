@@ -1,0 +1,192 @@
+/* 전체 컨테이너의 스타일링 */
+.container {
+    padding: 30px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0px;
+}
+
+/* 제목 스타일링 */
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    float: left;
+}
+
+/* 각 폼 그룹 스타일링 */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.form-group-inline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 4px;
+}
+
+.form-label-inline {
+    margin-right: 14px;
+    flex: 0 0 auto;
+    /* 너비가 내용에 따라 조절되도록 설정 */
+    white-space: nowrap;
+    /* 라벨이 줄바꿈 되지 않도록 설정 */
+    padding-top: 6px;
+    display: block;
+    color: #000000;
+    font-weight: 500;
+    text-align: left;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    justify-content: space-between;
+    /* 요소들 사이에 공간을 균등하게 배분 */
+}
+
+.form-input {
+    flex: 1;
+    /* 입력 필드가 가능한 많은 공간을 차지하도록 설정 */
+    margin-right: 20px;
+    /* 이미지와의 간격 설정 */
+}
+
+.form-image {
+    flex: 0 0 auto;
+    /* 이미지 크기가 변경되지 않도록 설정 */
+}
+
+/* 라벨 스타일링 */
+.label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000000;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+}
+
+.input {
+    width: 20% !important;
+    font-size: 15px !important;
+}
+
+.input-description {
+    margin: 0px !important;
+    height: 40px !important;
+    width: 100% !important;
+    font-size: 15px !important;
+}
+
+.input-content {
+    height: 90px !important;
+    font-size: 15px !important;
+    padding: 10px !important;
+}
+
+.image-preview img {
+    width: 300px;
+    height: auto;
+    border-radius: 4px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.list-container ul {
+    width: 100%;
+}
+
+.member-item {
+    display: flex;
+    /* flexbox 레이아웃 사용 */
+    align-items: stretch;
+    /* 모든 아이템을 세로 방향 중앙 정렬 */
+    margin-bottom: 4px;
+    /* 항목 간 간격 */
+    padding: 10px 0px;
+}
+
+.member-img {
+    width: 36px;
+    height: 36px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.member-info-manage {
+    display: flex;
+    /* flexbox 레이아웃 사용 */
+    align-items: center;
+    /* 내부 텍스트 세로 중앙 정렬 */
+    flex-grow: 1;
+    /* 남은 공간을 모두 차지 */
+    height: 34px;
+}
+
+.member-nickname {
+    font-weight: 500;
+    font-size: 16px;
+    margin: 0;
+}
+
+.member-delete-btn {
+    padding: 6px 14px;
+    background-color: #da2537;
+    color: #fff;
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.edit-member-modal {
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+  justify-content: center; /* 버튼들을 가운데 정렬 */
+  align-items: center; /* 수직 방향에서도 중앙에 위치하도록 함 */
+  max-width: 200px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 상하 0, 좌우 자동으로 설정하여 가운데 정렬 */
+  gap: 10px; /* 버튼 사이의 간격 */
+}
+
+.member-expel-btn-confirm {
+    padding: 10px 10px;
+    border: none;
+    background-color: #ea8400;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    flex-grow: 1;
+}
+
+.member-expel-btn-cancel {
+    padding: 10px 10px;
+    border: 1px solid #929292;
+    background-color: #fff;
+    color: #929292;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    flex-grow: 1;
+}

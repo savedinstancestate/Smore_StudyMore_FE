@@ -17,11 +17,11 @@ function KakaoLoginRedirectHandler() {
       Cookies.set('accessToken', accessToken);
       Cookies.set('refreshToken', refreshToken);
       
-      navigate('/home');
+      navigate('/');
   },[accessToken, refreshToken, navigate]);
 
   return <div>Loading..</div>;
-  
+
 };
 
 export default KakaoLoginRedirectHandler;

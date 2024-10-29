@@ -1,0 +1,64 @@
+.problem-list {
+    background-color: white;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.problem-list-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.problem-list-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.problem-list-container {
+    overflow-y: auto;
+    max-height: 300px;
+    height: 225px;
+}
+
+.problem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.problem-info {
+    font-size: 1em;
+}
+
+.edit-button {
+    background: none;
+    border: none;
+    color: #4a90e2;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    color: #357abd;
+}
+
+/* 스크롤바 전체 스타일 */
+.problem-list-container::-webkit-scrollbar {
+    width: 5px; /* 스크롤바의 너비 */
+}
+
+/* 스크롤바 핸들 */
+.problem-list-container::-webkit-scrollbar-thumb {
+    background-color: #1f875b; /* 스크롤바 핸들 색상 */
+    border-radius: 10px; /* 스크롤바 핸들 모서리 둥글기 */
+}
+
+/* 스크롤바 트랙 */
+.problem-list-container::-webkit-scrollbar-track {
+    background: #a8c4a8; /* 스크롤바 트랙 색상 */
+    border-radius: 10px; /* 스크롤바 트랙 모서리 둥글기 */
+}
