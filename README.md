@@ -2,9 +2,10 @@
 ---
 - <b>Kakao x goorm 기업 연계 프로젝트</b>
 - <b>개발 기간 :</b> 2024.05 ~ 2024.08
-- [배포 URL](http://ec2-43-202-238-3.ap-northeast-2.compute.amazonaws.com:3000) <br><br>
-<img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/f64e34f8-0997-41ec-9658-931b1346a2c6"><br>
+- [배포 URL](http://ec2-43-202-238-3.ap-northeast-2.compute.amazonaws.com:3000) <br>
 ___
+<img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/f64e34f8-0997-41ec-9658-931b1346a2c6"><br>
+
 <br>
 
 ## 💡 프로젝트 개요
