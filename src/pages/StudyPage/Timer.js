@@ -125,7 +125,7 @@ const Timer = ({ studyPk }) => {
                         onClick={toggleTimer}
                         variant="primary"
                         className="timer-button"
-                        style={{ backgroundColor: '#009063', border: 'none' }}
+                        style={{ backgroundColor: '#ea8400', border: 'none' }}
                     >
                         {isRunning ? <FaPause /> : <FaPlay />}
                     </Button>

@@ -10,9 +10,10 @@
 }
 
 .goal-header {
-    font-size: 1.5em;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0px;
     color: #333;
-    margin-bottom: 15px;
 }
 
 .goal-container {
@@ -31,12 +32,13 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin: 0px 10px;
 }
 
 .goal-name {
     font-weight: bold;
     margin-right: 20px;
+    font-size: 15px;
 }
 
 .goal-content {
@@ -45,6 +47,7 @@
     overflow: hidden; /* 내용이 요소 크기를 초과할 경우 숨김 */
     text-overflow: ellipsis; /* 내용이 요소 크기를 초과할 경우 말줄임표로 표시 */
     max-width: 200px; /* 텍스트의 최대 너비 설정 */
+    font-size: 15px;
 }
 
 /* 스크롤바 전체 스타일 */

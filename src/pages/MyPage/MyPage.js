@@ -101,24 +101,28 @@ function MyPage() {
   };
 
   return (
+    <div className="div-container-mypage">
     <div className="profile-container">
       {error && <div className="alert alert-danger">{error}</div>}
       {successMessage && <div className="alert alert-primary">{successMessage}</div>}
       <p className="card-type-mypage">프로필 수정 ✍️</p>
       <div className="profile-image" onClick={triggerFileInput}>
         <img src={userInfo.profileImage || "img/default-profile.png"} className="edited-image" alt="프로필 이미지" />
-        <img src="img/img-edit.png" className="image-edit-btn" alt="이미지 변경"  />
+        <img src="/img/img-edit.png" className="image-edit-btn" alt="이미지 변경"  />
         <input type="file" id="fileInput" style={{ display: 'none' }} accept=".png, .jpeg, .jpg, .svg" onChange={handleImageChange} />
       </div>
 
       <div className="nickname-container">
-        <span className="nickname-title">닉네임</span>
+        <span className="nickname-title">닉네임 
         <span className="nickname-info">한글, 영문, 숫자 2-10자 입력</span>
+        </span>
+        
         <div className="nickname-field">
           <input
             type="text"
             id="nickname"
-            placeholder="수정할 닉네임을 입력하세요."
+            className="nickname-input"
+            placeholder="수정할 닉네임 입력"
             maxLength="10"
             value={userInfo.nickname} 
             onChange={e => setUserInfo({...userInfo, nickname: e.target.value})}
@@ -126,6 +130,8 @@ function MyPage() {
           <button className="nickname-edit-btn" onClick={updateNickname}>확인</button>
         </div>
       </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    </div>
     </div>
   );
 }

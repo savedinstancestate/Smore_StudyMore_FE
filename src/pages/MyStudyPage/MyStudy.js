@@ -4,8 +4,6 @@ import API from '../../api/AxiosInstance';
 import Modal from '../../components/Modal'; 
 import ApplicantList from "./ApplicantListModal";
 import "../../styles/StudyCard.css";
-import sample1 from './sample1.png';
-import sample2 from './sample2.jpg';
 
 function MyStudy() {
   const [participatingStudies, setParticipatingStudies] = useState([]);
@@ -138,11 +136,11 @@ function MyStudy() {
               ></div>
               <div className="card-body">
                 <p className="study-name">{study.studyName}</p>
-                <p className="card-title">스터디 기간</p>
+                <p className="card-title" style={{color: '#9b580b'}}>스터디 기간</p>
                 <p className="card-text">
                   {study.studyStartDate} - {study.studyEndDate}
                 </p>
-                <p className="card-title">참가 인원</p>
+                <p className="card-title" style={{color: '#9b580b'}}>참가 인원</p>
                 <p className="card-text">{study.studyPersonNum} / {study.maxPeople}</p>
                 <button className="study-entry-btn" 
                 onClick={() => handleEnterStudy(study.studyPk)}>입장하기</button>
@@ -169,11 +167,11 @@ function MyStudy() {
               ></div>
               <div className="card-body">
                 <p className="study-name">{study.studyName}</p>
-                <p className="card-title">스터디 기간</p>
+                <p className="card-title" style={{color: '#9b580b'}}>스터디 기간</p>
                 <p className="card-text">
                   {study.studyStartDate} - {study.studyEndDate}
                 </p>
-                <p className="card-title">참가 인원</p>
+                <p className="card-title" style={{color: '#9b580b'}}>참가 인원</p>
                 <p className="card-text">{study.studyPersonNum} / 6</p>
                 <button className="study-entry-btn"
                 onClick={() => handleEnterStudy(study.studyPk)}>입장하기</button>
@@ -187,8 +185,10 @@ function MyStudy() {
             </div>
           ))
         )}   
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
       </div>
-
+    
+ {/*
       <div className="card-container">
       <p className="card-type">지원한 스터디 🧑‍💻</p>
       <div className="list-container">
@@ -242,7 +242,7 @@ function MyStudy() {
               </div>
       </div>
 </div>
-
+          */}
 
 
       <Modal show={isModalOpen} handleClose={handleCloseModal} title="지원요청 목록">
@@ -252,7 +252,8 @@ function MyStudy() {
       <Modal show={isWithdrawalModalOpen} handleClose={handleCloseWithdrawalModal} title="스터디 탈퇴">
         {studyToLeave && (
           <div className="study-leave-modal">
-            <h5>정말 탈퇴하시겠어요?</h5>
+            <img src="img/warning.png" style={{width: '40px', marginTop: '-12px', marginBottom: '12px'}}></img>
+            <p className="study-leave-title">스터디를 탈퇴하시겠습니까?</p>
             <div className="study-leave-contents">
             <p className="study-leave-content">스터디 탈퇴 시 모든 데이터는 삭제되며, 복구되지 않습니다.</p>
             <p className="study-leave-content">확인을 위해 <b>'{studyToLeave.studyName}'</b>을(를) 정확히 입력하세요.</p>

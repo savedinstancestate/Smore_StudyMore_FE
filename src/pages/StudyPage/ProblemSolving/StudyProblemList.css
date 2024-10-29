@@ -6,9 +6,18 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.study-problems-header .study-problems-title {
+.study-problems-header {
     color: black;
     font-size: 1.5em;
+    display: flex;
+    align-self: flex-start;
+}
+
+.study-problems-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
 }
 
 .study-problems-list {
@@ -21,8 +30,6 @@
 }
 
 .study-problem-item {
-    display: flex;
-    align-items: center;
     padding: 10px 0;
 }
 
@@ -37,18 +44,21 @@
     align-items: center;
     gap: 20px; /* 문제은행 이름, 출제자, 문제 수 사이의 간격 */
     width: 100%;
+    justify-content: space-between;
 }
 
 .problem-name {
     flex: 2;
-}
-
-.problem-writer {
-    flex: 1;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .problem-count {
-    flex: 1;
+    flex-shrink: 0;
+    text-align: right;
+    width: 200px;
 }
 
 /* 스크롤바 전체 스타일 */
@@ -58,13 +68,13 @@
 
 /* 스크롤바 핸들 */
 .study-problems-list::-webkit-scrollbar-thumb {
-    background-color: #1f875b; /* 스크롤바 핸들 색상 */
+    background-color: #ea8400; /* 스크롤바 핸들 색상 */
     border-radius: 10px; /* 스크롤바 핸들 모서리 둥글기 */
 }
 
 /* 스크롤바 트랙 */
 .study-problems-list::-webkit-scrollbar-track {
-    background: #a8c4a8; /* 스크롤바 트랙 색상 */
+    background: #fff2e275; /* 스크롤바 트랙 색상 */
     border-radius: 10px; /* 스크롤바 트랙 모서리 둥글기 */
 }
 

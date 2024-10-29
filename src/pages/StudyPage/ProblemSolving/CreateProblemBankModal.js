@@ -171,7 +171,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk, onUpdate }) => {
                 variant="success"
                 onClick={addQuestion}
                 className="mt-2"
-                style={{ width: '100%' }}
+                style={{ width: '100%', backgroundColor: '#fff', border: '1px solid #ea8400', color: '#ea8400' }}
                 disabled={!bankName || !isCurrentQuestionValid()}
             >
                 문제 추가하기
@@ -216,6 +216,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk, onUpdate }) => {
                             setBankCreated(false);
                         }}
                         className="mt-2"
+                        style={{ backgroundColor: '#fff', color: '#929292', border: '1px solid #929292' }}
                     >
                         취소
                     </Button>
@@ -224,6 +225,7 @@ const CreateProblemBankModal = ({ show, handleClose, studyPk, onUpdate }) => {
                         onClick={handleSaveProblems}
                         className="mt-2 ml-2"
                         disabled={!isFormValid()}
+                        style={{ backgroundColor: '#ea8400', border: 'none' }}
                     >
                         완료
                     </Button>
@@ -256,9 +258,11 @@ const CreateProblemBankButton = ({ studyPk, onUpdate }) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    backgroundColor: '#fff',
+                    border: '2px solid #ea8400'
                 }}
             >
-                <FaPlus style={{ color: 'white' }} />
+                <FaPlus style={{ color: '#ea8400' }} />
             </Button>
             <CreateProblemBankModal
                 show={showModal}

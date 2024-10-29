@@ -179,11 +179,11 @@ const CreateStudyModal = () => {
             <Button
                 variant="secondary"
                 onClick={closeModal}
-                style={{ backgroundColor: '#F5EBE9', color: 'black', border: 'none' }}
+                style={{ backgroundColor: '#fff', color: '#929292', border: '1px solid #929292' }}
             >
                 취소
             </Button>
-            <Button variant="success" type="submit" onClick={handleSubmit}>
+            <Button variant="success" type="submit" onClick={handleSubmit} style={{backgroundColor: '#ea8400', color: '#fff', border: 'none'}}>
                 생성하기
             </Button>
         </Modal.Footer>
@@ -193,15 +193,15 @@ const CreateStudyModal = () => {
         <>
             <Button variant="success"
             onClick={() => setModalShow(true)}
-            style={{backgroundColor: '#009063',
+            style={{backgroundColor: '#ea8400',
             fontSize: '15px',
-            fontWeight: '600',
+            fontWeight: '500',
             marginLeft: '10px',
-            padding: '8px 10px',
+            padding: '10px 12px',
             border: 'none',
-            borderRadius:'6px'}}
+            borderRadius:'7px'}}
             >
-                <img src={createImage} style={{width: '18px', marginRight: '4px', marginTop: '-3px'}} />
+                <img src={createImage} style={{width: '20px', marginRight: '8px', marginTop: '-4px'}} />
                 스터디 생성하기
             </Button>
 

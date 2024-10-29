@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
 import API from '../../api/AxiosInstance';
 import "../../styles/StudyCard.css";
 import ApplyStudyModal from "./ApplyStudyModal";
@@ -39,15 +38,21 @@ function BoardDetailModal({ studyBoardPk }) {
   const handleApplyClick = () => {
     if (!isLoggedIn) {
       setIsLoginModalOpen(true);
+      toggleOverlay(true);
     } else {
       toggleOverlay(true);
     }
   };
 
+  const handleCloseLoginModal = () => {
+    setIsLoginModalOpen(false);
+    toggleOverlay(false); 
+  };
+
   return (
     <div className="modal-container">
-      {showOverlay && <div className="overlay"></div>}
-      <div className="card-div-detail" style={{ position: 'relative', zIndex: showOverlay ? 1040 : 1 }}>
+      {showOverlay && <div className="overlay" style={{ zIndex: 1030 }}></div>}
+      <div className="card-div-detail" style={{ position: 'relative', zIndex: showOverlay ? 1020 : 1 }}>
         <div
           className="card-header-detail"
           alt={BoardDetails.studyName}
@@ -70,9 +75,13 @@ function BoardDetailModal({ studyBoardPk }) {
         <div className="content-wrapper-detail">
           <p>{BoardDetails.adContent}</p>
         </div>
-        {isLoggedIn ? (
+        {isLoggedIn ? ( 
           <div className="modal-container">
-            <ApplyStudyModal toggleOverlay={toggleOverlay} studyName={BoardDetails.studyName} studyPk={BoardDetails.studyPk} />
+            <ApplyStudyModal
+            toggleOverlay={toggleOverlay}
+            studyName={BoardDetails.studyName}
+            studyPk={BoardDetails.studyPk} 
+            />
           </div>
         ) : (
           <div onClick={handleApplyClick} className="modal-container">
@@ -80,7 +89,7 @@ function BoardDetailModal({ studyBoardPk }) {
           </div>
         )}
       </div>
-      <Modal show={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} title="로그인">
+      <Modal show={isLoginModalOpen} handleClose={handleCloseLoginModal} title="로그인">
         <Login />
       </Modal>
     </div>

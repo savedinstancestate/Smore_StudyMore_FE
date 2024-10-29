@@ -36,10 +36,10 @@ const EditAnnouncementModal = ({ show, handleClose, announcement, studyPk, updat
             backdrop="static"
             footer={
                 <>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleClose} style={{ backgroundColor: '#fff', color: '#929292', border: '1px solid #929292' }}>
                         취소
                     </Button>
-                    <Button variant="primary" onClick={handleSave}>
+                    <Button onClick={handleSave} style={{ backgroundColor: '#ea8400', border: '1px solid #ea8400' }}>
                         수정
                     </Button>
                 </>

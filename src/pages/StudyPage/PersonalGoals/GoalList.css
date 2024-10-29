@@ -1,11 +1,12 @@
 .goal-list {
     background-color: white;
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     height: 320px;
     padding-left: 15px;
+    width: 1040px;
 }
 
 .goal-list-header {
@@ -14,9 +15,10 @@
 }
 
 .goal-list-title {
-    font-size: 1.5em;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0px;
     color: #333;
-    margin-bottom: 15px;
 }
 
 .goal-list-container {
@@ -48,6 +50,7 @@
 .goal-status {
     font-weight: bold;
     margin-right: 10px;
+    color: #ea8400;
 }
 
 /* 스크롤바 전체 스타일 */

@@ -10,10 +10,10 @@
 }
 
 .attendance-chart-header {
-    font-size: 1.5em;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: black;
+    color: #333;
 }
 
 .header-row,
@@ -30,12 +30,14 @@
     text-align: center;
     border: none;
     font-size: 12px; /* 폰트 사이즈 조정 */
+    color: #000 !important;
 }
 
 .name-cell {
     font-weight: bold;
     background-color: transparent;
     min-width: 50px; /* 이름 칸 크기 조절 */
+    color: #000 !important;
 }
 
 .month-cell {
@@ -50,7 +52,7 @@
 }
 
 .출석 {
-    background-color: rgb(82, 208, 172);
+    background-color: #ffc170;
 }
 
 .결석 {

@@ -78,7 +78,7 @@ const Schedule = ({ studyPk }) => {
     return (
         <Container>
             <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', width: '100%' }}>
-                <div style={{ fontSize: '25px' }}>스터디 캘린더📆</div>
+                <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#333' }}>스터디 캘린더 📆</div>
                 <Button
                     variant="success"
                     onClick={() => setIsModalOpen(true)}
@@ -89,9 +89,11 @@ const Schedule = ({ studyPk }) => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        backgroundColor: '#fff',
+                        border: '2px solid #ea8400'
                     }}
                 >
-                    <FaPlus style={{ color: 'white' }} />
+                    <FaPlus style={{ color: '#ea8400' }} />
                 </Button>
                 <AddScheduleModal
                     show={isModalOpen}
