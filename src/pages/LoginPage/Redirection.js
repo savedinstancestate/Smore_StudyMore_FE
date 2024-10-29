@@ -20,7 +20,8 @@ function KakaoLoginRedirectHandler() {
       navigate('/');
   },[accessToken, refreshToken, navigate]);
 
-  return <div>Loading...</div>;
+  return <div>Loading..</div>;
+
 };
 
 export default KakaoLoginRedirectHandler;
