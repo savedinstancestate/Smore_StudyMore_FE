@@ -2,215 +2,92 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    margin: 0;
+    height: 90vh;
     background: #ffffff;
 }
 
-.div-container-mypage {
-    border: 1px solid #ddd;
-    border-radius: 14px;
-    padding: 30px 30px 0px 30px;
-    box-sizing: border-box;
-    z-index: 1000;
-    background-color: #fff;
-    overflow: visible;
-    margin-left: 280px; 
-    margin-bottom: 40px;
-    max-width: 880px; 
-    width: calc(100% - 300px);
-    transition: width 0.3s ease;
-  }
-
 .profile-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 0px;
-    margin-bottom: 30px;
-}
-
-.card-type-mypage {
-    font-size: 22px;
-    font-weight: 700;
-    width: 100%;
-    margin-bottom: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 500px;
 }
 
 .profile-image {
     position: relative;
-    width: 20%;
-    display: inline-block;
-    position: relative;
-    margin-bottom: 10px;
-    margin-left: 20%;
+    margin: 20px;
     text-align: center;
     cursor: pointer;
 }
 
 .edited-image {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     overflow: hidden;
-    object-fit: cover;
 }
 
 .image-edit-btn {
     position: absolute;
-    width: 24px;
-    top: 60px;  
-    left: 100px;
+    display: flex;
+    width: 6%;
+    top: 70px;
+    left: 230px;
     background: none;
     border: none;
     cursor: pointer;
 }
 
 .nickname-container {
-    margin-left: 20px;
-    margin-top: 10px;
-    width: 50%;
+    margin-bottom: 20px;
     flex-direction: column;
+    text-align: center;
+    align-items: center;
     display: flex;
+}
+
+.nickname-field {
+    display: flex; /* 입력 필드와 버튼을 수평 정렬 */
+    width: 100%; /* 컨테이너 전체 너비 */
 }
 
 .nickname-title {
     font-size: 18px;
     font-weight: 700;
+    margin-right: 10px;
 }
 
 .nickname-info {
-    font-size: 13px;
-    font-weight: 400;
+    font-size: 15px;
     color: #929292;
-    margin-bottom: 10px;
-    margin-left: 6px;
+    margin-bottom: 20px;
 }
 
-.nickname-field {
-    display: flex; 
-    width: 70%; 
-    align-items: center;
-    margin-top: 2px;
-}
-
-.nickname-input {
-    width: calc(100% - 52px - 16px);
-    height: 45px;
+input[type="text"] {
+    width: calc(100% - 52px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    outline: none;
+    outline: #009063;
     float: left;
     margin-right: 8px;
-    flex-grow: 1; 
+    flex-grow: 1; /* 입력 필드가 가능한 많은 공간 차지 */
 }
 
-.nickname-input, .nickname-edit-btn {
-    height: 44px;  
-    padding: 8px 12px;  
-    border-radius: 6px;  
-    font-size: 15px;
+input[type="text"]:focus {
+    border-color: #009063;
 }
 
 .nickname-edit-btn {
-    height: 44px;
-    padding: 4px 24px;
-    background-color: #ea8400;
+    padding: 10px 26px;
+    background-color: #009063;
     color: white;
     font-weight: bold;
-    border: none;
+    border: 1px solid #009063;
     border-radius: 6px;
     cursor: pointer;
     float: right;
     white-space: nowrap;
-    font-size: 15px;
-}
-
-
-@media screen and (max-width: 1100px) {
-
-    .card-type-mypage {
-        font-size: 20px;
-        margin-bottom: 12px;
-      }
-
-    .edited-image {
-        width: 86px;
-        height: 86px;
-    }
-    
-    .image-edit-btn {
-        width: 22px;
-        top: 60px;  
-        left: 90px;
-    }
-    
-    .nickname-title {
-        font-size: 16px;
-        margin-top: 2px;
-    }
-    
-    .nickname-info {
-        font-size: 12px;
-    }
-    
-    input[type="text"] {
-        width: calc(100% - 52px - 16px);
-        margin-right: 8px;
-        font-size: 13px;
-    }
-    
-    .nickname-input, .nickname-edit-btn {
-        height: 40px;  
-        padding: 8px 12px;  
-    }
-    
-    .nickname-edit-btn {
-        height: 40px;
-        padding: 4px 22px;
-        font-size: 13px;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .edited-image {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .image-edit-btn {
-        position: absolute;
-        width: 20px;
-        top: 54px;
-        left: 224px;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-    
-    .nickname-title {
-        font-size: 14px;
-        margin-top: 2px;
-    }
-    
-    .nickname-info {
-        font-size: 12px;
-    }
-    
-    .nickname-input {
-        width: calc(100% - 52px - 16px);
-        margin-right: 6px;
-        font-size: 12px;
-    }
-    
-    .nickname-input, .nickname-edit-btn {
-        height: 36px;  
-        padding: 8px 12px;  
-    }
-    
-    .nickname-edit-btn {
-        height: 36px;
-        padding: 4px 22px;
-        font-size: 12px;
-    }
 }
