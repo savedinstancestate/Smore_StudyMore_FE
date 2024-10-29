@@ -1,28 +1,5 @@
-html {
-    overflow-y: auto;
-}
-
-header {
-    overflow-y: scroll;
-}
-
-::-webkit-scrollbar {
-    display: block;
-}
-
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-button {
-    display: none;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #dadada;
-}
-
 body {
     margin: 0;
-    padding: 0;
-    overflow-y: scroll;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
         'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
