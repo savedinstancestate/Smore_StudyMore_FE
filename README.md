@@ -1,6 +1,6 @@
 # 🍪 스모어 (Study-more!)
 - <b>스터디 모집 및 관리 플랫폼</b>
-- <b>개발 기간 :</b> 2024.05 - 2024.07<br><br>
+- <b>개발 기간: 2024.05 - 2024.07</b><br><br>
 <img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/f64e34f8-0997-41ec-9658-931b1346a2c6"><br><br>
 
 ## 💡 프로젝트 개요
