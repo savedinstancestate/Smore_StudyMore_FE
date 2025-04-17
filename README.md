@@ -1,7 +1,8 @@
 # 🍪 스모어 (Study-more!)
 - <b>스터디 모집 및 관리 플랫폼</b>
-- <b>개발 기간: 2024.05 - 2024.07</b><br><br>
-<img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/f64e34f8-0997-41ec-9658-931b1346a2c6"><br><br>
+- <b>개발 기간: 2024.05 - 2024.07</b><br>
+<img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/834ba2ac-ac3f-466d-9e36-b6d5c03a40f6" />
+<br><br>
 
 ## 💡 프로젝트 개요
 - <b>스터디 가입, 활동, 운영을 지원하는 통합 플랫폼</b>
@@ -41,13 +42,13 @@
 > 다른 사람들과 함께하는 기분을 내고 싶다!<br>
 > 오직 스터디만을 위한 플랫폼이 필요하다!
 ### 2. 개발 요구사항
-  <p>a. <b>스터디 관리 -</b> 스터디 생성 및 모집, 관리</p>
-  <p>b. <b>출석 및 랭킹 조회 -</b> 학습 타이머를 통한 출석, 스터디 공부왕 랭킹 조회</p>
-  <p>c. <b>일정 관리 -</b> 스터디 학습일정 생성 및 관리</p>
-  <p>d. <b>문제 풀이 -</b> 학습한 내용을 문제로 출제 및 풀이</p>
-  <p>e. <b>학습목표 설정 -</b> 개인 학습목표 설정 및 달성 여부 체크</p>
-  <p>f. <b>웹 알림 -</b> 스터디 활동 관련 알림 표시</p>
-  <p>g. <b>호환성 -</b> 반응형 UI 지원</p>
+  <b><p>&emsp;a. 스터디 관리 -</b> 스터디 생성 및 모집, 관리</p>
+  <b><p>&emsp;b. 출석 및 랭킹 조회 -</b> 학습 타이머를 통한 출석, 스터디 공부왕 랭킹 조회</p>
+  <b><p>&emsp;c. 일정 관리 -</b> 스터디 학습일정 생성 및 관리</p>
+  <b><p>&emsp;d. 문제 풀이 -</b> 학습한 내용을 문제로 출제 및 풀이</p>
+  <b><p>&emsp;e. 학습목표 설정 -</b> 개인 학습목표 설정 및 달성 여부 체크</p>
+  <b><p>&emsp;f. 웹 알림 -</b> 스터디 활동 관련 알림 표시</p>
+  <b><p>&emsp;g. 호환성 -</b> 반응형 UI 지원</p>
   </div>
   <br>
 
@@ -77,7 +78,7 @@
 | etc | <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=jira&logoColor=white"/> <img src="https://img.shields.io/badge/IntelliJIDEA-000000?style=flat-square&logo=intellij-idea&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/Discord-000000?style=flat-square&logo=discord&logoColor=#5865F2"/> <img src="https://img.shields.io/badge/Figma-000000?style=flat-square&logo=figma&logoColor=#F24E1E"/>|
 
 ### FrontEnd
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"/> <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white"/> <img src="https://img.shields.io/badge/ec2-FF9900?style=flat-square&logo=amazonec2&logoColor=black"/> <br>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"/> <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white"/><br><img src="https://img.shields.io/badge/ec2-FF9900?style=flat-square&logo=amazonec2&logoColor=black"/> 
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
 </div>
 <br>
@@ -88,8 +89,6 @@
 <br>
 
 ## 👫 팀원 구성
-<div align="center">
-
 |   **이름**   | **포지션** | **구분** | **Github** |   **이름**   | **포지션** | **구분** | **Github** |   **이름**   | **포지션** | **구분** |       **Github** |
 | ---- | ---- | ---- | ------ | ---- | ---- | ---- | ------ | ---- | ---- | ---- | ------ |
 | <div align="center"><img src="https://avatars.githubusercontent.com/u/96505736?v=4" width="50" height="50"/><br><b>김현빈</b></div> | <div align="center"><b>BE</b></div> | <div align="center"><b>팀장</b></div> | <div align="center"><b>[링크](https://github.com/khv9786)</b></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/108870712?v=4" width="50" height="50"/><br><b>강준수</b></div> | <div align="center"><b>BE</b></div> | <div align="center"><b>팀원</b></div> | <div align="center"><b>[링크](https://github.com/Kangjunesu)</b></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/104208670?v=4" width="50" height="50"/><br><b>이수지</b></div> | <div align="center"><b>FE</b></div> | <div align="center"><b>팀원</b></div> | <div align="center"><b>[링크](https://github.com/ssssuji)</b></div> |
