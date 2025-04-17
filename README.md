@@ -1,29 +1,23 @@
 # 🍪 스모어 (Study-more!)
----
-- <b>Kakao x goorm 기업 연계 프로젝트</b>
-- <b>개발 기간 :</b> 2024.05 ~ 2024.07
-- [배포 URL](http://ec2-43-202-238-3.ap-northeast-2.compute.amazonaws.com:3000) <br>
-___
-<img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/f64e34f8-0997-41ec-9658-931b1346a2c6"><br>
-
-<br>
+- <b>스터디 모집 및 관리 플랫폼</b>
+- <b>개발 기간 :</b> 2024.05 - 2024.07<br><br>
+<img width="600" alt="smore-poster-ver2" src="https://github.com/user-attachments/assets/f64e34f8-0997-41ec-9658-931b1346a2c6"><br><br>
 
 ## 💡 프로젝트 개요
-- <b>스터디 모집 및 참여 플랫폼</b>
-- 구름톤 트레이닝 풀스택 과정 파이널 프로젝트
-- 프론트엔드(2명), 백엔드(4명)
+- <b>스터디 가입, 활동, 운영을 지원하는 통합 플랫폼</b>
+- Kakao x goorm 기업 연계 프로젝트
+- 프론트엔드(2인), 백엔드(4인)
 </div>
 <br>
 
 ## 🎮 주요 기능
-1. 카카오 로그인 기능
+1. 카카오 로그인
 2. 스터디 생성 및 모집 기능
 3. 출석하기 기능 
 4. 캘린더 기능
 5. 스터디 문제은행 기능
 6. 목표 설정 기능
-7. 스터디원 관리 기능
-8. 웹 알림 기능
+7. 웹 알림 기능
 </div>
 <br>
 
@@ -34,24 +28,26 @@ ___
     다른 사람들과 함께하는 기분을 내고 싶다!
     오직 스터디만을 위한 플랫폼이 필요하다!
 ### 2. 개발 요구사항
-  <p>1. <b>스터디 관리 -</b> 스터디 생성 및 모집, 관리</p>
-  <p>2. <b>출석 및 랭킹 조회 -</b> 학습 타이머를 통한 출석, 스터디 공부왕 랭킹 조회</p>
-  <p>3. <b>일정 관리 -</b> 스터디 학습일정 생성 및 관리</p>
-  <p>4. <b>문제 풀이 -</b> 학습한 내용을 문제로 출제 및 풀이</p>
-  <p>5. <b>학습목표 설정 -</b> 개인 학습목표 설정 및 달성 여부 체크</p>
-  <p>6. <b>웹 알림 -</b> 스터디 활동 관련 알림 표시</p>
-  <p>7. <b>호환성 -</b> 반응형 UI 지원</p>
+  <p>a. <b>스터디 관리 -</b> 스터디 생성 및 모집, 관리</p>
+  <p>b. <b>출석 및 랭킹 조회 -</b> 학습 타이머를 통한 출석, 스터디 공부왕 랭킹 조회</p>
+  <p>c. <b>일정 관리 -</b> 스터디 학습일정 생성 및 관리</p>
+  <p>d. <b>문제 풀이 -</b> 학습한 내용을 문제로 출제 및 풀이</p>
+  <p>e. <b>학습목표 설정 -</b> 개인 학습목표 설정 및 달성 여부 체크</p>
+  <p>f. <b>웹 알림 -</b> 스터디 활동 관련 알림 표시</p>
+  <p>g. <b>호환성 -</b> 반응형 UI 지원</p>
   </div>
   <br>
 
-## <img src="https://github.com/user-attachments/assets/a6d0c6cc-d4a0-406c-834e-d8721a313806" alt="image" width="30"/> BackEnd 레포지토리
-<a href="https://github.com/goorm-6th-Als/Smore_StudyMore_BE"> Smore_StudyMore_BE
+## 🛠 시스템 아키텍처
+<img width="600" alt="스크린샷 2024-10-08 14 58 50" src="https://github.com/user-attachments/assets/27ba802f-8982-4f5b-a749-28407be4d75a"><br>
 </div>
 <br>
 
-## 🛠 아키텍처
-<img width="756" alt="스크린샷 2024-10-08 14 58 50" src="https://github.com/user-attachments/assets/27ba802f-8982-4f5b-a749-28407be4d75a"><br>
-</div>
+## 📷 스크린샷
+<img width="700" alt="1" src="https://github.com/user-attachments/assets/274c8282-d4a5-448a-8b6e-54749d9a08e8" />
+<img width="700" alt="2" src="https://github.com/user-attachments/assets/b10e7c0a-2a7a-44dc-948a-6fbda7c6a831" />
+<img width="700" alt="3" src="https://github.com/user-attachments/assets/171e3437-bb16-47cd-998a-e9305ea63630" />
+<img width="540" alt="4" src="https://github.com/user-attachments/assets/81117c9d-d68c-4d12-bc6c-5738a2de30eb" />
 <br>
 
 ## 📚 기술 스택
@@ -73,6 +69,11 @@ ___
 </div>
 <br>
 
+## <img src="https://github.com/user-attachments/assets/a6d0c6cc-d4a0-406c-834e-d8721a313806" alt="image" width="30"/> BackEnd 레포지토리
+<a href="https://github.com/goorm-6th-Als/Smore_StudyMore_BE"> Smore_StudyMore_BE
+</div>
+<br>
+
 ## 👫 팀원 구성
 <div align="center">
 
@@ -85,8 +86,7 @@ ___
 <br>
 
 ## 💪 역할 분담
-### BackEnd
-![image](https://github.com/user-attachments/assets/7804068f-b445-493f-91e7-2cb7abe87ed9)
-### FrontEnd
-![image](https://github.com/user-attachments/assets/da995bc7-b7c3-40fb-bd58-2934769162fe)
-
+### BackEnd  
+<img src="https://github.com/user-attachments/assets/7804068f-b445-493f-91e7-2cb7abe87ed9" width="700"/><br>
+### FrontEnd  
+<img src="https://github.com/user-attachments/assets/da995bc7-b7c3-40fb-bd58-2934769162fe" width="700"/>
